@@ -25,7 +25,7 @@ DESTDIR =
 sysconfdir = /etc
 sbindir = /sbin
 libdir = /usr/lib
-man5dir = /usr/share/man5
+man5dir = /usr/share/man/man5
 localedir = /usr/share/locale
 
 # vim: ft=make
