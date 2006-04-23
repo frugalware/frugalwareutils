@@ -647,11 +647,11 @@ char *netaddr(char *ip, char *nm)
 	return(g_strdup_printf("%d.%d.%d.%d", na[0], na[1], na[2], na[3]));
 }
 
-int writeconfig(char *host, char *nettype, char *dhcphost, char *ipaddr, char *netmask, char *gateway, char *dns,
-	char *essid, char *key)
+int writeconfig(profile_t *profile, char *host, char *nettype, char *ipaddr, char *netmask, char *gateway, char *dns)
 {
-	// TODO: here the profile name ('default') and eth0 is hardwired
+	// TODO: here the profile name ('default') is hardwired
 	FILE *fp;
+	interface_t* iface = (interface_t*)g_list_nth_data(profile->interfaces, 0);
 	char *network=NULL;
 	int fakeip=0;
 
@@ -664,16 +664,16 @@ int writeconfig(char *host, char *nettype, char *dhcphost, char *ipaddr, char *n
 		fprintf(fp, "dns = %s\n", dns);
 	}
 	if(strcmp(nettype, "lo"))
-		fprintf(fp, "[eth0]\n");
-	if(essid != NULL && strlen(essid))
-		fprintf(fp, "essid = %s\n", essid);
-	if(key != NULL && strlen(key))
-		fprintf(fp, "key = %s\n", key);
+		fprintf(fp, "[%s]\n", iface->name);
+	if(iface->essid != NULL && strlen(iface->essid))
+		fprintf(fp, "essid = %s\n", iface->essid);
+	if(iface->key != NULL && strlen(iface->key))
+		fprintf(fp, "key = %s\n", iface->key);
 	if(!strcmp(nettype, "dhcp"))
 	{
 		fprintf(fp, "options = dhcp\n");
-		if(strlen(dhcphost))
-			fprintf(fp, "dhcp_opts = -t 10 -h %s\n", dhcphost);
+		if(strlen(iface->dhcp_opts))
+			fprintf(fp, "%s", iface->dhcp_opts);
 	}
 	else if (!strcmp(nettype, "static"))
 	{
@@ -745,9 +745,11 @@ int writeconfig(char *host, char *nettype, char *dhcphost, char *ipaddr, char *n
 int dialog_config()
 {
 	FILE *input = stdin;
+	profile_t *newprofile=NULL;
+	interface_t *newinterface = NULL;
+	char *ptr;
 	char *host, *nettype;
-	char *dhcphost=NULL;
-	char *ipaddr=NULL, *netmask=NULL, *gateway=NULL, *dns=NULL, *essid=NULL, *key=NULL;
+	char *ipaddr=NULL, *netmask=NULL, *gateway=NULL, *dns=NULL;
 
 	dialog_state.output = stderr;
 	init_dialog(input, dialog_state.output);
@@ -761,19 +763,41 @@ int dialog_config()
 	else
 		host = strdup("frugalware.example.net");
 	nettype = selnettype();
+
+	if((newprofile = (profile_t*)malloc(sizeof(profile_t))) == NULL)
+		return(1);
+	memset(newprofile, 0, sizeof(profile_t));
+	if((newinterface = (interface_t*)malloc(sizeof(interface_t))) == NULL)
+		return(1);
+	memset(newinterface, 0, sizeof(interface_t));
+	// TODO: here eth0 is hardwired
+	snprintf(newinterface->name, IF_NAMESIZE, "eth0");
+	newprofile->interfaces = g_list_append(newprofile->interfaces, newinterface);
+
 	if(strcmp(nettype, "lo") && is_wireless_device("eth0"))
 	{
-		essid = dialog_ask(_("Extended network name"), _("It seems that this network card has a wireless "
+		ptr = dialog_ask(_("Extended network name"), _("It seems that this network card has a wireless "
 			"extension. In order to use it, you must set your extended netwok name (ESSID). Enter your ESSID:"),
 			NULL);
-		key = dialog_ask(_("Encryption key"), _("If you have an encryption key, then please enter it below.\n"
+		snprintf(newinterface->essid, ESSID_MAX_SIZE, ptr);
+		FREE(ptr);
+		ptr = dialog_ask(_("Encryption key"), _("If you have an encryption key, then please enter it below.\n"
 			"Examples: 4567-89AB-CD or  s:password"), NULL);
+		snprintf(newinterface->key, ENCODING_TOKEN_MAX, ptr);
+		FREE(ptr);
 	}
 	if(!strcmp(nettype, "dhcp"))
-		dhcphost = dialog_ask(_("Set DHCP hostname"), _("Some network providers require that the DHCP hostname be"
+	{
+		ptr = dialog_ask(_("Set DHCP hostname"), _("Some network providers require that the DHCP hostname be"
 			"set in order to connect. If so, they'll have assigned a hostname to your machine. If you were"
 			"assigned a DHCP hostname, please enter it below. If you do not have a DHCP hostname, just"
 			"hit enter."), NULL);
+		if(strlen(ptr))
+			snprintf(newinterface->dhcp_opts, PATH_MAX, "dhcp_opts = -t 10 -h %s\n", ptr);
+		else
+			newinterface->dhcp_opts[0]='\0';
+		FREE(ptr);
+	}
 	else if(!strcmp(nettype, "static"))
 	{
 		ipaddr = dialog_ask(_("Enter ip address"), _("Enter your IP address for the local machine."), NULL);
@@ -793,17 +817,14 @@ int dialog_config()
 
 	if(dialog_myyesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
 		&& !nco_dryrun)
-		writeconfig(host, nettype, dhcphost, ipaddr, netmask, gateway, dns, essid, key);
+		writeconfig(newprofile, host, nettype, ipaddr, netmask, gateway, dns);
 
 	FREE(host);
 	FREE(nettype);
-	FREE(dhcphost);
 	FREE(ipaddr);
 	FREE(netmask);
 	FREE(gateway);
 	FREE(dns);
-	FREE(essid);
-	FREE(key);
 	end_dialog();
 	return(0);
 }
