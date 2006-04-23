@@ -1,5 +1,5 @@
 /*
- *  netconfig.h for frugalwareutils
+ *  fwnetconfig.h for frugalwareutils
  * 
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
  * 
@@ -50,3 +50,16 @@ typedef struct __profile_t {
 	GList *interfaces; // GList of interface_t*
 } profile_t;
 
+int listprofiles(void);
+profile_t *parseprofile(char *fn);
+int ifdown(interface_t *iface);
+int ifup(interface_t *iface);
+int setdns(profile_t* profile);
+char *lastprofile(void);
+int setlastprofile(char* str);
+int loup(void);
+int lodown(void);
+int is_wireless_device(char *dev);
+char *hostname(char *ptr);
+char *netaddr(char *ip, char *nm);
+int writeconfig(profile_t *profile, char *host, char *nettype);

@@ -30,7 +30,7 @@
 
 #define min(p, q)  ((p) < (q) ? (p) : (q))
 
-int nc_system(const char *cmd, int dryrun);
+int nc_system(const char *cmd);
 void i18ninit(void);
 char *trim(char *str);
 char *strtoupper(char *str);
