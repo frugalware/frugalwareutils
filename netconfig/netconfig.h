@@ -51,6 +51,7 @@ typedef struct __interface_t {
 } interface_t;
 
 typedef struct __profile_t {
+	char name[256];
 	GList *dnses;
 	char desc[PATH_MAX+1];
 	char domain[PATH_MAX+1];

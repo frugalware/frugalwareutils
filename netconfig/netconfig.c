@@ -647,15 +647,19 @@ char *netaddr(char *ip, char *nm)
 	return(g_strdup_printf("%d.%d.%d.%d", na[0], na[1], na[2], na[3]));
 }
 
-int writeconfig(profile_t *profile, char *host, char *nettype, char *ipaddr, char *netmask, char *gateway, char *dns)
+int writeconfig(profile_t *profile, char *host, char *nettype)
 {
-	// TODO: here the profile name ('default') is hardwired
 	FILE *fp;
 	interface_t* iface = (interface_t*)g_list_nth_data(profile->interfaces, 0);
+	char *option = (char*)g_list_nth_data(iface->options, 0);
+	char *dns = (char*)g_list_nth_data(profile->dnses, 0);
 	char *network=NULL;
-	int fakeip=0;
+	char ipaddr[16], netmask[16];
+	char *ptr;
 
-	fp = fopen(NC_PATH "/default", "w");
+	ptr = g_strdup_printf("%s/%s", NC_PATH, profile->name);
+	fp = fopen(ptr, "w");
+	FREE(ptr);
 	if(fp==NULL)
 		return(1);
 	if(dns != NULL && strlen(dns))
@@ -677,12 +681,10 @@ int writeconfig(profile_t *profile, char *host, char *nettype, char *ipaddr, cha
 	}
 	else if (!strcmp(nettype, "static"))
 	{
-		if(strlen(ipaddr) && strlen(netmask))
-			fprintf(fp, "options = %s netmask %s\n", ipaddr, netmask);
-		if(strlen(ipaddr) && !strlen(netmask))
-			fprintf(fp, "options = %s\n", ipaddr);
-		if(strlen(gateway))
-			fprintf(fp, "gateway = default gw %s\n", gateway);
+		if(option != NULL && strlen(option))
+			fprintf(fp, "%s\n", option);
+		if(strlen(iface->gateway))
+			fprintf(fp, "gateway = default gw %s\n", iface->gateway);
 	}
 	fclose(fp);
 
@@ -692,16 +694,16 @@ int writeconfig(profile_t *profile, char *host, char *nettype, char *ipaddr, cha
 	fprintf(fp, "%s\n", host);
 	fclose(fp);
 
+	sscanf(option, "options = %s netmask %s", ipaddr, netmask);
+
 	if(strcmp(nettype, "static"))
 	{
-		fakeip=1;
-		ipaddr=strdup("127.0.0.1");
-		network=strdup("127.0.0.0");
+		sprintf(ipaddr, "127.0.0.1");
+		network = strdup("127.0.0.0");
 	}
 	else
 		network=netaddr(ipaddr, netmask);
 
-#ifndef DEBUG
 	fp = fopen("/etc/hosts", "w");
 	if(fp==NULL)
 		return(1);
@@ -731,13 +733,6 @@ int writeconfig(profile_t *profile, char *host, char *nettype, char *ipaddr, cha
 	fprintf(fp, "localnet        %s\n", network);
 	fprintf(fp, "\n# End of networks.\n");
 	fclose(fp);
-#endif
-
-	if(fakeip)
-	{
-		FREE(ipaddr);
-		ipaddr=NULL;
-	}
 	FREE(network);
 	return(0);
 }
@@ -747,9 +742,10 @@ int dialog_config()
 	FILE *input = stdin;
 	profile_t *newprofile=NULL;
 	interface_t *newinterface = NULL;
+	char option[50];
 	char *ptr;
 	char *host, *nettype;
-	char *ipaddr=NULL, *netmask=NULL, *gateway=NULL, *dns=NULL;
+	char *ipaddr=NULL, *netmask=NULL, *dns=NULL;
 
 	dialog_state.output = stderr;
 	init_dialog(input, dialog_state.output);
@@ -767,6 +763,8 @@ int dialog_config()
 	if((newprofile = (profile_t*)malloc(sizeof(profile_t))) == NULL)
 		return(1);
 	memset(newprofile, 0, sizeof(profile_t));
+	// TODO: here the profile name ('default') is hardwired
+	sprintf(newprofile->name, "default");
 	if((newinterface = (interface_t*)malloc(sizeof(interface_t))) == NULL)
 		return(1);
 	memset(newinterface, 0, sizeof(interface_t));
@@ -800,25 +798,36 @@ int dialog_config()
 	}
 	else if(!strcmp(nettype, "static"))
 	{
+		// options = ip netmask netmask
 		ipaddr = dialog_ask(_("Enter ip address"), _("Enter your IP address for the local machine."), NULL);
 		netmask = dialog_ask(_("Enter netmask for local network"),
 			_("Enter your netmask. This will generally look something like this: 255.255.255.0\n"
 			"If unsure, just hit enter."), "255.255.255.0");
-		gateway = dialog_ask(_("Enter gateway address"), _("Enter the address for the gateway on your network. "
+		if(strlen(ipaddr))
+			snprintf(option, 49, "options = %s netmask %s", ipaddr, netmask);
+		newinterface->options = g_list_append(newinterface->options, option);
+		FREE(ipaddr);
+		FREE(netmask);
+		ptr = dialog_ask(_("Enter gateway address"), _("Enter the address for the gateway on your network. "
 			"If you don't have a gateway on your network just hit enter, without entering any ip address."),
 			NULL);
+		if(strlen(ptr))
+			snprintf(newinterface->gateway, GW_MAX_SIZE, "%s", ptr);
+		FREE(ptr);
 		dns = dialog_ask(_("Select nameserver"), _("Please give the IP address of the name server to use. You can"
 			"add more Domain Name Servers later by editing /etc/sysconfig/network/default.\n"
 			"If you don't have a name server on your network just hit enter, without entering any ip address."),
 			NULL);
+		newprofile->dnses = g_list_append(newprofile->dnses, dns);
 	}
 	if(!strcmp(nettype, "static") || !strcmp(nettype, "dsl"))
 		dsl_hook();
 
 	if(dialog_myyesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
 		&& !nco_dryrun)
-		writeconfig(newprofile, host, nettype, ipaddr, netmask, gateway, dns);
+		writeconfig(newprofile, host, nettype);
 
+	g_list_free(newinterface->options);
 	FREE(newinterface);
 	g_list_free(newprofile->interfaces);
 	FREE(newprofile);
@@ -826,7 +835,6 @@ int dialog_config()
 	FREE(nettype);
 	FREE(ipaddr);
 	FREE(netmask);
-	FREE(gateway);
 	FREE(dns);
 	end_dialog();
 	return(0);
