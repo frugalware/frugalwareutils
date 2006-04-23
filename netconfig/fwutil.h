@@ -1,5 +1,5 @@
 /*
- *  netconfig.h for frugalwareutils
+ *  fwutil.h for frugalwareutils
  * 
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
  * 
@@ -19,34 +19,13 @@
  *  USA.
  */
 
-#define MAC_MAX_SIZE 17
-#define ESSID_MAX_SIZE 32
-#define ENCODING_TOKEN_MAX   32
-#define GW_MAX_SIZE 26
-
 #define VERSIONFILE "/etc/frugalware-release"
-#define NC_PATH "/etc/sysconfig/network"
-#define NC_LOCK "/var/run/netconfig"
 
-typedef struct __interface_t {
-	char name[IF_NAMESIZE+1];
-	GList *options;
-	GList *pre_ups;
-	GList *post_ups;
-	GList *pre_downs;
-	GList *post_downs;
-	char mac[MAC_MAX_SIZE+1];
-	char dhcp_opts[PATH_MAX+1];
-	char essid[ESSID_MAX_SIZE+1];
-	char key[ENCODING_TOKEN_MAX+1];
-	char gateway[GW_MAX_SIZE+1];
-} interface_t;
+#ifdef _
+#undef _
+#endif
+#define _(text) gettext(text)
 
-typedef struct __profile_t {
-	char name[256];
-	GList *dnses;
-	char desc[PATH_MAX+1];
-	char domain[PATH_MAX+1];
-	GList *interfaces; // GList of interface_t*
-} profile_t;
+#define FREE(p) do { if (p) { free(p); (p) = NULL; }} while(0)
 
+#define min(p, q)  ((p) < (q) ? (p) : (q))

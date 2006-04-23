@@ -1,5 +1,5 @@
 /*
- *  netconfig.h for frugalwareutils
+ *  fwdialog.h for frugalwareutils
  * 
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
  * 
@@ -19,34 +19,12 @@
  *  USA.
  */
 
-#define MAC_MAX_SIZE 17
-#define ESSID_MAX_SIZE 32
-#define ENCODING_TOKEN_MAX   32
-#define GW_MAX_SIZE 26
+#include <dialog.h>
 
-#define VERSIONFILE "/etc/frugalware-release"
-#define NC_PATH "/etc/sysconfig/network"
-#define NC_LOCK "/var/run/netconfig"
-
-typedef struct __interface_t {
-	char name[IF_NAMESIZE+1];
-	GList *options;
-	GList *pre_ups;
-	GList *post_ups;
-	GList *pre_downs;
-	GList *post_downs;
-	char mac[MAC_MAX_SIZE+1];
-	char dhcp_opts[PATH_MAX+1];
-	char essid[ESSID_MAX_SIZE+1];
-	char key[ENCODING_TOKEN_MAX+1];
-	char gateway[GW_MAX_SIZE+1];
-} interface_t;
-
-typedef struct __profile_t {
-	char name[256];
-	GList *dnses;
-	char desc[PATH_MAX+1];
-	char domain[PATH_MAX+1];
-	GList *interfaces; // GList of interface_t*
-} profile_t;
-
+void dialog_backtitle(char *title);
+int dialog_confirm(void);
+void dialog_exit(void);
+char *dialog_ask(char *title, char *desc, char *init);
+char *dialog_mymenu(const char *title, const char *cprompt, int height, int width,
+	int menu_height, int item_no, char **items);
+int dialog_myyesno(char *title, char *desc);

@@ -21,14 +21,17 @@ LDFLAGS=-ldialog -lcurses -lm
 CFLAGS += $(shell pkg-config --cflags glib-2.0)
 LDFLAGS += $(shell pkg-config --libs glib-2.0)
 
+# fwdialog, fwutil
+CFLAGS += -I.
+
 -include ../Makefile.inc
 
 SUBDIRS = doc po
 
 compile: netconfig
 
-netconfig: netconfig.o
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+netconfig: netconfig.o fwdialog.o
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 install:
 	$(INSTALL) netconfig $(DESTDIR)$(sbindir)/netconfig
