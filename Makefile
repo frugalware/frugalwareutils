@@ -25,6 +25,7 @@ compile:
 
 install: compile
 	$(INSTALL) -d $(DESTDIR)$(sbindir)
+	$(INSTALL) -d $(DESTDIR)$(usrsbindir)
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)
 	$(INSTALL) -d $(DESTDIR)$(man5dir)
 	$(DO_RECURSIVE)

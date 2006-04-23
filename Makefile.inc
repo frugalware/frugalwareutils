@@ -24,6 +24,7 @@ INSTALL = /usr/bin/install -c
 DESTDIR =
 sysconfdir = /etc
 sbindir = /sbin
+usrsbindir = /usr/sbin
 libdir = /usr/lib
 man5dir = /usr/share/man/man5
 localedir = /usr/share/locale
