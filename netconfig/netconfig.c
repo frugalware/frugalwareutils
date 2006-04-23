@@ -819,6 +819,9 @@ int dialog_config()
 		&& !nco_dryrun)
 		writeconfig(newprofile, host, nettype, ipaddr, netmask, gateway, dns);
 
+	FREE(newinterface);
+	g_list_free(newprofile->interfaces);
+	FREE(newprofile);
 	FREE(host);
 	FREE(nettype);
 	FREE(ipaddr);
