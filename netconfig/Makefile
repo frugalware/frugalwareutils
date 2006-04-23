@@ -30,7 +30,7 @@ SUBDIRS = doc po
 
 compile: netconfig
 
-netconfig: netconfig.o fwdialog.o
+netconfig: netconfig.o fwdialog.o fwutil.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 install:

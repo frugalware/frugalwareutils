@@ -38,14 +38,6 @@ int nco_dryrun  = 0;
 int nco_usage   = 0;
 int nco_fast   = 0;
 
-int nc_system(const char *cmd)
-{
-	if(nco_dryrun)
-		return(printf("%s\n", cmd));
-	else
-		return(system(cmd) ? 1 : 0);
-}
-
 int usage(const char *myname)
 {
 	printf(_("usage: %s [options] start|stop|restart|status|list\n"), myname);
@@ -54,43 +46,6 @@ int usage(const char *myname)
 	printf(_("-f | --fast              Fast mode, used by the setup.\n"));
 	printf(_("     --dry-run           Do not actually perform the operation.\n"));
 	return(0);
-}
-
-void i18ninit(void)
-{
-	char *lang=NULL;
-
-	lang=getenv("LC_ALL");
-	if(lang==NULL || lang[0]=='\0')
-		lang=getenv("LC_MESSAGES");
-	if (lang==NULL || lang[0]=='\0')
-		lang=getenv("LANG");
-
-	setlocale(LC_ALL, lang);
-	bindtextdomain("netconfig", "/usr/share/locale");
-	textdomain("netconfig");
-}
-
-char *trim(char *str)
-{
-	char *ptr = str;
-
-	while(isspace(*ptr++))
-		if(ptr != str)
-			memmove(str, ptr, (strlen(ptr) + 1));
-	ptr = (char *)(str + (strlen(str) - 1));
-	while(isspace(*ptr--))
-		*++ptr = '\0';
-	return str;
-}
-
-char *strtoupper(char *str)
-{
-	char *ptr = str;
-
-	while(*ptr)
-		*ptr++ = toupper(*ptr);
-	return str;
 }
 
 int listprofiles(void)
@@ -246,7 +201,7 @@ int ifdown(interface_t *iface)
 
 	if(g_list_length(iface->pre_downs))
 		for (i=0; i<g_list_length(iface->pre_downs); i++)
-			nc_system((char*)g_list_nth_data(iface->pre_downs, i));
+			nc_system((char*)g_list_nth_data(iface->pre_downs, i), nco_dryrun);
 
 	dhcp = is_dhcp(iface);
 	if(dhcp)
@@ -272,17 +227,17 @@ int ifdown(interface_t *iface)
 			for (i=0; i<g_list_length(iface->options); i++)
 			{
 				ptr = g_strdup_printf("ifconfig %s 0.0.0.0", iface->name);
-				nc_system(ptr);
+				nc_system(ptr, nco_dryrun);
 				FREE(ptr);
 			}
 		ptr = g_strdup_printf("ifconfig %s down", iface->name);
-		nc_system(ptr);
+		nc_system(ptr, nco_dryrun);
 		FREE(ptr);
 	}
 
 	if(g_list_length(iface->post_downs))
 		for (i=0; i<g_list_length(iface->post_downs); i++)
-			nc_system((char*)g_list_nth_data(iface->post_downs, i));
+			nc_system((char*)g_list_nth_data(iface->post_downs, i), nco_dryrun);
 
 	return(ret);
 }
@@ -294,27 +249,27 @@ int ifup(interface_t *iface)
 
 	if(g_list_length(iface->pre_ups))
 		for (i=0; i<g_list_length(iface->pre_ups); i++)
-			ret += nc_system((char*)g_list_nth_data(iface->pre_ups, i));
+			ret += nc_system((char*)g_list_nth_data(iface->pre_ups, i), nco_dryrun);
 
 	dhcp = is_dhcp(iface);
 	// initialize the device
 	if(strlen(iface->mac))
 	{
 		ptr = g_strdup_printf("ifconfig %s hw ether %s", iface->name, iface->mac);
-		ret += nc_system(ptr);
+		ret += nc_system(ptr, nco_dryrun);
 		FREE(ptr);
 	}
 	if(strlen(iface->essid))
 	{
 		ptr = g_strdup_printf("iwconfig %s essid %s", iface->name, iface->essid);
-		ret += nc_system(ptr);
+		ret += nc_system(ptr, nco_dryrun);
 		FREE(ptr);
 	}
 
 	if(strlen(iface->key))
 	{
 		ptr = g_strdup_printf("iwconfig %s key %s", iface->name, iface->key);
-		ret += nc_system(ptr);
+		ret += nc_system(ptr, nco_dryrun);
 		FREE(ptr);
 	}
 
@@ -325,26 +280,26 @@ int ifup(interface_t *iface)
 			ptr = g_strdup_printf("dhcpcd %s %s", iface->dhcp_opts, iface->name);
 		else
 			ptr = g_strdup_printf("dhcpcd -t 10 %s", iface->name);
-		ret += nc_system(ptr);
+		ret += nc_system(ptr, nco_dryrun);
 		FREE(ptr);
 	}
 	else if(g_list_length(iface->options)==1)
 	{
 		ptr = g_strdup_printf("ifconfig %s %s",
 			iface->name, (char*)g_list_nth_data(iface->options, 0));
-		ret += nc_system(ptr);
+		ret += nc_system(ptr, nco_dryrun);
 		FREE(ptr);
 	}
 	else
 	{
 		ptr = g_strdup_printf("ifconfig %s 0.0.0.0", iface->name);
-		ret += nc_system(ptr);
+		ret += nc_system(ptr, nco_dryrun);
 		FREE(ptr);
 		for (i=0; i<g_list_length(iface->options); i++)
 		{
 			ptr = g_strdup_printf("ifconfig %s:%d %s",
 				iface->name, i+1, (char*)g_list_nth_data(iface->options, i));
-			ret += nc_system(ptr);
+			ret += nc_system(ptr, nco_dryrun);
 			FREE(ptr);
 		}
 	}
@@ -353,12 +308,12 @@ int ifup(interface_t *iface)
 	if(!dhcp && strlen(iface->gateway))
 	{
 		ptr = g_strdup_printf("route add %s", iface->gateway);
-		ret += nc_system(ptr);
+		ret += nc_system(ptr, nco_dryrun);
 		FREE(ptr);
 	}
 	if(g_list_length(iface->post_ups))
 		for (i=0; i<g_list_length(iface->post_ups); i++)
-			ret += nc_system((char*)g_list_nth_data(iface->post_ups, i));
+			ret += nc_system((char*)g_list_nth_data(iface->post_ups, i), nco_dryrun);
 
 	return(ret);
 }
@@ -429,14 +384,14 @@ int loup(void)
 {
 	int ret=0;
 
-	ret += nc_system("ifconfig lo 127.0.0.1");
-	ret += nc_system("route add -net 127.0.0.0 netmask 255.0.0.0 lo");
+	ret += nc_system("ifconfig lo 127.0.0.1", nco_dryrun);
+	ret += nc_system("route add -net 127.0.0.0 netmask 255.0.0.0 lo", nco_dryrun);
 	return(ret);
 }
 
 int lodown(void)
 {
-	return(nc_system("ifconfig lo down"));
+	return(nc_system("ifconfig lo down", nco_dryrun));
 }
 
 int is_wireless_device(char *dev)
@@ -498,13 +453,13 @@ int dsl_hook(void)
 	if(dialog_myyesno(_("DSL configuration"), _("Do you want to configure a DSL connetion now?")))
 	{
 		if(!nco_fast)
-			return(nc_system("adslconfig"));
+			return(nc_system("adslconfig", nco_dryrun));
 		else
 		{
-			ret = nc_system("adslconfig --fast");
-			nc_system("mkdir /var/run");
-			nc_system("mount -t devpts none /dev/pts");
-			nc_system("pppoe-connect >/dev/tty4 2>/dev/tty4 &");
+			ret = nc_system("adslconfig --fast", nco_dryrun);
+			nc_system("mkdir /var/run", nco_dryrun);
+			nc_system("mount -t devpts none /dev/pts", nco_dryrun);
+			nc_system("pppoe-connect >/dev/tty4 2>/dev/tty4 &", nco_dryrun);
 			return(ret);
 		}
 	}
