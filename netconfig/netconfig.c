@@ -701,6 +701,7 @@ int writeconfig(char *host, char *nettype, char *dhcphost, char *ipaddr, char *n
 	else
 		network=netaddr(ipaddr, netmask);
 
+#ifndef DEBUG
 	fp = fopen("/etc/hosts", "w");
 	if(fp==NULL)
 		return(1);
@@ -730,6 +731,7 @@ int writeconfig(char *host, char *nettype, char *dhcphost, char *ipaddr, char *n
 	fprintf(fp, "localnet        %s\n", network);
 	fprintf(fp, "\n# End of networks.\n");
 	fclose(fp);
+#endif
 
 	if(fakeip)
 	{

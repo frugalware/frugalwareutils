@@ -23,6 +23,10 @@ LDFLAGS += $(shell pkg-config --libs glib-2.0)
 
 -include ../Makefile.inc
 
+ifeq ($(DEBUG),true)
+CFLAGS += -DDEBUG
+endif
+
 SUBDIRS = doc po
 
 compile: netconfig
