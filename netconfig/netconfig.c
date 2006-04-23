@@ -20,10 +20,10 @@
  */
 
 #include <stdio.h>
-#include <fwutil.h>
-#include <fwdialog.h>
 #include <net/if.h>
 #include <glib.h>
+#include <fwdialog.h>
+#include <fwutil.h>
 #include <fwnetconfig.h>
 #include <getopt.h>
 #include <stdlib.h>
