@@ -50,4 +50,4 @@ clean:
 	$(DO_RECURSIVE)
 
 test:
-	LD_LIBRARY_PATH=../libfwutil:../libfwdialog:../libfwnetconfig netconfig
+	sudo sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog:../libfwnetconfig ./netconfig'
