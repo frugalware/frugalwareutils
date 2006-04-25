@@ -1,0 +1,37 @@
+# Hungarian translations for libfwnetconfig package.
+# Copyright (C) 2006 THE libfwnetconfig'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the libfwnetconfig package.
+#  <vmiklos@frugalware.org>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libfwnetconfig\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-04-26 00:26+0200\n"
+"PO-Revision-Date: 2006-04-26 00:26+0200\n"
+"Last-Translator:  <vmiklos@frugalware.org>\n"
+"Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../libfwnetconfig.c:81
+#, c-format
+msgid "%s: No such profile!\n"
+msgstr "%s: Nincs ilyen profil!\n"
+
+#: ../libfwnetconfig.c:101
+#, c-format
+msgid "profile: line %d: bad interface name\n"
+msgstr "profil: %d. sor: helytelen interfész név\n"
+
+#: ../libfwnetconfig.c:132
+#, c-format
+msgid "profile: line %d: syntax error\n"
+msgstr "profil: %d. sor: szintaktikai hiba\n"
+
+#: ../libfwnetconfig.c:139
+#, c-format
+msgid "profile: line %d: all directives must belong to a section\n"
+msgstr "profil: %d. sor: minden direktívának egy szekcióhoz kell tartoznia\n
