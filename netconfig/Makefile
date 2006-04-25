@@ -48,3 +48,6 @@ install:
 clean:
 	rm -f netconfig *.o
 	$(DO_RECURSIVE)
+
+test:
+	LD_LIBRARY_PATH=../libfwutil:../libfwdialog:../libfwnetconfig netconfig
