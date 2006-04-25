@@ -20,12 +20,14 @@
  */
 
 #include <stdio.h>
-#include "libfwutil.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <libintl.h>
 #include <string.h>
 #include <ctype.h>
+
+#define FWGETTEXT_LIB "libfwutil"
+#include "libfwutil.h"
 
 int f_util_dryrun = 0;
 

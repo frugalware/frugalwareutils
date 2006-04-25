@@ -22,6 +22,7 @@
  */
 
 #include <stdio.h>
+#define FWGETTEXT_LIB "libfwnetconfig"
 #include <libfwutil.h>
 #include <getopt.h>
 #include <stdlib.h>

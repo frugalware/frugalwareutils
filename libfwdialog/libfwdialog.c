@@ -21,6 +21,7 @@
 
 #include <stdio.h>
 #include <dialog.h>
+#define FWGETTEXT_LIB "libfwdialog"
 #include <libfwutil.h>
 #include <getopt.h>
 #include <stdlib.h>

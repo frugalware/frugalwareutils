@@ -24,7 +24,11 @@
 #ifdef _
 #undef _
 #endif
+#ifndef FWGETTEXT_LIB
 #define _(text) gettext(text)
+#else
+#define _(str) dgettext (FWGETTEXT_LIB, str)
+#endif
 
 #define FREE(p) do { if (p) { free(p); (p) = NULL; }} while(0)
 
