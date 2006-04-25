@@ -16,6 +16,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
+-include ../Makefile.inc
+
 CFLAGS ?= -g -Wall -O2 -pipe
 LDFLAGS=-ldialog -lcurses -lm
 CFLAGS += $(shell pkg-config --cflags glib-2.0)
@@ -25,26 +27,18 @@ LDFLAGS += $(shell pkg-config --libs glib-2.0)
 CFLAGS += -I../libfwutil
 LDFLAGS += -L../libfwutil -lfwutil
 
-# fwdialog
-CFLAGS += -I../libfwdialog
-LDFLAGS += -L../libfwdialog -lfwdialog
-
-# fwnetconfig
-CFLAGS += -I../libfwnetconfig
-LDFLAGS += -L../libfwnetconfig -lfwnetconfig
-
--include ../Makefile.inc
-
-SUBDIRS = doc po
-
-compile: netconfig
+compile: libfwdialog.so
 
 install:
-	$(INSTALL) netconfig $(DESTDIR)$(sbindir)/netconfig
-	mkdir -p $(DESTDIR)$(sysconfdir)/sysconfig/network
-	$(INSTALL) netconfig $(DESTDIR)$(sbindir)/netconfig
-	$(DO_RECURSIVE)
+	$(INSTALL) libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so.$(VERSION)
+	ln -s libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so.$(MAJORVER)
+	ln -s libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so
 
 clean:
-	rm -f netconfig *.o
-	$(DO_RECURSIVE)
+	rm -f *.so*
+
+%.so: %.o
+	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
+		$(basename $@).so.$(VERSION) $(basename $@).o $(LDFLAGS)
+	ln -s $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
+	ln -s $(basename $@).so.$(VERSION) $(basename $@).so

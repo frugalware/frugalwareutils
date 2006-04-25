@@ -1,5 +1,5 @@
 /*
- *  fwnetconfig.h for frugalwareutils
+ *  libfwnetconfig.h for frugalwareutils
  * 
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
  * 

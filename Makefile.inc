@@ -17,6 +17,7 @@
 #
 
 VERSION = 0.5.0
+MAJORVER = 0
 
 DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done
 

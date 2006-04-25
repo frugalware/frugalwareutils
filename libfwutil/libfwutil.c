@@ -1,5 +1,5 @@
 /*
- *  fwutil.c for frugalwareutils
+ *  libfwutil.c for frugalwareutils
  * 
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
  * 
@@ -20,7 +20,7 @@
  */
 
 #include <stdio.h>
-#include <fwutil.h>
+#include "libfwutil.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <libintl.h>

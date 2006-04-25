@@ -1,5 +1,5 @@
 /*
- *  fwdialog.c for frugalwareutils
+ *  libfwdialog.c for frugalwareutils
  * 
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
  * 
@@ -21,7 +21,7 @@
 
 #include <stdio.h>
 #include <dialog.h>
-#include <fwutil.h>
+#include <libfwutil.h>
 #include <getopt.h>
 #include <stdlib.h>
 #include <glib.h>

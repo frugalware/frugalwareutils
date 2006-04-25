@@ -22,9 +22,9 @@
 #include <stdio.h>
 #include <net/if.h>
 #include <glib.h>
-#include <fwdialog.h>
-#include <fwutil.h>
-#include <fwnetconfig.h>
+#include <libfwdialog.h>
+#include <libfwutil.h>
+#include <libfwnetconfig.h>
 #include <getopt.h>
 #include <stdlib.h>
 #include <dirent.h>

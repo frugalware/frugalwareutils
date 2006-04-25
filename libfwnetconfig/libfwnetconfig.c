@@ -1,5 +1,5 @@
 /*
- *  fwnetconfig.c for frugalwareutils
+ *  libfwnetconfig.c for frugalwareutils
  *
  *  usefull functions for a network configurator
  * 
@@ -22,8 +22,7 @@
  */
 
 #include <stdio.h>
-#include <fwdialog.h>
-#include <fwutil.h>
+#include <libfwutil.h>
 #include <getopt.h>
 #include <stdlib.h>
 #include <glib.h>
@@ -31,10 +30,12 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <signal.h>
 #include <unistd.h>
 #include <libintl.h>
+#include <string.h>
 
-#include "fwnetconfig.h"
+#include "libfwnetconfig.h"
 
 extern int f_util_dryrun;
 

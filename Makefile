@@ -18,13 +18,14 @@
 
 -include Makefile.inc
 
-SUBDIRS = netconfig
+SUBDIRS = libfwutil libfwdialog libfwnetconfig netconfig
 
 compile:
 	$(DO_RECURSIVE)
 
 install: compile
 	$(INSTALL) -d $(DESTDIR)$(sbindir)
+	$(INSTALL) -d $(DESTDIR)$(libdir)
 	$(INSTALL) -d $(DESTDIR)$(usrsbindir)
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)
 	$(INSTALL) -d $(DESTDIR)$(man5dir)
