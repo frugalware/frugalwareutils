@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: netconfig 0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-20 01:33+0100\n"
+"POT-Creation-Date: 2006-04-26 00:23+0200\n"
 "PO-Revision-Date: 2006-01-20 00:49+0100\n"
 "Last-Translator:  <vmiklos@frugalware.org>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -16,80 +16,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../netconfig.c:49
+#: ../netconfig.c:43
 #, c-format
 msgid "usage: %s [options] start|stop|restart|status|list\n"
 msgstr "használat: %s [opciók] start|stop|restart|status|list\n"
 
-#: ../netconfig.c:50
+#: ../netconfig.c:44
 #, c-format
 msgid "       %s [options] [profile]\n"
 msgstr "       %s [opciók] [profil]\n"
 
-#: ../netconfig.c:51
+#: ../netconfig.c:45
 #, c-format
 msgid "-h | --help              This help.\n"
 msgstr "-h | --help              Ez a segítség.\n"
 
-#: ../netconfig.c:52
+#: ../netconfig.c:46
+#, c-format
+msgid "-f | --fast              Fast mode, used by the setup.\n"
+msgstr ""
+
+#: ../netconfig.c:47
 #, c-format
 msgid "     --dry-run           Do not actually perform the operation.\n"
 msgstr ""
 "     --dry-run           Próba futtatás, ténylegesen netörténjen semmi.\n"
 
-#: ../netconfig.c:131
-#, c-format
-msgid "%s: No such profile!\n"
-msgstr "%s: Nincs ilyen profil!\n"
-
-#: ../netconfig.c:151
-#, c-format
-msgid "profile: line %d: bad interface name\n"
-msgstr "profil: %d. sor: helytelen interfész név\n"
-
-#: ../netconfig.c:182
-#, c-format
-msgid "profile: line %d: syntax error\n"
-msgstr "profile: %d. sor: szintaktikai hiba\n"
-
-#: ../netconfig.c:189
-#, c-format
-msgid "profile: line %d: all directives must belong to a section\n"
-msgstr "profile: %d. sor: minden direktívának egy szekcióhoz kell tartoznia\n"
-
-#: ../netconfig.c:472
-msgid "Setup"
-msgstr "Telepítõ"
-
-#: ../netconfig.c:481
-msgid "Exit"
-msgstr "Kilépés"
-
-#: ../netconfig.c:481
-msgid "Are you sure you want to exit?"
-msgstr "Biztos benne hogy ki szeretne lépni?"
-
-#: ../netconfig.c:553
+#: ../netconfig.c:56
 msgid "Use a DHCP server"
 msgstr "DHCP szerver használata"
 
-#: ../netconfig.c:554
+#: ../netconfig.c:57
 msgid "Use a static IP address"
 msgstr "Statikus ip-cím használata"
 
-#: ../netconfig.c:555
+#: ../netconfig.c:58
 msgid "DSL connection"
 msgstr "DSL kapcsolat"
 
-#: ../netconfig.c:556
+#: ../netconfig.c:59
 msgid "No network - loopback connection only"
 msgstr "Nincs hálózat - csak visszacsatoló adapter"
 
-#: ../netconfig.c:558
+#: ../netconfig.c:61
 msgid "Select network connection type"
 msgstr "A hálózati kapcsolat típusának kiválasztása"
 
-#: ../netconfig.c:559
+#: ../netconfig.c:62
 msgid ""
 "Now we need to know how your machine connects to the network.\n"
 "If you have an internal network card and an assigned IP address, gateway, "
@@ -111,23 +84,23 @@ msgstr ""
 "válassza a 'dsl'-t. \n"
 "Végül, ha nincs hálózati kártyája, válassza az 'lo'-t. \n"
 
-#: ../netconfig.c:575
+#: ../netconfig.c:79
 msgid "DSL configuration"
 msgstr "DSL beállítása"
 
-#: ../netconfig.c:575
+#: ../netconfig.c:79
 msgid "Do you want to configure a DSL connetion now?"
 msgstr "Kíván beállítani DSL kapcsolatot most?"
 
-#: ../netconfig.c:725
+#: ../netconfig.c:107
 msgid "Network configuration"
 msgstr "Hálózat beállítása"
 
-#: ../netconfig.c:727
+#: ../netconfig.c:110
 msgid "Enter hostname"
 msgstr "A gépnév beállítása"
 
-#: ../netconfig.c:727
+#: ../netconfig.c:110
 msgid ""
 "We'll need the name you'd like to give your host.\n"
 "The full hostname is needed, such as:\n"
@@ -143,11 +116,11 @@ msgstr ""
 "\n"
 "Adja meg a teljes gépnevet:"
 
-#: ../netconfig.c:734
+#: ../netconfig.c:132
 msgid "Extended network name"
 msgstr "Kiterjesztett hálózati név"
 
-#: ../netconfig.c:734
+#: ../netconfig.c:132
 msgid ""
 "It seems that this network card has a wireless extension. In order to use "
 "it, you must set your extended netwok name (ESSID). Enter your ESSID:"
@@ -156,11 +129,11 @@ msgstr ""
 "használni szeretné azt, akkor be kell állítania a kiterjesztett hálózati "
 "nevét (ESSID). Adja meg az ESSID-jét:"
 
-#: ../netconfig.c:737
+#: ../netconfig.c:137
 msgid "Encryption key"
 msgstr "Titkosítási kulcs"
 
-#: ../netconfig.c:737
+#: ../netconfig.c:137
 msgid ""
 "If you have an encryption key, then please enter it below.\n"
 "Examples: 4567-89AB-CD or  s:password"
@@ -168,11 +141,11 @@ msgstr ""
 "Ha rendelkezik titkosítási kulccsal, akkor azt adja meg itt.\n"
 "Példák: 4567-89AB-CD vagy s:jelszó"
 
-#: ../netconfig.c:741
+#: ../netconfig.c:144
 msgid "Set DHCP hostname"
 msgstr "A DHCP gépnév beállítása"
 
-#: ../netconfig.c:741
+#: ../netconfig.c:144
 msgid ""
 "Some network providers require that the DHCP hostname beset in order to "
 "connect. If so, they'll have assigned a hostname to your machine. If you "
@@ -184,19 +157,20 @@ msgstr ""
 "Ha kapott ilyen DHCP gépnevet, kérem alább adja meg.Ha nem kapott DHCP "
 "gépnevet, csak üssön entert."
 
-#: ../netconfig.c:747
+#. options = ip netmask netmask
+#: ../netconfig.c:157
 msgid "Enter ip address"
 msgstr "Az ip-cím beállítása"
 
-#: ../netconfig.c:747
+#: ../netconfig.c:157
 msgid "Enter your IP address for the local machine."
 msgstr "Adja meg a helyi gép ip-címét."
 
-#: ../netconfig.c:748
+#: ../netconfig.c:158
 msgid "Enter netmask for local network"
 msgstr "Adja meg a helyi hálózat netmaskját"
 
-#: ../netconfig.c:749
+#: ../netconfig.c:159
 msgid ""
 "Enter your netmask. This will generally look something like this: "
 "255.255.255.0\n"
@@ -205,11 +179,11 @@ msgstr ""
 "Adja meg a netmaskját. Ez általában ehhez hasonlóa néz ki: 255.255.255.0\n"
 "Ha nem biztos benne, csak üssön entert."
 
-#: ../netconfig.c:751
+#: ../netconfig.c:166
 msgid "Enter gateway address"
 msgstr "A gateway-cím beállítása"
 
-#: ../netconfig.c:751
+#: ../netconfig.c:166
 msgid ""
 "Enter the address for the gateway on your network. If you don't have a "
 "gateway on your network just hit enter, without entering any ip address."
@@ -217,11 +191,11 @@ msgstr ""
 "Adja meg a hálózatának gateway-címét. Ha nincs gateway a hálózatában, "
 "csaküssön entert, anélkül, hogy bármilyen ip-címet megadna."
 
-#: ../netconfig.c:754
+#: ../netconfig.c:172
 msgid "Select nameserver"
 msgstr "A névszerver-kiválasztása"
 
-#: ../netconfig.c:754
+#: ../netconfig.c:172
 msgid ""
 "Please give the IP address of the name server to use. You canadd more Domain "
 "Name Servers later by editing /etc/sysconfig/network/default.\n"
@@ -233,21 +207,43 @@ msgstr ""
 "Ha nincs névszerver a hálózatában, csak üssön entert, anélkül, hogybármilyen "
 "ip-címet megadna."
 
-#: ../netconfig.c:762
+#: ../netconfig.c:181
 msgid "Adjust configuration files"
 msgstr "A konfigurációs fájlok módosítása"
 
-#: ../netconfig.c:762
+#: ../netconfig.c:181
 msgid "Accept these settings and adjust configuration files?"
 msgstr ""
 "Elfogadja ezeket a beállításokat és módosítja a konfigurációs fájlokat?"
 
-#: ../netconfig.c:823
+#: ../netconfig.c:244
 #, c-format
 msgid "No profile loaded.\n"
 msgstr "Nincs betöltött profil.\n"
 
-#: ../netconfig.c:828
+#: ../netconfig.c:249
 #, c-format
 msgid "Current profile: %s\n"
 msgstr "Jelenlegi profil: %s\n"
+
+#~ msgid "%s: No such profile!\n"
+#~ msgstr "%s: Nincs ilyen profil!\n"
+
+#~ msgid "profile: line %d: bad interface name\n"
+#~ msgstr "profil: %d. sor: helytelen interfész név\n"
+
+#~ msgid "profile: line %d: syntax error\n"
+#~ msgstr "profile: %d. sor: szintaktikai hiba\n"
+
+#~ msgid "profile: line %d: all directives must belong to a section\n"
+#~ msgstr ""
+#~ "profile: %d. sor: minden direktívának egy szekcióhoz kell tartoznia\n"
+
+#~ msgid "Setup"
+#~ msgstr "Telepítõ"
+
+#~ msgid "Exit"
+#~ msgstr "Kilépés"
+
+#~ msgid "Are you sure you want to exit?"
+#~ msgstr "Biztos benne hogy ki szeretne lépni?"
