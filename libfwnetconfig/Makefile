@@ -29,12 +29,15 @@ LDFLAGS += -L../libfwutil -lfwutil
 compile: libfwnetconfig.so
 
 install:
-	$(INSTALL) libfwnetconfig.so $(DESTDIR)$(libdir)/libfwnetconfig.so.$(VERSION)
+	$(INSTALL) libfwnetconfig.so.$(VERSION) $(DESTDIR)$(libdir)/libfwnetconfig.so.$(VERSION)
+	ln -s libfwnetconfig.so.$(VERSION) $(DESTDIR)$(libdir)/libfwnetconfig.so.$(MAJORVER)
 	ln -s libfwnetconfig.so.$(VERSION) $(DESTDIR)$(libdir)/libfwnetconfig.so
 
 clean:
-	rm -f *.so
+	rm -f *.so*
 
 %.so: %.o
 	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
-		$(basename $@).so $(basename $@).o $(LDFLAGS)
+		$(basename $@).so.$(VERSION) $(basename $@).o $(LDFLAGS)
+	ln -s $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
+	ln -s $(basename $@).so.$(VERSION) $(basename $@).so
