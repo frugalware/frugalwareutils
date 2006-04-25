@@ -34,4 +34,4 @@ msgstr "profil: %d. sor: szintaktikai hiba\n"
 #: ../libfwnetconfig.c:139
 #, c-format
 msgid "profile: line %d: all directives must belong to a section\n"
-msgstr "profil: %d. sor: minden direktívának egy szekcióhoz kell tartoznia\n
+msgstr "profil: %d. sor: minden direktívának egy szekcióhoz kell tartoznia\n"
