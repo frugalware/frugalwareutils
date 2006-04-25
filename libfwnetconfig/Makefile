@@ -26,15 +26,19 @@ LDFLAGS += $(shell pkg-config --libs glib-2.0)
 CFLAGS += -I../libfwutil
 LDFLAGS += -L../libfwutil -lfwutil
 
+SUBDIRS = po
+
 compile: libfwnetconfig.so
 
 install:
 	$(INSTALL) libfwnetconfig.so.$(VERSION) $(DESTDIR)$(libdir)/libfwnetconfig.so.$(VERSION)
 	ln -s libfwnetconfig.so.$(VERSION) $(DESTDIR)$(libdir)/libfwnetconfig.so.$(MAJORVER)
 	ln -s libfwnetconfig.so.$(VERSION) $(DESTDIR)$(libdir)/libfwnetconfig.so
+	$(DO_RECURSIVE)
 
 clean:
 	rm -f *.so*
+	$(DO_RECURSIVE)
 
 %.so: %.o
 	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \

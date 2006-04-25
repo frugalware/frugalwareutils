@@ -26,7 +26,6 @@
 #include <string.h>
 #include <ctype.h>
 
-#define FWGETTEXT_LIB "libfwutil"
 #include "libfwutil.h"
 
 int f_util_dryrun = 0;

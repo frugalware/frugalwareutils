@@ -27,15 +27,19 @@ LDFLAGS += $(shell pkg-config --libs glib-2.0)
 CFLAGS += -I../libfwutil
 LDFLAGS += -L../libfwutil -lfwutil
 
+SUBDIRS = po
+
 compile: libfwdialog.so
 
 install:
 	$(INSTALL) libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so.$(VERSION)
 	ln -s libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so.$(MAJORVER)
 	ln -s libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so
+	$(DO_RECURSIVE)
 
 clean:
 	rm -f *.so*
+	$(DO_RECURSIVE)
 
 %.so: %.o
 	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
