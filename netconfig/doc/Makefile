@@ -20,6 +20,9 @@
 
 compile:
 
+pot:
+	po4a po4a.cfg
+
 install:
 	$(INSTALL) -m644 netconfig.5 $(DESTDIR)$(man5dir)/netconfig.5
 
