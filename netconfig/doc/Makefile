@@ -28,7 +28,7 @@ compile:
 install:
 	$(INSTALL) -m644 netconfig.5 $(DESTDIR)$(man5dir)/netconfig.5
 	for lang in $(LANGS); do \
-		$(INSTALL) -m644 $$lang/netconfig.5 $(DESTDIR)$(man5dir)/$$lang/netconfig.5
+		$(INSTALL) -m644 $$lang/netconfig.5 $(DESTDIR)$(man5dir)/$$lang/netconfig.5; \
 	done
 
 clean:
