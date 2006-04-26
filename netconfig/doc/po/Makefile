@@ -16,17 +16,23 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
--include ../../Makefile.inc
+-include ../../../Makefile.inc
 
-SUBDIRS = po
+LANGS=hu
 
 compile:
 
-pot:
-	po4a po4a.cfg
-
 install:
-	$(INSTALL) -m644 netconfig.5 $(DESTDIR)$(man5dir)/netconfig.5
+
+update-po: netconfig.5.pot
+	for lang in $(LANGS); do \
+		if msgmerge $$lang.po netconfig.5.pot -o $$lang.new.po; then \
+			mv -f $$lang.new.po $$lang.po; \
+		else \
+			echo "msgmerge for $$cat failed!"; \
+			rm -f $$lang.new.po; \
+		fi; \
+	done
 
 clean:
-	$(DO_RECURSIVE)
+	rm -f netconfig.5.pot
