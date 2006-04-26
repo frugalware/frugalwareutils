@@ -20,13 +20,14 @@
 
 SUBDIRS = po
 
-compile:
+LANGS=hu
 
-pot:
+compile:
 	po4a po4a.cfg
 
 install:
 	$(INSTALL) -m644 netconfig.5 $(DESTDIR)$(man5dir)/netconfig.5
 
 clean:
+	rm -rf $(LANGS)
 	$(DO_RECURSIVE)
