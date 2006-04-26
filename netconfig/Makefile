@@ -38,6 +38,7 @@ LDFLAGS += -L../libfwnetconfig -lfwnetconfig
 SUBDIRS = doc po
 
 compile: netconfig
+	$(DO_RECURSIVE)
 
 install:
 	$(INSTALL) netconfig $(DESTDIR)$(sbindir)/netconfig
