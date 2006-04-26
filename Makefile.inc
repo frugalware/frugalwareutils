@@ -27,7 +27,7 @@ sysconfdir = /etc
 sbindir = /sbin
 usrsbindir = /usr/sbin
 libdir = /lib
-man5dir = /usr/share/man/man5
+mandir = /usr/share/man
 localedir = /usr/share/locale
 
 # vim: ft=make

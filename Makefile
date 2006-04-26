@@ -28,7 +28,7 @@ install: compile
 	$(INSTALL) -d $(DESTDIR)$(libdir)
 	$(INSTALL) -d $(DESTDIR)$(usrsbindir)
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)
-	$(INSTALL) -d $(DESTDIR)$(man5dir)
+	$(INSTALL) -d $(DESTDIR)$(mandir)/man5
 	$(DO_RECURSIVE)
 
 clean:

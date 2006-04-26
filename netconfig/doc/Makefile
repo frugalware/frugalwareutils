@@ -26,10 +26,10 @@ compile:
 	po4a po4a.cfg
 
 install:
-	$(INSTALL) -m644 netconfig.5 $(DESTDIR)$(man5dir)/netconfig.5
+	$(INSTALL) -m644 netconfig.5 $(DESTDIR)$(mandir)/man5/netconfig.5
 	for lang in $(LANGS); do \
-		mkdir -p $(DESTDIR)$(man5dir)/$$lang/; \
-		$(INSTALL) -m644 $$lang/netconfig.5 $(DESTDIR)$(man5dir)/$$lang/netconfig.5; \
+		mkdir -p $(DESTDIR)$(mandir)/$$lang/man5/; \
+		$(INSTALL) -m644 $$lang/netconfig.5 $(DESTDIR)$(mandir)/$$lang/man5/netconfig.5; \
 	done
 
 clean:
