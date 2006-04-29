@@ -111,6 +111,7 @@ int main()
 	char *ptr;
 	GList *zones;
 
+	i18ninit();
 	init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("Time configuration"));
 
