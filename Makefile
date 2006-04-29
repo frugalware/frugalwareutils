@@ -18,7 +18,8 @@
 
 -include Makefile.inc
 
-SUBDIRS = libfwutil libfwdialog libfwnetconfig netconfig
+SUBDIRS = libfwutil libfwdialog libfwnetconfig netconfig \
+	  libfwtimeconfig timeconfig
 
 compile:
 	$(DO_RECURSIVE)

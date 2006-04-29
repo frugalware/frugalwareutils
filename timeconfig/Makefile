@@ -29,13 +29,13 @@ LDFLAGS += -L../libfwutil -lfwutil
 CFLAGS += -I../libfwdialog
 LDFLAGS += -L../libfwdialog -lfwdialog
 
-#### fwnetconfig
-###CFLAGS += -I../libfwnetconfig
-###LDFLAGS += -L../libfwnetconfig -lfwnetconfig
+# fwtimeconfig
+CFLAGS += -I../libfwtimeconfig
+LDFLAGS += -L../libfwtimeconfig -lfwtimeconfig
 
 -include ../Makefile.inc
 
-###SUBDIRS = doc po
+###SUBDIRS = po
 
 compile: timeconfig
 	$(DO_RECURSIVE)
@@ -49,5 +49,4 @@ clean:
 	$(DO_RECURSIVE)
 
 test:
-	#sudo sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog:../libfwnetconfig ./timeconfig'
-	sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog ./timeconfig'
+	sudo sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog:../libfwtimeconfig ./timeconfig'
