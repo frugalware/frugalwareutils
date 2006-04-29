@@ -120,3 +120,17 @@ int dialog_myyesno(char *title, char *desc)
 	else
 		return(0);
 }
+
+char **glist2dialog(GList *list)
+{
+	int i;
+	char **array;
+
+	if((array = malloc(g_list_length(list)*sizeof(char*))) == NULL)
+		return(NULL);
+	for (i=0; i<g_list_length(list); i++)
+	{
+		array[i] = (char*)g_list_nth_data(list, i);
+	}
+	return(array);
+}
