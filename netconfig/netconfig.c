@@ -221,7 +221,7 @@ int main(int argc, char **argv)
 			case 'f':  nco_fast   = 1; break;
 		}
 	}
-	i18ninit();
+	i18ninit(__FILE__);
 	if(nco_usage)
 	{
 		usage(argv[0]);

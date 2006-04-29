@@ -38,9 +38,13 @@ int nc_system(const char *cmd)
 		return(system(cmd) ? 1 : 0);
 }
 
-void i18ninit(void)
+void i18ninit(char *namespace)
 {
 	char *lang=NULL;
+	char *ptr = strdup(namespace);
+
+	// slice the .c suffix
+	*(ptr + strlen(ptr)-2)='\0';
 
 	lang=getenv("LC_ALL");
 	if(lang==NULL || lang[0]=='\0')
@@ -49,8 +53,9 @@ void i18ninit(void)
 		lang=getenv("LANG");
 
 	setlocale(LC_ALL, lang);
-	bindtextdomain("netconfig", "/usr/share/locale");
-	textdomain("netconfig");
+	bindtextdomain(ptr, "/usr/share/locale");
+	textdomain(ptr);
+	free(ptr);
 }
 
 char *trim(char *str)
