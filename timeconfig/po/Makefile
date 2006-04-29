@@ -16,37 +16,30 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-CFLAGS ?= -g -Wall -O2 -pipe
-LDFLAGS=-ldialog -lcurses -lm
-CFLAGS += $(shell pkg-config --cflags glib-2.0)
-LDFLAGS += $(shell pkg-config --libs glib-2.0)
+-include ../../Makefile.inc
 
-# fwutil
-CFLAGS += -I../libfwutil
-LDFLAGS += -L../libfwutil -lfwutil
+LANGS=hu
 
-# fwdialog
-CFLAGS += -I../libfwdialog
-LDFLAGS += -L../libfwdialog -lfwdialog
-
-# fwtimeconfig
-CFLAGS += -I../libfwtimeconfig
-LDFLAGS += -L../libfwtimeconfig -lfwtimeconfig
-
--include ../Makefile.inc
-
-SUBDIRS = po
-
-compile: timeconfig
-	$(DO_RECURSIVE)
+compile:
 
 install:
-	$(INSTALL) timeconfig $(DESTDIR)$(sbindir)/timeconfig
-	$(DO_RECURSIVE)
+	for i in $(LANGS); do \
+		mkdir -p $(DESTDIR)$(localedir)/`basename $$i .po`/LC_MESSAGES/; \
+		msgfmt -o $(DESTDIR)$(localedir)/`basename $$i .po`/LC_MESSAGES/timeconfig.mo $$i; \
+	done
+
+pot:
+	intltool-update --pot --gettext-package=timeconfig
+
+update-po: pot
+	for lang in $(LANGS); do \
+		if msgmerge $$lang.po timeconfig.pot -o $$lang.new.po; then \
+			mv -f $$lang.new.po $$lang.po; \
+		else \
+			echo "msgmerge for $$cat failed!"; \
+			rm -f $$lang.new.po; \
+		fi; \
+	done
 
 clean:
-	rm -f timeconfig *.o
-	$(DO_RECURSIVE)
-
-test:
-	sudo sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog:../libfwtimeconfig ./timeconfig'
+	rm -f timeconfig.pot
