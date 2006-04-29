@@ -1,5 +1,6 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.5.1         - new config tool: timeconfig
               - new libraries: libfwutils, libfwdialog, libfwnetconfig
               - added localized manpage support to the buildsystem
 0.5.0         - initial import
