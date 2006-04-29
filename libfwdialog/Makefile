@@ -33,8 +33,8 @@ compile: libfwdialog.so
 
 install:
 	$(INSTALL) libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so.$(VERSION)
-	ln -s libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so.$(MAJORVER)
-	ln -s libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so
+	ln -sf libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so.$(MAJORVER)
+	ln -sf libfwdialog.so.$(VERSION) $(DESTDIR)$(libdir)/libfwdialog.so
 	$(DO_RECURSIVE)
 
 clean:
@@ -44,5 +44,5 @@ clean:
 %.so: %.o
 	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
 		$(basename $@).so.$(VERSION) $(basename $@).o $(LDFLAGS)
-	ln -s $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
-	ln -s $(basename $@).so.$(VERSION) $(basename $@).so
+	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
+	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so

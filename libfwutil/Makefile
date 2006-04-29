@@ -24,8 +24,8 @@ compile: libfwutil.so
 
 install:
 	$(INSTALL) libfwutil.so.$(VERSION) $(DESTDIR)$(libdir)/libfwutil.so.$(VERSION)
-	ln -s libfwutil.so.$(VERSION) $(DESTDIR)$(libdir)/libfwutil.so.$(MAJORVER)
-	ln -s libfwutil.so.$(VERSION) $(DESTDIR)$(libdir)/libfwutil.so
+	ln -sf libfwutil.so.$(VERSION) $(DESTDIR)$(libdir)/libfwutil.so.$(MAJORVER)
+	ln -sf libfwutil.so.$(VERSION) $(DESTDIR)$(libdir)/libfwutil.so
 
 clean:
 	rm -f *.so*
@@ -33,5 +33,5 @@ clean:
 %.so: %.o
 	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
 		$(basename $@).so.$(VERSION) $(basename $@).o $(LDFLAGS)
-	ln -s $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
-	ln -s $(basename $@).so.$(VERSION) $(basename $@).so
+	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
+	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so
