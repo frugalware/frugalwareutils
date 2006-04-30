@@ -1,0 +1,29 @@
+# Hungarian translations for setup package.
+# Copyright (C) 2006 THE setup'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the setup package.
+#  <vmiklos@frugalware.org>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: setup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-04-30 23:24+0200\n"
+"PO-Revision-Date: 2006-04-30 23:45+0200\n"
+"Last-Translator:  <vmiklos@frugalware.org>\n"
+"Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../setup.c:115
+msgid "Control center"
+msgstr "Vezérlõközpont"
+
+#: ../setup.c:116
+msgid "Please select one of the following configuration tools to start:"
+msgstr "Kérem válassza ki az elindítani kívánt beállító eszközt:"
+
+#: ../setup.c:130
+msgid "General configuration"
+msgstr "Általános beállítások"

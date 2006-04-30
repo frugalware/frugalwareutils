@@ -16,33 +16,30 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-CFLAGS ?= -g -Wall -O2 -pipe
-LDFLAGS=-ldialog -lcurses -lm
-CFLAGS += $(shell pkg-config --cflags glib-2.0)
-LDFLAGS += $(shell pkg-config --libs glib-2.0)
+-include ../../Makefile.inc
 
-# fwutil
-CFLAGS += -I../libfwutil
-LDFLAGS += -L../libfwutil -lfwutil
+LANGS=hu
 
-# fwdialog
-CFLAGS += -I../libfwdialog
-LDFLAGS += -L../libfwdialog -lfwdialog
-
--include ../Makefile.inc
-
-SUBDIRS = po
-
-compile: setup
-	$(DO_RECURSIVE)
+compile:
 
 install:
-	$(INSTALL) setup $(DESTDIR)$(sbindir)/setup
-	$(DO_RECURSIVE)
+	for i in $(LANGS); do \
+		mkdir -p $(DESTDIR)$(localedir)/`basename $$i .po`/LC_MESSAGES/; \
+		msgfmt -o $(DESTDIR)$(localedir)/`basename $$i .po`/LC_MESSAGES/setup.mo $$i; \
+	done
+
+pot:
+	intltool-update --pot --gettext-package=setup
+
+update-po: pot
+	for lang in $(LANGS); do \
+		if msgmerge $$lang.po setup.pot -o $$lang.new.po; then \
+			mv -f $$lang.new.po $$lang.po; \
+		else \
+			echo "msgmerge for $$cat failed!"; \
+			rm -f $$lang.new.po; \
+		fi; \
+	done
 
 clean:
-	rm -f setup *.o
-	$(DO_RECURSIVE)
-
-test:
-	sudo sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog ./setup'
+	rm -f setup.pot

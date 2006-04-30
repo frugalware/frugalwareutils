@@ -109,7 +109,7 @@ char* ask_what()
 	{
 		plugin = g_list_nth_data(plugin_list, i);
 		pluglist = g_list_append(pluglist, plugin->name);
-		pluglist = g_list_append(pluglist, plugin->desc);
+		pluglist = g_list_append(pluglist, dgettext(plugin->name, plugin->desc));
 	}
 	plugstrs = glist2dialog(pluglist);
 	return(dialog_mymenu(_("Control center"),
