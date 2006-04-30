@@ -16,30 +16,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
--include ../../Makefile.inc
-
 LANGS=hu
+DOMAIN=setup
 
-compile:
-
-install:
-	for i in $(LANGS); do \
-		mkdir -p $(DESTDIR)$(localedir)/`basename $$i .po`/LC_MESSAGES/; \
-		msgfmt -o $(DESTDIR)$(localedir)/`basename $$i .po`/LC_MESSAGES/setup.mo $$i; \
-	done
-
-pot:
-	intltool-update --pot --gettext-package=setup
-
-update-po: pot
-	for lang in $(LANGS); do \
-		if msgmerge $$lang.po setup.pot -o $$lang.new.po; then \
-			mv -f $$lang.new.po $$lang.po; \
-		else \
-			echo "msgmerge for $$cat failed!"; \
-			rm -f $$lang.new.po; \
-		fi; \
-	done
-
-clean:
-	rm -f setup.pot
+-include ../../Makefile.inc
+-include ../../Makefile.po.inc
