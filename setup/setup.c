@@ -98,6 +98,52 @@ int cleanup_plugins()
 	return(0);
 }
 
+char* ask_what()
+{
+	int i;
+	plugin_t *plugin;
+	GList *pluglist=NULL;
+	char **plugstrs;
+
+	for (i=0; i<g_list_length(plugin_list); i++)
+	{
+		plugin = g_list_nth_data(plugin_list, i);
+		pluglist = g_list_append(pluglist, plugin->name);
+		pluglist = g_list_append(pluglist, plugin->desc);
+	}
+	plugstrs = glist2dialog(pluglist);
+	return(dialog_mymenu(_("Control center"),
+		_("Please select one of the following configuration tools "
+		"to start:"), 0, 0, 0, g_list_length(pluglist)/2, plugstrs));
+}
+
+int show_menu()
+{
+	FILE *input = stdin;
+	dialog_state.output = stderr;
+	char *ptr;
+	int i;
+	plugin_t *plugin;
+
+	i18ninit(__FILE__);
+	init_dialog(input, dialog_state.output);
+	dialog_backtitle(_("General configuration"));
+
+	while((ptr = ask_what()))
+	{
+		for (i=0; i<g_list_length(plugin_list); i++)
+		{
+			plugin = g_list_nth_data(plugin_list, i);
+			if(!strcmp(plugin->name, ptr))
+				plugin->run(1, NULL);
+		}
+		free(ptr);
+	}
+
+	end_dialog();
+	return(0);
+}
+
 int main(int argc, char **argv)
 {
 	int i, ret=0;
@@ -132,7 +178,7 @@ int main(int argc, char **argv)
 	else
 	{
 		// show a menu of config tools
-		printf("TODO: menu\n");
+		show_menu();
 	}
 	free(ptr);
 	cleanup_plugins();
