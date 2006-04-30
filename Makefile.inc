@@ -25,7 +25,6 @@ INSTALL = /usr/bin/install -c
 DESTDIR =
 sysconfdir = /etc
 sbindir = /sbin
-usrsbindir = /usr/sbin
 libdir = /lib
 fwlibdir = $(libdir)/frugalware
 mandir = /usr/share/man
