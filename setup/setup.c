@@ -104,8 +104,12 @@ int main(int argc, char **argv)
 	plugin_t *plugin;
 	char *myname, *ptr;
 
+	// drop the dir prefix if necessary
 	ptr = strdup(argv[0]);
-	myname = strrchr(ptr, '/')+1;
+	if(strchr(ptr, '/'))
+		myname = strrchr(ptr, '/')+1;
+	else
+		myname = ptr;
 
 	init_plugins(PLUGDIR);
 
@@ -130,6 +134,7 @@ int main(int argc, char **argv)
 		// show a menu of config tools
 		printf("TODO: menu\n");
 	}
+	free(ptr);
 	cleanup_plugins();
 	return(0);
 }
