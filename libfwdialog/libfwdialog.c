@@ -33,6 +33,15 @@
 #include <unistd.h>
 #include <libintl.h>
 
+/** @defgroup libfwdialog Frugalware Dialog library
+ * @brief Function to make libdialog usage easier
+ * @{
+ */
+
+/** Initialize the backtitle. This should be the the fist function you call
+ * after init_dialog().
+ * @param title the backtitle string, something like "Time configuration"
+ */
 void dialog_backtitle(char *title)
 {
 	FILE *fp;
@@ -50,6 +59,9 @@ void dialog_backtitle(char *title)
 	dlg_clear();
 }
 
+/** Confirm an 'exit'.
+ * @return 1 on yes, 0 on no
+ */
 int dialog_confirm(void)
 {
 	int ret;
@@ -62,12 +74,22 @@ int dialog_confirm(void)
 		return(0);
 }
 
+/** Exit without breaking your terminal by calling end_dialog() first.
+ */
 void dialog_exit(void)
 {
 	end_dialog();
 	exit(0);
 }
 
+/** A wrapper to dialog_inputbox(): handle the case when the user hits cancel,
+ * and omits the need to specify the (always 0) height, width, and password
+ * variables.
+ * @param title the title of the window
+ * @param desc the prompt text shown within the widget
+ * @param init the initial value of the input box
+ * @return the answer - you must free() the allocated memory
+ */
 char *dialog_ask(char *title, char *desc, char *init)
 {
 	char my_buffer[MAX_LEN + 1] = "";
@@ -87,6 +109,16 @@ char *dialog_ask(char *title, char *desc, char *init)
 	return(strdup(my_buffer));
 }
 
+/** A wrapper to dialog_menu(): handle the case when the user hits cancel.
+ * @param title the title on the top of the widget
+ * @param cprompt the prompt text shown within the widget
+ * @param height the desired height of the box
+ * @param width the desired width of the box
+ * @param menu_height the minimum height to reserve for displaying the list
+ * @param item_no the number of rows in items
+ * @param an array of strings - the contents of the menu
+ * @return the answer - you must free() the allocated memory
+ */
 char *dialog_mymenu(const char *title, const char *cprompt, int height, int width,
 	int menu_height, int item_no, char **items)
 {
@@ -108,6 +140,13 @@ char *dialog_mymenu(const char *title, const char *cprompt, int height, int widt
 	return(strdup(dialog_vars.input_result));
 }
 
+/** A wrapper to dialog_yesno(): sets the backtitle, clears the display,
+ * sets the height and width automatically and turns DLG_EXIT_OK to logical
+ * true/false.
+ * @param title the title on the top of the widget
+ * @param desc the prompt text shown within the widget
+ * @return 1 on yes, 0 on false
+ */
 int dialog_myyesno(char *title, char *desc)
 {
 	int ret;
@@ -121,6 +160,10 @@ int dialog_myyesno(char *title, char *desc)
 		return(0);
 }
 
+/** Converts a GList to a char** array, which is required by dialog_mymenu().
+ * @param list the GList to convert
+ * @return the array of strings - you must free() it later
+ */
 char **glist2dialog(GList *list)
 {
 	int i;
@@ -134,3 +177,5 @@ char **glist2dialog(GList *list)
 	}
 	return(array);
 }
+
+/* @} */
