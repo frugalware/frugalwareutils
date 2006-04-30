@@ -45,7 +45,7 @@ compile: timeconfig.so
 
 install:
 	$(INSTALL) timeconfig.so $(DESTDIR)$(fwlibdir)/timeconfig.so
-	ln -sf $(sbindir)/setup $(DESTDIR)$(sbindir)/timeconfig
+	ln -sf setup $(DESTDIR)$(sbindir)/timeconfig
 	$(DO_RECURSIVE)
 
 clean:

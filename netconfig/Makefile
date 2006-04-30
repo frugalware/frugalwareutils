@@ -46,7 +46,7 @@ compile: netconfig.so
 install:
 	$(INSTALL) netconfig.so $(DESTDIR)$(fwlibdir)/netconfig.so
 	mkdir -p $(DESTDIR)$(sysconfdir)/sysconfig/network
-	ln -sf $(sbindir)/setup $(DESTDIR)$(sbindir)/netconfig
+	ln -sf setup $(DESTDIR)$(sbindir)/netconfig
 	$(DO_RECURSIVE)
 
 clean:
