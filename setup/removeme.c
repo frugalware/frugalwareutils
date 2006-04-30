@@ -1,5 +1,5 @@
 /*
- *  timeconfig.c for frugalwareutils
+ *  setup.c for frugalwareutils
  * 
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
  * 
@@ -23,20 +23,12 @@
 #include <glib.h>
 #include <libfwdialog.h>
 #include <libfwutil.h>
-#include <libfwtimeconfig.h>
-#include <setup.h>
 #include <stdlib.h>
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <libintl.h>
-
-#define CLOCKFILE "/etc/hardwareclock"
-#define ZONEDIR "/usr/share/zoneinfo"
-#define ZONEFILE "/etc/localtime"
-
-GList *zones=NULL;
 
 char* ask_mode()
 {
@@ -66,76 +58,19 @@ char* ask_mode()
 	return(ptr);
 }
 
-int sort_zones(gconstpointer a, gconstpointer b)
-{
-	return(strcmp(a, b));
-}
-
-GList *zone_scan(char *dir)
-{
-	GList *buf=NULL;
-	int i;
-
-	// search the zones
-	fwtimeconfig_find(dir);
-
-	// sort them and add a "   " item after each (required by libdialog)
-	zones = g_list_sort(zones, sort_zones);
-	for (i=0; i<g_list_length(zones); i++)
-	{
-		buf = g_list_append(buf, g_list_nth_data(zones, i));
-		buf = g_list_append(buf, "   ");
-	}
-	g_list_free(zones);
-	zones = buf;
-	return(zones);
-}
-
-char *ask_zone(GList *zones)
-{
-	char **zonestrs = glist2dialog(zones);
-	char *ptr, *ret;
-
-	ret = dialog_mymenu(_("Timezone configuration"),
-		_("Please select one of the following timezones for your "
-		"machine:"), 0, 0, 0, g_list_length(zones)/2, zonestrs);
-	free(zonestrs);
-	ptr = g_strdup_printf("/usr/share/zoneinfo/%s", ret);
-	free(ret);
-	return(ptr);
-}
-
-int run()
+int main()
 {
 	FILE *input = stdin;
 	dialog_state.output = stderr;
 	char *ptr;
-	GList *zones;
 
 	i18ninit(__FILE__);
 	init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("Time configuration"));
 
 	ptr = ask_mode();
-	fwtimeconfig_hwclockconf(CLOCKFILE, ptr);
 	free(ptr);
-	zones = zone_scan(ZONEDIR);
-	ptr = ask_zone(zones);
-	symlink(ptr, ZONEFILE);
 
 	end_dialog();
 	return(0);
-}
-
-plugin_t plugin =
-{
-	"timeconfig",
-	"Time configuration",
-	run,
-	NULL // dlopen handle
-};
-
-plugin_t *info()
-{
-	return &plugin;
 }

@@ -33,22 +33,26 @@ LDFLAGS += -L../libfwdialog -lfwdialog
 CFLAGS += -I../libfwnetconfig
 LDFLAGS += -L../libfwnetconfig -lfwnetconfig
 
+# setup
+CFLAGS += -I../setup
+
 -include ../Makefile.inc
 
 SUBDIRS = doc po
 
-compile: netconfig
+compile: netconfig.so
 	$(DO_RECURSIVE)
 
 install:
-	$(INSTALL) netconfig $(DESTDIR)$(sbindir)/netconfig
+	$(INSTALL) netconfig.so $(DESTDIR)$(fwlibdir)/netconfig.so
 	mkdir -p $(DESTDIR)$(sysconfdir)/sysconfig/network
-	$(INSTALL) netconfig $(DESTDIR)$(sbindir)/netconfig
+	ln -sf $(sbindir)/setup $(DESTDIR)$(sbindir)/netconfig
 	$(DO_RECURSIVE)
 
 clean:
-	rm -f netconfig *.o
+	rm -f netconfig.so *.o
 	$(DO_RECURSIVE)
 
-test:
-	sudo sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog:../libfwnetconfig ./netconfig'
+%.so: %.o
+	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
+		$(basename $@).so $(basename $@).o $(LDFLAGS)

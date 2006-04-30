@@ -25,6 +25,7 @@
 #include <libfwdialog.h>
 #include <libfwutil.h>
 #include <libfwnetconfig.h>
+#include <setup.h>
 #include <getopt.h>
 #include <stdlib.h>
 #include <dirent.h>
@@ -195,7 +196,7 @@ int dialog_config()
 	return(0);
 }
 
-int main(int argc, char **argv)
+int run(int argc, char **argv)
 {
 	int opt;
 	int option_index;
@@ -282,4 +283,17 @@ int main(int argc, char **argv)
 	else
 		dialog_config();
 	return(ret);
+}
+
+plugin_t plugin =
+{
+	"netconfig",
+	"Network configuration",
+	run,
+	NULL // dlopen handle
+};
+
+plugin_t *info()
+{
+	return &plugin;
 }

@@ -16,28 +16,33 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
--include Makefile.inc
+CFLAGS ?= -g -Wall -O2 -pipe
+LDFLAGS=-ldialog -lcurses -lm
+CFLAGS += $(shell pkg-config --cflags glib-2.0)
+LDFLAGS += $(shell pkg-config --libs glib-2.0)
 
-SUBDIRS = libfwutil libfwdialog setup \
-	  libfwnetconfig netconfig \
-	  libfwtimeconfig timeconfig
+# fwutil
+CFLAGS += -I../libfwutil
+LDFLAGS += -L../libfwutil -lfwutil
 
-compile:
+# fwdialog
+CFLAGS += -I../libfwdialog
+LDFLAGS += -L../libfwdialog -lfwdialog
+
+-include ../Makefile.inc
+
+###SUBDIRS = po
+
+compile: setup
 	$(DO_RECURSIVE)
 
-install: compile
-	$(INSTALL) -d $(DESTDIR)$(sbindir)
-	$(INSTALL) -d $(DESTDIR)$(fwlibdir)
-	$(INSTALL) -d $(DESTDIR)$(usrsbindir)
-	$(INSTALL) -d $(DESTDIR)$(sysconfdir)
-	$(INSTALL) -d $(DESTDIR)$(mandir)/man5
+install:
+	$(INSTALL) setup $(DESTDIR)$(sbindir)/setup
 	$(DO_RECURSIVE)
 
 clean:
+	rm -f setup *.o
 	$(DO_RECURSIVE)
 
-dist:
-	darcs changes >_darcs/current/Changelog
-	darcs dist -d frugalwareutils-$(VERSION)
-	rm _darcs/current/Changelog
-	mv frugalwareutils-$(VERSION).tar.gz ../
+test:
+	sudo sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog ./setup'

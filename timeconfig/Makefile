@@ -33,20 +33,25 @@ LDFLAGS += -L../libfwdialog -lfwdialog
 CFLAGS += -I../libfwtimeconfig
 LDFLAGS += -L../libfwtimeconfig -lfwtimeconfig
 
+# setup
+CFLAGS += -I../setup
+
 -include ../Makefile.inc
 
 SUBDIRS = po
 
-compile: timeconfig
+compile: timeconfig.so
 	$(DO_RECURSIVE)
 
 install:
-	$(INSTALL) timeconfig $(DESTDIR)$(sbindir)/timeconfig
+	$(INSTALL) timeconfig.so $(DESTDIR)$(fwlibdir)/timeconfig.so
+	ln -sf $(sbindir)/setup $(DESTDIR)$(sbindir)/timeconfig
 	$(DO_RECURSIVE)
 
 clean:
-	rm -f timeconfig *.o
+	rm -f timeconfig.so *.o
 	$(DO_RECURSIVE)
 
-test:
-	sudo sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog:../libfwtimeconfig ./timeconfig'
+%.so: %.o
+	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
+		$(basename $@).so $(basename $@).o $(LDFLAGS)
