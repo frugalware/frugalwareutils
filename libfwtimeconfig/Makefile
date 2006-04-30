@@ -33,7 +33,7 @@ clean:
 	rm -f *.so*
 
 %.so: %.o
-	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
+	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so.$(MAJORVER) -o \
 		$(basename $@).so.$(VERSION) $(basename $@).o $(LDFLAGS)
 	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
 	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so
