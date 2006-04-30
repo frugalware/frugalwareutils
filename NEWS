@@ -1,5 +1,7 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.5.2         - fix build on x86_64
+              - new binary: setup - a wrapper to all config tool
 0.5.1         - new config tool: timeconfig
               - new libraries: libfwutils, libfwdialog, libfwnetconfig
               - added localized manpage support to the buildsystem
