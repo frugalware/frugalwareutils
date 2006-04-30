@@ -17,6 +17,9 @@
 #
 
 CFLAGS ?= -g -Wall -O2 -pipe
+ifeq ($(shell arch),x86_64)
+CFLAGS += -fPIC
+endif
 LDFLAGS=-ldialog -lcurses -lm
 CFLAGS += $(shell pkg-config --cflags glib-2.0)
 LDFLAGS += $(shell pkg-config --libs glib-2.0)
