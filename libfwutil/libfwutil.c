@@ -30,6 +30,16 @@
 
 int f_util_dryrun = 0;
 
+/** @defgroup libfwutil Frugalware General Utility library
+ * @brief Functions to make writing Frugalware configuration tools easier
+ * @{
+ */
+
+/** A wrapper to system() and printf(): the action depends on the global
+ * f_util_dryrun variable (0 by default).
+ * @param cmd the command to print/execute
+ * @return 1 on failure, 0 on success
+ */
 int nc_system(const char *cmd)
 {
 	if(f_util_dryrun)
@@ -38,6 +48,9 @@ int nc_system(const char *cmd)
 		return(system(cmd) ? 1 : 0);
 }
 
+/** Initialize gettext, based on the filename.
+ * @param namespace just use the __FILE__ constant
+ */
 void i18ninit(char *namespace)
 {
 	char *lang=NULL;
@@ -58,6 +71,10 @@ void i18ninit(char *namespace)
 	free(ptr);
 }
 
+/** Trims whitespace from the start and end of the line.
+ * @param str string to trim
+ * @return pointer to the trim'ed string
+ */
 char *trim(char *str)
 {
 	char *ptr = str;
@@ -71,6 +88,10 @@ char *trim(char *str)
 	return str;
 }
 
+/** Converts a char* to uppercase using toupper()
+ * @param str string to convert
+ * @return pointer to the upper'ed sting
+ */
 char *strtoupper(char *str)
 {
 	char *ptr = str;
@@ -79,3 +100,4 @@ char *strtoupper(char *str)
 		*ptr++ = toupper(*ptr);
 	return str;
 }
+/* @} */
