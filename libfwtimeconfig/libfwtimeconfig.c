@@ -35,6 +35,16 @@
 
 GList *zones=NULL;
 
+/** @defgroup libfwtimeconfig Frugalware Time Configuration library
+ * @brief Functions to make time configuration easier
+ * @{
+ */
+
+/** Creates the hardware clock configuration file.
+ * @param path path of the configuration file
+ * @param mode clock mode
+ * @return 1 on failure, 0 on success
+ */
 int fwtimeconfig_hwclockconf(char *path, char *mode)
 {
 	FILE *fp;
@@ -50,6 +60,11 @@ int fwtimeconfig_hwclockconf(char *path, char *mode)
 	return(0);
 }
 
+/** Helper function for finding timezones available. The result will be written
+ * to the global "zones" GList.
+ * @param dirname path of the dir which contains the timezones
+ * @return 1 on failure, 0 on success
+ */
 int fwtimeconfig_find(char *dirname)
 {
 	DIR *dir;
@@ -78,3 +93,4 @@ int fwtimeconfig_find(char *dirname)
 	closedir(dir);
 	return(0);
 }
+/* @} */
