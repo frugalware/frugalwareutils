@@ -16,28 +16,16 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
--include Makefile.inc
-
-SUBDIRS = doc libfwutil libfwdialog setup \
-	  libfwnetconfig netconfig \
-	  libfwtimeconfig timeconfig
+-include ../Makefile.inc
 
 compile:
-	$(DO_RECURSIVE)
+	cd .. && doxygen Doxyfile
+	rm -rf man3/_*
 
-install: compile
-	$(INSTALL) -d $(DESTDIR)$(sbindir)
-	$(INSTALL) -d $(DESTDIR)$(fwlibdir)
-	$(INSTALL) -d $(DESTDIR)$(sysconfdir)
-	$(INSTALL) -d $(DESTDIR)$(mandir)/man3
-	$(INSTALL) -d $(DESTDIR)$(mandir)/man5
-	$(DO_RECURSIVE)
+install:
+	for i in man3/*; do \
+		$(INSTALL) -m644 $$i $(DESTDIR)$(mandir)/man3/; \
+	done
 
 clean:
-	$(DO_RECURSIVE)
-
-dist:
-	darcs changes >_darcs/current/Changelog
-	darcs dist -d frugalwareutils-$(VERSION)
-	rm _darcs/current/Changelog
-	mv frugalwareutils-$(VERSION).tar.gz ../
+	rm -rf man3
