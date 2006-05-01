@@ -116,7 +116,7 @@ char *dialog_ask(char *title, char *desc, char *init)
  * @param width the desired width of the box
  * @param menu_height the minimum height to reserve for displaying the list
  * @param item_no the number of rows in items
- * @param an array of strings - the contents of the menu
+ * @param items an array of strings - the contents of the menu
  * @return the answer - you must free() the allocated memory
  */
 char *dialog_mymenu(const char *title, const char *cprompt, int height, int width,
