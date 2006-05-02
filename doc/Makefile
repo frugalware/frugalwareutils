@@ -23,7 +23,7 @@ compile:
 	rm -rf man3/_*
 
 install:
-	for i in man3/*; do \
+	for i in man3/* frugalwareutils.3; do \
 		$(INSTALL) -m644 $$i $(DESTDIR)$(mandir)/man3/; \
 	done
 
