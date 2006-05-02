@@ -34,7 +34,7 @@
 #include <libintl.h>
 
 /** @defgroup libfwdialog Frugalware Dialog library
- * @brief Function to make libdialog usage easier
+ * @brief Functions to make libdialog usage easier
  * @{
  */
 
