@@ -3,6 +3,3 @@ netconfig:
 - rc.interfaces: let it more verbose when loading a profile
 setup:
 - sample config tool
-- doxygen documentation:
-  - libfwnetconfig
-  - libfwutil
