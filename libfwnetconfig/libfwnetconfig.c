@@ -40,6 +40,14 @@
 
 extern int f_util_dryrun;
 
+/** @defgroup libfwnetconfig Frugalware Network Configuration library
+ * @brief Functions to make network configuration easier
+ * @{
+ */
+
+/** Prints s list of profiles available.
+ * @return 1 on failure, 0 on success
+ */
 int listprofiles(void)
 {
 	struct dirent *ent=NULL;
@@ -54,9 +62,10 @@ int listprofiles(void)
 	return(0);
 }
 
-/*
- * based on pacman's config parser, which is
+/** Parses a profile. Based on pacman's config parser, which is
  * Copyright (c) 2002-2006 by Judd Vinet <jvinet@zeroflux.org>
+ * @param fn pathname of the profile
+ * @return the parsed profile
  */
 profile_t *parseprofile(char *fn)
 {
@@ -176,6 +185,10 @@ profile_t *parseprofile(char *fn)
 	return(profile);
 }
 
+/** Check if an interface contains "options = dhcp".
+ * @param iface the interface struct pointer
+ * @return 1 if true, 0 if false
+ */
 int is_dhcp(interface_t *iface)
 {
 	int i, dhcp=0;
@@ -185,6 +198,10 @@ int is_dhcp(interface_t *iface)
 	return(dhcp);
 }
 
+/** Shut down an interface
+ * @param iface the interface struct pointer
+ * @return 1 on failure, 0 on success
+ */
 int ifdown(interface_t *iface)
 {
 	int dhcp, ret=0, i;
@@ -234,6 +251,10 @@ int ifdown(interface_t *iface)
 	return(ret);
 }
 
+/** Bring up an interface
+ * @param iface the interface struct pointer
+ * @return 1 on failure, 0 on success
+ */
 int ifup(interface_t *iface)
 {
 	int dhcp, ret=0, i;
@@ -310,6 +331,10 @@ int ifup(interface_t *iface)
 	return(ret);
 }
 
+/** Update the dns settings based on a profile
+ * @param profile the profile struct pointer
+ * @return 1 on failure, 0 on success
+ */
 int setdns(profile_t* profile)
 {
 	int i;
@@ -342,6 +367,9 @@ int setdns(profile_t* profile)
 	return(0);
 }
 
+/** Get the name of the last used profile.
+ * @return the name on success, NULL on failure
+ */
 char *lastprofile(void)
 {
 	FILE *fp;
@@ -356,6 +384,10 @@ char *lastprofile(void)
 	return(strdup(line));
 }
 
+/** Set the name of the last used profile.
+ * @param str the name of the profile
+ * @return 1 on failure, 0 on success
+ */
 int setlastprofile(char* str)
 {
 	FILE *fp;
@@ -372,6 +404,9 @@ int setlastprofile(char* str)
 	return(0);
 }
 
+/** Brings up the 'lo' interface.
+ * @return 1 on failure, 0 on success
+ */
 int loup(void)
 {
 	int ret=0;
@@ -381,11 +416,18 @@ int loup(void)
 	return(ret);
 }
 
+/** Shut down the 'lo' interface.
+ * @return 1 on failure, 0 on success
+ */
 int lodown(void)
 {
 	return(nc_system("ifconfig lo down"));
 }
 
+/** Check if an interface is a wireless device.
+ * @param dev the name of the interface
+ * @return 1 if yes, 0 if not
+ */
 int is_wireless_device(char *dev)
 {
 	FILE *pp;
@@ -414,6 +456,10 @@ int is_wireless_device(char *dev)
 	return(1);
 }
 
+/** Drop the domain suffix from a hostname+domainname.
+ * @param ptr the full hostname+domainname
+ * @return the hostname
+ */
 char *hostname(char *ptr)
 {
 	char *str=ptr;
@@ -423,9 +469,13 @@ char *hostname(char *ptr)
 	return(str);
 }
 
-/* Copyright 1994 by David Niemi.  Written in about 30 minutes on 13 Aug.
+/** Get a network address based on an ip address and a netmask.
+ * Copyright 1994 by David Niemi.  Written in about 30 minutes on 13 Aug.
  * The author places no restrictions on the use of this program, provided
  * that this copyright is preserved in any derived source code.
+ * @param ip the ip address
+ * @param nm the netmask address
+ * @return the network address
  */
 char *netaddr(char *ip, char *nm)
 {
@@ -463,6 +513,12 @@ char *netaddr(char *ip, char *nm)
 	return(g_strdup_printf("%d.%d.%d.%d", na[0], na[1], na[2], na[3]));
 }
 
+/** Dumps a profile to a text file.
+ * @param profile the profile to dump
+ * @param host the hostname
+ * @param nettype the type of the network (lo, dhcp or static)
+ * @return 1 on failure, 0 on success
+ */
 int writeconfig(profile_t *profile, char *host, char *nettype)
 {
 	FILE *fp;
@@ -552,3 +608,4 @@ int writeconfig(profile_t *profile, char *host, char *nettype)
 	FREE(network);
 	return(0);
 }
+/* @} */
