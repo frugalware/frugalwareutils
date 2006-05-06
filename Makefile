@@ -21,7 +21,7 @@
 SUBDIRS = doc libfwutil libfwdialog setup \
 	  libfwnetconfig netconfig \
 	  libfwtimeconfig timeconfig \
-	  libfwraidconfig
+	  libfwraidconfig raidconfig
 
 compile:
 	$(DO_RECURSIVE)
