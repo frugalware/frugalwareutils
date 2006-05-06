@@ -27,6 +27,7 @@
 #include <glib.h>
 #include <libfwutil.h>
 #include <parted/parted.h>
+#include <sys/stat.h>
 
 #include "libfwraidconfig.h"
 
@@ -62,8 +63,14 @@ char* fwraid_suggest_devname()
  */
 int fwraid_mknod_md(char *devname)
 {
+	struct stat buf;
 	int ret;
-	char *ptr = g_strdup_printf("mknod %s b 9 %s", devname, devname + strlen("/dev/md"));
+	char *ptr;
+
+	if(!stat(devname, &buf))
+		// device already created
+		return(0);
+	ptr = g_strdup_printf("mknod %s b 9 %s", devname, devname + strlen("/dev/md"));
 	
 	ret = system(ptr);
 	free(ptr);
