@@ -17,7 +17,7 @@
 #
 
 LANGS=hu
-DOMAIN=setup
+DOMAIN=timeconfig
 
 -include ../../Makefile.inc
 -include ../../Makefile.po.inc
