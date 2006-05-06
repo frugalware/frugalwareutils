@@ -155,3 +155,4 @@ int fwraid_create_md(char *devname, int level, GList *devices)
 	free(cmd);
 	return(ret);
 }
+/* @} */
