@@ -30,16 +30,6 @@
 
 #include "libfwraidconfig.h"
 
-char *fwraid_levels[] = 
-{
-	"0", "raid0 (stripe)",
-	"1", "raid1 (mirror)",
-	"4", "raid4",
-	"5", "raid5",
-	"6", "raid6",
-	"10", "raid10"
-};
-
 GList *fwraid_parts=NULL;
 
 /** @defgroup libfwraidconfig Frugalware RAID Configuration library
