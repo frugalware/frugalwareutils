@@ -1,5 +1,7 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.5.5         - added gettext support to raidconfig
+              - fixed gettext support of timeconfig
 0.5.4         - new config tool: raidconfig
               - several internal cleanups
 0.5.3         - added developer documentation
