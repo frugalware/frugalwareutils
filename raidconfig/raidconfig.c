@@ -83,7 +83,7 @@ GList *add_devices()
 		else
 		{
 			ptr = g_list_display(devlist, " ");
-			sptr = g_strdup_printf("The current list contains: %s.", ptr);
+			sptr = g_strdup_printf(_("The current list contains: %s."), ptr);
 			free(ptr);
 		}
 	

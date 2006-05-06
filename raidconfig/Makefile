@@ -41,7 +41,7 @@ CFLAGS += -I../setup
 
 -include ../Makefile.inc
 
-###SUBDIRS = po
+SUBDIRS = po
 
 compile: raidconfig.so
 	$(DO_RECURSIVE)
