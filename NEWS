@@ -1,5 +1,7 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.5.4         - new config tool: raidconfig
+              - several internal cleanups
 0.5.3         - added developer documentation
 0.5.2         - fix build on x86_64
               - new binary: setup - a wrapper to all config tool
