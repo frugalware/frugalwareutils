@@ -1,0 +1,5 @@
+This directory contains a very simple config plugin, in fact a mix of the
+raidconfig and timeconfig, but the target here is to be simple. Feel free
+to use it as a base of other new plugins.
+
+VMiklos
