@@ -30,21 +30,7 @@ CFLAGS += -I../libfwutil
 LDFLAGS += -L../libfwutil -lfwutil
 
 SUBDIRS = po
+LIBNAME = netconfig
 
-compile: libfwnetconfig.so
-
-install:
-	$(INSTALL) libfwnetconfig.so.$(VERSION) $(DESTDIR)$(libdir)/libfwnetconfig.so.$(VERSION)
-	ln -sf libfwnetconfig.so.$(VERSION) $(DESTDIR)$(libdir)/libfwnetconfig.so.$(MAJORVER)
-	ln -sf libfwnetconfig.so.$(VERSION) $(DESTDIR)$(libdir)/libfwnetconfig.so
-	$(DO_RECURSIVE)
-
-clean:
-	rm -f *.so*
-	$(DO_RECURSIVE)
-
-%.so: %.o
-	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so.$(MAJORVER) -o \
-		$(basename $@).so.$(VERSION) $(basename $@).o $(LDFLAGS)
-	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
-	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so
+-include ../Makefile.inc
+-include ../Makefile.lib.inc

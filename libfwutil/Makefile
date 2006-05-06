@@ -16,8 +16,6 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
--include ../Makefile.inc
-
 CFLAGS ?= -g -Wall -O2 -pipe
 ifeq ($(shell arch),x86_64)
 CFLAGS += -fPIC
@@ -27,18 +25,7 @@ endif
 CFLAGS += $(shell pkg-config --cflags glib-2.0)
 LDFLAGS += $(shell pkg-config --libs glib-2.0)
 
-compile: libfwutil.so
+LIBNAME = util
 
-install:
-	$(INSTALL) libfwutil.so.$(VERSION) $(DESTDIR)$(libdir)/libfwutil.so.$(VERSION)
-	ln -sf libfwutil.so.$(VERSION) $(DESTDIR)$(libdir)/libfwutil.so.$(MAJORVER)
-	ln -sf libfwutil.so.$(VERSION) $(DESTDIR)$(libdir)/libfwutil.so
-
-clean:
-	rm -f *.so*
-
-%.so: %.o
-	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so.$(MAJORVER) -o \
-		$(basename $@).so.$(VERSION) $(basename $@).o $(LDFLAGS)
-	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
-	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so
+-include ../Makefile.inc
+-include ../Makefile.lib.inc
