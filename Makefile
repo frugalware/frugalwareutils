@@ -40,5 +40,6 @@ clean:
 dist:
 	darcs changes >_darcs/current/Changelog
 	darcs dist -d frugalwareutils-$(VERSION)
+	gpg -ba -u 20F55619 frugalwareutils-$(VERSION).tar.gz
+	mv frugalwareutils-$(VERSION).tar.gz{,.asc} ../
 	rm _darcs/current/Changelog
-	mv frugalwareutils-$(VERSION).tar.gz ../
