@@ -1,5 +1,6 @@
 netconfig:
 - support for configuring != eth0
 - rc.interfaces: let it more verbose when loading a profile
-setup:
-- sample config tool
+dialog frontends:
+- don't init/deinit dialog if we're called from setup
+- Makefile cleanup
