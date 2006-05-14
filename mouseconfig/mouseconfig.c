@@ -87,7 +87,7 @@ char* ask_port()
 	return(ptr);
 }
 
-int run()
+int run(int argc, char **argv)
 {
 	FILE *input = stdin;
 	dialog_state.output = stderr;
@@ -163,7 +163,9 @@ int run()
 	FREE(mtype);
 	FREE(link);
 
-	end_dialog();
+	// deinit dialog if we're called directly, not via setup
+	if(argv!=NULL)
+		end_dialog();
 	return(0);
 }
 
