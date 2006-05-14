@@ -95,7 +95,8 @@ int run(int argc, char **argv)
 	char *mouse_type=NULL, *mtype=NULL, *link=NULL;
 
 	i18ninit(__FILE__);
-	init_dialog(input, dialog_state.output);
+	if(argv!=NULL)
+		init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("Mouse configuration"));
 
 	if(fwmouse_detect_usb())
