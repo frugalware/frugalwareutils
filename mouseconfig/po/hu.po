@@ -1,0 +1,144 @@
+# Hungarian translations for mouseconfig package.
+# Copyright (C) 2006 THE mouseconfig'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mouseconfig package.
+#  <vmiklos@frugalware.org>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mouseconfig\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-05-15 00:39+0200\n"
+"PO-Revision-Date: 2006-05-15 00:40+0200\n"
+"Last-Translator:  <vmiklos@frugalware.org>\n"
+"Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../mouseconfig.c:41
+msgid "PS/2 port mouse (most desktops and laptops)"
+msgstr "PS/2 egér (a legtöbb asztali és hordozható gépen)"
+
+#: ../mouseconfig.c:42
+msgid "Microsoft PS/2 Intellimouse"
+msgstr "Microsoft PS/2 Intellimouse"
+
+#: ../mouseconfig.c:43
+msgid "2 button Microsoft compatible serial mouse"
+msgstr "2 gombos Microsoft kompatibilis soros egér"
+
+#: ../mouseconfig.c:44
+msgid "3 button Microsoft compatible serial mouse"
+msgstr "3 gombos Microsoft kompatibilis soros egér"
+
+#: ../mouseconfig.c:45
+msgid "Logitech serial MouseMan and similar devices"
+msgstr "Logitech soros MouseMan és hasonló eszközök"
+
+#: ../mouseconfig.c:46
+msgid "MouseSystems serial (most 3 button serial mice)"
+msgstr "Soros MouseSystems (a legtöbb 3 gombos soros egér)"
+
+#: ../mouseconfig.c:47
+msgid "Plug and Play (serial mice that do not work with ms)"
+msgstr "Plug and Play (ms beállítással nem mûködõ soros egerek)"
+
+#: ../mouseconfig.c:48
+msgid "USB connected mouse"
+msgstr "USB egér"
+
+#: ../mouseconfig.c:49
+msgid "Microsoft serial Intellimouse"
+msgstr "Microsoft soros Intellimouse"
+
+#: ../mouseconfig.c:50
+msgid "Genius Netmouse on PS/2 port"
+msgstr "Genius Netmouse a PS/2 porton"
+
+#: ../mouseconfig.c:51
+msgid "Some serial Logitech devices"
+msgstr "Néhány soros Logitech eszköz"
+
+#: ../mouseconfig.c:52
+msgid "Make serial Logitech behave like msc"
+msgstr "A soros Logitech mûködjön msc-hez hasonlóan"
+
+#: ../mouseconfig.c:53
+msgid "ATI XL busmouse (mouse card)"
+msgstr "ATI XL buszos egér (egérkártyával)"
+
+#: ../mouseconfig.c:54
+msgid "Microsoft busmouse (mouse card)"
+msgstr "Microsoft buszos egér (egérkártyával)"
+
+#: ../mouseconfig.c:55
+msgid "Logitech busmouse (mouse card)"
+msgstr "Logitech buszos egér (egérkártyával)"
+
+#: ../mouseconfig.c:56
+msgid "A pointing pen (NCR3125) on some laptops"
+msgstr "Mutató toll (NRC3125) néhány laptopon"
+
+#: ../mouseconfig.c:57
+msgid "Twiddler keyboard, by HandyKey Corp"
+msgstr "Twiddler billentyûzet, HandKey Corp"
+
+#: ../mouseconfig.c:58
+msgid "Genitizer tablet (relative mode)"
+msgstr "Genitizer tábla (relatív mód)"
+
+#: ../mouseconfig.c:59
+msgid "Use a joystick as a mouse"
+msgstr "Joystick használata egérként"
+
+#: ../mouseconfig.c:60
+msgid "Wacom serial graphics tablet"
+msgstr "Wacom soros digitalizáló tábla"
+
+#: ../mouseconfig.c:64
+msgid "Configure the console mouse support (GPM)"
+msgstr "A konzol egértámogatásának (GPM) beállítása"
+
+#: ../mouseconfig.c:65
+msgid ""
+"This part of the configuration process will create a /dev/mouse link "
+"pointing to your default mouse device.  You can change the /dev/mouse link "
+"later in the /etc/sysconfig/gpm configuration file if the mouse doesn't "
+"work, or if you switch to a different type of pointing device. We will also "
+"use the information about the mouse to set the correct protocol for gpm, the "
+"Linux mouse server. Please select a mouse type from the list below:"
+msgstr ""
+"Ebben a szakaszban a telepítõ egy az alapértelmezett egér eszközre mutató /dev/mouse linket "
+"fog létrehozni. Ezt késõbb megváltoztathatja a /etc/sysconfig/gpm fájlban, "
+"ha az egér nem mûködik, vagy egy másik mutatóeszközre váltana. A "
+"megadott beállításokat a Linux egérszerver (gpm) protokoll beállításaihoz is "
+"felhasználjuk. Válassza ki az egér típusát a következõ listából:"
+
+#: ../mouseconfig.c:77
+msgid "(COM1: under DOS)"
+msgstr "(COM1: DOS alatt)"
+
+#: ../mouseconfig.c:78
+msgid "(COM2: under DOS)"
+msgstr "(COM2: DOS alatt)"
+
+#: ../mouseconfig.c:79
+msgid "(COM3: under DOS)"
+msgstr "(COM3: DOS alatt)"
+
+#: ../mouseconfig.c:80
+msgid "(COM4: under DOS)"
+msgstr "(COM4: DOS alatt)"
+
+#: ../mouseconfig.c:84
+msgid "Select Serial Port"
+msgstr "Soros port kiválasztása"
+
+#: ../mouseconfig.c:85
+msgid "Your mouse requires a serial port. Which one would you like to use?"
+msgstr "Melyik soros portot kívánja használni?"
+
+#: ../mouseconfig.c:99
+msgid "Mouse configuration"
+msgstr "Egér beállítása"
