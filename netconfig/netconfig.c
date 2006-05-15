@@ -93,7 +93,7 @@ int dsl_hook(void)
 	return(0);
 }
 
-int dialog_config()
+int dialog_config(int argc, char **argv)
 {
 	FILE *input = stdin;
 	profile_t *newprofile=NULL;
@@ -283,7 +283,7 @@ int run(int argc, char **argv)
 		FREE(fn);
 	}
 	else
-		dialog_config();
+		dialog_config(argc, argv);
 	return(ret);
 }
 
