@@ -107,7 +107,7 @@ GList *add_devices()
 	return(devlist);
 }
 
-int run()
+int run(int argc, char **argv)
 {
 	FILE *input = stdin;
 	dialog_state.output = stderr;

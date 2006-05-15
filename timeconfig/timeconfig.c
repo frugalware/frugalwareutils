@@ -105,7 +105,7 @@ char *ask_zone(GList *zones)
 	return(ptr);
 }
 
-int run()
+int run(int argc, char **argv)
 {
 	FILE *input = stdin;
 	dialog_state.output = stderr;
