@@ -19,7 +19,7 @@
 VERSION = 0.5.5
 MAJORVER = 0
 
-DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done
+DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || break; done
 
 INSTALL = /usr/bin/install -c
 DESTDIR =
