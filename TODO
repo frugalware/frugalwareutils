@@ -1,5 +1,3 @@
 netconfig:
 - support for configuring != eth0
 - rc.interfaces: let it more verbose when loading a profile
-dialog frontends:
-- Makefile cleanup

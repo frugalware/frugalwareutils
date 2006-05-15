@@ -39,22 +39,8 @@ LDFLAGS += -L../libfwtimeconfig -lfwtimeconfig
 # setup
 CFLAGS += -I../setup
 
--include ../Makefile.inc
-
 SUBDIRS = po
+CONFNAME = timeconfig
 
-compile: timeconfig.so
-	$(DO_RECURSIVE)
-
-install:
-	$(INSTALL) timeconfig.so $(DESTDIR)$(fwlibdir)/timeconfig.so
-	ln -sf setup $(DESTDIR)$(sbindir)/timeconfig
-	$(DO_RECURSIVE)
-
-clean:
-	rm -f timeconfig.so *.o
-	$(DO_RECURSIVE)
-
-%.so: %.o
-	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
-		$(basename $@).so $(basename $@).o $(LDFLAGS)
+-include ../Makefile.inc
+-include ../Makefile.conf.inc

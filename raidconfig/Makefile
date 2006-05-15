@@ -39,22 +39,8 @@ LDFLAGS += -L../libfwraidconfig -lfwraidconfig
 # setup
 CFLAGS += -I../setup
 
--include ../Makefile.inc
-
 SUBDIRS = po
+CONFNAME = raidconfig
 
-compile: raidconfig.so
-	$(DO_RECURSIVE)
-
-install:
-	$(INSTALL) raidconfig.so $(DESTDIR)$(fwlibdir)/raidconfig.so
-	ln -sf setup $(DESTDIR)$(sbindir)/raidconfig
-	$(DO_RECURSIVE)
-
-clean:
-	rm -f raidconfig.so *.o
-	$(DO_RECURSIVE)
-
-%.so: %.o
-	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
-		$(basename $@).so $(basename $@).o $(LDFLAGS)
+-include ../Makefile.inc
+-include ../Makefile.conf.inc

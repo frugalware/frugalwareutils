@@ -39,22 +39,8 @@ LDFLAGS += -L../libfwmouseconfig -lfwmouseconfig
 # setup
 CFLAGS += -I../setup
 
--include ../Makefile.inc
-
 SUBDIRS = po
+CONFNAME = mouseconfig
 
-compile: mouseconfig.so
-	$(DO_RECURSIVE)
-
-install:
-	$(INSTALL) mouseconfig.so $(DESTDIR)$(fwlibdir)/mouseconfig.so
-	ln -sf setup $(DESTDIR)$(sbindir)/mouseconfig
-	$(DO_RECURSIVE)
-
-clean:
-	rm -f mouseconfig.so *.o
-	$(DO_RECURSIVE)
-
-%.so: %.o
-	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
-		$(basename $@).so $(basename $@).o $(LDFLAGS)
+-include ../Makefile.inc
+-include ../Makefile.conf.inc

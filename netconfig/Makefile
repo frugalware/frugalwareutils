@@ -39,23 +39,8 @@ LDFLAGS += -L../libfwnetconfig -lfwnetconfig
 # setup
 CFLAGS += -I../setup
 
--include ../Makefile.inc
-
 SUBDIRS = doc po
+CONFNAME = netconfig
 
-compile: netconfig.so
-	$(DO_RECURSIVE)
-
-install:
-	$(INSTALL) netconfig.so $(DESTDIR)$(fwlibdir)/netconfig.so
-	mkdir -p $(DESTDIR)$(sysconfdir)/sysconfig/network
-	ln -sf setup $(DESTDIR)$(sbindir)/netconfig
-	$(DO_RECURSIVE)
-
-clean:
-	rm -f netconfig.so *.o
-	$(DO_RECURSIVE)
-
-%.so: %.o
-	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
-		$(basename $@).so $(basename $@).o $(LDFLAGS)
+-include ../Makefile.inc
+-include ../Makefile.conf.inc
