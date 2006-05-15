@@ -104,7 +104,8 @@ int dialog_config()
 	char *ipaddr=NULL, *netmask=NULL, *dns=NULL;
 
 	dialog_state.output = stderr;
-	init_dialog(input, dialog_state.output);
+	if(argv!=NULL)
+		init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("Network configuration"));
 
 	if(!nco_fast)
@@ -192,7 +193,8 @@ int dialog_config()
 	FREE(ipaddr);
 	FREE(netmask);
 	FREE(dns);
-	end_dialog();
+	if(argv!=NULL)
+		end_dialog();
 	return(0);
 }
 
