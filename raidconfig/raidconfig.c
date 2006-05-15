@@ -116,7 +116,8 @@ int run()
 	GList *devlist;
 
 	i18ninit(__FILE__);
-	init_dialog(input, dialog_state.output);
+	if(argv!=NULL)
+		init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("RAID configuration"));
 
 	devname = ask_devname();
@@ -127,7 +128,8 @@ int run()
 
 	free(devname);
 	g_list_free(devlist);
-	end_dialog();
+	if(argv!=NULL)
+		end_dialog();
 	return(0);
 }
 
