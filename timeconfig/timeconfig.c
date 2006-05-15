@@ -113,7 +113,8 @@ int run()
 	GList *zones;
 
 	i18ninit(__FILE__);
-	init_dialog(input, dialog_state.output);
+	if(argv!=NULL)
+		init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("Time configuration"));
 
 	ptr = ask_mode();
@@ -123,7 +124,8 @@ int run()
 	ptr = ask_zone(zones);
 	symlink(ptr, ZONEFILE);
 
-	end_dialog();
+	if(argv!=NULL)
+		end_dialog();
 	return(0);
 }
 
