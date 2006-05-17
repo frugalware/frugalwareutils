@@ -566,7 +566,8 @@ int writeconfig(profile_t *profile, char *host, char *nettype)
 	fprintf(fp, "%s\n", host);
 	fclose(fp);
 
-	sscanf(option, "options = %s netmask %s", ipaddr, netmask);
+	if(option)
+		sscanf(option, "options = %s netmask %s", ipaddr, netmask);
 
 	if(strcmp(nettype, "static"))
 	{
