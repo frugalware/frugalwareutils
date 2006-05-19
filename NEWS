@@ -1,5 +1,6 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.5.7         - bugfix release for netconfig
 0.5.6         - new config tool: mouseconfig
               - fixed exiting from the setup in case the config tool would not
                 exit() and the menu would return back
