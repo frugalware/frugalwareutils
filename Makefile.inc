@@ -27,6 +27,7 @@ sysconfdir = /etc
 sbindir = /sbin
 libdir = /lib
 fwlibdir = $(libdir)/frugalware
+libexecdir = /usr/libexec
 mandir = /usr/share/man
 localedir = /usr/share/locale
 

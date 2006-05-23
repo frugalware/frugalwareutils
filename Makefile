@@ -30,6 +30,7 @@ compile:
 install: compile
 	$(INSTALL) -d $(DESTDIR)$(sbindir)
 	$(INSTALL) -d $(DESTDIR)$(fwlibdir)
+	$(INSTALL) -d $(DESTDIR)$(libexecdir)
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)/sysconfig/network
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man3
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man5
