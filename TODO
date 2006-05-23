@@ -1,3 +1,6 @@
 netconfig:
 - support for configuring != eth0
 - rc.interfaces: let it more verbose when loading a profile
+xconfig:
+- dialog frontend
+- lib: doxygen, gettext
