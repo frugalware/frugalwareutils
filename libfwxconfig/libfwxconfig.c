@@ -123,7 +123,7 @@ int fwx_doprobe()
 	return(system("X -configure :1 2>/dev/null"));
 }
 
-int _fwx_reg_match(char *str, char *pattern)
+static int _fwx_reg_match(char *str, char *pattern)
 {
 	int result;
 	regex_t reg;
