@@ -36,6 +36,14 @@
 #define HORIZSYNC "31.5 - 64.3"
 #define REFRESH "60-75"
 
+/** @defgroup libfwxconfig Frugalware X Configuration library
+ * @brief Functions to make X configuration easier
+ * @{
+ */
+
+/** Initialize the environment if necessary
+ * @return 1 if fwx_release() call is needed later, 0 if not
+ */
 int fwx_init()
 {
 	struct stat buf;
@@ -70,6 +78,8 @@ int fwx_init()
 	return(0);
 }
 
+/** Release the environment
+ */
 void fwx_release()
 {
 	umount("/dev/pts");
@@ -118,6 +128,9 @@ static void _fwx_print_mouse_identifier(FILE *fp, int num, char *device, char *p
 			"Section \"InputDevice\"\n");
 }
 
+/** Creates a config draft, which will be an input fro fwx_doconfig()
+ * @return 0 on success, 1 on failure
+ */
 int fwx_doprobe()
 {
 	return(system("X -configure :1 2>/dev/null"));
@@ -136,6 +149,9 @@ static int _fwx_reg_match(char *str, char *pattern)
 	return(!(result));
 }
 
+/** Creates a configuration from the draft
+ * @return 1 on success, 0 on failure
+ */
 int fwx_doconfig(char *mousedev, char *res, char *depth)
 {
 	char line[PATH_MAX+1];
@@ -230,6 +246,9 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 
 }
 
+/** Performs a probe with the new config
+ * @return 1 on success, 0 on failure
+ */
 int fwx_dotest()
 {
 	struct stat buf;
@@ -244,6 +263,9 @@ int fwx_dotest()
 		return(1);
 }
 
+/** Get the name of the device used by gpm
+ * @return the name of the device
+ */
 char *fwx_get_mousedev()
 {
 	FILE *pp;
@@ -254,3 +276,4 @@ char *fwx_get_mousedev()
 	pclose(pp);
 	return(strdup(line));
 }
+/* @} */
