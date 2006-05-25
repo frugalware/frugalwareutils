@@ -78,14 +78,14 @@ void fwx_release()
 	umount("/proc");
 }
 
-void fwx_print_mouse_options(FILE *fp)
+static void _fwx_print_mouse_options(FILE *fp)
 {
 	fprintf(fp, "Option      \"ZAxisMapping\" \"4 5\"\n"
 		"Option      \"Buttons\" \"3\"\n"
 		"Option      \"AlwaysCore\" \"true\"\n");
 }
 
-void fwx_print_kbd_options(FILE *fp)
+static void _fwx_print_kbd_options(FILE *fp)
 {
 	char *ptr, *lang=NULL;
 	
@@ -105,13 +105,13 @@ void fwx_print_kbd_options(FILE *fp)
 		free(lang);
 }
 
-void fwx_print_mouse_identifier(FILE *fp, int num, char *device, char *proto)
+static void _fwx_print_mouse_identifier(FILE *fp, int num, char *device, char *proto)
 {
 	if(!proto)
 		proto = strdup("auto");
 	fprintf(fp, "Identifier  \"Mouse%d\"\n", num);
 	fprintf(fp, "Driver      \"mouse\"\n");
-	fwx_print_mouse_options(fp);
+	_fwx_print_mouse_options(fp);
 	fprintf(fp, "Option      \"Protocol\" \"%s\"\n", proto);
 	fprintf(fp, "Option      \"Device\" \"%s\"\n", device);
 	fprintf(fp, "EndSection\n\n"
@@ -155,14 +155,14 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 	{
 		if(_fwx_reg_match(line, "Protocol.*auto"))
 		{
-			fwx_print_mouse_options(nfp);
+			_fwx_print_mouse_options(nfp);
 			fprintf(nfp, "Option      \"Protocol\" \"auto\"\n");
 			line[0]='\0';
 		}
 		if(_fwx_reg_match(line, "Identifier.*Mouse"))
 		{
-			fwx_print_mouse_identifier(nfp, 0, "/dev/psaux", "ps/2");
-			fwx_print_mouse_identifier(nfp, 1, "/dev/tts/0", NULL);
+			_fwx_print_mouse_identifier(nfp, 0, "/dev/psaux", "ps/2");
+			_fwx_print_mouse_identifier(nfp, 1, "/dev/tts/0", NULL);
 			fprintf(nfp, "Identifier  \"Mouse3\"\n");
 			line[0]='\0';
 		}
@@ -201,7 +201,7 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 		}
 		if(_fwx_reg_match(line, "driver.*kbd"))
 		{
-			fwx_print_kbd_options(nfp);
+			_fwx_print_kbd_options(nfp);
 		}
 		if(_fwx_reg_match(line, "Depth.*(16)|(24)"))
 		{
