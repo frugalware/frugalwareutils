@@ -19,6 +19,8 @@
  *  USA.
  */
 
+int fwx_init();
+void fwx_release();
 void fwx_print_mouse_options(FILE *fp);
 void fwx_print_kbd_options(FILE *fp);
 void fwx_print_mouse_identifier(FILE *fp, int num, char *device, char *proto);

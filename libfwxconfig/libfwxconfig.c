@@ -26,6 +26,7 @@
 #include <limits.h>
 #include <regex.h>
 #include <sys/stat.h>
+#include <sys/mount.h>
 
 #include "xconfig-helper.h"
 
@@ -34,6 +35,48 @@
 #define COREPOINTER "\"CorePointer\""
 #define HORIZSYNC "31.5 - 64.3"
 #define REFRESH "60-75"
+
+int fwx_init()
+{
+	struct stat buf;
+	FILE *fi, *fo;
+
+	if(stat("/dev/zero", &buf))
+	{
+		if(stat("/proc/1", &buf))
+			system("mount /proc");
+		system("/etc/rc.d/rc.udev");
+		system("mount / -o rw,remount");
+
+		if((fi = fopen("/proc/mounts", "r")))
+		{
+			if((fo = fopen("mtab", "w")))
+			{
+				char line[256];
+
+				while(!feof(fi))
+				{
+					if(!fgets(line, 255, fi))
+						break;
+					if(!strstr(line, "root"))
+						fprintf(fo, "%s", line);
+				}
+			}
+		}
+
+		system("mount /dev/pts");
+		return(1);
+	}
+	return(0);
+}
+
+void fwx_release()
+{
+	umount("/dev/pts");
+	umount("/dev");
+	umount("/sys");
+	umount("/proc");
+}
 
 void fwx_print_mouse_options(FILE *fp)
 {
