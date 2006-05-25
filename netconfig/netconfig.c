@@ -66,7 +66,7 @@ char *selnettype()
 	return(fwdialog_menu(_("Select network connection type"),
 		_("Now we need to know how your machine connects to the network.\n"
 		"If you have an internal network card and an assigned IP address, gateway, and DNS, use 'static' "
-		"to enter these values. Also may use this if you have a DSL connection.\n"
+		"to enter these values. You may also use this if you have a DSL connection.\n"
 		"If your IP address is assigned by a DHCP server (commonly used by cable modem services), select 'dhcp'. \n"
 		"If you just have a network card to connect directly to a DSL modem, then select 'dsl'. \n"
 		"Finally, if you do not have a network card, select the 'lo' choice. \n"),
