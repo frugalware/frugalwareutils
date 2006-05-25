@@ -235,7 +235,7 @@ int fwx_dotest()
 	struct stat buf;
 
 	system("XINITRC=/usr/libexec/xconfig-helper xinit -- :1");
-	if(stat(CLICKFILE, &buf))
+	if(!stat(CLICKFILE, &buf))
 	{
 		unlink(CLICKFILE);
 		return(0);
