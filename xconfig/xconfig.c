@@ -32,17 +32,6 @@
 #include <unistd.h>
 #include <libintl.h>
 
-char *fwx_get_mousedev()
-{
-	FILE *pp;
-	char line[256];
-
-	pp = popen("source /etc/sysconfig/gpm; echo $dev", "r");
-	fgets(line, 255, pp);
-	pclose(pp);
-	return(strdup(line));
-}
-
 int run()
 {
 	FILE *input = stdin;

@@ -243,3 +243,14 @@ int fwx_dotest()
 	else
 		return(1);
 }
+
+char *fwx_get_mousedev()
+{
+	FILE *pp;
+	char line[256];
+
+	pp = popen("source /etc/sysconfig/gpm; echo $dev", "r");
+	fgets(line, 255, pp);
+	pclose(pp);
+	return(strdup(line));
+}
