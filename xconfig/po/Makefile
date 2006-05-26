@@ -16,31 +16,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-CFLAGS ?= -g -Wall -O2 -pipe
-ifeq ($(shell arch),x86_64)
-CFLAGS += -fPIC
-endif
-LDFLAGS=-ldialog -lcurses -lm
-CFLAGS += $(shell pkg-config --cflags glib-2.0)
-LDFLAGS += $(shell pkg-config --libs glib-2.0)
+LANGS=de hu
+DOMAIN=xconfig
 
-# fwutil
-CFLAGS += -I../libfwutil
-LDFLAGS += -L../libfwutil -lfwutil
-
-# fwdialog
-CFLAGS += -I../libfwdialog
-LDFLAGS += -L../libfwdialog -lfwdialog
-
-# fwxconfig
-CFLAGS += -I../libfwxconfig
-LDFLAGS += -L../libfwxconfig -lfwxconfig
-
-# setup
-CFLAGS += -I../setup
-
-SUBDIRS = po
-CONFNAME = xconfig
-
--include ../Makefile.inc
--include ../Makefile.conf.inc
+-include ../../Makefile.inc
+-include ../../Makefile.po.inc
