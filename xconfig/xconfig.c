@@ -51,14 +51,14 @@ int run()
 
 	if(stat("/usr/bin/xmessage", &buf))
 	{
-		dialog_msgbox(_("xmessage missing"), _("Could not find xinit, please install "
+		dialog_msgbox(_("xmessage missing"), _("Could not find xmessage, please install "
 			"it with pacman -S xmessage."), 0, 0, 1);
 		return(1);
 	}
 
 	if(stat("/usr/bin/xsetroot", &buf))
 	{
-		dialog_msgbox(_("xsetroot missing"), _("Could not find xinit, please install "
+		dialog_msgbox(_("xsetroot missing"), _("Could not find xsetroot, please install "
 			"it with pacman -S xsetroot."), 0, 0, 1);
 		return(1);
 	}
