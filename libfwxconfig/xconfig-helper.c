@@ -24,6 +24,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <libfwutil.h>
+#include <libintl.h>
 
 #include "xconfig-helper.h"
 
@@ -32,13 +34,14 @@ int main(int argc, char **argv)
 	int i, ret=0, fd;
 	char buf[256];
 
-	system("xsetroot -solid SteelBlue");
+	i18ninit(__FILE__);
 
+	system("xsetroot -solid SteelBlue");
 	for(i=10;i>0;i--)
 	{
-		snprintf(buf, 255, "xmessage -buttons OK:1 -center -timeout 1 \""
+		snprintf(buf, 255, _("xmessage -buttons OK:1 -center -timeout 1 \""
 		"If you see this message, click OK within 10 seconds. "
-		"Elapsed time: %d second(s).\"", i);
+		"Elapsed time: %d second(s).\""), i);
 		if(system(buf))
 		{
 			ret=1;

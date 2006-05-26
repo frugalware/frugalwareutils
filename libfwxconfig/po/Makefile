@@ -16,29 +16,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-CFLAGS ?= -g -Wall -O2 -pipe
-ifeq ($(shell arch),x86_64)
-CFLAGS += -fPIC
-endif
+LANGS=hu
+DOMAIN=xconfig-helper
 
-# fwutil
-CFLAGS += -I../libfwutil
-LDFLAGS += -L../libfwutil -lfwutil
-
-SUBDIRS = po
-LIBNAME = xconfig
-
--include ../Makefile.inc
--include ../Makefile.lib.inc
-
-compile: xconfig-helper
-
-install: xconfig-helper-install
-
-clean: xconfig-helper-clean
-
-xconfig-helper-install:
-	$(INSTALL) xconfig-helper $(DESTDIR)$(libexecdir)/xconfig-helper
-
-xconfig-helper-clean:
-	rm -f xconfig-helper
+-include ../../Makefile.inc
+-include ../../Makefile.po.inc
