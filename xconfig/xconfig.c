@@ -83,7 +83,7 @@ int run()
 		ret = fwx_dotest();
 		init_dialog(input, dialog_state.output);
 		dialog_backtitle(_("X configuration"));
-		if(ret)
+		if(!ret)
 			break;
 	}
 	unlink("/root/xorg.conf.new");
