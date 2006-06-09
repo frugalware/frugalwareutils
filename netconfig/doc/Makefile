@@ -20,10 +20,10 @@
 
 SUBDIRS = po
 
-LANGS=hu
+LANGS = fr hu
 
 compile:
-	po4a po4a.cfg
+	po4a -k 0 po4a.cfg
 
 install:
 	$(INSTALL) -m644 netconfig.5 $(DESTDIR)$(mandir)/man5/netconfig.5

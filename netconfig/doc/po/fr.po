@@ -1,0 +1,284 @@
+# French translations for PACKAGE package
+# Traduction anglaise du package PACKAGE
+# Copyright (C) 2006 Free Software Foundation, Inc.
+#  <enda@netou.com>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2006-06-09 21:59+0200\n"
+"PO-Revision-Date: 2006-06-09 22:22+0100\n"
+"Last-Translator: Enda <enda@netou.com>\n"
+"Language-Team: French <traduc@traduc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+# type: TH
+#: netconfig.5:1
+#, no-wrap
+msgid "netconfig"
+msgstr ""
+
+# type: TH
+#: netconfig.5:1
+#, no-wrap
+msgid "January 18, 2006"
+msgstr "18 Janvier 2006"
+
+# type: TH
+#: netconfig.5:1
+#, no-wrap
+msgid "Frugalware 0.4"
+msgstr ""
+
+# type: SH
+#: netconfig.5:2
+#, no-wrap
+msgid "NAME"
+msgstr "NOM"
+
+# type: Plain text
+#: netconfig.5:4
+msgid "/etc/sysconfig/network/ - configuration of network interfaces"
+msgstr "/etc/sysconfig/network/ - configuration des interfaces réseau"
+
+# type: SH
+#: netconfig.5:4
+#, no-wrap
+msgid "CONFIGURATION"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:11
+msgid "Every file in /etc/sysconfig/network represents a network profile. When netconfig invoked with the start paramter, then the profile named 'default' (/etc/sysconfig/network/default) will be read. This profile is divided into sections or I<interfaces>.  Each section defines an interface that netconfig should initialize. The exception to this is the I<options> section, which defines global options."
+msgstr "Chaque fichier dans /etc/sysconfig/network représente un profil réseau. Quand netconfig est lancé avec le paramètre start, alors le profil nommé 'default' (/etc/sysconfig/network/default) sera lu. Ce profil est divisé en sections ou I<interfaces>.  Chaque section défini une interface que netconfig doit initialiser. L'exception à cela est la section I<options>, qui défini les options globales."
+
+# type: SH
+#: netconfig.5:12
+#, no-wrap
+msgid "Example:"
+msgstr "Exemple:"
+
+# type: Plain text
+#: netconfig.5:17
+#, no-wrap
+msgid ""
+"[options]\n"
+"dns = 157.181.177.34\n"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:21
+#, no-wrap
+msgid ""
+"[eth0]\n"
+"options = 192.168.1.102 netmask 255.255.255.0\n"
+"gateway = default gw 192.168.1.1\n"
+msgstr ""
+
+# type: SH
+#: netconfig.5:23
+#, no-wrap
+msgid "CONFIG: OPTIONS"
+msgstr ""
+
+# type: TP
+#: netconfig.5:24
+#, no-wrap
+msgid "B<dns = E<lt>ipE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:27
+msgid "Explicitely defines dns addresses (ie. when using a static ip). Multiple usage is ok."
+msgstr "Défini explicitement les adresses dns (ie. lors de l'utilisation d'une adresse ip statique). On peut utiliser plusieurs fois ce paramètre."
+
+# type: TP
+#: netconfig.5:27
+#, no-wrap
+msgid "B<domain = E<lt>domainE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:30
+msgid "Defines the local domain name. If defined more than once, the first will be used."
+msgstr "Défini le nom de domaine local. Si défini plus d'une fois, la première instruction sera utilisée."
+
+# type: TP
+#: netconfig.5:30
+#, no-wrap
+msgid "B<desc = E<lt>descriptionE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:33
+msgid "A brief description of this network profile. Used by netconfig."
+msgstr "Une brève description de ce profil réseau. Utilisé par netconfig."
+
+# type: SH
+#: netconfig.5:33
+#, no-wrap
+msgid "CONFIG: INTERFACES"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:37
+msgid "Each section defines an interface.  The interface name is defined by the string within square brackets (eg, the two above are 'eth0' and 'eth1'). The available directives:"
+msgstr "Chaque section défini une interface.  Le nom de l'interface est défini par la chaîne entre apostrophe (eg, les deux ci dessus sont 'eth0' and 'eth1'). Les directives disponibles:"
+
+# type: TP
+#: netconfig.5:37
+#, no-wrap
+msgid "B<options = E<lt>ipE<gt> [netmask E<lt>netmaskE<gt> [broadcast E<lt>broadcastE<gt>]>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:42
+msgid "Defines the ip address, netmask and broadcast address of the interface.  Multiple usage is ok for eth0:1, eth0:2, etc. See the other format of this directive for dhcp."
+msgstr "Défini l'adresse ip, le masque réseau et l'adresse de broadcast de l'interface.  On peut le renseigner plusieurs fois pour eth0:1, eth0:2, etc. Voir l'autre réglage de cette directive pour utiliser le dhcp."
+
+# type: TP
+#: netconfig.5:42
+#, no-wrap
+msgid "B<opions = dhcp>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:45
+msgid "Use dhcp for this interface. When this format is used, the other \"options\" lines are ignored."
+msgstr "Configurer cette interface pour le dhcp. Quand ce format est utilisé, les autres lignes \"options\" sont ignorées."
+
+# type: TP
+#: netconfig.5:45
+#, no-wrap
+msgid "B<pre_up = E<lt>commandE<gt>>"
+msgstr ""
+
+# type: TP
+#: netconfig.5:47
+#, no-wrap
+msgid "B<post_up = E<lt>commandE<gt>>"
+msgstr ""
+
+# type: TP
+#: netconfig.5:49
+#, no-wrap
+msgid "B<pre_down = E<lt>commandE<gt>>"
+msgstr ""
+
+# type: TP
+#: netconfig.5:51
+#, no-wrap
+msgid "B<post_down = E<lt>commandE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:56
+msgid "The synatax of these directives are the same: you can define there commands to be executed before the interface is up, after the interface is up, before it is down, and after, respectively. Multiple usage is ok, the commands are executed in the specified order."
+msgstr "La syntaxe de ces directives est la même: vous pouvez définir les commandes à exécuter respectivement avant que l'interface ne se lance, après que l'interface se soit lancée, avant qu'elle s'arrête, et après. L'usage de commande multiple est autorisé, les commandes seront exécutées dans l'ordre spécifié."
+
+# type: TP
+#: netconfig.5:56
+#, no-wrap
+msgid "B<mac = E<lt>mac addressE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:59
+msgid "Overwrites the mac address of the card. If defined more than once, the first will be used."
+msgstr "Se substitue à l'adresse mac de la carte. Si ce paramètre est défini plusieurs fois, la première définition sera utilisée."
+
+# type: TP
+#: netconfig.5:59
+#, no-wrap
+msgid "B<essid = E<lt>essidE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:63
+msgid "Set the ESSID (or Network Name - in some products it may also be called Domain ID) for wireless network adapters. If defined more than once, the first will be used."
+msgstr "Défini le ESSID (ou Nom du Réseau - dans certain produit, cela peut s'appeler Domain ID) pour les adaptateurs wifi. S'il y'en a plus d'un de défini, le premier sera utilisé."
+
+# type: TP
+#: netconfig.5:63
+#, no-wrap
+msgid "B<gateway = [default gw] E<lt>ipE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:68
+msgid "Route packets via a gateway. NOTE: The specified gateway must be reachable first. If the \"default gw\" prefix is used, then adds a default route. If defined more than once, the first will be used. If using dhcp, then this directive is ignored."
+msgstr "Routez les paquets via une passerelle. NOTE: La passerelle indiquée doit d'abord être joignable. si le préfixe \"default gw\" est utilisé, alors cela ajoute une route par défaut. S'il y'en a plus d'une de définies, la première sera utilisée. Si vous êtes en dhcp, alors cette directive sera ignorée."
+
+# type: TP
+#: netconfig.5:68
+#, no-wrap
+msgid "B<key = E<lt>keyE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:72
+msgid "Used to manipulate encryption or scrambling keys and security mode for wireless networks.  Examples:"
+msgstr "Utilisé pour manipuler le cryptage ou  le masquage des touches ainsi que que le mode sécurisé pour les réseaux sans fil.  Exemples:"
+
+# type: Plain text
+#: netconfig.5:82
+#, no-wrap
+msgid ""
+"key = 0123-4567-89\n"
+"key = [3] 0123-4567-89\n"
+"key = s:password [2]\n"
+"key = [2]\n"
+"key = open\n"
+"key = off\n"
+"key = restricted [3] 0123456789\n"
+"key = 01-23 key 45-67 [4] key [4]\n"
+msgstr ""
+
+# type: TP
+#: netconfig.5:84
+#, no-wrap
+msgid "B<dhcp_opts = E<lt>optionsE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:88
+msgid "These options are passed to the dhcp client daemon. The default is \"-t 10\". You may want to specify here the dhcp hostname, then you'll need \"-t 10 -h E<lt>hostnameE<gt>\"."
+msgstr "Ces options sont passées au client dhcp. Le défaut est \"-t 10\". Vous pouvez vouloir spécifier ici le nom d'hôte dhcp, dans ce cas vous aurez besoin de \"-t 10 -h E<lt>hostnameE<gt>\"."
+
+# type: SH
+#: netconfig.5:88
+#, no-wrap
+msgid "AUTHORS"
+msgstr "AUTEURS"
+
+# type: Plain text
+#: netconfig.5:90
+msgid "Written by Miklos Vajna."
+msgstr "Écrit par Miklos Vajna."
+
+# type: SH
+#: netconfig.5:90
+#, no-wrap
+msgid "REPORTING BUGS"
+msgstr "SIGNALER DES BUGS"
+
+# type: Plain text
+#: netconfig.5:92
+msgid "If you find any bug, then please file a bugreport at E<lt>http://bugs.frugalware.org/E<gt>."
+msgstr "Si vous trouvez des bugs, merci de remplir un rapport de bug sur E<lt>http://bugs.frugalware.org/E<gt>."
+
+# type: SH
+#: netconfig.5:92
+#, no-wrap
+msgid "SEE ALSO"
+msgstr "VOIR ÉGALEMENT"
+
+# type: Plain text
+#: netconfig.5:96
+msgid "B<ifconfig>(8), B<route>(8), B<iwconfig>(8), B<dhcpcd>(8)"
+msgstr ""
+
+
