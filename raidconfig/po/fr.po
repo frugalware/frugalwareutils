@@ -1,0 +1,78 @@
+# French translations for PACKAGE package
+# Traduction anglaise du package PACKAGE.
+# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#  <enda@netou.com>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-06-06 20:33+0200\n"
+"PO-Revision-Date: 2006-06-06 21:14+0100\n"
+"Last-Translator: Enda <enda@netou.com>\n"
+"Language-Team: French <traduc@traduc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../raidconfig.c:39
+msgid "Select RAID device"
+msgstr "Sélection du périphérique raid"
+
+#: ../raidconfig.c:40
+msgid "Please specify the raid device you want to create:"
+msgstr "Veuillez indique le périphérique raid que vous souhaitez créer:"
+
+#: ../raidconfig.c:51
+msgid "raid0 (stripe)"
+msgstr "raid0 (agrégat)"
+
+#: ../raidconfig.c:52
+msgid "raid1 (mirror)"
+msgstr "raid1 (miroir)"
+
+#: ../raidconfig.c:59
+msgid "Choose a RAID level"
+msgstr "Choisir un niveau de raid"
+
+#: ../raidconfig.c:60
+msgid "Please choose what level of raid array you want to build"
+msgstr "Veuillez choisir le niveau de raid que vous souhaitez créer"
+
+#: ../raidconfig.c:76
+msgid "Add"
+msgstr "Ajouter"
+
+#: ../raidconfig.c:77
+msgid "Finish"
+msgstr "Terminer"
+
+#: ../raidconfig.c:82
+msgid "The list is currently empty."
+msgstr "La liste est actuellement vide"
+
+#: ../raidconfig.c:86
+#, c-format
+msgid "The current list contains: %s."
+msgstr "La liste courante contient: %s."
+
+#: ../raidconfig.c:90
+#, c-format
+msgid ""
+"Please select the devices you want to build the array from. When you are ready, press 'Finish'.\n"
+"%s"
+msgstr ""
+"Veuillez sélectionner les périphériques que vous souhaitez utiliser pour le raid. Quand vous êtes prêts, appuyez sur 'Terminer'.\n"
+"%s"
+
+#: ../raidconfig.c:98
+msgid "Selecting devices"
+msgstr "Sélection des périphériques"
+
+#: ../raidconfig.c:121
+msgid "RAID configuration"
+msgstr "Configuration du RAID"
+
+

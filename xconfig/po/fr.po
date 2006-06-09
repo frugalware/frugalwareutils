@@ -1,0 +1,73 @@
+# French translations for PACKAGE package
+# Traduction anglaise du package PACKAGE.
+# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#  <enda@netou.com>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-06-06 20:35+0200\n"
+"PO-Revision-Date: 2006-06-06 21:26+0100\n"
+"Last-Translator: Enda <enda@netou.com>\n"
+"Language-Team: French <traduc@traduc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../xconfig.c:42
+#: ../xconfig.c:85
+msgid "X configuration"
+msgstr "Configuration de X"
+
+#: ../xconfig.c:47
+msgid "xinit missing"
+msgstr "xinit est absent"
+
+#: ../xconfig.c:47
+msgid "Could not find xinit, please install it with pacman -S xinit."
+msgstr "Xinit non trouvé, veuillez l'installer via pacman -S xinit."
+
+#: ../xconfig.c:54
+msgid "xmessage missing"
+msgstr "xmessage est absent."
+
+#: ../xconfig.c:54
+msgid "Could not find xmessage, please install it with pacman -S xmessage."
+msgstr "xmessage non trouvé, veuillez l'installer avec pacman -S xmessage."
+
+#: ../xconfig.c:61
+msgid "xsetroot missing"
+msgstr "xsetroot absent"
+
+#: ../xconfig.c:61
+msgid "Could not find xsetroot, please install it with pacman -S xsetroot."
+msgstr "xsetroot non trouvé, veuillez l'installer via pacman -S xmessage."
+
+#: ../xconfig.c:66
+msgid "Configuring the X server"
+msgstr "Configuration du serveur X"
+
+#: ../xconfig.c:66
+msgid "Attemping to create an X config file..."
+msgstr "Tentative de création du fichier de configuration de X..."
+
+#: ../xconfig.c:74
+msgid "Selecting resolution"
+msgstr "Sélection de la résolution"
+
+#: ../xconfig.c:75
+msgid "Please enter the screen resolution you want to use. You can use values such as 1024x768, 800x600 or 640x480. If unsure, just press ENTER."
+msgstr "Veuillez entrer les résolutions d'écrans que vous souhaitez utiliser. Vous pouvez utilisez des valeurs telles que 1024x768, 800x600 ou 640x480. Si vous n'êtes pas sur, appuyer juste sur entrée (note de trad. il est possible de saisir plus de 3 résolution, et suivant votre configuration d'opter pour des résolutions plus élevées.. si vous savez ce que vous faites)"
+
+#: ../xconfig.c:78
+msgid "Selecting color depth"
+msgstr "Sélection de la profondeur de couleurs"
+
+#: ../xconfig.c:79
+msgid "Please enter the color depth you want to use. If unsure, just press ENTER."
+msgstr "Veuillez indiquer la profondeur de couleur à utiliser. Si vous êtes incertains, pressez simplement entrée."
+
+

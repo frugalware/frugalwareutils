@@ -1,0 +1,136 @@
+# French translations for PACKAGE package
+# Traduction anglaise du package PACKAGE.
+# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#  <enda@netou.com>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-06-06 20:32+0200\n"
+"PO-Revision-Date: 2006-06-06 20:49+0100\n"
+"Last-Translator: Enda <enda@netou.com>\n"
+"Language-Team: French <traduc@traduc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../mouseconfig.c:41
+msgid "PS/2 port mouse (most desktops and laptops)"
+msgstr "Port souris PS/2 (la plupart des pc et portables)"
+
+#: ../mouseconfig.c:42
+msgid "Microsoft PS/2 Intellimouse"
+msgstr "Souris PS/2 Microsoft Intellimouse"
+
+#: ../mouseconfig.c:43
+msgid "2 button Microsoft compatible serial mouse"
+msgstr "Souris série compatible Microsoft à 2 boutons"
+
+#: ../mouseconfig.c:44
+msgid "3 button Microsoft compatible serial mouse"
+msgstr "Souris série compatible Microsoft à 3 boutons"
+
+#: ../mouseconfig.c:45
+msgid "Logitech serial MouseMan and similar devices"
+msgstr "Souris série Logitech MouseMan ou compatible"
+
+#: ../mouseconfig.c:46
+msgid "MouseSystems serial (most 3 button serial mice)"
+msgstr "Souris série MouseSystems (la plupart des souris séries à 3 boutons)"
+
+#: ../mouseconfig.c:47
+msgid "Plug and Play (serial mice that do not work with ms)"
+msgstr "Plug and Play (souris série qui ne marche pas avec ms)"
+
+#: ../mouseconfig.c:48
+msgid "USB connected mouse"
+msgstr "Souris USB"
+
+#: ../mouseconfig.c:49
+msgid "Microsoft serial Intellimouse"
+msgstr "Souris série Microsoft Intellimouse"
+
+#: ../mouseconfig.c:50
+msgid "Genius Netmouse on PS/2 port"
+msgstr "Souris PS/2 Genius Netmouse"
+
+#: ../mouseconfig.c:51
+msgid "Some serial Logitech devices"
+msgstr "Souris série Logitech (quelques unes)"
+
+#: ../mouseconfig.c:52
+msgid "Make serial Logitech behave like msc"
+msgstr "Faire en sorte qu'une souris série Logitech se comporte comme MSC"
+
+#: ../mouseconfig.c:53
+msgid "ATI XL busmouse (mouse card)"
+msgstr ""
+
+#: ../mouseconfig.c:54
+msgid "Microsoft busmouse (mouse card)"
+msgstr ""
+
+#: ../mouseconfig.c:55
+msgid "Logitech busmouse (mouse card)"
+msgstr ""
+
+#: ../mouseconfig.c:56
+msgid "A pointing pen (NCR3125) on some laptops"
+msgstr "Crayon optique (NCR3125) sur certains portables"
+
+#: ../mouseconfig.c:57
+msgid "Twiddler keyboard, by HandyKey Corp"
+msgstr ""
+
+#: ../mouseconfig.c:58
+msgid "Genitizer tablet (relative mode)"
+msgstr ""
+
+#: ../mouseconfig.c:59
+msgid "Use a joystick as a mouse"
+msgstr "Utiliser un joystick comme souris"
+
+#: ../mouseconfig.c:60
+msgid "Wacom serial graphics tablet"
+msgstr "Tablette graphique Wacom (sur port série)"
+
+#: ../mouseconfig.c:64
+msgid "Configure the console mouse support (GPM)"
+msgstr "Configurer le support de la souris console (GPM)"
+
+#: ../mouseconfig.c:65
+msgid "This part of the configuration process will create a /dev/mouse link pointing to your default mouse device.  You can change the /dev/mouse link later in the /etc/sysconfig/gpm configuration file if the mouse doesn't work, or if you switch to a different type of pointing device. We will also use the information about the mouse to set the correct protocol for gpm, the Linux mouse server. Please select a mouse type from the list below:"
+msgstr "Cette partie du processus de configuration va créer un lien /dev/mouse qui pointera vers votre souris par défaut. Vous pouvez changer le lien /dev/mouse ultérieurement dans le fichier de configuration /etc/sysconfig/gpm si la souris ne fonctionne pas, ou si vous souhaitez basculer vers un autre type de périphérique de pointage. Nous allons également utiliser ces informations concernant la souris pour définir le protocole approprié pour gpm, le gestionnaire de souris Linux.Veuillez sélectionner un type de souris ci dessous:"
+
+#: ../mouseconfig.c:77
+msgid "(COM1: under DOS)"
+msgstr "(COM1: sous DOS)"
+
+#: ../mouseconfig.c:78
+msgid "(COM2: under DOS)"
+msgstr "(COM2: sous DOS)"
+
+#: ../mouseconfig.c:79
+msgid "(COM3: under DOS)"
+msgstr "(COM3: sous DOS)"
+
+#: ../mouseconfig.c:80
+msgid "(COM4: under DOS)"
+msgstr "(COM4: sous DOS)"
+
+#: ../mouseconfig.c:84
+msgid "Select Serial Port"
+msgstr "Sélectionner le port série"
+
+#: ../mouseconfig.c:85
+msgid "Your mouse requires a serial port. Which one would you like to use?"
+msgstr "Votre souris requiert un port série. Lequel souhaitez vous utiliser?"
+
+#: ../mouseconfig.c:100
+msgid "Mouse configuration"
+msgstr "Configuration de la souris"
+
+
