@@ -38,6 +38,8 @@ int nc_system(const char *cmd);
 void i18ninit(char *namespace);
 char *trim(char *str);
 char *strtoupper(char *str);
+int fwutil_init();
+void fwutil_release();
 #ifdef __G_LIB_H__
 char *g_list_display(GList *list, char *sep);
 #endif

@@ -19,8 +19,6 @@
  *  USA.
  */
 
-int fwx_init();
-void fwx_release();
 int fwx_doprobe();
 int fwx_doconfig(char *mousedev, char *res, char *depth);
 int fwx_dotest();

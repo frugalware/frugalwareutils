@@ -65,7 +65,7 @@ int run()
 
 	dialog_msgbox(_("Configuring the X server"), _("Attemping to create "
 		"an X config file..."), 0, 0, 0);
-	needrelease = fwx_init();
+	needrelease = fwutil_init();
 	mdev = fwx_get_mousedev();
 
 	fwx_doprobe();
@@ -89,7 +89,7 @@ int run()
 	unlink("/root/xorg.conf.new");
 
 	if(needrelease)
-		fwx_release();
+		fwutil_release();
 	end_dialog();
 	return(0);
 }

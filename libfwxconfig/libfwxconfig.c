@@ -26,7 +26,6 @@
 #include <limits.h>
 #include <regex.h>
 #include <sys/stat.h>
-#include <sys/mount.h>
 
 #include "xconfig-helper.h"
 
@@ -40,53 +39,6 @@
  * @brief Functions to make X configuration easier
  * @{
  */
-
-/** Initialize the environment if necessary
- * @return 1 if fwx_release() call is needed later, 0 if not
- */
-int fwx_init()
-{
-	struct stat buf;
-	FILE *fi, *fo;
-
-	if(stat("/dev/zero", &buf))
-	{
-		if(stat("/proc/1", &buf))
-			system("mount /proc");
-		system("/etc/rc.d/rc.udev");
-		system("mount / -o rw,remount");
-
-		if((fi = fopen("/proc/mounts", "r")))
-		{
-			if((fo = fopen("mtab", "w")))
-			{
-				char line[256];
-
-				while(!feof(fi))
-				{
-					if(!fgets(line, 255, fi))
-						break;
-					if(!strstr(line, "root"))
-						fprintf(fo, "%s", line);
-				}
-			}
-		}
-
-		system("mount /dev/pts");
-		return(1);
-	}
-	return(0);
-}
-
-/** Release the environment
- */
-void fwx_release()
-{
-	umount("/dev/pts");
-	umount("/dev");
-	umount("/sys");
-	umount("/proc");
-}
 
 static void _fwx_print_mouse_options(FILE *fp)
 {
