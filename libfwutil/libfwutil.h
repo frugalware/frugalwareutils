@@ -40,6 +40,7 @@ char *trim(char *str);
 char *strtoupper(char *str);
 int fwutil_init();
 void fwutil_release();
+int fwutil_cp(char *src, char *dest);
 #ifdef __G_LIB_H__
 char *g_list_display(GList *list, char *sep);
 #endif

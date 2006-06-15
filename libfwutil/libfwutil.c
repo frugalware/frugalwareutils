@@ -180,4 +180,31 @@ void fwutil_release()
 	umount("/proc");
 }
 
+/** does the same as cp
+ * @param src source
+ * @param dest destination
+ * @return 1 on error, 0 on success
+ */
+int fwutil_cp(char *src, char *dest)
+{
+	FILE *in, *out;
+	size_t len;
+	char buf[4097];
+
+	in = fopen(src, "r");
+	if(in == NULL)
+		return(1);
+	out = fopen(dest, "w");
+	if(out == NULL)
+	{
+		fclose(in);
+		return(1);
+	}
+	while((len = fread(buf, 1, 4096, in)))
+		fwrite(buf, 1, len, out);
+	fclose(in);
+	fclose(out);
+	return(0);
+}
+
 /* @} */
