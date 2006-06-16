@@ -23,7 +23,8 @@ SUBDIRS = doc libfwutil libfwdialog setup \
 	  libfwtimeconfig timeconfig \
 	  libfwraidconfig raidconfig \
 	  libfwmouseconfig mouseconfig \
-	  libfwxconfig xconfig
+	  libfwxconfig xconfig \
+	  libfwgrubconfig
 
 compile:
 	$(DO_RECURSIVE)
