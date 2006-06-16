@@ -24,7 +24,7 @@ SUBDIRS = doc libfwutil libfwdialog setup \
 	  libfwraidconfig raidconfig \
 	  libfwmouseconfig mouseconfig \
 	  libfwxconfig xconfig \
-	  libfwgrubconfig
+	  libfwgrubconfig grubconfig
 
 compile:
 	$(DO_RECURSIVE)
