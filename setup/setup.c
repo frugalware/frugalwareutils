@@ -37,6 +37,13 @@
 
 GList *plugin_list;
 
+int sort_plugins(gconstpointer a, gconstpointer b)
+{
+	const plugin_t *pa = a;
+	const plugin_t *pb = b;
+	return (strcmp(pa->name, pb->name));
+}
+
 int add_plugin(char *filename)
 {
 	void *handle;
@@ -158,6 +165,7 @@ int main(int argc, char **argv)
 		myname = ptr;
 
 	init_plugins(PLUGDIR);
+	plugin_list = g_list_sort(plugin_list, sort_plugins);
 
 	if(strcmp(myname, "setup"))
 	{
