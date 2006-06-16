@@ -130,7 +130,8 @@ GList *fwraid_lst_parts()
 			// no raid cd, thanks
 			continue;
 		disk = ped_disk_new(dev);
-		_fwraid_listparts(disk);
+		if(disk)
+			_fwraid_listparts(disk);
 	}
 	return(fwraid_parts);
 }
