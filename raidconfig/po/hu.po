@@ -65,7 +65,8 @@ msgid ""
 "%s"
 msgstr ""
 "Kérem válassza ki azokat az eszközöket, melyekbõl a tömböt kívánja felépíteni. "
-"Ha elkészült, válassza a Kész gombot."
+"Ha elkészült, válassza a Kész gombot.\n"
+"%s"
 
 #: ../raidconfig.c:98
 msgid "Selecting devices"
