@@ -115,6 +115,11 @@ int _fwraid_listparts(PedDisk *disk)
 	return(0);
 }
 
+PedExceptionOption _fwraid_peh(PedException* ex)
+{
+	return(PED_EXCEPTION_IGNORE);
+}
+
 /** List raid-able partitions.
  * @return the list of partitions
  */
@@ -123,6 +128,7 @@ GList *fwraid_lst_parts()
 	PedDevice *dev = NULL;
 	PedDisk *disk = NULL;
 
+	ped_exception_set_handler(_fwraid_peh);
 	ped_device_probe_all();
 	for(dev=ped_device_get_next(NULL);dev!=NULL;dev=dev->next)
 	{
