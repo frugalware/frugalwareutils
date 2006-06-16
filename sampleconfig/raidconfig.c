@@ -56,7 +56,7 @@ char* ask_mode()
 	return(ptr);
 }
 
-int run()
+int run(int argc, char **argv)
 {
 	FILE *input = stdin;
 	dialog_state.output = stderr;
@@ -69,7 +69,8 @@ int run()
 	ptr = ask_mode();
 	free(ptr);
 
-	end_dialog();
+	if(argv!=NULL)
+		end_dialog();
 	return(0);
 }
 
