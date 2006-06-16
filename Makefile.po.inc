@@ -1,9 +1,13 @@
 compile:
+	for i in $(LANGS); do \
+		echo -n "$$i: "; \
+		msgfmt -c --statistics -o $$i.mo $$i; \
+	done
 
 install:
 	for i in $(LANGS); do \
 		mkdir -p $(DESTDIR)$(localedir)/`basename $$i .po`/LC_MESSAGES/; \
-		msgfmt -o $(DESTDIR)$(localedir)/`basename $$i .po`/LC_MESSAGES/$(DOMAIN).mo $$i; \
+		$(INSTALL) -m644 $$i.mo $(DESTDIR)$(localedir)/`basename $$i .po`/LC_MESSAGES/$(DOMAIN).mo; \
 	done
 
 pot:
@@ -20,6 +24,6 @@ update-po: pot
 	done
 
 clean:
-	rm -f $(DOMAIN).pot
+	rm -f $(DOMAIN).pot *.mo
 
 # vim: ft=make
