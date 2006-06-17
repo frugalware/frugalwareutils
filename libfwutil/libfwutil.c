@@ -150,7 +150,7 @@ int fwutil_init()
 
 		if((fi = fopen("/proc/mounts", "r")))
 		{
-			if((fo = fopen("mtab", "w")))
+			if((fo = fopen("/etc/mtab", "w")))
 			{
 				char line[256];
 
@@ -161,7 +161,9 @@ int fwutil_init()
 					if(!strstr(line, "root"))
 						fprintf(fo, "%s", line);
 				}
+				fclose(fo);
 			}
+			fclose(fi);
 		}
 
 		system("mount /dev/pts");
