@@ -46,8 +46,12 @@ typedef struct mdu_version_s {
 #define FWGRUB_LOGDEV "/dev/tty4"
 
 
-/* find_dev_recursive() and find_dev() is based on Linus's original rdev */
+/** @defgroup libfwgrubconfig Frugalware GRUB Configuration library
+ * @brief Functions to make GRUB configuration easier
+ * @{
+ */
 
+/* find_dev_recursive() and find_dev() is based on Linus's original rdev */
 static int find_dev_recursive(char *dirnamebuf, int number)
 {
 	DIR *dp;
@@ -236,7 +240,10 @@ static char *get_mbr_dev()
 	return(g_strdup_printf("/dev/%s", str));
 }
 
-// 0: mbr, 1: floppy, 2: root
+/** Installs grub to a given target
+ * @param mode 0: mbr, 1: floppy, 2: root
+ * @return 0 on succcess, 1 on error
+ */
 int fwgrub_install(int mode)
 {
 	char *rootdev=find_rootdev();
@@ -395,6 +402,9 @@ static char *gen_title()
 	return(g_strdup_printf("%s - %s", line, name.release));
 }
 
+/** Crates a menu.lst
+ * @param fp file pointer to write the menu.lst to
+ */
 void fwgrub_create_menu(FILE *fp)
 {
 	char *ptr, *bootstr, *title=gen_title();
@@ -443,3 +453,4 @@ void fwgrub_create_menu(FILE *fp)
 	free(rootdev);
 	free(grubrootdev);
 }
+/* @} */
