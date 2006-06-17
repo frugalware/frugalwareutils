@@ -1,5 +1,9 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.5.9         - new config tool: grubconfig
+              - sort plugins in setup
+              - raidconfig: bugfix in the Hungarian translation
+              - added several French translation
 0.5.8         - new config tool: xconfig
 0.5.7         - bugfix release for netconfig
 0.5.6         - new config tool: mouseconfig
