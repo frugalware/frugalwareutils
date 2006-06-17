@@ -382,24 +382,37 @@ static char *mount_dev(char *path)
 
 static int write_entry(struct entry_t *entry)
 {
+	char *ptr;
+
 	if(!entry->fp)
 		return(1);
 	fprintf(entry->fp, "title %s\n", entry->title);
-	if(entry->opts)
+	if(!entry->type || !strcmp(entry->type, "linux"))
 	{
-		if(entry->rootdev && strlen(entry->rootdev))
-			fprintf(entry->fp, "\tkernel %s%s%s root=%s %s\n\n",
-				entry->grubbootdev, entry->bootstr, entry->kernel, entry->rootdev, entry->opts);
+		if(entry->opts)
+		{
+			if(entry->rootdev && strlen(entry->rootdev))
+				fprintf(entry->fp, "\tkernel %s%s%s root=%s %s\n\n",
+					entry->grubbootdev, entry->bootstr, entry->kernel, entry->rootdev, entry->opts);
+			else
+				// probably rootdev is already included in ->opts
+				fprintf(entry->fp, "\tkernel %s%s%s %s\n\n",
+					entry->grubbootdev, entry->bootstr, entry->kernel, entry->opts);
+		}
 		else
-			// probably rootdev is already included in ->opts
-			fprintf(entry->fp, "\tkernel %s%s%s %s\n\n",
-				entry->grubbootdev, entry->bootstr, entry->kernel, entry->opts);
+		{
+			fprintf(entry->fp, "\tkernel %s%s%s\n\n",
+				entry->grubbootdev, entry->bootstr, entry->kernel);
+		}
 	}
-	else
+	else if(!strcmp(entry->type, "chain"))
 	{
-		fprintf(entry->fp, "\tkernel %s%s%s\n\n",
-			entry->grubbootdev, entry->bootstr, entry->kernel);
+		ptr = grub_convert(entry->rootdev, 0);
+		fprintf(entry->fp, "\trootnoverify %s\n", ptr);
+		free(ptr);
+		fprintf(entry->fp, "\tchainloader +1\n\n");
 	}
+	// TODO: else if(!strcmp(entry->type, "hurd"))
 	return(0);
 }
 
@@ -550,10 +563,9 @@ static int os_prober(FILE *fp)
 			free(entry->grubbootdev);
 			free(entry->bootstr);
 		}
-		/*else if(!strcmp(entry->type, "chain"))
-		{
-			a;
-		}*/
+		else if(!strcmp(entry->type, "chain"))
+			write_entry(entry);
+		// TODO: else if(!strcmp(entry->type, "chain"))
 		free(entry->rootdev);
 	}
 	g_list_free(entries);
@@ -573,6 +585,7 @@ void fwgrub_create_menu(FILE *fp)
 
 	entry.fp = fp;
 	entry.title = gen_title();
+	entry.type=NULL;
 
 	ptr = find_mount_point("/boot");
 	bootdev = mount_dev(ptr);
