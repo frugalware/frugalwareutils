@@ -226,7 +226,7 @@ static char *get_mbr_dev()
 	if(!fp)
 		return(NULL);
 	while(fgets(line, PATH_MAX, fp))
-		if(++i>3)
+		if(++i>2)
 			break;
 	fclose(fp);
 	ptr=line;
