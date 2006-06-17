@@ -384,8 +384,18 @@ static int write_entry(FILE *fp, char *title, char *grubbootdev, char *bootstr,
 	if(!fp)
 		return(1);
 	fprintf(fp, "title %s\n", title);
-	fprintf(fp, "\tkernel %s%s%s root=%s %s\n",
-		grubbootdev, bootstr, kernel, rootdev, opts);
+	// XXX: what if if there is rootdev but no opts or there is opts but
+	//      no rootdev? be agressive for now
+	if(rootdev && opts)
+	{
+		fprintf(fp, "\tkernel %s%s%s root=%s %s\n\n",
+			grubbootdev, bootstr, kernel, rootdev, opts);
+	}
+	else
+	{
+		fprintf(fp, "\tkernel %s%s%s\n\n",
+			grubbootdev, bootstr, kernel);
+	}
 	return(0);
 }
 
@@ -413,6 +423,7 @@ void fwgrub_create_menu(FILE *fp)
 	char *ptr, *bootstr, *title=gen_title();
 	char *bootdev, *grubbootdev, *rootdev, *grubrootdev;
 	GList *list;
+	struct stat buf;
 
 	ptr = find_mount_point("/boot");
 	bootdev = mount_dev(ptr);
@@ -442,6 +453,8 @@ void fwgrub_create_menu(FILE *fp)
 	write_entry(fp, title, grubbootdev, bootstr, "/vmlinuz", rootdev, "ro quiet vga=791");
 	// TODO: other partitions
 
+	if(!(stat("/boot/memtest.bin", &buf)))
+		write_entry(fp, "Memtest86+", grubbootdev, bootstr, "/memtest.bin", NULL, NULL);
 	free(bootstr);
 	free(title);
 	free(bootdev);
