@@ -268,7 +268,8 @@ int fwgrub_install(int mode)
 			snprintf(dest, PATH_MAX, "/boot/grub/%s", ent->d_name);
 			fwutil_cp(src, dest);
 		}
-		pp = popen("grub --batch --device-map=/boot/grub/device.map", "w");
+		pp = popen("grub --batch --device-map=/boot/grub/device.map %s >"
+			FWGRUB_LOGDEV " 2>&1", "w");
 		if(!pp)
 			return(1);
 		fprintf(pp, "quit\n");
@@ -280,7 +281,8 @@ int fwgrub_install(int mode)
 			for(i=0;i<g_list_length(devs);i++)
 			{
 				char *dev = g_list_nth_data(devs, i);
-				pp = popen("grub --batch", "w");
+				pp = popen("grub --batch %s >" FWGRUB_LOGDEV
+					" 2>&1", "w");
 				if(!pp)
 					return(1);
 				fprintf(pp, "root %s\n", grub_convert(dev, 0));
@@ -296,7 +298,8 @@ int fwgrub_install(int mode)
 			for(i=0;i<g_list_length(devs);i++)
 			{
 				char *dev = g_list_nth_data(devs, i);
-				pp = popen("grub --batch", "w");
+				pp = popen("grub --batch %s >" FWGRUB_LOGDEV
+					" 2>&1", "w");
 				if(!pp)
 					return(1);
 				fprintf(pp, "root %s\n", grub_convert(dev, 0));
