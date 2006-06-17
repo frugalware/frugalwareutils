@@ -429,13 +429,6 @@ void fwgrub_create_menu(FILE *fp)
 	ptr = find_mount_point("/");
 	rootdev = mount_dev(ptr);
 	free(ptr);
-	if(is_raid1_device(rootdev))
-	{
-		list = find_real_devs(rootdev);
-		free(rootdev);
-		rootdev = g_list_nth_data(list, 0);
-		g_list_free(list);
-	}
 	grubrootdev=grub_convert(rootdev, 0);
 	if(!strcmp(rootdev, bootdev))
 		bootstr = strdup("/boot");
