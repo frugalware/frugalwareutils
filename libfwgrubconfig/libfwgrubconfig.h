@@ -19,5 +19,15 @@
  *  USA.
  */
 
+struct entry_t {
+	FILE *fp;
+	char *title;
+	char *grubbootdev;
+	char *bootstr;
+	char *kernel;
+	char *rootdev;
+	char *opts;
+};
+
 int fwgrub_install(int mode);
 void fwgrub_create_menu(FILE *fp);

@@ -36,6 +36,8 @@
 #include <libfwutil.h>
 #include <glib.h>
 
+#include "libfwgrubconfig.h"
+
 typedef struct mdu_version_s {
 	int major;
 	int minor;
@@ -378,23 +380,22 @@ static char *mount_dev(char *path)
 	return(strdup(mnt->mnt_fsname));
 }
 
-static int write_entry(FILE *fp, char *title, char *grubbootdev, char *bootstr,
-	char *kernel, char *rootdev, char *opts)
+static int write_entry(struct entry_t *entry)
 {
-	if(!fp)
+	if(!entry->fp)
 		return(1);
-	fprintf(fp, "title %s\n", title);
+	fprintf(entry->fp, "title %s\n", entry->title);
 	// XXX: what if if there is rootdev but no opts or there is opts but
 	//      no rootdev? be agressive for now
-	if(rootdev && opts)
+	if(entry->rootdev && entry->opts)
 	{
-		fprintf(fp, "\tkernel %s%s%s root=%s %s\n\n",
-			grubbootdev, bootstr, kernel, rootdev, opts);
+		fprintf(entry->fp, "\tkernel %s%s%s root=%s %s\n\n",
+			entry->grubbootdev, entry->bootstr, entry->kernel, entry->rootdev, entry->opts);
 	}
 	else
 	{
-		fprintf(fp, "\tkernel %s%s%s\n\n",
-			grubbootdev, bootstr, kernel);
+		fprintf(entry->fp, "\tkernel %s%s%s\n\n",
+			entry->grubbootdev, entry->bootstr, entry->kernel);
 	}
 	return(0);
 }
@@ -415,15 +416,29 @@ static char *gen_title()
 	return(g_strdup_printf("%s - %s", line, name.release));
 }
 
+static void entry_free(struct entry_t *entry)
+{
+	free(entry->title);
+	free(entry->grubbootdev);
+	free(entry->bootstr);
+	free(entry->kernel);
+	free(entry->rootdev);
+	free(entry->opts);
+}
+
 /** Crates a menu.lst
  * @param fp file pointer to write the menu.lst to
  */
 void fwgrub_create_menu(FILE *fp)
 {
-	char *ptr, *bootstr, *title=gen_title();
-	char *bootdev, *grubbootdev, *rootdev, *grubrootdev;
+	char *ptr;
+	char *bootdev;
 	GList *list;
 	struct stat buf;
+	struct entry_t entry;
+
+	entry.fp = fp;
+	entry.title = gen_title();
 
 	ptr = find_mount_point("/boot");
 	bootdev = mount_dev(ptr);
@@ -435,31 +450,41 @@ void fwgrub_create_menu(FILE *fp)
 		bootdev = g_list_nth_data(list, 0);
 		g_list_free(list);
 	}
-	grubbootdev=grub_convert(bootdev, 0);
+	entry.grubbootdev=grub_convert(bootdev, 0);
 
 	ptr = find_mount_point("/");
-	rootdev = mount_dev(ptr);
+	entry.rootdev = mount_dev(ptr);
 	free(ptr);
-	grubrootdev=grub_convert(rootdev, 0);
-	if(!strcmp(rootdev, bootdev))
-		bootstr = strdup("/boot");
+	if(!strcmp(entry.rootdev, bootdev))
+		entry.bootstr = strdup("/boot");
 	else
-		bootstr = strdup("");
+		entry.bootstr = strdup("");
 
-	fprintf(fp, "#\n# %s/grub/menu.lst - configuration file for GRUB\n", bootstr);
+	fprintf(fp, "#\n# %s/grub/menu.lst - configuration file for GRUB\n", entry.bootstr);
 	fprintf(fp, "# This file is generated automatically by grubconfig\n#\n\n");
 	fprintf(fp, "default=0\ntimeout=5\n");
-	fprintf(fp, "gfxmenu %s%s/grub/message\n\n", grubbootdev, bootstr);
-	write_entry(fp, title, grubbootdev, bootstr, "/vmlinuz", rootdev, "ro quiet vga=791");
-	// TODO: other partitions
+	fprintf(fp, "gfxmenu %s%s/grub/message\n\n", entry.grubbootdev, entry.bootstr);
+	entry.kernel = strdup("/vmlinuz");
+	entry.opts = strdup("ro quiet vga=791");
+	write_entry(&entry);
 
 	if(!(stat("/boot/memtest.bin", &buf)))
-		write_entry(fp, "Memtest86+", grubbootdev, bootstr, "/memtest.bin", NULL, NULL);
-	free(bootstr);
-	free(title);
+	{
+		free(entry.title);
+		entry.title=strdup("Memtest86+");
+		free(entry.kernel);
+		entry.kernel = strdup("/memtest.bin");
+		free(entry.rootdev);
+		entry.rootdev=NULL;
+		free(entry.opts);
+		entry.opts=NULL;
+		write_entry(&entry);
+	}
+	entry_free(&entry);
+
+	// TODO: other partitions
+
 	free(bootdev);
-	free(grubbootdev);
-	free(rootdev);
-	free(grubrootdev);
 }
+
 /* @} */
