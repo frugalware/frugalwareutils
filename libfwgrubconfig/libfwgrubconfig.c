@@ -385,12 +385,15 @@ static int write_entry(struct entry_t *entry)
 	if(!entry->fp)
 		return(1);
 	fprintf(entry->fp, "title %s\n", entry->title);
-	// XXX: what if if there is rootdev but no opts or there is opts but
-	//      no rootdev? be agressive for now
-	if(entry->rootdev && entry->opts)
+	if(entry->opts)
 	{
-		fprintf(entry->fp, "\tkernel %s%s%s root=%s %s\n\n",
-			entry->grubbootdev, entry->bootstr, entry->kernel, entry->rootdev, entry->opts);
+		if(entry->rootdev && strlen(entry->rootdev))
+			fprintf(entry->fp, "\tkernel %s%s%s root=%s %s\n\n",
+				entry->grubbootdev, entry->bootstr, entry->kernel, entry->rootdev, entry->opts);
+		else
+			// probably rootdev is already included in ->opts
+			fprintf(entry->fp, "\tkernel %s%s%s %s\n\n",
+				entry->grubbootdev, entry->bootstr, entry->kernel, entry->opts);
 	}
 	else
 	{
@@ -418,12 +421,143 @@ static char *gen_title()
 
 static void entry_free(struct entry_t *entry)
 {
-	free(entry->title);
-	free(entry->grubbootdev);
-	free(entry->bootstr);
-	free(entry->kernel);
-	free(entry->rootdev);
-	free(entry->opts);
+	if(entry->title)
+		free(entry->title);
+	if(entry->grubbootdev)
+		free(entry->grubbootdev);
+	if(entry->bootstr)
+		free(entry->bootstr);
+	if(entry->kernel)
+		free(entry->kernel);
+	if(entry->rootdev)
+		free(entry->rootdev);
+	if(entry->opts)
+		free(entry->opts);
+}
+
+static int os_prober(FILE *fp)
+{
+	struct stat buf;
+	FILE *pp;
+	char line[PATH_MAX], *ptr, *bootdev;
+	struct entry_t *entry;
+	GList *entries=NULL;
+	int i;
+
+	if(stat("/usr/bin/os-prober", &buf))
+		return(1);
+
+	pp = popen("os-prober", "r");
+	if(!pp)
+		return(1);
+	while(fgets(line, PATH_MAX, pp))
+	{
+		entry = (struct entry_t*)malloc(sizeof(struct entry_t));
+		if(!entry)
+			return(1);
+		entry->fp=fp;
+		// rootdev
+		entry->rootdev = strdup(line);
+		ptr = entry->rootdev;
+		while(*++ptr)
+			if(*ptr==':')
+				break;
+		*ptr='\0';
+
+		// title
+		entry->title = ptr+1;
+		while(*++ptr)
+			if(*ptr==':')
+				break;
+		*ptr='\0';
+
+		// shorname is useless for us
+		while(*++ptr)
+			if(*ptr==':')
+				break;
+
+		// type
+		entry->type = ptr+1;
+		while(*++ptr)
+			if(*ptr==':')
+				break;
+		*ptr='\0';
+		// this is the last one, slice the \n from the end
+		entry->type[strlen(entry->type)-1]='\0';
+		entries = g_list_append(entries, entry);
+	}
+	pclose(pp);
+	for(i=0;i<g_list_length(entries);i++)
+	{
+		entry = g_list_nth_data(entries, i);
+		if(!strcmp(entry->type, "linux"))
+		{
+			if(stat("/usr/bin/linux-boot-prober", &buf))
+				continue;
+
+			ptr = g_strdup_printf("linux-boot-prober %s", entry->rootdev);
+			pp = popen(ptr, "r");
+			free(ptr);
+			if(!pp)
+				return(1);
+			// only the first line matters
+			if(fgets(line, PATH_MAX, pp))
+			{
+				// rootdev, junk
+				ptr = line;
+				while(*++ptr)
+					if(*ptr==':')
+						break;
+				// bootdev
+				bootdev = strdup(ptr+1);
+				while(*++ptr)
+					if(*ptr==':')
+						break;
+				*ptr='\0';
+				if(!strcmp(entry->rootdev, bootdev))
+					entry->bootstr = strdup("/boot");
+				else
+					entry->bootstr = strdup("");
+				// ->rootdev already included in ->opts. clear it here since
+				// we needed it only for ->bootstr
+				entry->rootdev='\0';
+				entry->grubbootdev = grub_convert(bootdev, 0);
+				// title, junk
+				while(*++ptr)
+					if(*ptr==':')
+						break;
+				// kernel
+				entry->kernel = ptr+1;
+				while(*++ptr)
+					if(*ptr==':')
+						break;
+				*ptr='\0';
+				// initrd, maybe useful later
+				while(*++ptr)
+					if(*ptr==':')
+						break;
+				// opts
+				entry->opts = ptr+1;
+				while(*++ptr)
+					if(*ptr==':')
+						break;
+				*ptr='\0';
+				// this is the last one, slice the \n from the end
+				entry->opts[strlen(entry->opts)-1]='\0';
+			}
+			pclose(pp);
+			write_entry(entry);
+			free(entry->grubbootdev);
+			free(entry->bootstr);
+		}
+		/*else if(!strcmp(entry->type, "chain"))
+		{
+			a;
+		}*/
+		free(entry->rootdev);
+	}
+	g_list_free(entries);
+	return(0);
 }
 
 /** Crates a menu.lst
@@ -482,7 +616,7 @@ void fwgrub_create_menu(FILE *fp)
 	}
 	entry_free(&entry);
 
-	// TODO: other partitions
+	os_prober(fp);
 
 	free(bootdev);
 }

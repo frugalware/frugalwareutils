@@ -27,6 +27,8 @@ struct entry_t {
 	char *kernel;
 	char *rootdev;
 	char *opts;
+	// not used by write_entry() but os_prober()
+	char *type;
 };
 
 int fwgrub_install(int mode);
