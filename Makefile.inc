@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-VERSION = 0.5.9
+VERSION = 0.6.0
 MAJORVER = 0
 
 DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || break; done

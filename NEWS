@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.6.0         - libfwgrubconfig: support for os-prober, memtest support
+              - libfwutil: descriptor leak fixes
+              - grubconfig: don't init anything till the "please wait" splash
 0.5.9         - new config tool: grubconfig
               - sort plugins in setup
               - raidconfig: bugfix in the Hungarian translation
