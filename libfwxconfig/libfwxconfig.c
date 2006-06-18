@@ -129,7 +129,7 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 		}
 		if(_fwx_reg_match(line, "Identifier.*Mouse"))
 		{
-			_fwx_print_mouse_identifier(nfp, 0, "/dev/psaux", "ps/2");
+			_fwx_print_mouse_identifier(nfp, 0, "/dev/psaux", "imps2");
 			_fwx_print_mouse_identifier(nfp, 1, "/dev/tts/0", NULL);
 			fprintf(nfp, "Identifier  \"Mouse3\"\n");
 			line[0]='\0';
