@@ -1,15 +1,15 @@
-# French translations for PACKAGE package
-# Traduction anglaise du package PACKAGE.
-# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# French translations for xconfig package
+# Traduction anglaise du package xconfig.
+# Copyright (C) 2006 THE xconfig'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xconfig package.
 #  <enda@netou.com>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: xconfig\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-06-06 20:35+0200\n"
-"PO-Revision-Date: 2006-06-06 21:26+0100\n"
+"PO-Revision-Date: 2006-06-20 21:17+0200\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "MIME-Version: 1.0\n"
