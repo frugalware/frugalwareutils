@@ -508,7 +508,7 @@ static int os_prober(FILE *fp)
 			if(stat("/usr/bin/linux-boot-prober", &buf))
 				continue;
 
-			ptr = g_strdup_printf("linux-boot-prober %s", entry->rootdev);
+			ptr = g_strdup_printf("linux-boot-prober --mounted %s", entry->rootdev);
 			pp = popen(ptr, "r");
 			free(ptr);
 			if(!pp)
