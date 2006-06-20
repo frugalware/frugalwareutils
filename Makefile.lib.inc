@@ -1,4 +1,5 @@
 compile: libfw$(LIBNAME).so
+	$(DO_RECURSIVE)
 
 install:
 	$(INSTALL) libfw$(LIBNAME).so.$(VERSION) $(DESTDIR)$(libdir)/libfw$(LIBNAME).so.$(VERSION)

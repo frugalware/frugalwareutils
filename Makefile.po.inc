@@ -1,7 +1,7 @@
 compile:
 	for i in $(LANGS); do \
 		echo -n "$$i: "; \
-		msgfmt -c --statistics -o $$i.mo $$i; \
+		msgfmt -c --statistics -o $$i.mo $$i || exit 1; \
 	done
 
 install:
