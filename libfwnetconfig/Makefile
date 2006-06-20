@@ -18,7 +18,7 @@
 
 -include ../Makefile.inc
 
-CFLAGS ?= -g -Wall -O2 -pipe
+CFLAGS ?= -g -Wall -Werror -O2 -pipe
 ifeq ($(shell arch),x86_64)
 CFLAGS += -fPIC
 endif
