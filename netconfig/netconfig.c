@@ -101,7 +101,7 @@ int dialog_config(int argc, char **argv)
 	char option[50];
 	char *ptr;
 	char *host, *nettype;
-	char *ipaddr=NULL, *netmask=NULL, *dns=NULL;
+	char *ipaddr=NULL, *netmask=NULL, *dns=NULL, *iface=NULL;
 
 	dialog_state.output = stderr;
 	if(argv!=NULL)
@@ -125,11 +125,14 @@ int dialog_config(int argc, char **argv)
 	if((newinterface = (interface_t*)malloc(sizeof(interface_t))) == NULL)
 		return(1);
 	memset(newinterface, 0, sizeof(interface_t));
-	// TODO: here eth0 is hardwired
-	snprintf(newinterface->name, IF_NAMESIZE, "eth0");
+	iface = dialog_ask(_("Enter interface name"),
+		_("We'll need the name of the interface you'd like to use for your network connection.\n"
+		"If unsure, just hit enter.\n"
+		"Enter interface name:"), "eth0");
+	snprintf(newinterface->name, IF_NAMESIZE, iface);
 	newprofile->interfaces = g_list_append(newprofile->interfaces, newinterface);
 
-	if(strcmp(nettype, "lo") && is_wireless_device("eth0"))
+	if(strcmp(nettype, "lo") && is_wireless_device(iface))
 	{
 		ptr = dialog_ask(_("Extended network name"), _("It seems that this network card has a wireless "
 			"extension. In order to use it, you must set your extended netwok name (ESSID). Enter your ESSID:"),
