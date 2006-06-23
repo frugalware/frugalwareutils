@@ -134,17 +134,21 @@ char *g_list_display(GList *list, char *sep)
 }
 
 /** Initialize the environment if necessary
- * @return 1 if fwx_release() call is needed later, 0 if not
+ * @return true if fwx_release() call is needed later, false if not
  */
 int fwutil_init()
 {
 	struct stat buf;
 	FILE *fi, *fo;
+	int ret=0;
 
+	if(stat("/proc/1", &buf))
+	{
+		system("mount /proc");
+		ret++;
+	}
 	if(stat("/dev/zero", &buf))
 	{
-		if(stat("/proc/1", &buf))
-			system("mount /proc");
 		system("/etc/rc.d/rc.udev");
 		system("mount / -o rw,remount");
 
@@ -167,9 +171,9 @@ int fwutil_init()
 		}
 
 		system("mount /dev/pts");
-		return(1);
+		ret++;
 	}
-	return(0);
+	return(ret);
 }
 
 /** Release the environment
