@@ -23,6 +23,9 @@ update-po: pot
 		fi; \
 	done
 
+%.po: $(DOMAIN).pot
+	msginit -l $(basename $@)_$(shell echo $(basename $@)|tr [a-z] [A-Z])
+
 clean:
 	rm -f $(DOMAIN).pot *.mo
 
