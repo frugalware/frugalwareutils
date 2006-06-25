@@ -29,6 +29,7 @@ LDFLAGS += -lalpm
 CFLAGS += -I../libfwutil
 LDFLAGS += -L../libfwutil -lfwutil
 
+SUBDIRS = po
 LIBNAME = xwmconfig
 
 -include ../Makefile.inc
