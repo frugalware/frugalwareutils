@@ -1,0 +1,29 @@
+# Hungarian translations for libfwxwmconfig package.
+# Copyright (C) 2006 THE libfwxwmconfig'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the libfwxwmconfig package.
+#  <vmiklos@frugalware.org>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libfwxwmconfig\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-06-25 12:53+0200\n"
+"PO-Revision-Date: 2006-06-25 13:16+0200\n"
+"Last-Translator:  <vmiklos@frugalware.org>\n"
+"Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../libfwxwmconfig.c:128
+msgid "K Desktop Environment"
+msgstr "KDE grafikus környezet"
+
+#: ../libfwxwmconfig.c:130
+msgid "A lightweight desktop environment."
+msgstr "Egy pehelysúlyú grafikus környezet."
+
+#: ../libfwxwmconfig.c:132
+msgid "--- No description, please report! ---"
+msgstr "--- Nincs leírás, kérjük jelentse! ---"
