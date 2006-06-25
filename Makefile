@@ -49,3 +49,7 @@ dist:
 		-ba -u 20F55619 frugalwareutils-$(VERSION).tar.gz
 	mv frugalwareutils-$(VERSION).tar.gz{,.asc} ../
 	rm _darcs/current/Changelog
+
+release:
+	darcs tag --checkpoint $(VERSION)
+	$(MAKE) dist
