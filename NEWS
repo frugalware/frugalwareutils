@@ -1,5 +1,10 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.6.1         - bugfixes in libfwxconfig, libfwutil
+              - new config tool: xwmconfig
+              - netconfig: support for interfaces != eth0 in the menu-driven
+                configurator
+              - libfwgrubconfig: support for newer os-prober
 0.6.0         - libfwgrubconfig: support for os-prober, memtest support
               - libfwutil: descriptor leak fixes
               - grubconfig: don't init anything till the "please wait" splash
