@@ -149,8 +149,7 @@ int fwxwm_set(char *name)
 	snprintf(oldpath, PATH_MAX, "xinitrc.%s", name);
 	snprintf(newpath, PATH_MAX, "%s/xinitrc", _FWXWM_XINITDIR);
 
-	if(unlink(newpath)==-1)
-		return(0);
+	unlink(newpath);
 	if(symlink(oldpath, newpath)==-1)
 		return(0);
 	return(1);
