@@ -611,8 +611,11 @@ int writeconfig(profile_t *profile, char *host, char *nettype)
 	char *network=NULL;
 	char ipaddr[16], netmask[16];
 	char *ptr;
+	int oldmask;
 
+	oldmask = umask(0077);
 	ptr = g_strdup_printf("%s/%s", NC_PATH, profile->name);
+	unlink(ptr);
 	fp = fopen(ptr, "w");
 	FREE(ptr);
 	if(fp==NULL)
@@ -696,6 +699,7 @@ int writeconfig(profile_t *profile, char *host, char *nettype)
 	fprintf(fp, "\n# End of networks.\n");
 	fclose(fp);
 	FREE(network);
+	umask(oldmask);
 	return(0);
 }
 /* @} */
