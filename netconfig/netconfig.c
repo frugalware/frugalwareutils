@@ -74,8 +74,8 @@ int dsl_hook(profile_t *profile)
 	struct stat buf;
 	char *iface, *uname, *pass1, *pass2;
 
-	// do we have adslconfig?
-	if(stat("/usr/sbin/adslconfig", &buf))
+	// do we have pppoe?
+	if(stat("/usr/sbin/pppoe", &buf))
 		return(0);
 	if(dialog_myyesno(_("DSL configuration"), _("Do you want to configure a DSL connetion now?")))
 	{
