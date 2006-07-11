@@ -72,7 +72,7 @@ char *selnettype()
 int dsl_hook(profile_t *profile)
 {
 	struct stat buf;
-	char *iface, *uname;
+	char *iface, *uname, *pass1, *pass2;
 
 	// do we have adslconfig?
 	if(stat("/usr/sbin/adslconfig", &buf))
@@ -82,7 +82,21 @@ int dsl_hook(profile_t *profile)
 		uname = dialog_ask(_("Enter user name"),
 			_("Enter your PPPoE user name:"), NULL);
 		snprintf(profile->adsl_username, PATH_MAX, uname);
-		// TODO: ask password
+		while(1)
+		{
+			pass1 = dialog_password(_("Password"),
+				_("Please enter your PPPoE password"));
+			pass2 = dialog_password(_("Password"),
+				_("Please re-enter your PPPoE password"));
+			if(!strcmp(pass1, pass2))
+			{
+				snprintf(profile->adsl_password, PATH_MAX, pass1);
+				break;
+			}
+			if(!dialog_myyesno(_("Passwords don't match"),
+				_("Sorry, the passwords do not match. Try again?")))
+				return(1);
+		}
 		iface = dialog_ask(_("Enter interface name"),
 			_("Enter the Ethernet interface connected to the DSL modem. It will be ethn, "
 			"where 'n' is a number.\n"
