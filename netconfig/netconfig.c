@@ -69,25 +69,32 @@ char *selnettype()
 		0, 0, 0, typenum, types));
 }
 
-int dsl_hook(void)
+int dsl_hook(profile_t *profile)
 {
 	struct stat buf;
-	int ret;
+	char *iface, *uname;
 
 	// do we have adslconfig?
 	if(stat("/usr/sbin/adslconfig", &buf))
 		return(0);
 	if(dialog_myyesno(_("DSL configuration"), _("Do you want to configure a DSL connetion now?")))
 	{
-		if(!nco_fast)
-			return(nc_system("adslconfig"));
-		else
+		uname = dialog_ask(_("Enter user name"),
+			_("Enter your PPPoE user name:"), NULL);
+		snprintf(profile->adsl_username, PATH_MAX, uname);
+		// TODO: ask password
+		iface = dialog_ask(_("Enter interface name"),
+			_("Enter the Ethernet interface connected to the DSL modem. It will be ethn, "
+			"where 'n' is a number.\n"
+			"If unsure, just hit enter.\n"
+			"Enter interface name:"), "eth0");
+		snprintf(profile->adsl_interface, IF_NAMESIZE, iface);
+		if(nco_fast)
 		{
-			ret = nc_system("adslconfig --fast");
 			nc_system("mkdir /var/run");
 			nc_system("mount -t devpts none /dev/pts");
 			nc_system("pppoe-connect >/dev/tty4 2>/dev/tty4 &");
-			return(ret);
+			return(0);
 		}
 	}
 	return(0);
@@ -181,7 +188,7 @@ int dialog_config(int argc, char **argv)
 		newprofile->dnses = g_list_append(newprofile->dnses, dns);
 	}
 	if(!strcmp(nettype, "static") || !strcmp(nettype, "dsl"))
-		dsl_hook();
+		dsl_hook(newprofile);
 
 	if(dialog_myyesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
 		&& !f_util_dryrun)
