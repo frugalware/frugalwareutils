@@ -622,6 +622,12 @@ int writeconfig(profile_t *profile, char *host, char *nettype)
 		fprintf(fp, "[options]\n");
 		fprintf(fp, "dns = %s\n", dns);
 	}
+	if(strlen(profile->adsl_username))
+		fprintf(fp, "adsl_username = %s\n", profile->adsl_username);
+	if(strlen(profile->adsl_password))
+		fprintf(fp, "adsl_password = %s\n", profile->adsl_password);
+	if(strlen(profile->adsl_interface))
+		fprintf(fp, "adsl_interface = %s\n", profile->adsl_interface);
 	if(strcmp(nettype, "lo"))
 		fprintf(fp, "[%s]\n", iface->name);
 	if(iface->essid != NULL && strlen(iface->essid))
