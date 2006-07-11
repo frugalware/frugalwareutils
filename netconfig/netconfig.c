@@ -259,7 +259,7 @@ int run(int argc, char **argv)
 			if(profile!=NULL)
 				// unload the old profile
 				for (i=0; i<g_list_length(profile->interfaces); i++)
-					ifdown((interface_t*)g_list_nth_data(profile->interfaces, i));
+					ifdown((interface_t*)g_list_nth_data(profile->interfaces, i), profile);
 			if(!strcmp("stop", argv[optind]))
 			{
 				lodown();
@@ -280,7 +280,7 @@ int run(int argc, char **argv)
 		if(profile==NULL)
 			return(1);
 		for (i=0; i<g_list_length(profile->interfaces); i++)
-			ret += ifup((interface_t*)g_list_nth_data(profile->interfaces, i));
+			ret += ifup((interface_t*)g_list_nth_data(profile->interfaces, i), profile);
 		setdns(profile);
 		setlastprofile(fn);
 		FREE(fn);
