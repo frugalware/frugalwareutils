@@ -49,7 +49,7 @@ typedef struct __profile_t {
 	char domain[PATH_MAX+1];
 	char adsl_username[PATH_MAX+1];
 	char adsl_password[PATH_MAX+1];
-	char adsl_interface[IF_NAMESIZE+1];
+	char adsl_interface[PATH_MAX+1];
 	GList *interfaces; // GList of interface_t*
 } profile_t;
 
