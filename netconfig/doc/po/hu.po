@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: netconfig.5\n"
-"POT-Creation-Date: 2006-04-26 10:19+0200\n"
-"PO-Revision-Date: 2006-04-26 00:58+0200\n"
+"POT-Creation-Date: 2006-07-11 13:49+0200\n"
+"PO-Revision-Date: 2006-07-11 14:44+0200\n"
 "Last-Translator:  <vmiklos@frugalware.org>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -141,14 +141,51 @@ msgstr "B<desc = E<lt>leírásE<gt>>"
 msgid "A brief description of this network profile. Used by netconfig."
 msgstr "Egy rövid leírása ennek a hálózati profilnak. A netconfig használja."
 
-# type: SH
+# type: TP
 #: netconfig.5:33
+#, no-wrap
+msgid "B<adsl_username = E<lt>usernameE<gt>>"
+msgstr "B<adsl_username = E<lt>felhasználónévE<gt>>"
+
+# type: Plain text
+#: netconfig.5:36
+msgid "If you have an adsl (pppoe) connection, your adsl username."
+msgstr "Ha használ adsl (pppoe) kapcsolatot, az adsl felhasználóneve."
+
+# type: TP
+#: netconfig.5:36
+#, no-wrap
+msgid "B<adsl_password = E<lt>passwordE<gt>>"
+msgstr "B<adsl_passowrd = E<lt>jelszóE<gt>>"
+
+# type: Plain text
+#: netconfig.5:39
+msgid "If you have an adsl connection, your adsl password."
+msgstr "Ha használ adsl kapcsolatot, az adsl jelszava."
+
+# type: TP
+#: netconfig.5:39
+#, no-wrap
+msgid "B<adsl_interface = E<lt>interfaceE<gt>>"
+msgstr "B<adsl_interface = E<lt>interfészE<gt>>"
+
+# type: Plain text
+#: netconfig.5:42
+msgid ""
+"If you have an adsl connection, the Ethernet interface connected to the DSL "
+"modem."
+msgstr ""
+"Ha használ adsl kapcsolatot, a hálózati interfész neve amelyre a DSL modem "
+"kapcsolódik."
+
+# type: SH
+#: netconfig.5:42
 #, no-wrap
 msgid "CONFIG: INTERFACES"
 msgstr "BEÁLLÍTÁSOK: INTERFÉSZEK"
 
 # type: Plain text
-#: netconfig.5:37
+#: netconfig.5:46
 msgid ""
 "Each section defines an interface.  The interface name is defined by the "
 "string within square brackets (eg, the two above are 'eth0' and 'eth1'). The "
@@ -159,13 +196,13 @@ msgstr ""
 "direktívák:"
 
 # type: TP
-#: netconfig.5:37
+#: netconfig.5:46
 #, no-wrap
 msgid "B<options = E<lt>ipE<gt> [netmask E<lt>netmaskE<gt> [broadcast E<lt>broadcastE<gt>]>"
 msgstr "B<options = E<lt>ipE<gt> [netmask E<lt>netmaszkE<gt> [broadcast E<lt>broadcastcímE<gt>]>"
 
 # type: Plain text
-#: netconfig.5:42
+#: netconfig.5:51
 msgid ""
 "Defines the ip address, netmask and broadcast address of the interface.  "
 "Multiple usage is ok for eth0:1, eth0:2, etc. See the other format of this "
@@ -176,13 +213,13 @@ msgstr ""
 "formátumát ennek a direktívának dhcp esetére."
 
 # type: TP
-#: netconfig.5:42
+#: netconfig.5:51
 #, no-wrap
 msgid "B<opions = dhcp>"
 msgstr "B<opions = dhcp>"
 
 # type: Plain text
-#: netconfig.5:45
+#: netconfig.5:54
 msgid ""
 "Use dhcp for this interface. When this format is used, the other \"options\" "
 "lines are ignored."
@@ -191,31 +228,31 @@ msgstr ""
 "többi \"options\" sorhoz képest."
 
 # type: TP
-#: netconfig.5:45
+#: netconfig.5:54
 #, no-wrap
 msgid "B<pre_up = E<lt>commandE<gt>>"
 msgstr "B<pre_up = E<lt>parancsE<gt>>"
 
 # type: TP
-#: netconfig.5:47
+#: netconfig.5:56
 #, no-wrap
 msgid "B<post_up = E<lt>commandE<gt>>"
 msgstr "B<post_up = E<lt>parancsE<gt>>"
 
 # type: TP
-#: netconfig.5:49
+#: netconfig.5:58
 #, no-wrap
 msgid "B<pre_down = E<lt>commandE<gt>>"
 msgstr "B<pre_down = E<lt>parancsE<gt>>"
 
 # type: TP
-#: netconfig.5:51
+#: netconfig.5:60
 #, no-wrap
 msgid "B<post_down = E<lt>commandE<gt>>"
 msgstr "B<post_down = E<lt>parancsE<gt>>"
 
 # type: Plain text
-#: netconfig.5:56
+#: netconfig.5:65
 msgid ""
 "The synatax of these directives are the same: you can define there commands "
 "to be executed before the interface is up, after the interface is up, before "
@@ -228,13 +265,13 @@ msgstr ""
 "sorrendjében lesznek végrehajtva."
 
 # type: TP
-#: netconfig.5:56
+#: netconfig.5:65
 #, no-wrap
 msgid "B<mac = E<lt>mac addressE<gt>>"
 msgstr "B<mac = E<lt>mac címE<gt>>"
 
 # type: Plain text
-#: netconfig.5:59
+#: netconfig.5:68
 msgid ""
 "Overwrites the mac address of the card. If defined more than once, the first "
 "will be used."
@@ -243,13 +280,13 @@ msgstr ""
 "érvényes."
 
 # type: TP
-#: netconfig.5:59
+#: netconfig.5:68
 #, no-wrap
 msgid "B<essid = E<lt>essidE<gt>>"
 msgstr "B<essid = E<lt>essidE<gt>>"
 
 # type: Plain text
-#: netconfig.5:63
+#: netconfig.5:72
 msgid ""
 "Set the ESSID (or Network Name - in some products it may also be called "
 "Domain ID) for wireless network adapters. If defined more than once, the "
@@ -260,13 +297,13 @@ msgstr ""
 "definiálva, az elsõ lesz érvényes."
 
 # type: TP
-#: netconfig.5:63
+#: netconfig.5:72
 #, no-wrap
 msgid "B<gateway = [default gw] E<lt>ipE<gt>>"
 msgstr "B<gateway = [default gw] E<lt>ipE<gt>>"
 
 # type: Plain text
-#: netconfig.5:68
+#: netconfig.5:77
 msgid ""
 "Route packets via a gateway. NOTE: The specified gateway must be reachable "
 "first. If the \"default gw\" prefix is used, then adds a default route. If "
@@ -279,20 +316,20 @@ msgstr ""
 "figyelmen kívül lesz hagyva."
 
 # type: TP
-#: netconfig.5:68
+#: netconfig.5:77
 #, no-wrap
 msgid "B<key = E<lt>keyE<gt>>"
 msgstr "B<key = E<lt>keyE<gt>>"
 
 # type: Plain text
-#: netconfig.5:72
+#: netconfig.5:81
 msgid ""
 "Used to manipulate encryption or scrambling keys and security mode for "
 "wireless networks.  Examples:"
 msgstr "Titkosítási kulcsok es biztonsági módok megadásához használt. Példák:"
 
 # type: Plain text
-#: netconfig.5:82
+#: netconfig.5:91
 #, no-wrap
 msgid ""
 "key = 0123-4567-89\n"
@@ -314,13 +351,13 @@ msgstr ""
 "key = 01-23 key 45-67 [4] key [4]\n"
 
 # type: TP
-#: netconfig.5:84
+#: netconfig.5:93
 #, no-wrap
 msgid "B<dhcp_opts = E<lt>optionsE<gt>>"
 msgstr "B<dhcp_opts = E<lt>opciókE<gt>>"
 
 # type: Plain text
-#: netconfig.5:88
+#: netconfig.5:97
 msgid ""
 "These options are passed to the dhcp client daemon. The default is \"-t 10"
 "\". You may want to specify here the dhcp hostname, then you'll need \"-t 10 "
@@ -331,24 +368,24 @@ msgstr ""
 "E<lt>hostnévE<gt>\"-re lesz szüksége."
 
 # type: SH
-#: netconfig.5:88
+#: netconfig.5:97
 #, no-wrap
 msgid "AUTHORS"
 msgstr "SZERZÕK"
 
 # type: Plain text
-#: netconfig.5:90
+#: netconfig.5:99
 msgid "Written by Miklos Vajna."
 msgstr "Írta Vajna Miklós"
 
 # type: SH
-#: netconfig.5:90
+#: netconfig.5:99
 #, no-wrap
 msgid "REPORTING BUGS"
 msgstr "HIBÁK JELZÉSE"
 
 # type: Plain text
-#: netconfig.5:92
+#: netconfig.5:101
 msgid ""
 "If you find any bug, then please file a bugreport at E<lt>http://bugs."
 "frugalware.org/E<gt>."
@@ -357,12 +394,12 @@ msgstr ""
 "frugalware.org/E<gt> címen."
 
 # type: SH
-#: netconfig.5:92
+#: netconfig.5:101
 #, no-wrap
 msgid "SEE ALSO"
 msgstr "LÁSD MÉG"
 
 # type: Plain text
-#: netconfig.5:96
+#: netconfig.5:105
 msgid "B<ifconfig>(8), B<route>(8), B<iwconfig>(8), B<dhcpcd>(8)"
 msgstr "B<ifconfig>(8), B<route>(8), B<iwconfig>(8), B<dhcpcd>(8)"
