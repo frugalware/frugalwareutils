@@ -47,13 +47,16 @@ typedef struct __profile_t {
 	GList *dnses;
 	char desc[PATH_MAX+1];
 	char domain[PATH_MAX+1];
+	char adsl_username[PATH_MAX+1];
+	char adsl_password[PATH_MAX+1];
+	char adsl_interface[PATH_MAX+1];
 	GList *interfaces; // GList of interface_t*
 } profile_t;
 
 int listprofiles(void);
 profile_t *parseprofile(char *fn);
-int ifdown(interface_t *iface);
-int ifup(interface_t *iface);
+int ifdown(interface_t *iface, profile_t *profile);
+int ifup(interface_t *iface, profile_t *profile);
 int setdns(profile_t* profile);
 char *lastprofile(void);
 int setlastprofile(char* str);

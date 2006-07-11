@@ -30,6 +30,15 @@ Defines the local domain name. If defined more than once, the first will be used
 .TP
 .B "desc = <description>"
 A brief description of this network profile. Used by netconfig.
+.TP
+.B "adsl_username = <username>"
+If you have an adsl (pppoe) connection, your adsl username.
+.TP
+.B "adsl_password = <password>"
+If you have an adsl connection, your adsl password.
+.TP
+.B "adsl_interface = <interface>"
+If you have an adsl connection, the Ethernet interface connected to the DSL modem.
 .SH CONFIG: INTERFACES
 Each section defines an interface.
 The interface name is defined by the string within square brackets (eg, the two

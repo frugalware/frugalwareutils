@@ -157,6 +157,12 @@ profile_t *parseprofile(char *fn)
 					strncpy(profile->domain, ptr, PATH_MAX);
 				if (!strcmp(var, "DESC") && !strlen(profile->desc))
 					strncpy(profile->desc, ptr, PATH_MAX);
+				if (!strcmp(var, "ADSL_USERNAME") && !strlen(profile->adsl_username))
+					strncpy(profile->adsl_username, ptr, PATH_MAX);
+				if (!strcmp(var, "ADSL_PASSWORD") && !strlen(profile->adsl_password))
+					strncpy(profile->adsl_password, ptr, PATH_MAX);
+				if (!strcmp(var, "ADSL_INTERFACE") && !strlen(profile->adsl_interface))
+					strncpy(profile->adsl_interface, ptr, PATH_MAX);
 				if (!strcmp(var, "OPTIONS"))
 					iface->options = g_list_append(iface->options, strdup(ptr));
 				if (!strcmp(var, "PRE_UP"))
@@ -202,7 +208,7 @@ int is_dhcp(interface_t *iface)
  * @param iface the interface struct pointer
  * @return 1 on failure, 0 on success
  */
-int ifdown(interface_t *iface)
+int ifdown(interface_t *iface, profile_t *profile)
 {
 	int dhcp, ret=0, i;
 	char *ptr;
@@ -212,6 +218,11 @@ int ifdown(interface_t *iface)
 		for (i=0; i<g_list_length(iface->pre_downs); i++)
 			nc_system((char*)g_list_nth_data(iface->pre_downs, i));
 
+	if(strlen(profile->adsl_interface) && !strcmp(profile->adsl_interface, iface->name) &&
+		strlen(profile->adsl_username) && strlen(profile->adsl_password))
+	{
+		ret += nc_system("service adsl stop");
+	}
 	dhcp = is_dhcp(iface);
 	if(dhcp)
 	{
@@ -251,11 +262,75 @@ int ifdown(interface_t *iface)
 	return(ret);
 }
 
+static int copyfile(char *from, char *to)
+{
+	int oldmask;
+	FILE *ip, *op;
+	size_t len;
+	char buf[4097];
+
+	oldmask = umask(0077);
+	ip = fopen(from, "r");
+	if(!ip)
+		return(1);
+	op = fopen(to, "w");
+	if(!op)
+		return(1);
+	while((len = fread(buf, 1, 4096, ip)))
+		fwrite(buf, 1, len, op);
+	fclose(ip);
+	fclose(op);
+	umask(oldmask);
+	return(0);
+}
+
+static int update_adsl_conf(char *iface, char *user)
+{
+	FILE *ip, *op;
+	char line[256];
+
+	copyfile("/etc/ppp/pppoe.conf", "/etc/ppp/pppoe.conf-bak");
+	ip = fopen("/etc/ppp/pppoe.conf-bak", "r");
+	if(!ip)
+		return(1);
+	op = fopen("/etc/ppp/pppoe.conf", "w");
+	if(!op)
+		return(1);
+	while(fgets(line, 255, ip))
+	{
+		if(!strncmp(line, "ETH=", 4))
+			fprintf(op, "ETH='%s'\n", iface);
+		else if(!strncmp(line, "USER=", 5))
+			fprintf(op, "USER='%s'\n", user);
+		else
+			fprintf(op, "%s", line);
+	}
+	fclose(ip);
+	fclose(op);
+	return(0);
+}
+
+static int update_secrets(char *path, char *user, char *pass)
+{
+	FILE *fp;
+	int oldmask;
+
+	oldmask = umask(0077);
+	unlink(path);
+	fp = fopen(path, "w");
+	if(!fp)
+		return(1);
+	fprintf(fp, "\"%s\"\t*\t\"%s\"\n", user, pass);
+	fclose(fp);
+	umask(oldmask);
+	return(0);
+}
+
 /** Bring up an interface
  * @param iface the interface struct pointer
  * @return 1 on failure, 0 on success
  */
-int ifup(interface_t *iface)
+int ifup(interface_t *iface, profile_t *profile)
 {
 	int dhcp, ret=0, i;
 	char *ptr;
@@ -323,6 +398,14 @@ int ifup(interface_t *iface)
 		ptr = g_strdup_printf("route add %s", iface->gateway);
 		ret += nc_system(ptr);
 		FREE(ptr);
+	}
+	if(strlen(profile->adsl_interface) && !strcmp(profile->adsl_interface, iface->name) &&
+		strlen(profile->adsl_username) && strlen(profile->adsl_password))
+	{
+		update_adsl_conf(iface->name, profile->adsl_username);
+		update_secrets("/etc/ppp/pap-secrets", profile->adsl_username, profile->adsl_password);
+		update_secrets("/etc/ppp/chap-secrets", profile->adsl_username, profile->adsl_password);
+		ret += nc_system("service adsl start");
 	}
 	if(g_list_length(iface->post_ups))
 		for (i=0; i<g_list_length(iface->post_ups); i++)
