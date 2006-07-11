@@ -25,6 +25,7 @@ void dialog_backtitle(char *title);
 int dialog_confirm(void);
 void dialog_exit(void);
 char *dialog_ask(char *title, char *desc, char *init);
+char *dialog_password(char *title, char *desc);
 char *dialog_mymenu(const char *title, const char *cprompt, int height, int width,
 	int menu_height, int item_no, char **items);
 int dialog_myyesno(char *title, char *desc);

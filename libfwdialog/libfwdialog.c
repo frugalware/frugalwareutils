@@ -109,6 +109,31 @@ char *dialog_ask(char *title, char *desc, char *init)
 	return(strdup(my_buffer));
 }
 
+/** A wrapper to dialog_inputbox() for passwords
+ * @param title the title of the window
+ * @param desc the prompt text shown within the widget
+ * @return the answer - you must free() the allocated memory
+ */
+char *dialog_password(char *title, char *desc)
+{
+	char my_buffer[MAX_LEN + 1] = "";
+	int ret;
+
+	dlg_put_backtitle();
+	dlg_clear();
+	while(1)
+	{
+		dialog_vars.input_result = my_buffer;
+		dialog_vars.insecure = 1;
+		ret = dialog_inputbox(title, desc, 0, 0, 0, 1);
+		if (ret != DLG_EXIT_CANCEL)
+			break;
+		if(dialog_confirm())
+			dialog_exit();
+	}
+	return(strdup(my_buffer));
+}
+
 /** A wrapper to dialog_menu(): handle the case when the user hits cancel.
  * @param title the title on the top of the widget
  * @param cprompt the prompt text shown within the widget
