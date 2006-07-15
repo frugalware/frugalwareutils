@@ -29,15 +29,27 @@
 #include <sys/stat.h>
 #include <libintl.h>
 
-int run()
+int run(int argc, char **argv)
 {
 	FILE *input = stdin;
 	dialog_state.output = stderr;
-	char *mdev, *res, *depth;
+	char *mdev, *res=NULL, *depth=NULL;
 	struct stat buf;
-	int needrelease, ret;
+	int needrelease, ret, silent=0;
 
 	i18ninit(__FILE__);
+	if(argc>1 && !strcmp(argv[1], "--live"))
+	{
+		if(argc!=4)
+		{
+			printf(_("usage: %s [--live <resolution> <depth>\n"), argv[0]);
+			return(1);
+		}
+		res = argv[2];
+		depth = argv[3];
+		silent=1;
+	}
+
 	init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("X configuration"));
 
@@ -63,29 +75,41 @@ int run()
 		return(1);
 	}
 
-	dialog_msgbox(_("Configuring the X server"), _("Attemping to create "
-		"an X config file..."), 0, 0, 0);
+	if(!silent)
+		dialog_msgbox(_("Configuring the X server"), _("Attemping to create "
+			"an X config file..."), 0, 0, 0);
 	needrelease = fwutil_init();
 	mdev = fwx_get_mousedev();
 
-	fwx_doprobe();
-	while(1)
+	if(fwx_doprobe())
 	{
-		res = dialog_ask(_("Selecting resolution"),
-			_("Please enter the screen resolution you want to use. "
-			"You can use values such as 1024x768, 800x600 or 640x480. If unsure, just press ENTER."),
-			"1024x768");
-		depth = dialog_ask(_("Selecting color depth"),
-			_("Please enter the color depth you want to use. If unsure, just press ENTER."),
-			"24");
-		fwx_doconfig(mdev, res, depth);
+		if(needrelease)
+			fwutil_release();
 		end_dialog();
-		ret = fwx_dotest();
-		init_dialog(input, dialog_state.output);
-		dialog_backtitle(_("X configuration"));
-		if(!ret)
-			break;
+		return(1);
 	}
+	if(!silent)
+	{
+		while(1)
+		{
+			res = dialog_ask(_("Selecting resolution"),
+				_("Please enter the screen resolution you want to use. "
+				"You can use values such as 1024x768, 800x600 or 640x480. If unsure, just press ENTER."),
+				"1024x768");
+			depth = dialog_ask(_("Selecting color depth"),
+				_("Please enter the color depth you want to use. If unsure, just press ENTER."),
+				"24");
+			fwx_doconfig(mdev, res, depth);
+			end_dialog();
+			ret = fwx_dotest();
+			init_dialog(input, dialog_state.output);
+			dialog_backtitle(_("X configuration"));
+			if(!ret)
+				break;
+		}
+	}
+	else
+		fwx_doconfig(mdev, res, depth);
 	unlink("/root/xorg.conf.new");
 
 	if(needrelease)
