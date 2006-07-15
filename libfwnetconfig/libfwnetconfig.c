@@ -620,10 +620,10 @@ int writeconfig(profile_t *profile, char *host, char *nettype)
 	FREE(ptr);
 	if(fp==NULL)
 		return(1);
-	if(strlen(dns) || strlen(profile->adsl_username) ||
+	if((dns && strlen(dns)) || strlen(profile->adsl_username) ||
 		strlen(profile->adsl_password) || strlen(profile->adsl_interface))
 		fprintf(fp, "[options]\n");
-	if(strlen(dns))
+	if(dns && strlen(dns))
 		fprintf(fp, "dns = %s\n", dns);
 	if(strlen(profile->adsl_username))
 		fprintf(fp, "adsl_username = %s\n", profile->adsl_username);
