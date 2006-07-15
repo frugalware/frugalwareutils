@@ -1,14 +1,14 @@
 compile: $(CONFNAME).so
-	$(DO_RECURSIVE)
+	+$(DO_RECURSIVE)
 
 install:
 	$(INSTALL) $(CONFNAME).so $(DESTDIR)$(fwlibdir)/$(CONFNAME).so
 	ln -sf setup $(DESTDIR)$(sbindir)/$(CONFNAME)
-	$(DO_RECURSIVE)
+	+$(DO_RECURSIVE)
 
 clean:
 	rm -f $(CONFNAME).so *.o
-	$(DO_RECURSIVE)
+	+$(DO_RECURSIVE)
 
 %.so: %.o
 	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \

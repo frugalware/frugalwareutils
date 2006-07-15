@@ -28,7 +28,7 @@ SUBDIRS = doc libfwutil libfwdialog setup \
 	  libfwxwmconfig xwmconfig
 
 compile:
-	$(DO_RECURSIVE)
+	+$(DO_RECURSIVE)
 
 install: compile
 	$(INSTALL) -d $(DESTDIR)$(sbindir)
@@ -37,10 +37,10 @@ install: compile
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)/sysconfig/network
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man3
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man5
-	$(DO_RECURSIVE)
+	+$(DO_RECURSIVE)
 
 clean:
-	$(DO_RECURSIVE)
+	+$(DO_RECURSIVE)
 
 dist:
 	darcs changes >_darcs/current/Changelog

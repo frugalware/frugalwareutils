@@ -34,4 +34,4 @@ install:
 
 clean:
 	rm -rf $(LANGS)
-	$(DO_RECURSIVE)
+	+$(DO_RECURSIVE)

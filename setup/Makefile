@@ -34,15 +34,15 @@ LDFLAGS += -L../libfwdialog -lfwdialog
 SUBDIRS = po
 
 compile: setup
-	$(DO_RECURSIVE)
+	+$(DO_RECURSIVE)
 
 install:
 	$(INSTALL) setup $(DESTDIR)$(sbindir)/setup
-	$(DO_RECURSIVE)
+	+$(DO_RECURSIVE)
 
 clean:
 	rm -f setup *.o
-	$(DO_RECURSIVE)
+	+$(DO_RECURSIVE)
 
 test:
 	sudo sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog ./setup'
