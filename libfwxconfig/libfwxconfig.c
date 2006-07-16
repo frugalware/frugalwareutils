@@ -40,14 +40,14 @@
  * @{
  */
 
-static void _fwx_print_mouse_options(FILE *fp)
+static void print_mouse_options(FILE *fp)
 {
 	fprintf(fp, "Option      \"ZAxisMapping\" \"4 5\"\n"
 		"Option      \"Buttons\" \"3\"\n"
 		"Option      \"AlwaysCore\" \"true\"\n");
 }
 
-static void _fwx_print_kbd_options(FILE *fp)
+static void print_kbd_options(FILE *fp)
 {
 	char *ptr, *lang=NULL;
 	
@@ -67,13 +67,13 @@ static void _fwx_print_kbd_options(FILE *fp)
 		free(lang);
 }
 
-static void _fwx_print_mouse_identifier(FILE *fp, int num, char *device, char *proto)
+static void print_mouse_identifier(FILE *fp, int num, char *device, char *proto)
 {
 	if(!proto)
 		proto = strdup("auto");
 	fprintf(fp, "Identifier  \"Mouse%d\"\n", num);
 	fprintf(fp, "Driver      \"mouse\"\n");
-	_fwx_print_mouse_options(fp);
+	print_mouse_options(fp);
 	fprintf(fp, "Option      \"Protocol\" \"%s\"\n", proto);
 	fprintf(fp, "Option      \"Device\" \"%s\"\n", device);
 	fprintf(fp, "EndSection\n\n"
@@ -88,7 +88,7 @@ int fwx_doprobe()
 	return(system("X -configure :1 2>/dev/null"));
 }
 
-static int _fwx_reg_match(char *str, char *pattern)
+static int reg_match(char *str, char *pattern)
 {
 	int result;
 	regex_t reg;
@@ -121,20 +121,20 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 		return(1);
 	while(fgets(line, PATH_MAX, ofp))
 	{
-		if(_fwx_reg_match(line, "Protocol.*auto"))
+		if(reg_match(line, "Protocol.*auto"))
 		{
-			_fwx_print_mouse_options(nfp);
+			print_mouse_options(nfp);
 			fprintf(nfp, "Option      \"Protocol\" \"auto\"\n");
 			line[0]='\0';
 		}
-		if(_fwx_reg_match(line, "Identifier.*Mouse"))
+		if(reg_match(line, "Identifier.*Mouse"))
 		{
-			_fwx_print_mouse_identifier(nfp, 0, "/dev/psaux", "imps/2");
-			_fwx_print_mouse_identifier(nfp, 1, "/dev/tts/0", NULL);
+			print_mouse_identifier(nfp, 0, "/dev/psaux", "imps/2");
+			print_mouse_identifier(nfp, 1, "/dev/tts/0", NULL);
 			fprintf(nfp, "Identifier  \"Mouse3\"\n");
 			line[0]='\0';
 		}
-		if(_fwx_reg_match(line, "CorePointer"))
+		if(reg_match(line, "CorePointer"))
 		{
 			char cp[PATH_MAX+1] = "";
 			if(!stat("/dev/psaux", &buf))
@@ -147,19 +147,19 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 			line[0]='\0';
 		}
 		fprintf(nfp, "%s", line);
-		if(_fwx_reg_match(line, "usebios"))
+		if(reg_match(line, "usebios"))
 		{
 			// To disable blinking on some savage cards
 			fprintf(nfp, "Option     \"UseBIOS\" \"No\"\n");
 		}
-		if(_fwx_reg_match(line, "boardname"))
+		if(reg_match(line, "boardname"))
 		{
 			char *ptr = strstr(line, "\"");
 			// S3 Virge/GX2, 2x AGP, TVOut - workaround for broken DDC
 			if(!strcmp(ptr, "ViRGE/GX2"))
 				fprintf(nfp, "Option          \"NoDDC\"\n");
 		}
-		if(_fwx_reg_match(line, "Section.*Monitor"))
+		if(reg_match(line, "Section.*Monitor"))
 		{
 			// X -configure leaves out the refresh frequency
 			// We'll work around this.
@@ -167,22 +167,22 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 			fprintf(nfp, "VertRefresh  %s\n", REFRESH);
 			fprintf(nfp, "Option       \"DPMS\"\n");
 		}
-		if(_fwx_reg_match(line, "driver.*kbd"))
+		if(reg_match(line, "driver.*kbd"))
 		{
-			_fwx_print_kbd_options(nfp);
+			print_kbd_options(nfp);
 		}
-		if(_fwx_reg_match(line, "Depth.*(16)|(24)"))
+		if(reg_match(line, "Depth.*(16)|(24)"))
 		{
 			fprintf(nfp, "Modes \"%s\" \"800x600\" \"640x480\"\n", res);
 		}
-		if(_fwx_reg_match(line, "Load.*type1"))
+		if(reg_match(line, "Load.*type1"))
 			// X -configure leaves out the freetype module.
 			// We'll work around this.
 			fprintf(nfp, "Load  \"freetype\"\n");
-		if(_fwx_reg_match(line, "Section.*Screen"))
+		if(reg_match(line, "Section.*Screen"))
 			start_looking=1;
 		if(start_looking)
-			if(_fwx_reg_match(line, "Monitor"))
+			if(reg_match(line, "Monitor"))
 			{
 				fprintf(nfp, "DefaultDepth %s\n", depth);
 				start_looking=0;
