@@ -159,11 +159,11 @@ int dialog_config(int argc, char **argv)
 			"extension. In order to use it, you must set your extended netwok name (ESSID). Enter your ESSID:"),
 			NULL);
 		snprintf(newinterface->essid, FWNET_ESSID_MAX_SIZE, ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 		ptr = fwdialog_ask(_("Encryption key"), _("If you have an encryption key, then please enter it below.\n"
 			"Examples: 4567-89AB-CD or  s:password"), NULL);
 		snprintf(newinterface->key, FWNET_ENCODING_TOKEN_MAX, ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 	}
 	if(!strcmp(nettype, "dhcp"))
 	{
@@ -175,7 +175,7 @@ int dialog_config(int argc, char **argv)
 			snprintf(newinterface->dhcp_opts, PATH_MAX, "dhcp_opts = -t 10 -h %s\n", ptr);
 		else
 			newinterface->dhcp_opts[0]='\0';
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 	}
 	else if(!strcmp(nettype, "static"))
 	{
@@ -187,14 +187,14 @@ int dialog_config(int argc, char **argv)
 		if(strlen(ipaddr))
 			snprintf(option, 49, "options = %s netmask %s", ipaddr, netmask);
 		newinterface->options = g_list_append(newinterface->options, option);
-		FREE(ipaddr);
-		FREE(netmask);
+		FWUTIL_FREE(ipaddr);
+		FWUTIL_FREE(netmask);
 		ptr = fwdialog_ask(_("Enter gateway address"), _("Enter the address for the gateway on your network. "
 			"If you don't have a gateway on your network just hit enter, without entering any ip address."),
 			NULL);
 		if(strlen(ptr))
 			snprintf(newinterface->gateway, FWNET_GW_MAX_SIZE, "%s", ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 		dns = fwdialog_ask(_("Select nameserver"), _("Please give the IP address of the name server to use. You can"
 			"add more Domain Name Servers later by editing /etc/sysconfig/network/default.\n"
 			"If you don't have a name server on your network just hit enter, without entering any ip address."),
@@ -209,14 +209,14 @@ int dialog_config(int argc, char **argv)
 		fwnet_writeconfig(newprofile, host, nettype);
 
 	g_list_free(newinterface->options);
-	FREE(newinterface);
+	FWUTIL_FREE(newinterface);
 	g_list_free(newprofile->interfaces);
-	FREE(newprofile);
-	FREE(host);
-	FREE(nettype);
-	FREE(ipaddr);
-	FREE(netmask);
-	FREE(dns);
+	FWUTIL_FREE(newprofile);
+	FWUTIL_FREE(host);
+	FWUTIL_FREE(nettype);
+	FWUTIL_FREE(ipaddr);
+	FWUTIL_FREE(netmask);
+	FWUTIL_FREE(dns);
 	if(argv!=NULL)
 		end_dialog();
 	return(0);
@@ -304,7 +304,7 @@ int run(int argc, char **argv)
 			ret += fwnet_ifup((fwnet_interface_t*)g_list_nth_data(profile->interfaces, i), profile);
 		fwnet_setdns(profile);
 		fwnet_setlastprofile(fn);
-		FREE(fn);
+		FWUTIL_FREE(fn);
 	}
 	else
 		dialog_config(argc, argv);

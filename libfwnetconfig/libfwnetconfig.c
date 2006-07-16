@@ -22,7 +22,7 @@
  */
 
 #include <stdio.h>
-#define FWGETTEXT_LIB "libfwnetconfig"
+#define FWUTIL_GETTEXT "libfwnetconfig"
 #include <libfwutil.h>
 #include <getopt.h>
 #include <stdlib.h>
@@ -90,7 +90,7 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 		printf(_("%s: No such profile!\n"), fn);
 		return(NULL);
 	}
-	FREE(ptr);
+	FWUTIL_FREE(ptr);
 
 	while(fgets(line, PATH_MAX, fp))
 	{
@@ -103,8 +103,8 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 			// new interface
 			ptr = line;
 			ptr++;
-			strncpy(interface, ptr, min(255, strlen(ptr)-1));
-			interface[min(255, strlen(ptr)-1)] = '\0';
+			strncpy(interface, ptr, fwutil_min(255, strlen(ptr)-1));
+			interface[fwutil_min(255, strlen(ptr)-1)] = '\0';
 			if(!strlen(interface))
 			{
 				fprintf(stderr, _("profile: line %d: bad interface name\n"), n);
@@ -229,7 +229,7 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 		char line[7];
 		ptr = g_strdup_printf("/etc/dhcpc/dhcpcd-%s.pid", iface->name);
 		fp = fopen(ptr, "r");
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 		if(fp != NULL)
 		{
 			fgets(line, 6, fp);
@@ -248,11 +248,11 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 			{
 				ptr = g_strdup_printf("ifconfig %s 0.0.0.0", iface->name);
 				fwutil_system(ptr);
-				FREE(ptr);
+				FWUTIL_FREE(ptr);
 			}
 		ptr = g_strdup_printf("ifconfig %s down", iface->name);
 		fwutil_system(ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 	}
 
 	if(g_list_length(iface->post_downs))
@@ -345,20 +345,20 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 	{
 		ptr = g_strdup_printf("ifconfig %s hw ether %s", iface->name, iface->mac);
 		ret += fwutil_system(ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 	}
 	if(strlen(iface->essid))
 	{
 		ptr = g_strdup_printf("iwconfig %s essid %s", iface->name, iface->essid);
 		ret += fwutil_system(ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 	}
 
 	if(strlen(iface->key))
 	{
 		ptr = g_strdup_printf("iwconfig %s key %s", iface->name, iface->key);
 		ret += fwutil_system(ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 	}
 
 	// set up the interface
@@ -369,26 +369,26 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 		else
 			ptr = g_strdup_printf("dhcpcd -t 10 %s", iface->name);
 		ret += fwutil_system(ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 	}
 	else if(g_list_length(iface->options)==1)
 	{
 		ptr = g_strdup_printf("ifconfig %s %s",
 			iface->name, (char*)g_list_nth_data(iface->options, 0));
 		ret += fwutil_system(ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 	}
 	else
 	{
 		ptr = g_strdup_printf("ifconfig %s 0.0.0.0", iface->name);
 		ret += fwutil_system(ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 		for (i=0; i<g_list_length(iface->options); i++)
 		{
 			ptr = g_strdup_printf("ifconfig %s:%d %s",
 				iface->name, i+1, (char*)g_list_nth_data(iface->options, i));
 			ret += fwutil_system(ptr);
-			FREE(ptr);
+			FWUTIL_FREE(ptr);
 		}
 	}
 
@@ -397,7 +397,7 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 	{
 		ptr = g_strdup_printf("route add %s", iface->gateway);
 		ret += fwutil_system(ptr);
-		FREE(ptr);
+		FWUTIL_FREE(ptr);
 	}
 	if(strlen(profile->adsl_interface) && !strcmp(profile->adsl_interface, iface->name) &&
 		strlen(profile->adsl_username) && strlen(profile->adsl_password))
@@ -526,7 +526,7 @@ int fwnet_is_wireless_device(char *dev)
 
 	ptr = g_strdup_printf("iwconfig %s 2>&1", dev);
 	pp = popen(ptr, "r");
-	FREE(ptr);
+	FWUTIL_FREE(ptr);
 	if(pp==NULL)
 		return(0);
 	while(fgets(line, 255, pp))
@@ -617,7 +617,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 	ptr = g_strdup_printf("%s/%s", FWNET_PATH, profile->name);
 	unlink(ptr);
 	fp = fopen(ptr, "w");
-	FREE(ptr);
+	FWUTIL_FREE(ptr);
 	if(fp==NULL)
 		return(1);
 	if((dns && strlen(dns)) || strlen(profile->adsl_username) ||
@@ -698,7 +698,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 	fprintf(fp, "localnet        %s\n", network);
 	fprintf(fp, "\n# End of networks.\n");
 	fclose(fp);
-	FREE(network);
+	FWUTIL_FREE(network);
 	umask(oldmask);
 	return(0);
 }

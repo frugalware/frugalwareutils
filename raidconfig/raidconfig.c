@@ -102,8 +102,8 @@ GList *add_devices()
 		devlist = g_list_append(devlist, strdup(buf));
 		buf[0]='\0';
 	}
-	FREE(dialog_vars.ok_label);
-	FREE(dialog_vars.cancel_label);
+	FWUTIL_FREE(dialog_vars.ok_label);
+	FWUTIL_FREE(dialog_vars.cancel_label);
 	return(devlist);
 }
 

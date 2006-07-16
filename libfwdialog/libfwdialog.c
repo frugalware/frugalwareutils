@@ -21,7 +21,7 @@
 
 #include <stdio.h>
 #include <dialog.h>
-#define FWGETTEXT_LIB "libfwdialog"
+#define FWUTIL_GETTEXT "libfwdialog"
 #include <libfwutil.h>
 #include <getopt.h>
 #include <stdlib.h>
@@ -47,13 +47,13 @@ void fwdialog_backtitle(char *title)
 	FILE *fp;
 	char line[128];
 
-	if ((fp = fopen(VERSIONFILE, "r")) == NULL)
+	if ((fp = fopen(FWUTIL_VERSION, "r")) == NULL)
 		return;
 	fgets(line, 127, fp);
 	line[strlen(line)-1]='\0';
 	fclose(fp);
 	if(dialog_vars.backtitle)
-		FREE(dialog_vars.backtitle);
+		FWUTIL_FREE(dialog_vars.backtitle);
 	dialog_vars.backtitle=g_strdup_printf("%s - %s %s", title, line, _("Setup"));
 	dlg_put_backtitle();
 	dlg_clear();

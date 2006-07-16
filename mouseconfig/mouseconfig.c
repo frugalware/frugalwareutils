@@ -160,9 +160,9 @@ int run(int argc, char **argv)
 	}
 	fwmouse_writeconfig(link, mtype);
 
-	FREE(mouse_type);
-	FREE(mtype);
-	FREE(link);
+	FWUTIL_FREE(mouse_type);
+	FWUTIL_FREE(mtype);
+	FWUTIL_FREE(link);
 
 	// deinit dialog if we're called directly, not via setup
 	if(argv!=NULL)

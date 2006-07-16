@@ -26,7 +26,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <limits.h>
-#define FWGETTEXT_LIB "libfwxwmconfig"
+#define FWUTIL_GETTEXT "libfwxwmconfig"
 #include <libfwutil.h>
 #include <libintl.h>
 #include <alpm.h>

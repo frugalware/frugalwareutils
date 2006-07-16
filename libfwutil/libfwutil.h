@@ -19,20 +19,20 @@
  *  USA.
  */
 
-#define VERSIONFILE "/etc/frugalware-release"
+#define FWUTIL_VERSION "/etc/frugalware-release"
 
 #ifdef _
 #undef _
 #endif
-#ifndef FWGETTEXT_LIB
+#ifndef FWUTIL_GETTEXT
 #define _(text) gettext(text)
 #else
-#define _(str) dgettext (FWGETTEXT_LIB, str)
+#define _(str) dgettext (FWUTIL_GETTEXT, str)
 #endif
 
-#define FREE(p) do { if (p) { free(p); (p) = NULL; }} while(0)
+#define FWUTIL_FREE(p) do { if (p) { free(p); (p) = NULL; }} while(0)
 
-#define min(p, q)  ((p) < (q) ? (p) : (q))
+#define fwutil_min(p, q)  ((p) < (q) ? (p) : (q))
 
 int fwutil_system(const char *cmd);
 void fwutil_i18ninit(char *namespace);
