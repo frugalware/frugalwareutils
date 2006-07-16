@@ -53,16 +53,14 @@ typedef struct __profile_t {
 	GList *interfaces; // GList of interface_t*
 } profile_t;
 
-int listprofiles(void);
-profile_t *parseprofile(char *fn);
-int ifdown(interface_t *iface, profile_t *profile);
-int ifup(interface_t *iface, profile_t *profile);
-int setdns(profile_t* profile);
-char *lastprofile(void);
-int setlastprofile(char* str);
-int loup(void);
-int lodown(void);
-int is_wireless_device(char *dev);
-char *hostname(char *ptr);
-char *netaddr(char *ip, char *nm);
-int writeconfig(profile_t *profile, char *host, char *nettype);
+int fwnet_listprofiles(void);
+profile_t *fwnet_parseprofile(char *fn);
+int fwnet_ifdown(interface_t *iface, profile_t *profile);
+int fwnet_ifup(interface_t *iface, profile_t *profile);
+int fwnet_setdns(profile_t* profile);
+char *fwnet_lastprofile(void);
+int fwnet_setlastprofile(char* str);
+int fwnet_loup(void);
+int fwnet_lodown(void);
+int fwnet_is_wireless_device(char *dev);
+int fwnet_writeconfig(profile_t *profile, char *host, char *nettype);

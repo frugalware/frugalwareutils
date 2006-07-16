@@ -48,7 +48,7 @@ extern int f_util_dryrun;
 /** Prints s list of profiles available.
  * @return 1 on failure, 0 on success
  */
-int listprofiles(void)
+int fwnet_listprofiles(void)
 {
 	struct dirent *ent=NULL;
 	DIR *dir;
@@ -67,7 +67,7 @@ int listprofiles(void)
  * @param fn pathname of the profile
  * @return the parsed profile
  */
-profile_t *parseprofile(char *fn)
+profile_t *fwnet_parseprofile(char *fn)
 {
 	FILE *fp;
 	char line[PATH_MAX+1];
@@ -195,7 +195,7 @@ profile_t *parseprofile(char *fn)
  * @param iface the interface struct pointer
  * @return 1 if true, 0 if false
  */
-int is_dhcp(interface_t *iface)
+int fwnet_is_dhcp(interface_t *iface)
 {
 	int i, dhcp=0;
 	for (i=0; i<g_list_length(iface->options); i++)
@@ -208,7 +208,7 @@ int is_dhcp(interface_t *iface)
  * @param iface the interface struct pointer
  * @return 1 on failure, 0 on success
  */
-int ifdown(interface_t *iface, profile_t *profile)
+int fwnet_ifdown(interface_t *iface, profile_t *profile)
 {
 	int dhcp, ret=0, i;
 	char *ptr;
@@ -223,7 +223,7 @@ int ifdown(interface_t *iface, profile_t *profile)
 	{
 		ret += nc_system("service adsl stop");
 	}
-	dhcp = is_dhcp(iface);
+	dhcp = fwnet_is_dhcp(iface);
 	if(dhcp)
 	{
 		char line[7];
@@ -330,7 +330,7 @@ static int update_secrets(char *path, char *user, char *pass)
  * @param iface the interface struct pointer
  * @return 1 on failure, 0 on success
  */
-int ifup(interface_t *iface, profile_t *profile)
+int fwnet_ifup(interface_t *iface, profile_t *profile)
 {
 	int dhcp, ret=0, i;
 	char *ptr;
@@ -339,7 +339,7 @@ int ifup(interface_t *iface, profile_t *profile)
 		for (i=0; i<g_list_length(iface->pre_ups); i++)
 			ret += nc_system((char*)g_list_nth_data(iface->pre_ups, i));
 
-	dhcp = is_dhcp(iface);
+	dhcp = fwnet_is_dhcp(iface);
 	// initialize the device
 	if(strlen(iface->mac))
 	{
@@ -418,7 +418,7 @@ int ifup(interface_t *iface, profile_t *profile)
  * @param profile the profile struct pointer
  * @return 1 on failure, 0 on success
  */
-int setdns(profile_t* profile)
+int fwnet_setdns(profile_t* profile)
 {
 	int i;
 	FILE *fp=NULL;
@@ -453,7 +453,7 @@ int setdns(profile_t* profile)
 /** Get the name of the last used profile.
  * @return the name on success, NULL on failure
  */
-char *lastprofile(void)
+char *fwnet_lastprofile(void)
 {
 	FILE *fp;
 	char line[PATH_MAX+1];
@@ -471,7 +471,7 @@ char *lastprofile(void)
  * @param str the name of the profile
  * @return 1 on failure, 0 on success
  */
-int setlastprofile(char* str)
+int fwnet_setlastprofile(char* str)
 {
 	FILE *fp;
 
@@ -490,7 +490,7 @@ int setlastprofile(char* str)
 /** Brings up the 'lo' interface.
  * @return 1 on failure, 0 on success
  */
-int loup(void)
+int fwnet_loup(void)
 {
 	int ret=0;
 
@@ -502,7 +502,7 @@ int loup(void)
 /** Shut down the 'lo' interface.
  * @return 1 on failure, 0 on success
  */
-int lodown(void)
+int fwnet_lodown(void)
 {
 	return(nc_system("ifconfig lo down"));
 }
@@ -511,7 +511,7 @@ int lodown(void)
  * @param dev the name of the interface
  * @return 1 if yes, 0 if not
  */
-int is_wireless_device(char *dev)
+int fwnet_is_wireless_device(char *dev)
 {
 	FILE *pp;
 	char *ptr;
@@ -543,7 +543,7 @@ int is_wireless_device(char *dev)
  * @param ptr the full hostname+domainname
  * @return the hostname
  */
-char *hostname(char *ptr)
+static char *hostname(char *ptr)
 {
 	char *str=ptr;
 
@@ -560,7 +560,7 @@ char *hostname(char *ptr)
  * @param nm the netmask address
  * @return the network address
  */
-char *netaddr(char *ip, char *nm)
+static char *netaddr(char *ip, char *nm)
 {
 	unsigned long netmask, ipaddr, netaddr;
 	int in[4], i;
@@ -602,7 +602,7 @@ char *netaddr(char *ip, char *nm)
  * @param nettype the type of the network (lo, dhcp or static)
  * @return 1 on failure, 0 on success
  */
-int writeconfig(profile_t *profile, char *host, char *nettype)
+int fwnet_writeconfig(profile_t *profile, char *host, char *nettype)
 {
 	FILE *fp;
 	interface_t* iface = (interface_t*)g_list_nth_data(profile->interfaces, 0);

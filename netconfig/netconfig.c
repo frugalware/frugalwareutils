@@ -153,7 +153,7 @@ int dialog_config(int argc, char **argv)
 	snprintf(newinterface->name, IF_NAMESIZE, iface);
 	newprofile->interfaces = g_list_append(newprofile->interfaces, newinterface);
 
-	if(strcmp(nettype, "lo") && is_wireless_device(iface))
+	if(strcmp(nettype, "lo") && fwnet_is_wireless_device(iface))
 	{
 		ptr = dialog_ask(_("Extended network name"), _("It seems that this network card has a wireless "
 			"extension. In order to use it, you must set your extended netwok name (ESSID). Enter your ESSID:"),
@@ -206,7 +206,7 @@ int dialog_config(int argc, char **argv)
 
 	if(dialog_myyesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
 		&& !f_util_dryrun)
-		writeconfig(newprofile, host, nettype);
+		fwnet_writeconfig(newprofile, host, nettype);
 
 	g_list_free(newinterface->options);
 	FREE(newinterface);
@@ -259,10 +259,10 @@ int run(int argc, char **argv)
 	{
 		if(!strcmp("list", argv[optind]))
 		{
-			listprofiles();
+			fwnet_listprofiles();
 			return(0);
 		}
-		if((fn=lastprofile()) || !strcmp("stop", argv[optind]) || !strcmp("status", argv[optind]))
+		if((fn=fwnet_lastprofile()) || !strcmp("stop", argv[optind]) || !strcmp("status", argv[optind]))
 		{
 			if((!strcmp("stop", argv[optind])) && !fn)
 				return(127);
@@ -276,34 +276,34 @@ int run(int argc, char **argv)
 				printf(_("Current profile: %s\n"), fn);
 				return(0);
 			}
-			profile = parseprofile(fn);
+			profile = fwnet_parseprofile(fn);
 			if(profile!=NULL)
 				// unload the old profile
 				for (i=0; i<g_list_length(profile->interfaces); i++)
-					ifdown((interface_t*)g_list_nth_data(profile->interfaces, i), profile);
+					fwnet_ifdown((interface_t*)g_list_nth_data(profile->interfaces, i), profile);
 			if(!strcmp("stop", argv[optind]))
 			{
-				lodown();
+				fwnet_lodown();
 				return(0);
 			}
 		}
 		// load the default for 'start' and for 'restart' if not yet started
 		if(!strcmp("start", argv[optind]) || (!strcmp("restart", argv[optind]) && !fn))
 		{
-			loup();
+			fwnet_loup();
 			fn = strdup("default");
 		}
 		// load the target profile if != 'restart'
 		else if (strcmp("restart", argv[optind]))
 			fn = strdup(argv[optind]);
 		// load the new profile
-		profile = parseprofile(fn);
+		profile = fwnet_parseprofile(fn);
 		if(profile==NULL)
 			return(1);
 		for (i=0; i<g_list_length(profile->interfaces); i++)
-			ret += ifup((interface_t*)g_list_nth_data(profile->interfaces, i), profile);
-		setdns(profile);
-		setlastprofile(fn);
+			ret += fwnet_ifup((interface_t*)g_list_nth_data(profile->interfaces, i), profile);
+		fwnet_setdns(profile);
+		fwnet_setlastprofile(fn);
 		FREE(fn);
 	}
 	else
