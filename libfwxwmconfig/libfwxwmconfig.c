@@ -91,7 +91,7 @@ unsigned int fwxwm_checkdms(PM_DB *db)
  * @return a list of names and descriptions, in the "name1 desc1 name2 desc2"
  * format on success, NULL on error
  */
-GList *fwx_listwms(PM_DB *db)
+GList *fwxwm_list(PM_DB *db)
 {
 	GList *list=NULL;
 	PM_PKG *pkg;

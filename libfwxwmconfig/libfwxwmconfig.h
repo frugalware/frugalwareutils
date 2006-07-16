@@ -25,5 +25,5 @@
 PM_DB *fwxwm_init();
 int fwxwm_release(PM_DB *db);
 unsigned int fwxwm_checkdms(PM_DB *db);
-GList *fwx_listwms(PM_DB *db);
+GList *fwxwm_list(PM_DB *db);
 int fwxwm_set(char *name);

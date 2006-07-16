@@ -39,7 +39,7 @@ int xwm_silent=0;
 
 char* ask_wm(PM_DB *db)
 {
-	GList *list = fwx_listwms(db);
+	GList *list = fwxwm_list(db);
 	char **dlist = fwdialog_glist(list);
 	char *ptr;
 
