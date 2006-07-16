@@ -45,7 +45,7 @@ GList *zones=NULL;
  * @param mode clock mode
  * @return 1 on failure, 0 on success
  */
-int fwtimeconfig_hwclockconf(char *path, char *mode)
+int fwtime_hwclockconf(char *path, char *mode)
 {
 	FILE *fp;
 
@@ -65,7 +65,7 @@ int fwtimeconfig_hwclockconf(char *path, char *mode)
  * @param dirname path of the dir which contains the timezones
  * @return 1 on failure, 0 on success
  */
-int fwtimeconfig_find(char *dirname)
+int fwtime_find(char *dirname)
 {
 	DIR *dir;
 	struct dirent *ent;
@@ -84,7 +84,7 @@ int fwtimeconfig_find(char *dirname)
 		if(!stat(fn, &statbuf) && S_ISDIR(statbuf.st_mode))
 			if(strcmp(ent->d_name, ".") &&
 				strcmp(ent->d_name, ".."))
-				fwtimeconfig_find(fn);
+				fwtime_find(fn);
 		if(!stat(fn, &statbuf) && S_ISREG(statbuf.st_mode) &&
 			!strrchr(ent->d_name, '.'))
 			zones = g_list_append(zones, strdup(fn+strlen(ZONEDIR)+1));

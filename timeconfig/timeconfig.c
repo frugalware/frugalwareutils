@@ -77,7 +77,7 @@ GList *zone_scan(char *dir)
 	int i;
 
 	// search the zones
-	fwtimeconfig_find(dir);
+	fwtime_find(dir);
 
 	// sort them and add a "   " item after each (required by libdialog)
 	zones = g_list_sort(zones, sort_zones);
@@ -118,7 +118,7 @@ int run(int argc, char **argv)
 	fwdialog_backtitle(_("Time configuration"));
 
 	ptr = ask_mode();
-	fwtimeconfig_hwclockconf(CLOCKFILE, ptr);
+	fwtime_hwclockconf(CLOCKFILE, ptr);
 	free(ptr);
 	zones = zone_scan(ZONEDIR);
 	ptr = ask_zone(zones);
