@@ -69,7 +69,7 @@ char *selnettype()
 		0, 0, 0, typenum, types));
 }
 
-int dsl_hook(profile_t *profile)
+int dsl_hook(fwnet_profile_t *profile)
 {
 	struct stat buf;
 	char *iface, *uname, *pass1, *pass2;
@@ -117,8 +117,8 @@ int dsl_hook(profile_t *profile)
 int dialog_config(int argc, char **argv)
 {
 	FILE *input = stdin;
-	profile_t *newprofile=NULL;
-	interface_t *newinterface = NULL;
+	fwnet_profile_t *newprofile=NULL;
+	fwnet_interface_t *newinterface = NULL;
 	char option[50];
 	char *ptr;
 	char *host, *nettype;
@@ -138,14 +138,14 @@ int dialog_config(int argc, char **argv)
 		host = strdup("frugalware.example.net");
 	nettype = selnettype();
 
-	if((newprofile = (profile_t*)malloc(sizeof(profile_t))) == NULL)
+	if((newprofile = (fwnet_profile_t*)malloc(sizeof(fwnet_profile_t))) == NULL)
 		return(1);
-	memset(newprofile, 0, sizeof(profile_t));
+	memset(newprofile, 0, sizeof(fwnet_profile_t));
 	// TODO: here the profile name ('default') is hardwired
 	sprintf(newprofile->name, "default");
-	if((newinterface = (interface_t*)malloc(sizeof(interface_t))) == NULL)
+	if((newinterface = (fwnet_interface_t*)malloc(sizeof(fwnet_interface_t))) == NULL)
 		return(1);
-	memset(newinterface, 0, sizeof(interface_t));
+	memset(newinterface, 0, sizeof(fwnet_interface_t));
 	iface = fwdialog_ask(_("Enter interface name"),
 		_("We'll need the name of the interface you'd like to use for your network connection.\n"
 		"If unsure, just hit enter.\n"
@@ -158,11 +158,11 @@ int dialog_config(int argc, char **argv)
 		ptr = fwdialog_ask(_("Extended network name"), _("It seems that this network card has a wireless "
 			"extension. In order to use it, you must set your extended netwok name (ESSID). Enter your ESSID:"),
 			NULL);
-		snprintf(newinterface->essid, ESSID_MAX_SIZE, ptr);
+		snprintf(newinterface->essid, FWNET_ESSID_MAX_SIZE, ptr);
 		FREE(ptr);
 		ptr = fwdialog_ask(_("Encryption key"), _("If you have an encryption key, then please enter it below.\n"
 			"Examples: 4567-89AB-CD or  s:password"), NULL);
-		snprintf(newinterface->key, ENCODING_TOKEN_MAX, ptr);
+		snprintf(newinterface->key, FWNET_ENCODING_TOKEN_MAX, ptr);
 		FREE(ptr);
 	}
 	if(!strcmp(nettype, "dhcp"))
@@ -193,7 +193,7 @@ int dialog_config(int argc, char **argv)
 			"If you don't have a gateway on your network just hit enter, without entering any ip address."),
 			NULL);
 		if(strlen(ptr))
-			snprintf(newinterface->gateway, GW_MAX_SIZE, "%s", ptr);
+			snprintf(newinterface->gateway, FWNET_GW_MAX_SIZE, "%s", ptr);
 		FREE(ptr);
 		dns = fwdialog_ask(_("Select nameserver"), _("Please give the IP address of the name server to use. You can"
 			"add more Domain Name Servers later by editing /etc/sysconfig/network/default.\n"
@@ -235,7 +235,7 @@ int run(int argc, char **argv)
 	};
 	char *fn=NULL;
 	int ret=0, i;
-	profile_t *profile;
+	fwnet_profile_t *profile;
 
 	while((opt = getopt_long(argc, argv, "hf", opts, &option_index)))
 	{
@@ -280,7 +280,7 @@ int run(int argc, char **argv)
 			if(profile!=NULL)
 				// unload the old profile
 				for (i=0; i<g_list_length(profile->interfaces); i++)
-					fwnet_ifdown((interface_t*)g_list_nth_data(profile->interfaces, i), profile);
+					fwnet_ifdown((fwnet_interface_t*)g_list_nth_data(profile->interfaces, i), profile);
 			if(!strcmp("stop", argv[optind]))
 			{
 				fwnet_lodown();
@@ -301,7 +301,7 @@ int run(int argc, char **argv)
 		if(profile==NULL)
 			return(1);
 		for (i=0; i<g_list_length(profile->interfaces); i++)
-			ret += fwnet_ifup((interface_t*)g_list_nth_data(profile->interfaces, i), profile);
+			ret += fwnet_ifup((fwnet_interface_t*)g_list_nth_data(profile->interfaces, i), profile);
 		fwnet_setdns(profile);
 		fwnet_setlastprofile(fn);
 		FREE(fn);

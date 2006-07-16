@@ -19,30 +19,30 @@
  *  USA.
  */
 
-#define MAC_MAX_SIZE 17
-#define ESSID_MAX_SIZE 32
-#define ENCODING_TOKEN_MAX   32
-#define GW_MAX_SIZE 26
+#define FWNET_MAC_MAX_SIZE 17
+#define FWNET_ESSID_MAX_SIZE 32
+#define FWNET_ENCODING_TOKEN_MAX   32
+#define FWNET_GW_MAX_SIZE 26
 
-#define VERSIONFILE "/etc/frugalware-release"
-#define NC_PATH "/etc/sysconfig/network"
-#define NC_LOCK "/var/run/netconfig"
+#define FWNET_VERSIONFILE "/etc/frugalware-release"
+#define FWNET_PATH "/etc/sysconfig/network"
+#define FWNET_LOCK "/var/run/netconfig"
 
-typedef struct __interface_t {
+typedef struct __fwnet_interface_t {
 	char name[IF_NAMESIZE+1];
 	GList *options;
 	GList *pre_ups;
 	GList *post_ups;
 	GList *pre_downs;
 	GList *post_downs;
-	char mac[MAC_MAX_SIZE+1];
+	char mac[FWNET_MAC_MAX_SIZE+1];
 	char dhcp_opts[PATH_MAX+1];
-	char essid[ESSID_MAX_SIZE+1];
-	char key[ENCODING_TOKEN_MAX+1];
-	char gateway[GW_MAX_SIZE+1];
-} interface_t;
+	char essid[FWNET_ESSID_MAX_SIZE+1];
+	char key[FWNET_ENCODING_TOKEN_MAX+1];
+	char gateway[FWNET_GW_MAX_SIZE+1];
+} fwnet_interface_t;
 
-typedef struct __profile_t {
+typedef struct __fwnet_profile_t {
 	char name[256];
 	GList *dnses;
 	char desc[PATH_MAX+1];
@@ -51,16 +51,16 @@ typedef struct __profile_t {
 	char adsl_password[PATH_MAX+1];
 	char adsl_interface[PATH_MAX+1];
 	GList *interfaces; // GList of interface_t*
-} profile_t;
+} fwnet_profile_t;
 
 int fwnet_listprofiles(void);
-profile_t *fwnet_parseprofile(char *fn);
-int fwnet_ifdown(interface_t *iface, profile_t *profile);
-int fwnet_ifup(interface_t *iface, profile_t *profile);
-int fwnet_setdns(profile_t* profile);
+fwnet_profile_t *fwnet_parseprofile(char *fn);
+int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile);
+int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile);
+int fwnet_setdns(fwnet_profile_t* profile);
 char *fwnet_lastprofile(void);
 int fwnet_setlastprofile(char* str);
 int fwnet_loup(void);
 int fwnet_lodown(void);
 int fwnet_is_wireless_device(char *dev);
-int fwnet_writeconfig(profile_t *profile, char *host, char *nettype);
+int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype);

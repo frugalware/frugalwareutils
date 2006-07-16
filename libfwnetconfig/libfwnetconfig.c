@@ -53,7 +53,7 @@ int fwnet_listprofiles(void)
 	struct dirent *ent=NULL;
 	DIR *dir;
 
-	dir = opendir(NC_PATH);
+	dir = opendir(FWNET_PATH);
 	while((ent = readdir(dir)))
 	{
 		if(strcmp(ent->d_name, ".") && strcmp(ent->d_name, ".."))
@@ -67,7 +67,7 @@ int fwnet_listprofiles(void)
  * @param fn pathname of the profile
  * @return the parsed profile
  */
-profile_t *fwnet_parseprofile(char *fn)
+fwnet_profile_t *fwnet_parseprofile(char *fn)
 {
 	FILE *fp;
 	char line[PATH_MAX+1];
@@ -75,15 +75,15 @@ profile_t *fwnet_parseprofile(char *fn)
 	char *ptr = NULL;
 	char *var = NULL;
 	char interface[256] = "";
-	profile_t *profile;
-	interface_t *iface=NULL;
+	fwnet_profile_t *profile;
+	fwnet_interface_t *iface=NULL;
 
-	profile = (profile_t*)malloc(sizeof(profile_t));
+	profile = (fwnet_profile_t*)malloc(sizeof(fwnet_profile_t));
 	if(profile==NULL)
 		return(NULL);
-	memset(profile, 0, sizeof(profile_t));
+	memset(profile, 0, sizeof(fwnet_profile_t));
 
-	ptr = g_strdup_printf(NC_PATH "/%s", fn);
+	ptr = g_strdup_printf(FWNET_PATH "/%s", fn);
 	fp = fopen(ptr, "r");
 	if(fp == NULL)
 	{
@@ -115,17 +115,17 @@ profile_t *fwnet_parseprofile(char *fn)
 				int found = 0;
 				for (i=0; !found && i<g_list_length(profile->interfaces); i++)
 				{
-					iface = (interface_t*)g_list_nth_data(profile->interfaces, i);
+					iface = (fwnet_interface_t*)g_list_nth_data(profile->interfaces, i);
 					if(!strcmp(iface->name, interface))
 						found=1;
 				}
 				if(!found)
 				{
 					// start a new interface record
-					iface = (interface_t*)malloc(sizeof(interface_t));
+					iface = (fwnet_interface_t*)malloc(sizeof(fwnet_interface_t));
 					if(iface==NULL)
 						return(NULL);
-					memset(iface, 0, sizeof(interface_t));
+					memset(iface, 0, sizeof(fwnet_interface_t));
 					strncpy(iface->name, interface, IF_NAMESIZE);
 					profile->interfaces = g_list_append(profile->interfaces, iface);
 				}
@@ -174,15 +174,15 @@ profile_t *fwnet_parseprofile(char *fn)
 				if (!strcmp(var, "POST_DOWN"))
 					iface->post_downs = g_list_append(iface->post_downs, strdup(ptr));
 				if(!strcmp(var, "MAC") && !strlen(iface->mac))
-					strncpy(iface->mac, ptr, MAC_MAX_SIZE);
+					strncpy(iface->mac, ptr, FWNET_MAC_MAX_SIZE);
 				if(!strcmp(var, "DHCP_OPTS") && !strlen(iface->dhcp_opts))
 					strncpy(iface->dhcp_opts, ptr, PATH_MAX);
 				if(!strcmp(var, "ESSID") && !strlen(iface->essid))
-					strncpy(iface->essid, ptr, ESSID_MAX_SIZE);
+					strncpy(iface->essid, ptr, FWNET_ESSID_MAX_SIZE);
 				if(!strcmp(var, "KEY") && !strlen(iface->key))
-					strncpy(iface->key, ptr, ENCODING_TOKEN_MAX);
+					strncpy(iface->key, ptr, FWNET_ENCODING_TOKEN_MAX);
 				if(!strcmp(var, "GATEWAY") && !strlen(iface->gateway))
-					strncpy(iface->gateway, ptr, GW_MAX_SIZE);
+					strncpy(iface->gateway, ptr, FWNET_GW_MAX_SIZE);
 			}
 		}
 		line[0] = '\0';
@@ -195,7 +195,7 @@ profile_t *fwnet_parseprofile(char *fn)
  * @param iface the interface struct pointer
  * @return 1 if true, 0 if false
  */
-int fwnet_is_dhcp(interface_t *iface)
+int fwnet_is_dhcp(fwnet_interface_t *iface)
 {
 	int i, dhcp=0;
 	for (i=0; i<g_list_length(iface->options); i++)
@@ -208,7 +208,7 @@ int fwnet_is_dhcp(interface_t *iface)
  * @param iface the interface struct pointer
  * @return 1 on failure, 0 on success
  */
-int fwnet_ifdown(interface_t *iface, profile_t *profile)
+int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 {
 	int dhcp, ret=0, i;
 	char *ptr;
@@ -330,7 +330,7 @@ static int update_secrets(char *path, char *user, char *pass)
  * @param iface the interface struct pointer
  * @return 1 on failure, 0 on success
  */
-int fwnet_ifup(interface_t *iface, profile_t *profile)
+int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 {
 	int dhcp, ret=0, i;
 	char *ptr;
@@ -418,7 +418,7 @@ int fwnet_ifup(interface_t *iface, profile_t *profile)
  * @param profile the profile struct pointer
  * @return 1 on failure, 0 on success
  */
-int fwnet_setdns(profile_t* profile)
+int fwnet_setdns(fwnet_profile_t* profile)
 {
 	int i;
 	FILE *fp=NULL;
@@ -458,7 +458,7 @@ char *fwnet_lastprofile(void)
 	FILE *fp;
 	char line[PATH_MAX+1];
 
-	fp = fopen(NC_LOCK, "r");
+	fp = fopen(FWNET_LOCK, "r");
 	if(fp==NULL)
 		return(NULL);
 	fgets(line, PATH_MAX, fp);
@@ -479,7 +479,7 @@ int fwnet_setlastprofile(char* str)
 	if(!str)
 		return(1);
 
-	fp = fopen(NC_LOCK, "w");
+	fp = fopen(FWNET_LOCK, "w");
 	if(fp==NULL)
 		return(1);
 	fprintf(fp, str);
@@ -602,10 +602,10 @@ static char *netaddr(char *ip, char *nm)
  * @param nettype the type of the network (lo, dhcp or static)
  * @return 1 on failure, 0 on success
  */
-int fwnet_writeconfig(profile_t *profile, char *host, char *nettype)
+int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 {
 	FILE *fp;
-	interface_t* iface = (interface_t*)g_list_nth_data(profile->interfaces, 0);
+	fwnet_interface_t* iface = (fwnet_interface_t*)g_list_nth_data(profile->interfaces, 0);
 	char *option = (char*)g_list_nth_data(iface->options, 0);
 	char *dns = (char*)g_list_nth_data(profile->dnses, 0);
 	char *network=NULL;
@@ -614,7 +614,7 @@ int fwnet_writeconfig(profile_t *profile, char *host, char *nettype)
 	int oldmask;
 
 	oldmask = umask(0077);
-	ptr = g_strdup_printf("%s/%s", NC_PATH, profile->name);
+	ptr = g_strdup_printf("%s/%s", FWNET_PATH, profile->name);
 	unlink(ptr);
 	fp = fopen(ptr, "w");
 	FREE(ptr);
