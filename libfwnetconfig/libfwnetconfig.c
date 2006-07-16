@@ -38,7 +38,7 @@
 
 #include "libfwnetconfig.h"
 
-extern int f_util_dryrun;
+extern int fwutil_dryrun;
 
 /** @defgroup libfwnetconfig Frugalware Network Configuration library
  * @brief Functions to make network configuration easier
