@@ -47,6 +47,17 @@ typedef struct mdu_version_s {
 #define RAID_VERSION            _IOR (MD_MAJOR, 0x10, mdu_version_t)
 #define FWGRUB_LOGDEV "/dev/tty4"
 
+struct fwgrub_entry_t {
+	FILE *fp;
+	char *title;
+	char *grubbootdev;
+	char *bootstr;
+	char *kernel;
+	char *rootdev;
+	char *opts;
+	char *type;
+};
+
 
 /** @defgroup libfwgrubconfig Frugalware GRUB Configuration library
  * @brief Functions to make GRUB configuration easier
@@ -380,7 +391,7 @@ static char *mount_dev(char *path)
 	return(strdup(mnt->mnt_fsname));
 }
 
-static int write_entry(struct entry_t *entry)
+static int write_entry(struct fwgrub_entry_t *entry)
 {
 	char *ptr;
 
@@ -432,7 +443,7 @@ static char *gen_title()
 	return(g_strdup_printf("%s - %s", line, name.release));
 }
 
-static void entry_free(struct entry_t *entry)
+static void entry_free(struct fwgrub_entry_t *entry)
 {
 	if(entry->title)
 		free(entry->title);
@@ -453,7 +464,7 @@ static int os_prober(FILE *fp)
 	struct stat buf;
 	FILE *pp;
 	char line[PATH_MAX], *ptr, *bootdev;
-	struct entry_t *entry;
+	struct fwgrub_entry_t *entry;
 	GList *entries=NULL;
 	int i;
 
@@ -465,7 +476,7 @@ static int os_prober(FILE *fp)
 		return(1);
 	while(fgets(line, PATH_MAX, pp))
 	{
-		entry = (struct entry_t*)malloc(sizeof(struct entry_t));
+		entry = (struct fwgrub_entry_t*)malloc(sizeof(struct fwgrub_entry_t));
 		if(!entry)
 			return(1);
 		entry->fp=fp;
@@ -581,7 +592,7 @@ void fwgrub_create_menu(FILE *fp)
 	char *bootdev;
 	GList *list;
 	struct stat buf;
-	struct entry_t entry;
+	struct fwgrub_entry_t entry;
 
 	entry.fp = fp;
 	entry.title = gen_title();
