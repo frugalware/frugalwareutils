@@ -235,7 +235,7 @@ int fwnet_ifdown(interface_t *iface, profile_t *profile)
 			fgets(line, 6, fp);
 			fclose(fp);
 			i = atoi(line);
-			if(i>0 && !f_util_dryrun)
+			if(i>0 && !fwutil_dryrun)
 				ret = kill(i, 15);
 			else if (i>0)
 				printf("kill(%d, 15);\n", i);
@@ -425,24 +425,24 @@ int fwnet_setdns(profile_t* profile)
 
 	if(g_list_length(profile->dnses) || strlen(profile->domain))
 	{
-		if(!f_util_dryrun)
+		if(!fwutil_dryrun)
 			fp = fopen("/etc/resolv.conf", "w");
-		if(f_util_dryrun || (fp != NULL))
+		if(fwutil_dryrun || (fp != NULL))
 		{
 			if(strlen(profile->domain))
 			{
-				if(f_util_dryrun)
+				if(fwutil_dryrun)
 					printf("search %s\n", profile->domain);
 				else
 					fprintf(fp, "search %s\n", profile->domain);
 			}
 			if(g_list_length(profile->dnses))
 				for (i=0; i<g_list_length(profile->dnses); i++)
-					if(f_util_dryrun)
+					if(fwutil_dryrun)
 						printf("nameserver %s\n", (char*)g_list_nth_data(profile->dnses, i));
 					else
 						fprintf(fp, "nameserver %s\n", (char*)g_list_nth_data(profile->dnses, i));
-			if(!f_util_dryrun)
+			if(!fwutil_dryrun)
 				fclose(fp);
 		}
 		return(1);
