@@ -34,7 +34,7 @@
 #include <unistd.h>
 #include <libintl.h>
 
-extern int f_util_dryrun;
+extern int fwutil_dryrun;
 
 int nco_usage   = 0;
 int nco_fast   = 0;
@@ -205,7 +205,7 @@ int dialog_config(int argc, char **argv)
 		dsl_hook(newprofile);
 
 	if(fwdialog_yesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
-		&& !f_util_dryrun)
+		&& !fwutil_dryrun)
 		fwnet_writeconfig(newprofile, host, nettype);
 
 	g_list_free(newinterface->options);
@@ -243,7 +243,7 @@ int run(int argc, char **argv)
 			break;
 		switch(opt)
 		{
-			case 1000: f_util_dryrun = 1; break;
+			case 1000: fwutil_dryrun = 1; break;
 			case 'h':  nco_usage  = 1; break;
 			case 'f':  nco_fast   = 1; break;
 		}
