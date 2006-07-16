@@ -30,5 +30,6 @@ fwlibdir = $(libdir)/frugalware
 libexecdir = /usr/libexec
 mandir = /usr/share/man
 localedir = /usr/share/locale
+incdir = /usr/include
 
 # vim: ft=make

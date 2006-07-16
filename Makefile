@@ -37,6 +37,7 @@ install: compile
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)/sysconfig/network
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man3
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man5
+	$(INSTALL) -d $(DESTDIR)$(incdir)
 	+$(DO_RECURSIVE)
 
 clean:

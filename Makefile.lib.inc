@@ -5,6 +5,7 @@ install:
 	$(INSTALL) libfw$(LIBNAME).so.$(VERSION) $(DESTDIR)$(libdir)/libfw$(LIBNAME).so.$(VERSION)
 	ln -sf libfw$(LIBNAME).so.$(VERSION) $(DESTDIR)$(libdir)/libfw$(LIBNAME).so.$(MAJORVER)
 	ln -sf libfw$(LIBNAME).so.$(VERSION) $(DESTDIR)$(libdir)/libfw$(LIBNAME).so
+	$(INSTALL) -m644 libfw$(LIBNAME).h $(DESTDIR)$(incdir)/libfw$(LIBNAME).h
 	+$(DO_RECURSIVE)
 
 clean:
