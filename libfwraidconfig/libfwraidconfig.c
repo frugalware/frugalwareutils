@@ -77,7 +77,7 @@ int fwraid_mknod_md(char *devname)
 	return(ret);
 }
 
-int _fwraid_partdetails(PedPartition *part)
+static int partdetails(PedPartition *part)
 {
 	char *pname, *ptr;
 
@@ -93,7 +93,7 @@ int _fwraid_partdetails(PedPartition *part)
 	return(0);
 }
 
-int _fwraid_listparts(PedDisk *disk)
+static int listparts(PedDisk *disk)
 {
 	PedPartition *part = NULL;
 	PedPartition *extpart = NULL;
@@ -105,17 +105,17 @@ int _fwraid_listparts(PedDisk *disk)
 		part!=NULL;part=part->next)
 	{
 		if((part->num>0) && (part->type != PED_PARTITION_EXTENDED) && ped_partition_get_flag(part, PED_PARTITION_RAID))
-			_fwraid_partdetails(part);
+			partdetails(part);
 		if(part->type == PED_PARTITION_EXTENDED)
 			for(extpart=part->part_list;
 				extpart!=NULL;extpart=extpart->next)
 				if(extpart->num>0 && ped_partition_get_flag(extpart, PED_PARTITION_RAID))
-					_fwraid_partdetails(extpart);
+					partdetails(extpart);
 	}
 	return(0);
 }
 
-PedExceptionOption _fwraid_peh(PedException* ex)
+static PedExceptionOption peh(PedException* ex)
 {
 	return(PED_EXCEPTION_IGNORE);
 }
@@ -128,7 +128,7 @@ GList *fwraid_lst_parts()
 	PedDevice *dev = NULL;
 	PedDisk *disk = NULL;
 
-	ped_exception_set_handler(_fwraid_peh);
+	ped_exception_set_handler(peh);
 	ped_device_probe_all();
 	for(dev=ped_device_get_next(NULL);dev!=NULL;dev=dev->next)
 	{
@@ -137,7 +137,7 @@ GList *fwraid_lst_parts()
 			continue;
 		disk = ped_disk_new(dev);
 		if(disk)
-			_fwraid_listparts(disk);
+			listparts(disk);
 	}
 	return(fwraid_parts);
 }
