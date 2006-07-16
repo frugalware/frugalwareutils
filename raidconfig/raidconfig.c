@@ -36,7 +36,7 @@ char *ask_devname()
 {
 	char *ptr, *basename = fwraid_suggest_devname();
 	
-	ptr = dialog_ask(_("Select RAID device"),
+	ptr = fwdialog_ask(_("Select RAID device"),
 		_("Please specify the raid device you want to create:"),
 		basename);
 	free(basename);
@@ -56,7 +56,7 @@ int ask_level()
 		"10", "raid10"
 	};
 
-	char *ptr = dialog_mymenu(_("Choose a RAID level"),
+	char *ptr = fwdialog_menu(_("Choose a RAID level"),
 		_("Please choose what level of raid array you want to build"),
 		0, 0, 0, 6, fwraid_levels);
 	ret = atoi(ptr);
@@ -67,7 +67,7 @@ int ask_level()
 GList *add_devices()
 {
 	GList *partlist = fwraid_lst_parts();
-	char **partarray = glist2dialog(partlist);
+	char **partarray = fwdialog_glist(partlist);
 	GList *devlist=NULL;
 	char *ptr, *sptr, *dptr;
 	int ret;
@@ -118,7 +118,7 @@ int run(int argc, char **argv)
 	fwutil_i18ninit(__FILE__);
 	if(argv!=NULL)
 		init_dialog(input, dialog_state.output);
-	dialog_backtitle(_("RAID configuration"));
+	fwdialog_backtitle(_("RAID configuration"));
 
 	devname = ask_devname();
 	level = ask_level();

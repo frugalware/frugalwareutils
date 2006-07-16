@@ -41,7 +41,7 @@ char* ask_mode()
 	};
 	char *ptr;
 
-	ptr = dialog_mymenu(_("question?"),
+	ptr = fwdialog_menu(_("question?"),
 		_("loooooooong description"), 0, 0, 0, 2, modes);
 	if(!strcmp(ptr, "yes"))
 	{
@@ -62,9 +62,9 @@ int run(int argc, char **argv)
 	dialog_state.output = stderr;
 	char *ptr;
 
-	i18ninit(__FILE__);
+	fwutil_i18ninit(__FILE__);
 	init_dialog(input, dialog_state.output);
-	dialog_backtitle(_("RAID configuration"));
+	fwdialog_backtitle(_("RAID configuration"));
 
 	ptr = ask_mode();
 	free(ptr);

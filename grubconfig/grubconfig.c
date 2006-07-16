@@ -45,7 +45,7 @@ int ask_mode()
 	char *ptr;
 	int ret=0;
 
-	ptr = dialog_mymenu(_("Installing GRUB bootloader"),
+	ptr = fwdialog_menu(_("Installing GRUB bootloader"),
 		_("GRUB can be installed to a variety of places:\n\n"
 		"\t1. The Master Boot Record of your first hard drive.\n"
 		"\t2. A formatted floppy disk.\n"
@@ -74,7 +74,7 @@ int run(int argc, char **argv)
 
 	fwutil_i18ninit(__FILE__);
 	init_dialog(input, dialog_state.output);
-	dialog_backtitle(_("GRUB bootloader"));
+	fwdialog_backtitle(_("GRUB bootloader"));
 
 	mode = ask_mode();
 	if(mode!=3)

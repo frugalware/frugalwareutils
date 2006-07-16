@@ -40,10 +40,10 @@ int xwm_silent=0;
 char* ask_wm(PM_DB *db)
 {
 	GList *list = fwx_listwms(db);
-	char **dlist = glist2dialog(list);
+	char **dlist = fwdialog_glist(list);
 	char *ptr;
 
-	ptr = dialog_mymenu(_("Window managers"),
+	ptr = fwdialog_menu(_("Window managers"),
 		_("Choose one from the window managers listed below. Window "
 		"managers are responsible for the desktop layout."), 0, 0, 0, g_list_length(list)/2, dlist);
 	free(dlist);
@@ -92,7 +92,7 @@ int run(int argc, char **argv)
 	}
 
 	init_dialog(input, dialog_state.output);
-	dialog_backtitle(_("XDM configuration"));
+	fwdialog_backtitle(_("XDM configuration"));
 	dialog_msgbox(_("Please wait"), _("Searching for desktop managers..."), 0, 0, 0);
 	db = fwxwm_init();
 

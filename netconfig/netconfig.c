@@ -59,7 +59,7 @@ char *selnettype()
 		"dsl", _("DSL connection"),
 		"lo", _("No network - loopback connection only")
 	};
-	return(dialog_mymenu(_("Select network connection type"),
+	return(fwdialog_menu(_("Select network connection type"),
 		_("Now we need to know how your machine connects to the network.\n"
 		"If you have an internal network card and an assigned IP address, gateway, and DNS, use 'static' "
 		"to enter these values. Also may use this if you have a DSL connection.\n"
@@ -77,27 +77,27 @@ int dsl_hook(profile_t *profile)
 	// do we have pppoe?
 	if(stat("/usr/sbin/pppoe", &buf))
 		return(0);
-	if(dialog_myyesno(_("DSL configuration"), _("Do you want to configure a DSL connetion now?")))
+	if(fwdialog_yesno(_("DSL configuration"), _("Do you want to configure a DSL connetion now?")))
 	{
-		uname = dialog_ask(_("Enter user name"),
+		uname = fwdialog_ask(_("Enter user name"),
 			_("Enter your PPPoE user name:"), NULL);
 		snprintf(profile->adsl_username, PATH_MAX, uname);
 		while(1)
 		{
-			pass1 = dialog_password(_("Password"),
+			pass1 = fwdialog_password(_("Password"),
 				_("Please enter your PPPoE password"));
-			pass2 = dialog_password(_("Password"),
+			pass2 = fwdialog_password(_("Password"),
 				_("Please re-enter your PPPoE password"));
 			if(!strcmp(pass1, pass2))
 			{
 				snprintf(profile->adsl_password, PATH_MAX, pass1);
 				break;
 			}
-			if(!dialog_myyesno(_("Passwords don't match"),
+			if(!fwdialog_yesno(_("Passwords don't match"),
 				_("Sorry, the passwords do not match. Try again?")))
 				return(1);
 		}
-		iface = dialog_ask(_("Enter interface name"),
+		iface = fwdialog_ask(_("Enter interface name"),
 			_("Enter the Ethernet interface connected to the DSL modem. It will be ethn, "
 			"where 'n' is a number.\n"
 			"If unsure, just hit enter.\n"
@@ -127,10 +127,10 @@ int dialog_config(int argc, char **argv)
 	dialog_state.output = stderr;
 	if(argv!=NULL)
 		init_dialog(input, dialog_state.output);
-	dialog_backtitle(_("Network configuration"));
+	fwdialog_backtitle(_("Network configuration"));
 
 	if(!nco_fast)
-		host = dialog_ask(_("Enter hostname"), _("We'll need the name you'd like to give your host.\n"
+		host = fwdialog_ask(_("Enter hostname"), _("We'll need the name you'd like to give your host.\n"
 		"The full hostname is needed, such as:\n\n"
 		"frugalware.example.net\n\n"
 		"Enter full hostname:"), "frugalware.example.net");
@@ -146,7 +146,7 @@ int dialog_config(int argc, char **argv)
 	if((newinterface = (interface_t*)malloc(sizeof(interface_t))) == NULL)
 		return(1);
 	memset(newinterface, 0, sizeof(interface_t));
-	iface = dialog_ask(_("Enter interface name"),
+	iface = fwdialog_ask(_("Enter interface name"),
 		_("We'll need the name of the interface you'd like to use for your network connection.\n"
 		"If unsure, just hit enter.\n"
 		"Enter interface name:"), "eth0");
@@ -155,19 +155,19 @@ int dialog_config(int argc, char **argv)
 
 	if(strcmp(nettype, "lo") && fwnet_is_wireless_device(iface))
 	{
-		ptr = dialog_ask(_("Extended network name"), _("It seems that this network card has a wireless "
+		ptr = fwdialog_ask(_("Extended network name"), _("It seems that this network card has a wireless "
 			"extension. In order to use it, you must set your extended netwok name (ESSID). Enter your ESSID:"),
 			NULL);
 		snprintf(newinterface->essid, ESSID_MAX_SIZE, ptr);
 		FREE(ptr);
-		ptr = dialog_ask(_("Encryption key"), _("If you have an encryption key, then please enter it below.\n"
+		ptr = fwdialog_ask(_("Encryption key"), _("If you have an encryption key, then please enter it below.\n"
 			"Examples: 4567-89AB-CD or  s:password"), NULL);
 		snprintf(newinterface->key, ENCODING_TOKEN_MAX, ptr);
 		FREE(ptr);
 	}
 	if(!strcmp(nettype, "dhcp"))
 	{
-		ptr = dialog_ask(_("Set DHCP hostname"), _("Some network providers require that the DHCP hostname be"
+		ptr = fwdialog_ask(_("Set DHCP hostname"), _("Some network providers require that the DHCP hostname be"
 			"set in order to connect. If so, they'll have assigned a hostname to your machine. If you were"
 			"assigned a DHCP hostname, please enter it below. If you do not have a DHCP hostname, just"
 			"hit enter."), NULL);
@@ -180,8 +180,8 @@ int dialog_config(int argc, char **argv)
 	else if(!strcmp(nettype, "static"))
 	{
 		// options = ip netmask netmask
-		ipaddr = dialog_ask(_("Enter ip address"), _("Enter your IP address for the local machine."), NULL);
-		netmask = dialog_ask(_("Enter netmask for local network"),
+		ipaddr = fwdialog_ask(_("Enter ip address"), _("Enter your IP address for the local machine."), NULL);
+		netmask = fwdialog_ask(_("Enter netmask for local network"),
 			_("Enter your netmask. This will generally look something like this: 255.255.255.0\n"
 			"If unsure, just hit enter."), "255.255.255.0");
 		if(strlen(ipaddr))
@@ -189,13 +189,13 @@ int dialog_config(int argc, char **argv)
 		newinterface->options = g_list_append(newinterface->options, option);
 		FREE(ipaddr);
 		FREE(netmask);
-		ptr = dialog_ask(_("Enter gateway address"), _("Enter the address for the gateway on your network. "
+		ptr = fwdialog_ask(_("Enter gateway address"), _("Enter the address for the gateway on your network. "
 			"If you don't have a gateway on your network just hit enter, without entering any ip address."),
 			NULL);
 		if(strlen(ptr))
 			snprintf(newinterface->gateway, GW_MAX_SIZE, "%s", ptr);
 		FREE(ptr);
-		dns = dialog_ask(_("Select nameserver"), _("Please give the IP address of the name server to use. You can"
+		dns = fwdialog_ask(_("Select nameserver"), _("Please give the IP address of the name server to use. You can"
 			"add more Domain Name Servers later by editing /etc/sysconfig/network/default.\n"
 			"If you don't have a name server on your network just hit enter, without entering any ip address."),
 			NULL);
@@ -204,7 +204,7 @@ int dialog_config(int argc, char **argv)
 	if(!strcmp(nettype, "static") || !strcmp(nettype, "dsl"))
 		dsl_hook(newprofile);
 
-	if(dialog_myyesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
+	if(fwdialog_yesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
 		&& !f_util_dryrun)
 		fwnet_writeconfig(newprofile, host, nettype);
 

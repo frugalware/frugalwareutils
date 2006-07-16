@@ -47,7 +47,7 @@ char* ask_mode()
 	};
 	char *ptr;
 
-	ptr = dialog_mymenu(_("Do you want to set hardware clock utc?"),
+	ptr = fwdialog_menu(_("Do you want to set hardware clock utc?"),
 		_("Is the hardware clock set to Coordinated Universal Time "
 		"(UTC/GMT)?  If it is, select 'yes' here. If the hardware "
 		"clock is set to the current local time (this is how most PCs "
@@ -93,10 +93,10 @@ GList *zone_scan(char *dir)
 
 char *ask_zone(GList *zones)
 {
-	char **zonestrs = glist2dialog(zones);
+	char **zonestrs = fwdialog_glist(zones);
 	char *ptr, *ret;
 
-	ret = dialog_mymenu(_("Timezone configuration"),
+	ret = fwdialog_menu(_("Timezone configuration"),
 		_("Please select one of the following timezones for your "
 		"machine:"), 0, 0, 0, g_list_length(zones)/2, zonestrs);
 	free(zonestrs);
@@ -115,7 +115,7 @@ int run(int argc, char **argv)
 	fwutil_i18ninit(__FILE__);
 	if(argv!=NULL)
 		init_dialog(input, dialog_state.output);
-	dialog_backtitle(_("Time configuration"));
+	fwdialog_backtitle(_("Time configuration"));
 
 	ptr = ask_mode();
 	fwtimeconfig_hwclockconf(CLOCKFILE, ptr);

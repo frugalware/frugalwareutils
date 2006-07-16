@@ -61,7 +61,7 @@ char* ask_mouse()
 	};
 	char *ptr;
 
-	ptr = dialog_mymenu(_("Configure the console mouse support (GPM)"),
+	ptr = fwdialog_menu(_("Configure the console mouse support (GPM)"),
 		_("This part of the configuration process will create a /dev/mouse link pointing to your default mouse "
 		"device.  You can change the /dev/mouse link later in the /etc/sysconfig/gpm configuration file if the "
 		"mouse doesn't work, or if you switch to a different type of pointing device. We will also use the "
@@ -81,7 +81,7 @@ char* ask_port()
 	};
 	char *ptr;
 
-	ptr = dialog_mymenu(_("Select Serial Port"),
+	ptr = fwdialog_menu(_("Select Serial Port"),
 		_("Your mouse requires a serial port. Which one would you like to use?"),
 		0, 0, 0, 4, ports);
 	return(ptr);
@@ -97,7 +97,7 @@ int run(int argc, char **argv)
 	fwutil_i18ninit(__FILE__);
 	if(argv!=NULL)
 		init_dialog(input, dialog_state.output);
-	dialog_backtitle(_("Mouse configuration"));
+	fwdialog_backtitle(_("Mouse configuration"));
 
 	if(fwmouse_detect_usb())
 	{

@@ -51,7 +51,7 @@ int run(int argc, char **argv)
 	}
 
 	init_dialog(input, dialog_state.output);
-	dialog_backtitle(_("X configuration"));
+	fwdialog_backtitle(_("X configuration"));
 
 	// sanility checks
 	if(stat("/usr/bin/xinit", &buf))
@@ -92,18 +92,18 @@ int run(int argc, char **argv)
 	{
 		while(1)
 		{
-			res = dialog_ask(_("Selecting resolution"),
+			res = fwdialog_ask(_("Selecting resolution"),
 				_("Please enter the screen resolution you want to use. "
 				"You can use values such as 1024x768, 800x600 or 640x480. If unsure, just press ENTER."),
 				"1024x768");
-			depth = dialog_ask(_("Selecting color depth"),
+			depth = fwdialog_ask(_("Selecting color depth"),
 				_("Please enter the color depth you want to use. If unsure, just press ENTER."),
 				"24");
 			fwx_doconfig(mdev, res, depth);
 			end_dialog();
 			ret = fwx_dotest();
 			init_dialog(input, dialog_state.output);
-			dialog_backtitle(_("X configuration"));
+			fwdialog_backtitle(_("X configuration"));
 			if(!ret)
 				break;
 		}

@@ -42,7 +42,7 @@
  * after init_dialog().
  * @param title the backtitle string, something like "Time configuration"
  */
-void dialog_backtitle(char *title)
+void fwdialog_backtitle(char *title)
 {
 	FILE *fp;
 	char line[128];
@@ -62,7 +62,7 @@ void dialog_backtitle(char *title)
 /** Confirm an 'exit'.
  * @return 1 on yes, 0 on no
  */
-int dialog_confirm(void)
+int fwdialog_confirm(void)
 {
 	int ret;
 	dialog_vars.defaultno=1;
@@ -76,7 +76,7 @@ int dialog_confirm(void)
 
 /** Exit without breaking your terminal by calling end_dialog() first.
  */
-void dialog_exit(void)
+void fwdialog_exit(void)
 {
 	end_dialog();
 	exit(0);
@@ -90,7 +90,7 @@ void dialog_exit(void)
  * @param init the initial value of the input box
  * @return the answer - you must free() the allocated memory
  */
-char *dialog_ask(char *title, char *desc, char *init)
+char *fwdialog_ask(char *title, char *desc, char *init)
 {
 	char my_buffer[MAX_LEN + 1] = "";
 	int ret;
@@ -103,8 +103,8 @@ char *dialog_ask(char *title, char *desc, char *init)
 		ret = dialog_inputbox(title, desc, 0, 0, init, 0);
 		if (ret != DLG_EXIT_CANCEL)
 			break;
-		if(dialog_confirm())
-			dialog_exit();
+		if(fwdialog_confirm())
+			fwdialog_exit();
 	}
 	return(strdup(my_buffer));
 }
@@ -114,7 +114,7 @@ char *dialog_ask(char *title, char *desc, char *init)
  * @param desc the prompt text shown within the widget
  * @return the answer - you must free() the allocated memory
  */
-char *dialog_password(char *title, char *desc)
+char *fwdialog_password(char *title, char *desc)
 {
 	char my_buffer[MAX_LEN + 1] = "";
 	int ret;
@@ -128,8 +128,8 @@ char *dialog_password(char *title, char *desc)
 		ret = dialog_inputbox(title, desc, 0, 0, 0, 1);
 		if (ret != DLG_EXIT_CANCEL)
 			break;
-		if(dialog_confirm())
-			dialog_exit();
+		if(fwdialog_confirm())
+			fwdialog_exit();
 	}
 	return(strdup(my_buffer));
 }
@@ -144,7 +144,7 @@ char *dialog_password(char *title, char *desc)
  * @param items an array of strings - the contents of the menu
  * @return the answer - you must free() the allocated memory
  */
-char *dialog_mymenu(const char *title, const char *cprompt, int height, int width,
+char *fwdialog_menu(const char *title, const char *cprompt, int height, int width,
 	int menu_height, int item_no, char **items)
 {
 	int ret;
@@ -159,8 +159,8 @@ char *dialog_mymenu(const char *title, const char *cprompt, int height, int widt
 			item_no, items);
 		if (ret != DLG_EXIT_CANCEL)
 			break;
-		if(dialog_confirm())
-			dialog_exit();
+		if(fwdialog_confirm())
+			fwdialog_exit();
 	}
 	return(strdup(dialog_vars.input_result));
 }
@@ -172,7 +172,7 @@ char *dialog_mymenu(const char *title, const char *cprompt, int height, int widt
  * @param desc the prompt text shown within the widget
  * @return 1 on yes, 0 on false
  */
-int dialog_myyesno(char *title, char *desc)
+int fwdialog_yesno(char *title, char *desc)
 {
 	int ret;
 
@@ -189,7 +189,7 @@ int dialog_myyesno(char *title, char *desc)
  * @param list the GList to convert
  * @return the array of strings - you must free() it later
  */
-char **glist2dialog(GList *list)
+char **fwdialog_glist(GList *list)
 {
 	int i;
 	char **array;

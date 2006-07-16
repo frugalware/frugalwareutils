@@ -21,12 +21,12 @@
 
 #include <dialog.h>
 
-void dialog_backtitle(char *title);
-int dialog_confirm(void);
-void dialog_exit(void);
-char *dialog_ask(char *title, char *desc, char *init);
-char *dialog_password(char *title, char *desc);
-char *dialog_mymenu(const char *title, const char *cprompt, int height, int width,
+void fwdialog_backtitle(char *title);
+int fwdialog_confirm(void);
+void fwdialog_exit(void);
+char *fwdialog_ask(char *title, char *desc, char *init);
+char *fwdialog_password(char *title, char *desc);
+char *fwdialog_menu(const char *title, const char *cprompt, int height, int width,
 	int menu_height, int item_no, char **items);
-int dialog_myyesno(char *title, char *desc);
-char **glist2dialog(GList *list);
+int fwdialog_yesno(char *title, char *desc);
+char **fwdialog_glist(GList *list);

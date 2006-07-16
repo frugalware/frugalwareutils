@@ -118,8 +118,8 @@ char* ask_what()
 		pluglist = g_list_append(pluglist, plugin->name);
 		pluglist = g_list_append(pluglist, dgettext(plugin->name, plugin->desc));
 	}
-	plugstrs = glist2dialog(pluglist);
-	return(dialog_mymenu(_("Control center"),
+	plugstrs = fwdialog_glist(pluglist);
+	return(fwdialog_menu(_("Control center"),
 		_("Please select one of the following configuration tools "
 		"to start:"), 0, 0, 0, g_list_length(pluglist)/2, plugstrs));
 }
@@ -134,7 +134,7 @@ int show_menu()
 
 	fwutil_i18ninit(__FILE__);
 	init_dialog(input, dialog_state.output);
-	dialog_backtitle(_("General configuration"));
+	fwdialog_backtitle(_("General configuration"));
 
 	while((ptr = ask_what()))
 	{
