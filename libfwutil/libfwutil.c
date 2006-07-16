@@ -33,7 +33,7 @@
 
 #include "libfwutil.h"
 
-int f_util_dryrun = 0;
+int fwutil_dryrun = 0;
 
 /** @defgroup libfwutil Frugalware General Utility library
  * @brief Functions to make writing Frugalware configuration tools easier
@@ -45,9 +45,9 @@ int f_util_dryrun = 0;
  * @param cmd the command to print/execute
  * @return 1 on failure, 0 on success
  */
-int nc_system(const char *cmd)
+int fwutil_system(const char *cmd)
 {
-	if(f_util_dryrun)
+	if(fwutil_dryrun)
 		return(printf("%s\n", cmd));
 	else
 		return(system(cmd) ? 1 : 0);
@@ -56,7 +56,7 @@ int nc_system(const char *cmd)
 /** Initialize gettext, based on the filename.
  * @param namespace just use the __FILE__ constant
  */
-void i18ninit(char *namespace)
+void fwutil_i18ninit(char *namespace)
 {
 	char *lang=NULL;
 	char *ptr = strdup(namespace);
@@ -80,7 +80,7 @@ void i18ninit(char *namespace)
  * @param str string to trim
  * @return pointer to the trim'ed string
  */
-char *trim(char *str)
+char *fwutil_trim(char *str)
 {
 	char *ptr = str;
 
@@ -97,7 +97,7 @@ char *trim(char *str)
  * @param str string to convert
  * @return pointer to the upper'ed sting
  */
-char *strtoupper(char *str)
+char *fwutil_strtoupper(char *str)
 {
 	char *ptr = str;
 
@@ -110,7 +110,7 @@ char *strtoupper(char *str)
  * @param list the GList
  * @param sep the separator
  */
-char *g_list_display(GList *list, char *sep)
+char *fwutil_glist_display(GList *list, char *sep)
 {
 	int i, len=0;
 	char *ret;

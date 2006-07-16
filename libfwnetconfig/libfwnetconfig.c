@@ -95,7 +95,7 @@ profile_t *fwnet_parseprofile(char *fn)
 	while(fgets(line, PATH_MAX, fp))
 	{
 		n++;
-		trim(line);
+		fwutil_trim(line);
 		if(strlen(line) == 0 || line[0] == '#')
 			continue;
 		if(line[0] == '[' && line[strlen(line)-1] == ']')
@@ -141,8 +141,8 @@ profile_t *fwnet_parseprofile(char *fn)
 				fprintf(stderr, _("profile: line %d: syntax error\n"), n);
 				return(NULL);
 			}
-			trim(var);
-			var = strtoupper(var);
+			fwutil_trim(var);
+			var = fwutil_strtoupper(var);
 			if(!strlen(interface))
 			{
 				fprintf(stderr, _("profile: line %d: all directives must belong to a section\n"), n);
@@ -150,7 +150,7 @@ profile_t *fwnet_parseprofile(char *fn)
 			}
 			if(ptr != NULL)
 			{
-				trim(ptr);
+				fwutil_trim(ptr);
 				if (!strcmp(var, "DNS"))
 					profile->dnses = g_list_append(profile->dnses, strdup(ptr));
 				if (!strcmp(var, "DOMAIN") && !strlen(profile->domain))
@@ -216,12 +216,12 @@ int fwnet_ifdown(interface_t *iface, profile_t *profile)
 
 	if(g_list_length(iface->pre_downs))
 		for (i=0; i<g_list_length(iface->pre_downs); i++)
-			nc_system((char*)g_list_nth_data(iface->pre_downs, i));
+			fwutil_system((char*)g_list_nth_data(iface->pre_downs, i));
 
 	if(strlen(profile->adsl_interface) && !strcmp(profile->adsl_interface, iface->name) &&
 		strlen(profile->adsl_username) && strlen(profile->adsl_password))
 	{
-		ret += nc_system("service adsl stop");
+		ret += fwutil_system("service adsl stop");
 	}
 	dhcp = fwnet_is_dhcp(iface);
 	if(dhcp)
@@ -247,17 +247,17 @@ int fwnet_ifdown(interface_t *iface, profile_t *profile)
 			for (i=0; i<g_list_length(iface->options); i++)
 			{
 				ptr = g_strdup_printf("ifconfig %s 0.0.0.0", iface->name);
-				nc_system(ptr);
+				fwutil_system(ptr);
 				FREE(ptr);
 			}
 		ptr = g_strdup_printf("ifconfig %s down", iface->name);
-		nc_system(ptr);
+		fwutil_system(ptr);
 		FREE(ptr);
 	}
 
 	if(g_list_length(iface->post_downs))
 		for (i=0; i<g_list_length(iface->post_downs); i++)
-			nc_system((char*)g_list_nth_data(iface->post_downs, i));
+			fwutil_system((char*)g_list_nth_data(iface->post_downs, i));
 
 	return(ret);
 }
@@ -337,27 +337,27 @@ int fwnet_ifup(interface_t *iface, profile_t *profile)
 
 	if(g_list_length(iface->pre_ups))
 		for (i=0; i<g_list_length(iface->pre_ups); i++)
-			ret += nc_system((char*)g_list_nth_data(iface->pre_ups, i));
+			ret += fwutil_system((char*)g_list_nth_data(iface->pre_ups, i));
 
 	dhcp = fwnet_is_dhcp(iface);
 	// initialize the device
 	if(strlen(iface->mac))
 	{
 		ptr = g_strdup_printf("ifconfig %s hw ether %s", iface->name, iface->mac);
-		ret += nc_system(ptr);
+		ret += fwutil_system(ptr);
 		FREE(ptr);
 	}
 	if(strlen(iface->essid))
 	{
 		ptr = g_strdup_printf("iwconfig %s essid %s", iface->name, iface->essid);
-		ret += nc_system(ptr);
+		ret += fwutil_system(ptr);
 		FREE(ptr);
 	}
 
 	if(strlen(iface->key))
 	{
 		ptr = g_strdup_printf("iwconfig %s key %s", iface->name, iface->key);
-		ret += nc_system(ptr);
+		ret += fwutil_system(ptr);
 		FREE(ptr);
 	}
 
@@ -368,26 +368,26 @@ int fwnet_ifup(interface_t *iface, profile_t *profile)
 			ptr = g_strdup_printf("dhcpcd %s %s", iface->dhcp_opts, iface->name);
 		else
 			ptr = g_strdup_printf("dhcpcd -t 10 %s", iface->name);
-		ret += nc_system(ptr);
+		ret += fwutil_system(ptr);
 		FREE(ptr);
 	}
 	else if(g_list_length(iface->options)==1)
 	{
 		ptr = g_strdup_printf("ifconfig %s %s",
 			iface->name, (char*)g_list_nth_data(iface->options, 0));
-		ret += nc_system(ptr);
+		ret += fwutil_system(ptr);
 		FREE(ptr);
 	}
 	else
 	{
 		ptr = g_strdup_printf("ifconfig %s 0.0.0.0", iface->name);
-		ret += nc_system(ptr);
+		ret += fwutil_system(ptr);
 		FREE(ptr);
 		for (i=0; i<g_list_length(iface->options); i++)
 		{
 			ptr = g_strdup_printf("ifconfig %s:%d %s",
 				iface->name, i+1, (char*)g_list_nth_data(iface->options, i));
-			ret += nc_system(ptr);
+			ret += fwutil_system(ptr);
 			FREE(ptr);
 		}
 	}
@@ -396,7 +396,7 @@ int fwnet_ifup(interface_t *iface, profile_t *profile)
 	if(!dhcp && strlen(iface->gateway))
 	{
 		ptr = g_strdup_printf("route add %s", iface->gateway);
-		ret += nc_system(ptr);
+		ret += fwutil_system(ptr);
 		FREE(ptr);
 	}
 	if(strlen(profile->adsl_interface) && !strcmp(profile->adsl_interface, iface->name) &&
@@ -405,11 +405,11 @@ int fwnet_ifup(interface_t *iface, profile_t *profile)
 		update_adsl_conf(iface->name, profile->adsl_username);
 		update_secrets("/etc/ppp/pap-secrets", profile->adsl_username, profile->adsl_password);
 		update_secrets("/etc/ppp/chap-secrets", profile->adsl_username, profile->adsl_password);
-		ret += nc_system("service adsl start");
+		ret += fwutil_system("service adsl start");
 	}
 	if(g_list_length(iface->post_ups))
 		for (i=0; i<g_list_length(iface->post_ups); i++)
-			ret += nc_system((char*)g_list_nth_data(iface->post_ups, i));
+			ret += fwutil_system((char*)g_list_nth_data(iface->post_ups, i));
 
 	return(ret);
 }
@@ -463,7 +463,7 @@ char *fwnet_lastprofile(void)
 		return(NULL);
 	fgets(line, PATH_MAX, fp);
 	fclose(fp);
-	trim(line);
+	fwutil_trim(line);
 	return(strdup(line));
 }
 
@@ -494,8 +494,8 @@ int fwnet_loup(void)
 {
 	int ret=0;
 
-	ret += nc_system("ifconfig lo 127.0.0.1");
-	ret += nc_system("route add -net 127.0.0.0 netmask 255.0.0.0 lo");
+	ret += fwutil_system("ifconfig lo 127.0.0.1");
+	ret += fwutil_system("route add -net 127.0.0.0 netmask 255.0.0.0 lo");
 	return(ret);
 }
 
@@ -504,7 +504,7 @@ int fwnet_loup(void)
  */
 int fwnet_lodown(void)
 {
-	return(nc_system("ifconfig lo down"));
+	return(fwutil_system("ifconfig lo down"));
 }
 
 /** Check if an interface is a wireless device.

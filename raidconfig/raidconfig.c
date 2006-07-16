@@ -82,7 +82,7 @@ GList *add_devices()
 			sptr = strdup(_("The list is currently empty."));
 		else
 		{
-			ptr = g_list_display(devlist, " ");
+			ptr = fwutil_glist_display(devlist, " ");
 			sptr = g_strdup_printf(_("The current list contains: %s."), ptr);
 			free(ptr);
 		}
@@ -115,7 +115,7 @@ int run(int argc, char **argv)
 	int level;
 	GList *devlist;
 
-	i18ninit(__FILE__);
+	fwutil_i18ninit(__FILE__);
 	if(argv!=NULL)
 		init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("RAID configuration"));

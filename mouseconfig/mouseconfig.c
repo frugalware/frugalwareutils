@@ -94,7 +94,7 @@ int run(int argc, char **argv)
 
 	char *mouse_type=NULL, *mtype=NULL, *link=NULL;
 
-	i18ninit(__FILE__);
+	fwutil_i18ninit(__FILE__);
 	if(argv!=NULL)
 		init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("Mouse configuration"));

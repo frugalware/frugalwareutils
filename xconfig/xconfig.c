@@ -37,7 +37,7 @@ int run(int argc, char **argv)
 	struct stat buf;
 	int needrelease, ret, silent=0;
 
-	i18ninit(__FILE__);
+	fwutil_i18ninit(__FILE__);
 	if(argc>1 && !strcmp(argv[1], "--live"))
 	{
 		if(argc!=4)

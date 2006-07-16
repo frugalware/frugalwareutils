@@ -72,7 +72,7 @@ int run(int argc, char **argv)
 	int mode, needrelease;
 	struct stat buf;
 
-	i18ninit(__FILE__);
+	fwutil_i18ninit(__FILE__);
 	init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("GRUB bootloader"));
 

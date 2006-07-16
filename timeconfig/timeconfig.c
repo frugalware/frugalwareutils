@@ -112,7 +112,7 @@ int run(int argc, char **argv)
 	char *ptr;
 	GList *zones;
 
-	i18ninit(__FILE__);
+	fwutil_i18ninit(__FILE__);
 	if(argv!=NULL)
 		init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("Time configuration"));

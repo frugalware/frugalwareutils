@@ -105,9 +105,9 @@ int dsl_hook(profile_t *profile)
 		snprintf(profile->adsl_interface, IF_NAMESIZE, iface);
 		if(nco_fast)
 		{
-			nc_system("mkdir /var/run");
-			nc_system("mount -t devpts none /dev/pts");
-			nc_system("pppoe-connect >/dev/tty4 2>/dev/tty4 &");
+			fwutil_system("mkdir /var/run");
+			fwutil_system("mount -t devpts none /dev/pts");
+			fwutil_system("pppoe-connect >/dev/tty4 2>/dev/tty4 &");
 			return(0);
 		}
 	}
@@ -248,7 +248,7 @@ int run(int argc, char **argv)
 			case 'f':  nco_fast   = 1; break;
 		}
 	}
-	i18ninit(__FILE__);
+	fwutil_i18ninit(__FILE__);
 	if(nco_usage)
 	{
 		usage(argv[0]);

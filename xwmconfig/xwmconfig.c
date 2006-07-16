@@ -77,7 +77,7 @@ int run(int argc, char **argv)
 		{0, 0, 0, 0}
 	};
 
-	i18ninit(__FILE__);
+	fwutil_i18ninit(__FILE__);
 
 	while((opt = getopt_long(argc, argv, "", opts, &option_index)))
 	{

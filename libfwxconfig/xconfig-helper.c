@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	int i, ret=0, fd;
 	char buf[256];
 
-	i18ninit(__FILE__);
+	fwutil_i18ninit(__FILE__);
 
 	system("xsetroot -solid SteelBlue");
 	for(i=10;i>0;i--)

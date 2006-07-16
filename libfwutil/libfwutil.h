@@ -34,13 +34,13 @@
 
 #define min(p, q)  ((p) < (q) ? (p) : (q))
 
-int nc_system(const char *cmd);
-void i18ninit(char *namespace);
-char *trim(char *str);
-char *strtoupper(char *str);
+int fwutil_system(const char *cmd);
+void fwutil_i18ninit(char *namespace);
+char *fwutil_trim(char *str);
+char *fwutil_strtoupper(char *str);
 int fwutil_init();
 void fwutil_release();
 int fwutil_cp(char *src, char *dest);
 #ifdef __G_LIB_H__
-char *g_list_display(GList *list, char *sep);
+char *fwutil_glist_display(GList *list, char *sep);
 #endif

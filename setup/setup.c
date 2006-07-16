@@ -132,7 +132,7 @@ int show_menu()
 	int i;
 	plugin_t *plugin;
 
-	i18ninit(__FILE__);
+	fwutil_i18ninit(__FILE__);
 	init_dialog(input, dialog_state.output);
 	dialog_backtitle(_("General configuration"));
 
