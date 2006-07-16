@@ -204,18 +204,6 @@ int fwnet_is_dhcp(fwnet_interface_t *iface)
 	return(dhcp);
 }
 
-/** Flush the route table of an interface
- * @param iface the interface to flush
- * @return 1 on failure, 0 on success
- */
-int fwnet_ifflush(fwnet_interface_t *iface)
-{
-	char cmd[PATH_MAX+1];
-
-	snprintf(cmd, PATH_MAX, "ip route flush dev %s", iface->name);
-	return(fwutil_system(cmd));
-}
-
 /** Shut down an interface
  * @param iface the interface struct pointer
  * @return 1 on failure, 0 on success
