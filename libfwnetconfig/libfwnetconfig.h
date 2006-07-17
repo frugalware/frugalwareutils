@@ -55,6 +55,7 @@ typedef struct __fwnet_profile_t {
 
 int fwnet_listprofiles(void);
 fwnet_profile_t *fwnet_parseprofile(char *fn);
+int fwnet_is_dhcp(fwnet_interface_t *iface);
 int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile);
 int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile);
 int fwnet_setdns(fwnet_profile_t* profile);
