@@ -94,6 +94,9 @@ key = 01-23 key 45-67 [4] key [4]
 .B "dhcp_opts = <options>"
 These options are passed to the dhcp client daemon. The default is "-t 10". You may want to
 specify here the dhcp hostname, then you'll need "-t 10 -h <hostname>".
+.TP
+.B "dhcpclient = <dhcp client>"
+This specifies the dhcp client to use. It can be either dhcpcd or dhclient.
 .SH AUTHORS
 Written by Miklos Vajna.
 .SH "REPORTING BUGS"

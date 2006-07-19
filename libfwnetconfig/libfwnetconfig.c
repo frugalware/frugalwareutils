@@ -177,6 +177,8 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 					strncpy(iface->mac, ptr, FWNET_MAC_MAX_SIZE);
 				if(!strcmp(var, "DHCP_OPTS") && !strlen(iface->dhcp_opts))
 					strncpy(iface->dhcp_opts, ptr, PATH_MAX);
+				if(!strcmp(var, "DHCPCLIENT") && !strlen(iface->dhcpclient))
+					strncpy(iface->dhcpclient, ptr, PATH_MAX);
 				if(!strcmp(var, "ESSID") && !strlen(iface->essid))
 					strncpy(iface->essid, ptr, FWNET_ESSID_MAX_SIZE);
 				if(!strcmp(var, "KEY") && !strlen(iface->key))
@@ -227,7 +229,10 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 	if(dhcp)
 	{
 		char line[7];
-		ptr = g_strdup_printf("/etc/dhcpc/dhcpcd-%s.pid", iface->name);
+		if (!strcmp("dhclient", iface->dhcpclient)) {
+			ptr = g_strdup_printf("/var/run/dhclient-%s.pid", iface->name);
+		} else
+			ptr = g_strdup_printf("/etc/dhcpc/dhcpcd-%s.pid", iface->name);
 		fp = fopen(ptr, "r");
 		FWUTIL_FREE(ptr);
 		if(fp != NULL)
@@ -239,6 +244,13 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 				ret = kill(i, 15);
 			else if (i>0)
 				printf("kill(%d, 15);\n", i);
+			
+			// dhclient requires a bit of extra attention...
+			if (!strcmp("dhclient", iface->dhcpclient)) {
+				ptr = g_strdup_printf("ifconfig %s down", iface->name);
+				fwutil_system(ptr);
+				FWUTIL_FREE(ptr);
+			}
 		}
 	}
 	else
@@ -364,10 +376,15 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 	// set up the interface
 	if(dhcp)
 	{
-		if(strlen(iface->dhcp_opts))
-			ptr = g_strdup_printf("dhcpcd %s %s", iface->dhcp_opts, iface->name);
-		else
-			ptr = g_strdup_printf("dhcpcd -t 10 %s", iface->name);
+		if (!strcmp(iface->dhcpclient, "dhclient"))
+			ptr = g_strdup_printf("dhclient -pf /var/run/dhclient-%s.pid %s", iface->name, iface->name);
+		else {
+			if(strlen(iface->dhcp_opts))
+				ptr = g_strdup_printf("dhcpcd %s %s", iface->dhcp_opts, iface->name);
+			else
+				ptr = g_strdup_printf("dhcpcd -t 10 %s", iface->name);
+		}
+		
 		ret += fwutil_system(ptr);
 		FWUTIL_FREE(ptr);
 	}

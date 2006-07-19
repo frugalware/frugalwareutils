@@ -37,6 +37,7 @@ typedef struct __fwnet_interface_t {
 	GList *post_downs;
 	char mac[FWNET_MAC_MAX_SIZE+1];
 	char dhcp_opts[PATH_MAX+1];
+	char dhcpclient[PATH_MAX+1];
 	char essid[FWNET_ESSID_MAX_SIZE+1];
 	char key[FWNET_ENCODING_TOKEN_MAX+1];
 	char gateway[FWNET_GW_MAX_SIZE+1];
