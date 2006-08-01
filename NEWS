@@ -1,5 +1,7 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.6.3         - netconfig: custom dhcp clients / dhclient improvements
+              - install header files by default
 0.6.2         - new config tool: netconfig (the last one for a while)
               - libfwxconfig: replace imps2 with imps/2
               - xwmconfig: bugfix for running it for the fist time
