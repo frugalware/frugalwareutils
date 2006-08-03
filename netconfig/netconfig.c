@@ -284,6 +284,7 @@ int run(int argc, char **argv)
 			if(!strcmp("stop", argv[optind]))
 			{
 				fwnet_lodown();
+				fwnet_setlastprofile(NULL);
 				return(0);
 			}
 		}
