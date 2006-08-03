@@ -301,6 +301,8 @@ int run(int argc, char **argv)
 		profile = fwnet_parseprofile(fn);
 		if(profile==NULL)
 			return(1);
+		if(!fwnet_lastprofile())
+			fwnet_loup();
 		for (i=0; i<g_list_length(profile->interfaces); i++)
 			ret += fwnet_ifup((fwnet_interface_t*)g_list_nth_data(profile->interfaces, i), profile);
 		fwnet_setdns(profile);
