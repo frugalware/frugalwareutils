@@ -492,9 +492,13 @@ int fwnet_setlastprofile(char* str)
 {
 	FILE *fp;
 
-	// sanility check
 	if(!str)
-		return(1);
+	{
+		if(unlink(FWNET_LOCK)==-1)
+			return(1);
+		else
+			return(0);
+	}
 
 	fp = fopen(FWNET_LOCK, "w");
 	if(fp==NULL)
