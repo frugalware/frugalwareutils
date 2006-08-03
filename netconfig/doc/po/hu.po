@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: netconfig.5\n"
-"POT-Creation-Date: 2006-07-11 13:49+0200\n"
-"PO-Revision-Date: 2006-07-11 14:44+0200\n"
+"POT-Creation-Date: 2006-08-03 15:10+0200\n"
+"PO-Revision-Date: 2006-08-03 15:26+0200\n"
 "Last-Translator:  <vmiklos@frugalware.org>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -367,25 +367,38 @@ msgstr ""
 "10\". Abban az esetben ha dhcp hostnevet szeretne megadni, a \"-t 10 -h "
 "E<lt>hostnévE<gt>\"-re lesz szüksége."
 
-# type: SH
+# type: TP
 #: netconfig.5:97
+#, no-wrap
+msgid "B<dhcpclient = E<lt>dhcp clientE<gt>>"
+msgstr "B<dhcpclient = E<lt>dhcp kliensE<gt>>"
+
+# type: Plain text
+#: netconfig.5:100
+msgid ""
+"This specifies the dhcp client to use. It can be either dhcpcd or dhclient."
+msgstr ""
+"Megadja a használandó dhcp klienst. dhcpcd vagy dhclient lehet."
+
+# type: SH
+#: netconfig.5:100
 #, no-wrap
 msgid "AUTHORS"
 msgstr "SZERZÕK"
 
 # type: Plain text
-#: netconfig.5:99
+#: netconfig.5:102
 msgid "Written by Miklos Vajna."
 msgstr "Írta Vajna Miklós"
 
 # type: SH
-#: netconfig.5:99
+#: netconfig.5:102
 #, no-wrap
 msgid "REPORTING BUGS"
 msgstr "HIBÁK JELZÉSE"
 
 # type: Plain text
-#: netconfig.5:101
+#: netconfig.5:104
 msgid ""
 "If you find any bug, then please file a bugreport at E<lt>http://bugs."
 "frugalware.org/E<gt>."
@@ -394,12 +407,12 @@ msgstr ""
 "frugalware.org/E<gt> címen."
 
 # type: SH
-#: netconfig.5:101
+#: netconfig.5:104
 #, no-wrap
 msgid "SEE ALSO"
 msgstr "LÁSD MÉG"
 
 # type: Plain text
-#: netconfig.5:105
+#: netconfig.5:108
 msgid "B<ifconfig>(8), B<route>(8), B<iwconfig>(8), B<dhcpcd>(8)"
 msgstr "B<ifconfig>(8), B<route>(8), B<iwconfig>(8), B<dhcpcd>(8)"
