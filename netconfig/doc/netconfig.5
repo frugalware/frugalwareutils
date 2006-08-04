@@ -1,13 +1,17 @@
-.TH netconfig 5 "January 18, 2006" "Frugalware 0.4" ""
+.TH netconfig 5 "August 5, 2006" "Frugalware 0.5" ""
 .SH NAME
 /etc/sysconfig/network/ \- configuration of network interfaces
 .SH CONFIGURATION
 Every file in /etc/sysconfig/network represents a network profile. When
 netconfig invoked with the start paramter, then the profile named 'default'
-(/etc/sysconfig/network/default) will be read. This profile is divided into
-sections or \fIinterfaces\fP.  Each section defines an interface that netconfig
-should initialize. The exception to this is the \fIoptions\fP section,
-which defines global options.
+(/etc/sysconfig/network/default) will be read.
+
+This behaviour can be overwritten by the "network=<profilename>" kernel
+parameter. In that case the given profile will be loaded instead of 'default'.
+
+This profile is divided into sections or \fIinterfaces\fP.  Each section
+defines an interface that netconfig should initialize. The exception to this is
+the \fIoptions\fP section, which defines global options.
 .TP
 .SH Example:
 .RS
