@@ -284,16 +284,14 @@ int run(int argc, char **argv)
 			if(!strcmp("stop", argv[optind]))
 			{
 				fwnet_lodown();
-				fwnet_setlastprofile(NULL);
+				if(!fwutil_dryrun)
+					fwnet_setlastprofile(NULL);
 				return(0);
 			}
 		}
 		// load the default for 'start' and for 'restart' if not yet started
 		if(!strcmp("start", argv[optind]) || (!strcmp("restart", argv[optind]) && !fn))
-		{
-			fwnet_loup();
 			fn = strdup("default");
-		}
 		// load the target profile if != 'restart'
 		else if (strcmp("restart", argv[optind]))
 			fn = strdup(argv[optind]);
@@ -306,7 +304,8 @@ int run(int argc, char **argv)
 		for (i=0; i<g_list_length(profile->interfaces); i++)
 			ret += fwnet_ifup((fwnet_interface_t*)g_list_nth_data(profile->interfaces, i), profile);
 		fwnet_setdns(profile);
-		fwnet_setlastprofile(fn);
+		if(!fwutil_dryrun)
+			fwnet_setlastprofile(fn);
 		FWUTIL_FREE(fn);
 	}
 	else
