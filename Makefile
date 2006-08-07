@@ -27,10 +27,17 @@ SUBDIRS = doc libfwutil libfwdialog setup \
 	  libfwgrubconfig grubconfig \
 	  libfwxwmconfig xwmconfig
 
-compile:
+compile: config.mak
 	+$(DO_RECURSIVE)
 
-install: compile
+configure: configure.ac
+	cp /usr/share/automake/install-sh ./
+	autoconf
+
+config.mak: config.mak.in configure
+	./configure
+
+install:
 	$(INSTALL) -d $(DESTDIR)$(sbindir)
 	$(INSTALL) -d $(DESTDIR)$(fwlibdir)
 	$(INSTALL) -d $(DESTDIR)$(libexecdir)
@@ -42,6 +49,7 @@ install: compile
 
 clean:
 	+$(DO_RECURSIVE)
+	rm -rf autom4te.cache config.log config.mak config.status configure install-sh
 
 dist:
 	darcs changes >_darcs/current/Changelog
