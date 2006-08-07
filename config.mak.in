@@ -1,3 +1,5 @@
+CFLAGS = @CFLAGS@
+LIB_CFLAGS = @LIB_CFLAGS@
 INSTALL = @INSTALL@
 prefix = @prefix@
 sysconfdir = @sysconfdir@

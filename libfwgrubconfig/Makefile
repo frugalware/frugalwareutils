@@ -16,10 +16,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-CFLAGS ?= -g -Wall -Werror -O2 -pipe
-ifeq ($(shell arch),x86_64)
-CFLAGS += -fPIC
-endif
+-include ../config.mak
+CFLAGS = $(LIB_CFLAGS)
 CFLAGS += $(shell pkg-config --cflags glib-2.0)
 LDFLAGS += $(shell pkg-config --libs glib-2.0)
 
@@ -31,6 +29,5 @@ LDFLAGS += -L../libfwutil -lfwutil
 
 LIBNAME = grubconfig
 
--include ../config.mak
 -include ../Makefile.inc
 -include ../Makefile.lib.inc
