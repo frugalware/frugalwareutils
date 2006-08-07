@@ -23,5 +23,6 @@ endif
 
 LIBNAME = mouseconfig
 
+-include ../config.mak
 -include ../Makefile.inc
 -include ../Makefile.lib.inc

@@ -19,5 +19,6 @@
 LANGS=de fr hu
 DOMAIN=xconfig
 
+-include ../../config.mak
 -include ../../Makefile.inc
 -include ../../Makefile.po.inc

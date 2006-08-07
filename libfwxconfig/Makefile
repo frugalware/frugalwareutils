@@ -28,6 +28,7 @@ LDFLAGS += -L../libfwutil -lfwutil
 SUBDIRS = po
 LIBNAME = xconfig
 
+-include ../config.mak
 -include ../Makefile.inc
 -include ../Makefile.lib.inc
 

@@ -31,5 +31,6 @@ LDFLAGS += -L../libfwutil -lfwutil
 SUBDIRS = po
 LIBNAME = dialog
 
+-include ../config.mak
 -include ../Makefile.inc
 -include ../Makefile.lib.inc

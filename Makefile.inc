@@ -21,7 +21,6 @@ MAJORVER = 0
 
 DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || exit 1; done
 
-INSTALL = /usr/bin/install -c
 DESTDIR =
 sysconfdir = /etc
 sbindir = /sbin

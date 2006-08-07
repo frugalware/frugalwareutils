@@ -19,5 +19,6 @@
 LANGS=hu
 DOMAIN=grubconfig
 
+-include ../../config.mak
 -include ../../Makefile.inc
 -include ../../Makefile.po.inc

@@ -19,5 +19,6 @@
 LANGS=fr hu
 DOMAIN=mouseconfig
 
+-include ../../config.mak
 -include ../../Makefile.inc
 -include ../../Makefile.po.inc

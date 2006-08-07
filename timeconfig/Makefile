@@ -42,5 +42,6 @@ CFLAGS += -I../setup
 SUBDIRS = po
 CONFNAME = timeconfig
 
+-include ../config.mak
 -include ../Makefile.inc
 -include ../Makefile.conf.inc

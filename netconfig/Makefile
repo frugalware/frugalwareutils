@@ -42,5 +42,6 @@ CFLAGS += -I../setup
 SUBDIRS = doc po
 CONFNAME = netconfig
 
+-include ../config.mak
 -include ../Makefile.inc
 -include ../Makefile.conf.inc

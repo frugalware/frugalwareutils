@@ -19,5 +19,6 @@
 LANGS=hu
 DOMAIN=xwmconfig
 
+-include ../../config.mak
 -include ../../Makefile.inc
 -include ../../Makefile.po.inc

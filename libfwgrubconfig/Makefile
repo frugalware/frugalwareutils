@@ -31,5 +31,6 @@ LDFLAGS += -L../libfwutil -lfwutil
 
 LIBNAME = grubconfig
 
+-include ../config.mak
 -include ../Makefile.inc
 -include ../Makefile.lib.inc

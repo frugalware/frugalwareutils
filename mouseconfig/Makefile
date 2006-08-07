@@ -42,5 +42,6 @@ CFLAGS += -I../setup
 SUBDIRS = po
 CONFNAME = mouseconfig
 
+-include ../config.mak
 -include ../Makefile.inc
 -include ../Makefile.conf.inc

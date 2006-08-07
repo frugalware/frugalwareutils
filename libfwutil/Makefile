@@ -27,5 +27,6 @@ LDFLAGS += $(shell pkg-config --libs glib-2.0)
 
 LIBNAME = util
 
+-include ../config.mak
 -include ../Makefile.inc
 -include ../Makefile.lib.inc

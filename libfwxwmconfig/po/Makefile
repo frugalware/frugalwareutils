@@ -19,5 +19,6 @@
 LANGS=hu
 DOMAIN=libfwxwmconfig
 
+-include ../../config.mak
 -include ../../Makefile.inc
 -include ../../Makefile.po.inc

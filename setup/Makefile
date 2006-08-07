@@ -29,6 +29,7 @@ LDFLAGS += -L../libfwutil -lfwutil
 CFLAGS += -I../libfwdialog
 LDFLAGS += -L../libfwdialog -lfwdialog
 
+-include ../config.mak
 -include ../Makefile.inc
 
 SUBDIRS = po
