@@ -1,3 +1,5 @@
 INSTALL = @INSTALL@
+prefix = @prefix@
+sysconfdir = @sysconfdir@
 doxygen = @DOXYGEN@
 po4a = @PO4A@

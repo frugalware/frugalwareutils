@@ -22,7 +22,6 @@ MAJORVER = 0
 DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || exit 1; done
 
 DESTDIR =
-sysconfdir = /etc
 sbindir = /sbin
 libdir = /lib
 fwlibdir = $(libdir)/frugalware
