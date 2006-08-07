@@ -17,20 +17,25 @@
 #
 
 -include ../../Makefile.inc
+-include ../../config.mak
 
 SUBDIRS = po
 
 LANGS = fr hu
 
 compile:
+ifneq ($(po4a),)
 	po4a -k 0 po4a.cfg
+endif
 
 install:
 	$(INSTALL) -m644 netconfig.5 $(DESTDIR)$(mandir)/man5/netconfig.5
+ifneq ($(po4a),)
 	for lang in $(LANGS); do \
 		mkdir -p $(DESTDIR)$(mandir)/$$lang/man5/; \
 		$(INSTALL) -m644 $$lang/netconfig.5 $(DESTDIR)$(mandir)/$$lang/man5/netconfig.5; \
 	done
+endif
 
 clean:
 	rm -rf $(LANGS)
