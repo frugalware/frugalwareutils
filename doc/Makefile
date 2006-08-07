@@ -17,15 +17,20 @@
 #
 
 -include ../Makefile.inc
+-include ../config.mak
 
 compile:
+ifneq ($(doxygen),)
 	cd .. && doxygen Doxyfile
 	rm -rf man3/_*
+endif
 
 install:
+ifneq ($(doxygen),)
 	for i in man3/* frugalwareutils.3; do \
 		$(INSTALL) -m644 $$i $(DESTDIR)$(mandir)/man3/; \
 	done
+endif
 
 clean:
 	rm -rf man3
