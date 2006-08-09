@@ -1,5 +1,7 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.6.4         - now using autoconf for the buildsystem (many new switches)
+              - {libfw,}netconfig: several bugfixes
 0.6.3         - netconfig: custom dhcp clients / dhclient improvements
               - install header files by default
 0.6.2         - new config tool: netconfig (the last one for a while)
