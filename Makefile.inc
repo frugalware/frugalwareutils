@@ -22,12 +22,6 @@ MAJORVER = 0
 DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || exit 1; done
 
 DESTDIR =
-sbindir = /sbin
-libdir = /lib
 fwlibdir = $(libdir)/frugalware
-libexecdir = /usr/libexec
-mandir = /usr/share/man
-localedir = /usr/share/locale
-incdir = /usr/include
 
 # vim: ft=make
