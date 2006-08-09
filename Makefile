@@ -45,7 +45,7 @@ install:
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)/sysconfig/network
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man3
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man5
-	$(INSTALL) -d $(DESTDIR)$(incdir)
+	$(INSTALL) -d $(DESTDIR)$(includedir)
 	+$(DO_RECURSIVE)
 
 clean:
