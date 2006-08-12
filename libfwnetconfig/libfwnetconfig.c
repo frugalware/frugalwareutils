@@ -229,10 +229,10 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 	if(dhcp)
 	{
 		char line[7];
-		if (!strcmp("dhclient", iface->dhcpclient)) {
-			ptr = g_strdup_printf("/var/run/dhclient-%s.pid", iface->name);
-		} else
+		if (!strcmp("dhcpcd", iface->dhcpclient)) {
 			ptr = g_strdup_printf("/etc/dhcpc/dhcpcd-%s.pid", iface->name);
+		} else
+			ptr = g_strdup_printf("/var/run/dhclient-%s.pid", iface->name);
 		fp = fopen(ptr, "r");
 		FWUTIL_FREE(ptr);
 		if(fp != NULL)
@@ -245,8 +245,8 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 			else if (i>0)
 				printf("kill(%d, 15);\n", i);
 			
-			// dhclient requires a bit of extra attention...
-			if (!strcmp("dhclient", iface->dhcpclient)) {
+			// if we're not using dhcpcd...
+			if (strcmp("dhcpcd", iface->dhcpclient)) {
 				ptr = g_strdup_printf("ifconfig %s down", iface->name);
 				fwutil_system(ptr);
 				FWUTIL_FREE(ptr);
@@ -376,13 +376,13 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 	// set up the interface
 	if(dhcp)
 	{
-		if (!strcmp(iface->dhcpclient, "dhclient"))
-			ptr = g_strdup_printf("dhclient -pf /var/run/dhclient-%s.pid -lf /var/state/dhcp/dhclient-%s.leases %s", iface->name, iface->name, iface->name);
-		else {
+		if (!strcmp(iface->dhcpclient, "dhcpcd"))
 			if(strlen(iface->dhcp_opts))
 				ptr = g_strdup_printf("dhcpcd %s %s", iface->dhcp_opts, iface->name);
 			else
 				ptr = g_strdup_printf("dhcpcd -t 10 %s", iface->name);
+		else {
+			ptr = g_strdup_printf("dhclient -pf /var/run/dhclient-%s.pid -lf /var/state/dhcp/dhclient-%s.leases %s", iface->name, iface->name, iface->name);
 		}
 		
 		ret += fwutil_system(ptr);
