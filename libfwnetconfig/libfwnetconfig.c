@@ -382,7 +382,7 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 			else
 				ptr = g_strdup_printf("dhcpcd -t 10 %s", iface->name);
 		else {
-			ptr = g_strdup_printf("dhclient -pf /var/run/dhclient-%s.pid -lf /var/state/dhcp/dhclient-%s.leases %s", iface->name, iface->name, iface->name);
+			ptr = g_strdup_printf("dhclient -pf /var/run/dhclient-%s.pid -lf /var/lib/dhclient/dhclient-%s.leases -q %s", iface->name, iface->name, iface->name);
 		}
 		
 		ret += fwutil_system(ptr);
