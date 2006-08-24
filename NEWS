@@ -1,5 +1,9 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.6.5         - netconfig: the default dhcp client is dhclient now
+              - fix i18n build
+              - fix x86_64 build
+              - updated Hungarian translation
 0.6.4         - now using autoconf for the buildsystem (many new switches)
               - {libfw,}netconfig: several bugfixes
 0.6.3         - netconfig: custom dhcp clients / dhclient improvements
