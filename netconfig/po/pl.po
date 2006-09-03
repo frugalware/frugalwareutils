@@ -1,0 +1,274 @@
+# translation of hu.po to
+# Hungarian translations for netconfig package.
+# Copyright (C) 2006 THE netconfig'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the netconfig package.
+#
+#  <vmiklos@frugalware.org>, 2006.
+# VMiklos <vmiklos@frugalware.org>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: hu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-08-09 00:20+0200\n"
+"PO-Revision-Date: 2006-04-08 12:19+0900\n"
+"Last-Translator: Piotr Maliñski <admin@rk.edu.pl>\n"
+"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../netconfig.c:44
+#, c-format
+msgid "usage: %s [options] start|stop|restart|status|list\n"
+msgstr "u¿ycie: %s [opcje] start|stop|restart|status|list\n"
+
+#: ../netconfig.c:45
+#, c-format
+msgid "       %s [options] [profile]\n"
+msgstr "       %s [opcje] [profil]\n"
+
+#: ../netconfig.c:46
+#, c-format
+msgid "-h | --help              This help.\n"
+msgstr "-h | --help              Pomoc.\n"
+
+#: ../netconfig.c:47
+#, c-format
+msgid "-f | --fast              Fast mode, used by the setup.\n"
+msgstr "-f | --fast             Tryb szybki, u¿ywany przez konfigurator.\n"
+
+#: ../netconfig.c:48
+#, c-format
+msgid "     --dry-run           Do not actually perform the operation.\n"
+msgstr ""
+"     --dry-run           Nie wykonuj ¿adnych operacji (symulacja).\n"
+
+#: ../netconfig.c:57
+msgid "Use a DHCP server"
+msgstr "U¿yj serwera DHCP"
+
+#: ../netconfig.c:58
+msgid "Use a static IP address"
+msgstr "U¿yj statycznego IP"
+
+#: ../netconfig.c:59
+msgid "DSL connection"
+msgstr "Po³±czenie DSL"
+
+#: ../netconfig.c:60
+msgid "No network - loopback connection only"
+msgstr "Brak po³±czenia sieciowego"
+
+#: ../netconfig.c:62
+msgid "Select network connection type"
+msgstr "Wybierz typ po³±czenia sieciowego"
+
+#: ../netconfig.c:63
+msgid ""
+"Now we need to know how your machine connects to the network.\n"
+"If you have an internal network card and an assigned IP address, gateway, "
+"and DNS, use 'static' to enter these values. Also may use this if you have a "
+"DSL connection.\n"
+"If your IP address is assigned by a DHCP server (commonly used by cable "
+"modem services), select 'dhcp'. \n"
+"If you just have a network card to connect directly to a DSL modem, then "
+"select 'dsl'. \n"
+"Finally, if you do not have a network card, select the 'lo' choice. \n"
+msgstr ""
+"Je¿eli masz kartê sieciow± i przypisane IP, bramkê i DNSy to u¿yj opcji ze statycznym IP. "
+"Je¿eli IP przypisane jest przez serwer DHCP u¿yj opcji z serwerem DHCP. Je¿eli korzystasz "
+"z po³±czeñ DSL wybierz opcjê dotycz±c± tych po³±czeñ.\n"
+
+#: ../netconfig.c:80
+msgid "DSL configuration"
+msgstr "Konfiguracja DSL"
+
+#: ../netconfig.c:80
+msgid "Do you want to configure a DSL connetion now?"
+msgstr "Czy chcesz skonfigurowaæ po³±czenie DSL?"
+
+#: ../netconfig.c:82
+msgid "Enter user name"
+msgstr "Podaj nazwê u¿ytkownika"
+
+#: ../netconfig.c:83
+msgid "Enter your PPPoE user name:"
+msgstr "Podaj nazwê u¿ytkownika PPPoE:"
+
+#: ../netconfig.c:87 ../netconfig.c:89
+msgid "Password"
+msgstr "Has³o"
+
+#: ../netconfig.c:88
+msgid "Please enter your PPPoE password"
+msgstr "Podaj has³o PPPoE"
+
+#: ../netconfig.c:90
+msgid "Please re-enter your PPPoE password"
+msgstr "Podaj has³o PPPoE ponownie"
+
+#: ../netconfig.c:96
+msgid "Passwords don't match"
+msgstr "Has³a nie zgadzaj± siê"
+
+#: ../netconfig.c:97
+msgid "Sorry, the passwords do not match. Try again?"
+msgstr "Spróbowaæ ponownie?"
+
+#: ../netconfig.c:100 ../netconfig.c:149
+msgid "Enter interface name"
+msgstr "Podaj nazwê interfejsu"
+
+#: ../netconfig.c:101
+msgid ""
+"Enter the Ethernet interface connected to the DSL modem. It will be ethn, "
+"where 'n' is a number.\n"
+"If unsure, just hit enter.\n"
+"Enter interface name:"
+msgstr ""
+"Podaj nazwê interfejsu ³±cz±cego siê z modemem DSL. Bêdzie to ethN, "
+"gdzie 'N' to liczba.\n"
+"Je¿eli nie jeste¶ pewien wci¶nij enter.\n"
+"Podaj nazwê interfejsu:"
+
+#: ../netconfig.c:130
+msgid "Network configuration"
+msgstr "Konfiguracja sieci"
+
+#: ../netconfig.c:133
+msgid "Enter hostname"
+msgstr "Podaj nazwê hosta"
+
+#: ../netconfig.c:133
+msgid ""
+"We'll need the name you'd like to give your host.\n"
+"The full hostname is needed, such as:\n"
+"\n"
+"frugalware.example.net\n"
+"\n"
+"Enter full hostname:"
+msgstr ""
+"Podaj nazwê jak± chcesz nadaæ swojej maszynie.\n"
+"Wymagana jest pe³ne nazwa, np:\n"
+"\n"
+"frugalware.przyklad.net\n"
+"\n"
+"Podaj pe³n± nazwê hosta:"
+
+
+#: ../netconfig.c:150
+msgid ""
+"We'll need the name of the interface you'd like to use for your network "
+"connection.\n"
+"If unsure, just hit enter.\n"
+"Enter interface name:"
+msgstr ""
+"Podaj nazwê interfejsu do wykorzystania w po³±czeniu.\n"
+"Je¿eli nie jeste¶ pewien wci¶nij enter.\n"
+"Podaj nazwê interfejsu:"
+
+#: ../netconfig.c:158
+msgid "Extended network name"
+msgstr "Rozszerzona nazwa sieci"
+
+#: ../netconfig.c:158
+msgid ""
+"It seems that this network card has a wireless extension. In order to use "
+"it, you must set your extended netwok name (ESSID). Enter your ESSID:"
+msgstr ""
+"Wygl±da na to ¿e ta karta sieciowa s³u¿y do po³±czeñ bezprzewodowych. "
+"Musisz podaæ ESSID - rozszerzon± nazwê sieci:"
+
+#: ../netconfig.c:163
+msgid "Encryption key"
+msgstr "Klucz"
+
+#: ../netconfig.c:163
+msgid ""
+"If you have an encryption key, then please enter it below.\n"
+"Examples: 4567-89AB-CD or  s:password"
+msgstr ""
+"Je¿eli sieæ jest kodowana podaj klucz poni¿ej."
+
+#: ../netconfig.c:170
+msgid "Set DHCP hostname"
+msgstr "Nazwa hosta serwera DHCP"
+
+#: ../netconfig.c:170
+msgid ""
+"Some network providers require that the DHCP hostname beset in order to "
+"connect. If so, they'll have assigned a hostname to your machine. If you "
+"wereassigned a DHCP hostname, please enter it below. If you do not have a "
+"DHCP hostname, justhit enter."
+msgstr ""
+"Niektórzy dostawcy us³ug internetowych wymagaj± ustawienia nazwy hosta DHCP "
+"w celu nawi±zania po³±czenia. Je¿eli posiadasz nazwê hosta DHCP to j± podaj poni¿ej, "
+"je¿eli nie to wci¶nij enter."
+
+#. options = ip netmask netmask
+#: ../netconfig.c:183
+msgid "Enter ip address"
+msgstr "Podaj adres IP"
+
+#: ../netconfig.c:183
+msgid "Enter your IP address for the local machine."
+msgstr "Podaj adres IP dla lokalnej maszyny."
+
+#: ../netconfig.c:184
+msgid "Enter netmask for local network"
+msgstr "Podaj maskê sieci dla maszymy"
+
+#: ../netconfig.c:185
+msgid ""
+"Enter your netmask. This will generally look something like this: "
+"255.255.255.0\n"
+"If unsure, just hit enter."
+msgstr ""
+"Podaj masê sieci. Zazwyczaj bêdzie to: "
+"255.255.255.0\n"
+"Je¿eli nie jeste¶ pewien wci¶nij enter."
+
+#: ../netconfig.c:192
+msgid "Enter gateway address"
+msgstr "Podaj adres bramki"
+
+#: ../netconfig.c:192
+msgid ""
+"Enter the address for the gateway on your network. If you don't have a "
+"gateway on your network just hit enter, without entering any ip address."
+msgstr ""
+"Podaj adres bramki je¿eli posiadasz taki."
+
+#: ../netconfig.c:198
+msgid "Select nameserver"
+msgstr "Serwery DNS"
+
+#: ../netconfig.c:198
+msgid ""
+"Please give the IP address of the name server to use. You canadd more Domain "
+"Name Servers later by editing /etc/sysconfig/network/default.\n"
+"If you don't have a name server on your network just hit enter, without "
+"entering any ip address."
+msgstr ""
+"Podaj adresy IP serwerów DNS. Mo¿esz dodaæ ich wiêcej pó¼niej edytuj±c "
+"/etc/sysconfig/network/default.\n"
+"Je¿eli DNSy nie funkcjonuj± w twojej sieci wci¶nij enter."
+
+#: ../netconfig.c:207
+msgid "Adjust configuration files"
+msgstr "Edycja plików konfiguracyjnych"
+
+#: ../netconfig.c:207
+msgid "Accept these settings and adjust configuration files?"
+msgstr "Zaakceptowaæ ustawienia i zmodyfikowaæ pliki konfiguracyjne?"
+
+#: ../netconfig.c:271
+#, c-format
+msgid "No profile loaded.\n"
+msgstr "Nie za³adowano profilu.\n"
+
+#: ../netconfig.c:276
+#, c-format
+msgid "Current profile: %s\n"
+msgstr "Obecny profil: %s\n"
+

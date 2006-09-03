@@ -16,7 +16,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-LANGS=fr hu
+LANGS=fr hu pl
 DOMAIN=xconfig-helper
 
 -include ../../config.mak

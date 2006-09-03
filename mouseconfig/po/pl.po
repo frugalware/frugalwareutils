@@ -1,0 +1,141 @@
+# Hungarian translations for mouseconfig package.
+# Copyright (C) 2006 THE mouseconfig'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the mouseconfig package.
+#  <vmiklos@frugalware.org>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mouseconfig\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-08-09 00:20+0200\n"
+"PO-Revision-Date: 2006-04-08 12:19+0900\n"
+"Last-Translator: Piotr Maliñski <admin@rk.edu.pl>\n"
+"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../mouseconfig.c:41
+msgid "PS/2 port mouse (most desktops and laptops)"
+msgstr "Mysza na porcie PS/2 (wiêkszo¶æ laptopów i komputerów)"
+
+#: ../mouseconfig.c:42
+msgid "Microsoft PS/2 Intellimouse"
+msgstr "Microsoft PS/2 Intellimouse"
+
+#: ../mouseconfig.c:43
+msgid "2 button Microsoft compatible serial mouse"
+msgstr "2 przyciskowa mysza szeregowa (zgodna z Microsoft)"
+
+#: ../mouseconfig.c:44
+msgid "3 button Microsoft compatible serial mouse"
+msgstr "3 przyciskowa mysza szeregowa (zgodna z Microsoft)"
+
+#: ../mouseconfig.c:45
+msgid "Logitech serial MouseMan and similar devices"
+msgstr "Szeregowy MouseMan Logitechu i podobne urz±dzenia"
+
+#: ../mouseconfig.c:46
+msgid "MouseSystems serial (most 3 button serial mice)"
+msgstr "Szeregowa mysz MouseSystems (wiêkszo¶æ 3 przyciskowych)"
+
+#: ../mouseconfig.c:47
+msgid "Plug and Play (serial mice that do not work with ms)"
+msgstr "Plug and Play (szeregowe mysze nie dzia³aj±ce z ms)"
+
+#: ../mouseconfig.c:48
+msgid "USB connected mouse"
+msgstr "Mysza na USB"
+
+#: ../mouseconfig.c:49
+msgid "Microsoft serial Intellimouse"
+msgstr "Microsoft Intellimouse"
+
+#: ../mouseconfig.c:50
+msgid "Genius Netmouse on PS/2 port"
+msgstr "Genius Netmouse na porcie PS/2"
+
+#: ../mouseconfig.c:51
+msgid "Some serial Logitech devices"
+msgstr "Urz±dzenia szeregowe Logitechu"
+
+#: ../mouseconfig.c:52
+msgid "Make serial Logitech behave like msc"
+msgstr "Ustaw urz±dzenia Logitechu jako myszy"
+
+#: ../mouseconfig.c:53
+msgid "ATI XL busmouse (mouse card)"
+msgstr "ATI XL busmouse (mouse card)"
+
+#: ../mouseconfig.c:54
+msgid "Microsoft busmouse (mouse card)"
+msgstr "Microsoft busmouse (mouse card)"
+
+#: ../mouseconfig.c:55
+msgid "Logitech busmouse (mouse card)"
+msgstr "Logitech busmouse (mouse card)"
+
+#: ../mouseconfig.c:56
+msgid "A pointing pen (NCR3125) on some laptops"
+msgstr "Pióro wskazuj±ce (NRC3125)"
+
+#: ../mouseconfig.c:57
+msgid "Twiddler keyboard, by HandyKey Corp"
+msgstr "Twiddler keyboard, by HandyKey Corp"
+
+#: ../mouseconfig.c:58
+msgid "Genitizer tablet (relative mode)"
+msgstr "Tablet Genitizer"
+
+#: ../mouseconfig.c:59
+msgid "Use a joystick as a mouse"
+msgstr "U¿yj joysticka jako mysz"
+
+#: ../mouseconfig.c:60
+msgid "Wacom serial graphics tablet"
+msgstr "Tablet Wacoma"
+
+#: ../mouseconfig.c:64
+msgid "Configure the console mouse support (GPM)"
+msgstr "Konfiguracja wsparcia myszy dla konsoli (GPM)"
+
+#: ../mouseconfig.c:65
+msgid ""
+"This part of the configuration process will create a /dev/mouse link "
+"pointing to your default mouse device.  You can change the /dev/mouse link "
+"later in the /etc/sysconfig/gpm configuration file if the mouse doesn't "
+"work, or if you switch to a different type of pointing device. We will also "
+"use the information about the mouse to set the correct protocol for gpm, the "
+"Linux mouse server. Please select a mouse type from the list below:"
+msgstr ""
+"Ta czê¶æ konfiguracji utworzy symlink /dev/mouse wskazuj±cy "
+"na twoj± domy¶ln± mysz. Mo¿esz zmieniæ symlink pó¼niej "
+"w /etc/sysconfig/gpm. Proszê wybraæ typ myszy z poni¿szej listy:"
+
+#: ../mouseconfig.c:77
+msgid "(COM1: under DOS)"
+msgstr "(COM1: pod DOS)"
+
+#: ../mouseconfig.c:78
+msgid "(COM2: under DOS)"
+msgstr "(COM2: pod DOS)"
+
+#: ../mouseconfig.c:79
+msgid "(COM3: under DOS)"
+msgstr "(COM3: pod DOS)"
+
+#: ../mouseconfig.c:80
+msgid "(COM4: under DOS)"
+msgstr "(COM4: pod DOSC)"
+
+#: ../mouseconfig.c:84
+msgid "Select Serial Port"
+msgstr "Wybierz Port Szeregowy"
+
+#: ../mouseconfig.c:85
+msgid "Your mouse requires a serial port. Which one would you like to use?"
+msgstr "Mysza wymaga portu szeregowego. Który wybraæ?"
+
+#: ../mouseconfig.c:99
+msgid "Mouse configuration"
+msgstr "Konfiguracja myszy"

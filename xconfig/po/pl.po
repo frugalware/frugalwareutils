@@ -1,0 +1,79 @@
+# Hungarian translations for xconfig package.
+# Copyright (C) 2006 THE xconfig'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xconfig package.
+#  <vmiklos@frugalware.org>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xconfig\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-08-09 00:20+0200\n"
+"PO-Revision-Date: 2006-04-08 12:19+0900\n"
+"Last-Translator: Piotr Maliñski <admin@rk.edu.pl>\n"
+"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../xconfig.c:45
+#, c-format
+msgid "usage: %s [--live <resolution> <depth>\n"
+msgstr "u¿ycie: %s [--live <rozdzielczo¶æ <g³êbia>]\n"
+
+#: ../xconfig.c:54 ../xconfig.c:106
+msgid "X configuration"
+msgstr "Konfiguracja X"
+
+#: ../xconfig.c:59
+msgid "xinit missing"
+msgstr "Brak xinit"
+
+#: ../xconfig.c:59
+msgid "Could not find xinit, please install it with pacman -S xinit."
+msgstr "Nie mogê znale¶æ xinit. Zainstaluj poleceniem pacman -S xinit."
+
+#: ../xconfig.c:66
+msgid "xmessage missing"
+msgstr "brak xmessage"
+
+#: ../xconfig.c:66
+msgid "Could not find xmessage, please install it with pacman -S xmessage."
+msgstr "Zainstaluj xmessage poleceniem: pacman -S xmessage."
+
+#: ../xconfig.c:73
+msgid "xsetroot missing"
+msgstr "brak xsetroot"
+
+#: ../xconfig.c:73
+msgid "Could not find xsetroot, please install it with pacman -S xsetroot."
+msgstr "Zainstaluj xsetroot poleceniem pacman -S xsetroot."
+
+#: ../xconfig.c:79
+msgid "Configuring the X server"
+msgstr "Konfiguracja serwera X"
+
+#: ../xconfig.c:79
+msgid "Attemping to create an X config file..."
+msgstr "Próbujê utworzyæ plik xorg.conf..."
+
+#: ../xconfig.c:95
+msgid "Selecting resolution"
+msgstr "Rozdzielczo¶æ"
+
+#: ../xconfig.c:96
+msgid ""
+"Please enter the screen resolution you want to use. You can use values such "
+"as 1024x768, 800x600 or 640x480. If unsure, just press ENTER."
+msgstr ""
+"Proszê podaæ rozdzielczo¶æ z jakiej chcesz korzystaæ. Je¿eli nie jeste¶ pewien wybierz "
+"1024x768 lub 800x600 lub nawet 640x480 (stare bardzo monitory). Wci¶nij ENTER by zaakceptowaæ."
+
+#: ../xconfig.c:99
+msgid "Selecting color depth"
+msgstr "Wybór g³êbi kolorów"
+
+#: ../xconfig.c:100
+msgid ""
+"Please enter the color depth you want to use. If unsure, just press ENTER."
+msgstr ""
+"Proszê podaæ g³êbiê kolorów jaka ma byæ stosowana. Je¿eli nie jeste¶ pewien, wci¶nij ENTER."
