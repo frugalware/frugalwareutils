@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2006-07-15 23:08+0200\n"
-"PO-Revision-Date: 2006-06-09 22:22+0100\n"
+"POT-Creation-Date: 2006-09-10 13:34+0200\n"
+"PO-Revision-Date: 2006-09-10 04:05+0100\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,13 +24,13 @@ msgstr ""
 # type: TH
 #: netconfig.5:1
 #, no-wrap
-msgid "January 18, 2006"
-msgstr "18 Janvier 2006"
+msgid "August 5, 2006"
+msgstr ""
 
 # type: TH
 #: netconfig.5:1
 #, no-wrap
-msgid "Frugalware 0.4"
+msgid "Frugalware 0.5"
 msgstr ""
 
 # type: SH
@@ -51,14 +51,35 @@ msgid "CONFIGURATION"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:11
+#: netconfig.5:8
+#, fuzzy
 msgid ""
 "Every file in /etc/sysconfig/network represents a network profile. When "
 "netconfig invoked with the start paramter, then the profile named "
-"'default' (/etc/sysconfig/network/default) will be read. This profile is "
-"divided into sections or I<interfaces>.  Each section defines an interface "
-"that netconfig should initialize. The exception to this is the I<options> "
-"section, which defines global options."
+"'default' (/etc/sysconfig/network/default) will be read."
+msgstr ""
+"Chaque fichier dans /etc/sysconfig/network représente un profil réseau. "
+"Quand netconfig est lancé avec le paramètre start, alors le profil nommé "
+"'default' (/etc/sysconfig/network/default) sera lu. Ce profil est divisé en "
+"sections ou I<interfaces>.  Chaque section défini une interface que "
+"netconfig doit initialiser. L'exception à cela est la section I<options>, "
+"qui défini les options globales."
+
+# type: Plain text
+#: netconfig.5:11
+msgid ""
+"This behaviour can be overwritten by the \"network=E<lt>profilenameE<gt>\" "
+"kernel parameter. In that case the given profile will be loaded instead of "
+"'default'."
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:15
+#, fuzzy
+msgid ""
+"This profile is divided into sections or I<interfaces>.  Each section "
+"defines an interface that netconfig should initialize. The exception to this "
+"is the I<options> section, which defines global options."
 msgstr ""
 "Chaque fichier dans /etc/sysconfig/network représente un profil réseau. "
 "Quand netconfig est lancé avec le paramètre start, alors le profil nommé "
@@ -68,13 +89,13 @@ msgstr ""
 "qui défini les options globales."
 
 # type: SH
-#: netconfig.5:12
+#: netconfig.5:16
 #, no-wrap
 msgid "Example:"
 msgstr "Exemple:"
 
 # type: Plain text
-#: netconfig.5:17
+#: netconfig.5:21
 #, no-wrap
 msgid ""
 "[options]\n"
@@ -82,7 +103,7 @@ msgid ""
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:21
+#: netconfig.5:25
 #, no-wrap
 msgid ""
 "[eth0]\n"
@@ -91,19 +112,19 @@ msgid ""
 msgstr ""
 
 # type: SH
-#: netconfig.5:23
+#: netconfig.5:27
 #, no-wrap
 msgid "CONFIG: OPTIONS"
 msgstr ""
 
 # type: TP
-#: netconfig.5:24
+#: netconfig.5:28
 #, no-wrap
 msgid "B<dns = E<lt>ipE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:27
+#: netconfig.5:31
 msgid ""
 "Explicitely defines dns addresses (ie. when using a static ip). Multiple "
 "usage is ok."
@@ -112,13 +133,13 @@ msgstr ""
 "adresse ip statique). On peut utiliser plusieurs fois ce paramètre."
 
 # type: TP
-#: netconfig.5:27
+#: netconfig.5:31
 #, no-wrap
 msgid "B<domain = E<lt>domainE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:30
+#: netconfig.5:34
 msgid ""
 "Defines the local domain name. If defined more than once, the first will be "
 "used."
@@ -127,59 +148,60 @@ msgstr ""
 "instruction sera utilisée."
 
 # type: TP
-#: netconfig.5:30
+#: netconfig.5:34
 #, no-wrap
 msgid "B<desc = E<lt>descriptionE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:33
+#: netconfig.5:37
 msgid "A brief description of this network profile. Used by netconfig."
 msgstr "Une brève description de ce profil réseau. Utilisé par netconfig."
 
 # type: TP
-#: netconfig.5:33
+#: netconfig.5:37
 #, no-wrap
 msgid "B<adsl_username = E<lt>usernameE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:36
+#: netconfig.5:40
 msgid "If you have an adsl (pppoe) connection, your adsl username."
 msgstr ""
 
 # type: TP
-#: netconfig.5:36
+#: netconfig.5:40
 #, no-wrap
 msgid "B<adsl_password = E<lt>passwordE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:39
+#: netconfig.5:43
 msgid "If you have an adsl connection, your adsl password."
-msgstr ""
+msgstr "si vous avez une connexion adsl, votre mot de passe adsl."
 
 # type: TP
-#: netconfig.5:39
+#: netconfig.5:43
 #, no-wrap
 msgid "B<adsl_interface = E<lt>interfaceE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:42
+#: netconfig.5:46
 msgid ""
 "If you have an adsl connection, the Ethernet interface connected to the DSL "
 "modem."
 msgstr ""
+"Si vous avez une connexion adsl, l'interface réseau connectée au modem DSL."
 
 # type: SH
-#: netconfig.5:42
+#: netconfig.5:46
 #, no-wrap
 msgid "CONFIG: INTERFACES"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:46
+#: netconfig.5:50
 msgid ""
 "Each section defines an interface.  The interface name is defined by the "
 "string within square brackets (eg, the two above are 'eth0' and 'eth1'). The "
@@ -190,13 +212,13 @@ msgstr ""
 "Les directives disponibles:"
 
 # type: TP
-#: netconfig.5:46
+#: netconfig.5:50
 #, no-wrap
 msgid "B<options = E<lt>ipE<gt> [netmask E<lt>netmaskE<gt> [broadcast E<lt>broadcastE<gt>]>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:51
+#: netconfig.5:55
 msgid ""
 "Defines the ip address, netmask and broadcast address of the interface.  "
 "Multiple usage is ok for eth0:1, eth0:2, etc. See the other format of this "
@@ -207,13 +229,13 @@ msgstr ""
 "Voir l'autre réglage de cette directive pour utiliser le dhcp."
 
 # type: TP
-#: netconfig.5:51
+#: netconfig.5:55
 #, no-wrap
 msgid "B<opions = dhcp>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:54
+#: netconfig.5:58
 msgid ""
 "Use dhcp for this interface. When this format is used, the other \"options\" "
 "lines are ignored."
@@ -222,31 +244,31 @@ msgstr ""
 "autres lignes \"options\" sont ignorées."
 
 # type: TP
-#: netconfig.5:54
+#: netconfig.5:58
 #, no-wrap
 msgid "B<pre_up = E<lt>commandE<gt>>"
 msgstr ""
 
 # type: TP
-#: netconfig.5:56
+#: netconfig.5:60
 #, no-wrap
 msgid "B<post_up = E<lt>commandE<gt>>"
 msgstr ""
 
 # type: TP
-#: netconfig.5:58
+#: netconfig.5:62
 #, no-wrap
 msgid "B<pre_down = E<lt>commandE<gt>>"
 msgstr ""
 
 # type: TP
-#: netconfig.5:60
+#: netconfig.5:64
 #, no-wrap
 msgid "B<post_down = E<lt>commandE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:65
+#: netconfig.5:69
 msgid ""
 "The synatax of these directives are the same: you can define there commands "
 "to be executed before the interface is up, after the interface is up, before "
@@ -260,13 +282,13 @@ msgstr ""
 "spécifié."
 
 # type: TP
-#: netconfig.5:65
+#: netconfig.5:69
 #, no-wrap
 msgid "B<mac = E<lt>mac addressE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:68
+#: netconfig.5:72
 msgid ""
 "Overwrites the mac address of the card. If defined more than once, the first "
 "will be used."
@@ -275,13 +297,13 @@ msgstr ""
 "plusieurs fois, la première définition sera utilisée."
 
 # type: TP
-#: netconfig.5:68
+#: netconfig.5:72
 #, no-wrap
 msgid "B<essid = E<lt>essidE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:72
+#: netconfig.5:76
 msgid ""
 "Set the ESSID (or Network Name - in some products it may also be called "
 "Domain ID) for wireless network adapters. If defined more than once, the "
@@ -292,13 +314,13 @@ msgstr ""
 "défini, le premier sera utilisé."
 
 # type: TP
-#: netconfig.5:72
+#: netconfig.5:76
 #, no-wrap
 msgid "B<gateway = [default gw] E<lt>ipE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:77
+#: netconfig.5:81
 msgid ""
 "Route packets via a gateway. NOTE: The specified gateway must be reachable "
 "first. If the \"default gw\" prefix is used, then adds a default route. If "
@@ -311,13 +333,13 @@ msgstr ""
 "sera utilisée. Si vous êtes en dhcp, alors cette directive sera ignorée."
 
 # type: TP
-#: netconfig.5:77
+#: netconfig.5:81
 #, no-wrap
 msgid "B<key = E<lt>keyE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:81
+#: netconfig.5:85
 msgid ""
 "Used to manipulate encryption or scrambling keys and security mode for "
 "wireless networks.  Examples:"
@@ -326,7 +348,7 @@ msgstr ""
 "le mode sécurisé pour les réseaux sans fil.  Exemples:"
 
 # type: Plain text
-#: netconfig.5:91
+#: netconfig.5:95
 #, no-wrap
 msgid ""
 "key = 0123-4567-89\n"
@@ -340,13 +362,13 @@ msgid ""
 msgstr ""
 
 # type: TP
-#: netconfig.5:93
+#: netconfig.5:97
 #, no-wrap
 msgid "B<dhcp_opts = E<lt>optionsE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:97
+#: netconfig.5:101
 msgid ""
 "These options are passed to the dhcp client daemon. The default is \"-t 10"
 "\". You may want to specify here the dhcp hostname, then you'll need \"-t 10 "
@@ -356,25 +378,38 @@ msgstr ""
 "pouvez vouloir spécifier ici le nom d'hôte dhcp, dans ce cas vous aurez "
 "besoin de \"-t 10 -h E<lt>hostnameE<gt>\"."
 
+# type: TP
+#: netconfig.5:101
+#, no-wrap
+msgid "B<dhcpclient = E<lt>dhcp clientE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:104
+msgid ""
+"This specifies the dhcp client to use. It can be either dhcpcd (default) or "
+"dhclient."
+msgstr ""
+
 # type: SH
-#: netconfig.5:97
+#: netconfig.5:104
 #, no-wrap
 msgid "AUTHORS"
 msgstr "AUTEURS"
 
 # type: Plain text
-#: netconfig.5:99
+#: netconfig.5:106
 msgid "Written by Miklos Vajna."
 msgstr "Écrit par Miklos Vajna."
 
 # type: SH
-#: netconfig.5:99
+#: netconfig.5:106
 #, no-wrap
 msgid "REPORTING BUGS"
 msgstr "SIGNALER DES BUGS"
 
 # type: Plain text
-#: netconfig.5:101
+#: netconfig.5:108
 msgid ""
 "If you find any bug, then please file a bugreport at E<lt>http://bugs."
 "frugalware.org/E<gt>."
@@ -383,12 +418,16 @@ msgstr ""
 "bugs.frugalware.org/E<gt>."
 
 # type: SH
-#: netconfig.5:101
+#: netconfig.5:108
 #, no-wrap
 msgid "SEE ALSO"
 msgstr "VOIR ÉGALEMENT"
 
 # type: Plain text
-#: netconfig.5:105
+#: netconfig.5:112
 msgid "B<ifconfig>(8), B<route>(8), B<iwconfig>(8), B<dhcpcd>(8)"
 msgstr ""
+
+# type: TH
+#~ msgid "January 18, 2006"
+#~ msgstr "18 Janvier 2006"
