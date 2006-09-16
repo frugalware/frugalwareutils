@@ -19,6 +19,9 @@
  *  USA.
  */
 
+#include <net/if.h>
+#include <glib.h>
+
 #define FWNET_MAC_MAX_SIZE 17
 #define FWNET_ESSID_MAX_SIZE 32
 #define FWNET_ENCODING_TOKEN_MAX   32

@@ -26,8 +26,6 @@
 #include <libfwutil.h>
 #include <getopt.h>
 #include <stdlib.h>
-#include <glib.h>
-#include <net/if.h>
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
