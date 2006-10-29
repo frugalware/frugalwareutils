@@ -1,5 +1,10 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.6.6         - netconfig reverted the dhclient update since it does not have
+                any switch to specify the dhcp hostname
+              - added Polish translation
+              - updated French/Hungarian translation
+              - netconfig: new option --loop
 0.6.5         - netconfig: the default dhcp client is dhclient now
               - fix i18n build
               - fix x86_64 build
