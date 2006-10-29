@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: netconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-06 20:32+0200\n"
+"POT-Creation-Date: 2006-10-29 21:54+0100\n"
 "PO-Revision-Date: 2006-06-20 21:15+0200\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -17,82 +17,147 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../netconfig.c:44
+#: ../netconfig.c:46
 #, c-format
 msgid "usage: %s [options] start|stop|restart|status|list\n"
 msgstr ""
 
-#: ../netconfig.c:45
+#: ../netconfig.c:47
 #, c-format
 msgid "       %s [options] [profile]\n"
 msgstr ""
 
-#: ../netconfig.c:46
+#: ../netconfig.c:48
 #, c-format
 msgid "-h | --help              This help.\n"
 msgstr "-h | --help              Cette aide.\n"
 
-#: ../netconfig.c:47
+#: ../netconfig.c:49
 #, c-format
 msgid "-f | --fast              Fast mode, used by the setup.\n"
-msgstr "-f | --fast              Mode rapide, utilisé par l'outil d'installation.\n"
+msgstr ""
+"-f | --fast              Mode rapide, utilisé par l'outil d'installation.\n"
 
-#: ../netconfig.c:48
+#: ../netconfig.c:50
+#, c-format
+msgid ""
+"-l | --loop              After bringing up the profile, loop in the "
+"foreground.\n"
+msgstr ""
+
+#: ../netconfig.c:51
+#, c-format
+msgid ""
+"                         SIGHUP will unload and reload the current profile.\n"
+msgstr ""
+
+#: ../netconfig.c:52
 #, c-format
 msgid "     --dry-run           Do not actually perform the operation.\n"
 msgstr "     --dry-run           N'effectue pas cette opération.\n"
 
-#: ../netconfig.c:57
+#: ../netconfig.c:61
 msgid "Use a DHCP server"
 msgstr "Utiliser un serveur DHCP"
 
-#: ../netconfig.c:58
+#: ../netconfig.c:62
 msgid "Use a static IP address"
 msgstr "Utiliser une adresse statique"
 
-#: ../netconfig.c:59
+#: ../netconfig.c:63
 msgid "DSL connection"
 msgstr "Connexion DSL"
 
-#: ../netconfig.c:60
+#: ../netconfig.c:64
 msgid "No network - loopback connection only"
 msgstr "Aucun réseau - connexion de interne (loopback) seulement"
 
-#: ../netconfig.c:62
+#: ../netconfig.c:66
 msgid "Select network connection type"
 msgstr "Choix du type de connexion réseau"
 
-#: ../netconfig.c:63
+#: ../netconfig.c:67
 msgid ""
 "Now we need to know how your machine connects to the network.\n"
-"If you have an internal network card and an assigned IP address, gateway, and DNS, use 'static' to enter these values. Also may use this if you have a DSL connection.\n"
-"If your IP address is assigned by a DHCP server (commonly used by cable modem services), select 'dhcp'. \n"
-"If you just have a network card to connect directly to a DSL modem, then select 'dsl'. \n"
+"If you have an internal network card and an assigned IP address, gateway, "
+"and DNS, use 'static' to enter these values. Also may use this if you have a "
+"DSL connection.\n"
+"If your IP address is assigned by a DHCP server (commonly used by cable "
+"modem services), select 'dhcp'. \n"
+"If you just have a network card to connect directly to a DSL modem, then "
+"select 'dsl'. \n"
 "Finally, if you do not have a network card, select the 'lo' choice. \n"
 msgstr ""
-"Nous avons maintenant besoin de savoir comment votre machine est reliée au réseau.\n"
-"Si vous avez une carte réseau interne une adresse ip définie, une passerelle et des DNS, choisissez 'static' pour saisir ces informations. Vous pouvez également choisir cette option si vous disposez d'une connexion DSL.\n"
-"Si votre adresse ip est fournie par un serveur DHCP (généralement le cas sur les connexion par cable), optez pour 'dhcp'.\n"
-"Si vous avez simplement une carte réseau directement reliée a un modem DSL, faites le choix de 'dsl'.\n"
+"Nous avons maintenant besoin de savoir comment votre machine est reliée au "
+"réseau.\n"
+"Si vous avez une carte réseau interne une adresse ip définie, une passerelle "
+"et des DNS, choisissez 'static' pour saisir ces informations. Vous pouvez "
+"également choisir cette option si vous disposez d'une connexion DSL.\n"
+"Si votre adresse ip est fournie par un serveur DHCP (généralement le cas sur "
+"les connexion par cable), optez pour 'dhcp'.\n"
+"Si vous avez simplement une carte réseau directement reliée a un modem DSL, "
+"faites le choix de 'dsl'.\n"
 "Enfin, si vous n'avez pas de carte réseau, sélectionnez 'lo'.\n"
 
-#: ../netconfig.c:80
+#: ../netconfig.c:84
 msgid "DSL configuration"
 msgstr "Configuration DSL"
 
-#: ../netconfig.c:80
+#: ../netconfig.c:84
 msgid "Do you want to configure a DSL connetion now?"
 msgstr "Souhaitez vous configurer une connexion DSL maintenant?"
 
-#: ../netconfig.c:109
+#: ../netconfig.c:86
+#, fuzzy
+msgid "Enter user name"
+msgstr "Saisir le nom de la machine"
+
+#: ../netconfig.c:87
+msgid "Enter your PPPoE user name:"
+msgstr ""
+
+#: ../netconfig.c:91 ../netconfig.c:93
+msgid "Password"
+msgstr ""
+
+#: ../netconfig.c:92
+msgid "Please enter your PPPoE password"
+msgstr ""
+
+#: ../netconfig.c:94
+msgid "Please re-enter your PPPoE password"
+msgstr ""
+
+#: ../netconfig.c:100
+msgid "Passwords don't match"
+msgstr ""
+
+#: ../netconfig.c:101
+msgid "Sorry, the passwords do not match. Try again?"
+msgstr ""
+
+#: ../netconfig.c:104 ../netconfig.c:153
+#, fuzzy
+msgid "Enter interface name"
+msgstr "Saisir le nom de la machine"
+
+#: ../netconfig.c:105
+msgid ""
+"Enter the Ethernet interface connected to the DSL modem. It will be ethn, "
+"where 'n' is a number.\n"
+"If unsure, just hit enter.\n"
+"Enter interface name:"
+msgstr ""
+
+#: ../netconfig.c:134
 msgid "Network configuration"
 msgstr "Configuration réseau"
 
-#: ../netconfig.c:112
+#: ../netconfig.c:137
 msgid "Enter hostname"
 msgstr "Saisir le nom de la machine"
 
-#: ../netconfig.c:112
+#: ../netconfig.c:137
 msgid ""
 "We'll need the name you'd like to give your host.\n"
 "The full hostname is needed, such as:\n"
@@ -108,19 +173,32 @@ msgstr ""
 "et\n"
 "Saisissez le nom complet:"
 
-#: ../netconfig.c:134
+#: ../netconfig.c:154
+msgid ""
+"We'll need the name of the interface you'd like to use for your network "
+"connection.\n"
+"If unsure, just hit enter.\n"
+"Enter interface name:"
+msgstr ""
+
+#: ../netconfig.c:162
 msgid "Extended network name"
 msgstr "Nom de réseau étendu"
 
-#: ../netconfig.c:134
-msgid "It seems that this network card has a wireless extension. In order to use it, you must set your extended netwok name (ESSID). Enter your ESSID:"
-msgstr "Il semble que cette carte réseau ait une extension sans fil. Dans l'optique de l'utiliser, vous devez saisir le nom de réseau étendu (ESSID).Saissez votre ESSID:"
+#: ../netconfig.c:162
+msgid ""
+"It seems that this network card has a wireless extension. In order to use "
+"it, you must set your extended netwok name (ESSID). Enter your ESSID:"
+msgstr ""
+"Il semble que cette carte réseau ait une extension sans fil. Dans l'optique "
+"de l'utiliser, vous devez saisir le nom de réseau étendu (ESSID).Saissez "
+"votre ESSID:"
 
-#: ../netconfig.c:139
+#: ../netconfig.c:167
 msgid "Encryption key"
 msgstr "Clef de cryptage"
 
-#: ../netconfig.c:139
+#: ../netconfig.c:167
 msgid ""
 "If you have an encryption key, then please enter it below.\n"
 "Examples: 4567-89AB-CD or  s:password"
@@ -128,71 +206,88 @@ msgstr ""
 "Si vous disposez d'une clef de cryptage, merci de le saisir ci dessous.\n"
 "Exemples: 4567-89AB-CD ou  s:password"
 
-#: ../netconfig.c:146
+#: ../netconfig.c:174
 msgid "Set DHCP hostname"
 msgstr "Affecter le nom d'hôte DHCP"
 
-#: ../netconfig.c:146
-msgid "Some network providers require that the DHCP hostname beset in order to connect. If so, they'll have assigned a hostname to your machine. If you wereassigned a DHCP hostname, please enter it below. If you do not have a DHCP hostname, justhit enter."
-msgstr "Certains fournisseur réseau nécessitent un nom d'hôte défini pour établir la connexion. Si c'est le cas, ils auront affecté un nom d'hôte à votre machine. Si on vous en à assigné un, merci de le saisir ci dessous. Si vous n'en avez pas, appuyez juste sur entrée."
+#: ../netconfig.c:174
+msgid ""
+"Some network providers require that the DHCP hostname beset in order to "
+"connect. If so, they'll have assigned a hostname to your machine. If you "
+"wereassigned a DHCP hostname, please enter it below. If you do not have a "
+"DHCP hostname, justhit enter."
+msgstr ""
+"Certains fournisseur réseau nécessitent un nom d'hôte défini pour établir la "
+"connexion. Si c'est le cas, ils auront affecté un nom d'hôte à votre "
+"machine. Si on vous en à assigné un, merci de le saisir ci dessous. Si vous "
+"n'en avez pas, appuyez juste sur entrée."
 
 #. options = ip netmask netmask
-#: ../netconfig.c:159
+#: ../netconfig.c:187
 msgid "Enter ip address"
 msgstr "Saisir l'adresse ip"
 
-#: ../netconfig.c:159
+#: ../netconfig.c:187
 msgid "Enter your IP address for the local machine."
 msgstr "Saisir l'adresse ip locale de la machine"
 
-#: ../netconfig.c:160
+#: ../netconfig.c:188
 msgid "Enter netmask for local network"
 msgstr "Saisir le masque pour le réseau local"
 
-#: ../netconfig.c:161
+#: ../netconfig.c:189
 msgid ""
-"Enter your netmask. This will generally look something like this: 255.255.255.0\n"
+"Enter your netmask. This will generally look something like this: "
+"255.255.255.0\n"
 "If unsure, just hit enter."
 msgstr ""
-"Saisir votre masque réseau. Il ressemble généralement à quelque chose du genre 255.255.255.0\n"
+"Saisir votre masque réseau. Il ressemble généralement à quelque chose du "
+"genre 255.255.255.0\n"
 "Si vous n'êtes pas sur, appuyez simplement sur entrée."
 
-#: ../netconfig.c:168
+#: ../netconfig.c:196
 msgid "Enter gateway address"
 msgstr "Saisir l'adresse de votre passerelle"
 
-#: ../netconfig.c:168
-msgid "Enter the address for the gateway on your network. If you don't have a gateway on your network just hit enter, without entering any ip address."
-msgstr "Saisir l'adresse de la passerelle dans votre réseau. Si vous n'avez pas de passerelle, appuyer juste sur entrée sans saisir d'adresse ip."
+#: ../netconfig.c:196
+msgid ""
+"Enter the address for the gateway on your network. If you don't have a "
+"gateway on your network just hit enter, without entering any ip address."
+msgstr ""
+"Saisir l'adresse de la passerelle dans votre réseau. Si vous n'avez pas de "
+"passerelle, appuyer juste sur entrée sans saisir d'adresse ip."
 
-#: ../netconfig.c:174
+#: ../netconfig.c:202
 msgid "Select nameserver"
 msgstr "Choix des serveur de noms"
 
-#: ../netconfig.c:174
+#: ../netconfig.c:202
 msgid ""
-"Please give the IP address of the name server to use. You canadd more Domain Name Servers later by editing /etc/sysconfig/network/default.\n"
-"If you don't have a name server on your network just hit enter, without entering any ip address."
+"Please give the IP address of the name server to use. You canadd more Domain "
+"Name Servers later by editing /etc/sysconfig/network/default.\n"
+"If you don't have a name server on your network just hit enter, without "
+"entering any ip address."
 msgstr ""
-"Veuillez indiquer l'adresse ip du serveur de nom (DNS) à utiliser. Vous pouvez ajouter plus d'un serveur de nom par la suite en éditant le fichier /etc/sysconfig/network/default.\n"
-"Si vous n'avez pas de serveur de nom dans votre réseau appuyez simplement sur entrée, sans saisir d'adresse ip."
+"Veuillez indiquer l'adresse ip du serveur de nom (DNS) à utiliser. Vous "
+"pouvez ajouter plus d'un serveur de nom par la suite en éditant le fichier /"
+"etc/sysconfig/network/default.\n"
+"Si vous n'avez pas de serveur de nom dans votre réseau appuyez simplement "
+"sur entrée, sans saisir d'adresse ip."
 
-#: ../netconfig.c:183
+#: ../netconfig.c:211
 msgid "Adjust configuration files"
 msgstr "Appliquer la configuration"
 
-#: ../netconfig.c:183
+#: ../netconfig.c:211
 msgid "Accept these settings and adjust configuration files?"
 msgstr "Accepter ces paramètres et appliquer la configuration?"
 
-#: ../netconfig.c:247
+#: ../netconfig.c:297
 #, c-format
 msgid "No profile loaded.\n"
 msgstr "Aucun profil chargé.\n"
 
-#: ../netconfig.c:252
+#: ../netconfig.c:302
 #, c-format
 msgid "Current profile: %s\n"
 msgstr "Profil courant: %s\n"
-
-
