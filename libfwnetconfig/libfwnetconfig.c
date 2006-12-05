@@ -179,6 +179,8 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 					strncpy(iface->dhcpclient, ptr, PATH_MAX);
 				if(!strcmp(var, "ESSID") && !strlen(iface->essid))
 					strncpy(iface->essid, ptr, FWNET_ESSID_MAX_SIZE);
+				if(!strcmp(var, "MODE") && !strlen(iface->mode))
+					strncpy(iface->mode, ptr, FWNET_MODE_MAX_SIZE);
 				if(!strcmp(var, "KEY") && !strlen(iface->key))
 					strncpy(iface->key, ptr, FWNET_ENCODING_TOKEN_MAX);
 				if(!strcmp(var, "GATEWAY") && !strlen(iface->gateway))
@@ -354,6 +356,12 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 	if(strlen(iface->mac))
 	{
 		ptr = g_strdup_printf("ifconfig %s hw ether %s", iface->name, iface->mac);
+		ret += fwutil_system(ptr);
+		FWUTIL_FREE(ptr);
+	}
+	if(strlen(iface->mode))
+	{
+		ptr = g_strdup_printf("iwconfig %s mode %s", iface->name, iface->mode);
 		ret += fwutil_system(ptr);
 		FWUTIL_FREE(ptr);
 	}
@@ -654,6 +662,8 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 		fprintf(fp, "[%s]\n", iface->name);
 	if(iface->essid != NULL && strlen(iface->essid))
 		fprintf(fp, "essid = %s\n", iface->essid);
+	if(iface->mode != NULL && strlen(iface->mode))
+		fprintf(fp, "mode = %s\n", iface->mode);
 	if(iface->key != NULL && strlen(iface->key))
 		fprintf(fp, "key = %s\n", iface->key);
 	if(!strcmp(nettype, "dhcp"))

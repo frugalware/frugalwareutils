@@ -24,6 +24,7 @@
 
 #define FWNET_MAC_MAX_SIZE 17
 #define FWNET_ESSID_MAX_SIZE 32
+#define FWNET_MODE_MAX_SIZE 32
 #define FWNET_ENCODING_TOKEN_MAX   32
 #define FWNET_GW_MAX_SIZE 26
 
@@ -42,6 +43,7 @@ typedef struct __fwnet_interface_t {
 	char dhcp_opts[PATH_MAX+1];
 	char dhcpclient[PATH_MAX+1];
 	char essid[FWNET_ESSID_MAX_SIZE+1];
+	char mode[FWNET_MODE_MAX_SIZE+1];
 	char key[FWNET_ENCODING_TOKEN_MAX+1];
 	char gateway[FWNET_GW_MAX_SIZE+1];
 } fwnet_interface_t;

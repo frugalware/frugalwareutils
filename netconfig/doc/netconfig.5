@@ -74,6 +74,16 @@ Overwrites the mac address of the card. If defined more than once, the first wil
 Set the ESSID (or Network Name - in some products it may also be called Domain ID) for
 wireless network adapters. If defined more than once, the first will be used.
 .TP
+.B "mode = <mode>"
+Set the operating mode of the device, for wireless network adapters. The mode
+can be  Ad- Hoc  (network  composed  of  only one cell and without Access
+Point), Managed (node connects to a network composed of many Access Points,
+with roaming), Master (the node  is  the  synchronisation master  or  acts  as
+an Access Point), Repeater (the node forwards packets between other wireless
+nodes), Secondary (the node acts as a backup master/repeater), Monitor (the
+node is  not  associ- ated with any cell and passively monitor all packets on
+the frequency) or Auto. If defined more than once, the first will be used.
+.TP
 .B "gateway = [default gw] <ip>"
 Route packets via a gateway. NOTE: The specified gateway must be reachable first. If the
 "default gw" prefix is used, then adds a default route. If defined more than once,
