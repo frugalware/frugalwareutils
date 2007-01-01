@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xconfig\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-15 20:04+0200\n"
-"PO-Revision-Date: 2006-09-19 11:12+0200\n"
+"PO-Revision-Date: 2007-01-01 15:15+0100\n"
 "Last-Translator:  <vmiklos@frugalware.org>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "Az xsetroot hiányzik"
 
 #: ../xconfig.c:73
 msgid "Could not find xsetroot, please install it with pacman -S xsetroot."
-msgstr "Az xsetroot nem található, telepítse a pacman -S xroot-tal."
+msgstr "Az xsetroot nem található, telepítse a pacman -S xsetroot-tal."
 
 #: ../xconfig.c:79
 msgid "Configuring the X server"
