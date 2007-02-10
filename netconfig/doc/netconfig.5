@@ -111,6 +111,30 @@ specify here the dhcp hostname, then you'll need "-t 10 -h <hostname>".
 .TP
 .B "dhcpclient = <dhcp client>"
 This specifies the dhcp client to use. It can be either dhcpcd (default) or dhclient.
+.SH "SPECIAL WIRELESS CARDS"
+Some users reported that they had to initialize the card with ifconfig
+<interface> up before using iwconfig.
+
+Example:
+.nf
+[eth1]
+pre_up = ifconfig eth1 up
+post_down = ifconfig eth1 down
+.fi
+
+NOTE: if you use several pre_up and/or post_down lines, this pre_up should be
+the first, and this post_down should be the last one.
+
+.SH "USING WPA_SUPPLICANT"
+
+If you want to use wpa_supplicant instead of the simple encyption (using key =
+secret), then use the following pre_up and post_down lines:
+
+.nf
+pre_up = wpa_supplicant -Dwext -c /etc/wpa_supplicant.conf -w -B
+post_down = killall wpa_supplicant
+.fi
+
 .SH AUTHORS
 Written by Miklos Vajna.
 .SH "REPORTING BUGS"
