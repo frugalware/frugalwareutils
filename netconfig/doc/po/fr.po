@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2006-09-10 13:34+0200\n"
+"POT-Creation-Date: 2007-02-10 18:57+0100\n"
 "PO-Revision-Date: 2006-09-10 04:05+0100\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -89,7 +89,7 @@ msgstr ""
 "qui défini les options globales."
 
 # type: SH
-#: netconfig.5:16
+#: netconfig.5:16 netconfig.5:119
 #, no-wrap
 msgid "Example:"
 msgstr "Exemple:"
@@ -316,11 +316,30 @@ msgstr ""
 # type: TP
 #: netconfig.5:76
 #, no-wrap
+msgid "B<mode = E<lt>modeE<gt>>"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:86
+msgid ""
+"Set the operating mode of the device, for wireless network adapters. The "
+"mode can be Ad- Hoc (network composed of only one cell and without Access "
+"Point), Managed (node connects to a network composed of many Access Points, "
+"with roaming), Master (the node is the synchronisation master or acts as an "
+"Access Point), Repeater (the node forwards packets between other wireless "
+"nodes), Secondary (the node acts as a backup master/repeater), Monitor (the "
+"node is not associ- ated with any cell and passively monitor all packets on "
+"the frequency) or Auto. If defined more than once, the first will be used."
+msgstr ""
+
+# type: TP
+#: netconfig.5:86
+#, no-wrap
 msgid "B<gateway = [default gw] E<lt>ipE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:81
+#: netconfig.5:91
 msgid ""
 "Route packets via a gateway. NOTE: The specified gateway must be reachable "
 "first. If the \"default gw\" prefix is used, then adds a default route. If "
@@ -333,13 +352,13 @@ msgstr ""
 "sera utilisée. Si vous êtes en dhcp, alors cette directive sera ignorée."
 
 # type: TP
-#: netconfig.5:81
+#: netconfig.5:91
 #, no-wrap
 msgid "B<key = E<lt>keyE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:85
+#: netconfig.5:95
 msgid ""
 "Used to manipulate encryption or scrambling keys and security mode for "
 "wireless networks.  Examples:"
@@ -348,7 +367,7 @@ msgstr ""
 "le mode sécurisé pour les réseaux sans fil.  Exemples:"
 
 # type: Plain text
-#: netconfig.5:95
+#: netconfig.5:105
 #, no-wrap
 msgid ""
 "key = 0123-4567-89\n"
@@ -362,13 +381,13 @@ msgid ""
 msgstr ""
 
 # type: TP
-#: netconfig.5:97
+#: netconfig.5:107
 #, no-wrap
 msgid "B<dhcp_opts = E<lt>optionsE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:101
+#: netconfig.5:111
 msgid ""
 "These options are passed to the dhcp client daemon. The default is \"-t 10"
 "\". You may want to specify here the dhcp hostname, then you'll need \"-t 10 "
@@ -379,37 +398,87 @@ msgstr ""
 "besoin de \"-t 10 -h E<lt>hostnameE<gt>\"."
 
 # type: TP
-#: netconfig.5:101
+#: netconfig.5:111
 #, no-wrap
 msgid "B<dhcpclient = E<lt>dhcp clientE<gt>>"
 msgstr ""
 
 # type: Plain text
-#: netconfig.5:104
+#: netconfig.5:114
 msgid ""
 "This specifies the dhcp client to use. It can be either dhcpcd (default) or "
 "dhclient."
 msgstr ""
 
 # type: SH
-#: netconfig.5:104
+#: netconfig.5:114
+#, no-wrap
+msgid "SPECIAL WIRELESS CARDS"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:117
+msgid ""
+"Some users reported that they had to initialize the card with ifconfig "
+"E<lt>interfaceE<gt> up before using iwconfig."
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:123
+#, no-wrap
+msgid ""
+"[eth1]\n"
+"pre_up = ifconfig eth1 up\n"
+"post_down = ifconfig eth1 down\n"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:127
+msgid ""
+"NOTE: if you use several pre_up and/or post_down lines, this pre_up should "
+"be the first, and this post_down should be the last one."
+msgstr ""
+
+# type: SH
+#: netconfig.5:128
+#, no-wrap
+msgid "USING WPA_SUPPLICANT"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:132
+msgid ""
+"If you want to use wpa_supplicant instead of the simple encyption (using key "
+"= secret), then use the following pre_up and post_down lines:"
+msgstr ""
+
+# type: Plain text
+#: netconfig.5:136
+#, no-wrap
+msgid ""
+"pre_up = wpa_supplicant -Dwext -c /etc/wpa_supplicant.conf -w -B\n"
+"post_down = killall wpa_supplicant\n"
+msgstr ""
+
+# type: SH
+#: netconfig.5:138
 #, no-wrap
 msgid "AUTHORS"
 msgstr "AUTEURS"
 
 # type: Plain text
-#: netconfig.5:106
+#: netconfig.5:140
 msgid "Written by Miklos Vajna."
 msgstr "Écrit par Miklos Vajna."
 
 # type: SH
-#: netconfig.5:106
+#: netconfig.5:140
 #, no-wrap
 msgid "REPORTING BUGS"
 msgstr "SIGNALER DES BUGS"
 
 # type: Plain text
-#: netconfig.5:108
+#: netconfig.5:142
 msgid ""
 "If you find any bug, then please file a bugreport at E<lt>http://bugs."
 "frugalware.org/E<gt>."
@@ -418,13 +487,13 @@ msgstr ""
 "bugs.frugalware.org/E<gt>."
 
 # type: SH
-#: netconfig.5:108
+#: netconfig.5:142
 #, no-wrap
 msgid "SEE ALSO"
 msgstr "VOIR ÉGALEMENT"
 
 # type: Plain text
-#: netconfig.5:112
+#: netconfig.5:146
 msgid "B<ifconfig>(8), B<route>(8), B<iwconfig>(8), B<dhcpcd>(8)"
 msgstr ""
 
