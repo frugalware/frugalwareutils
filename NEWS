@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.6.7         - netconfig: new directive in the config file: mode
+              - merged documentation updates from the wiki
+              - updated Hungarian translation
 0.6.6         - netconfig reverted the dhclient update since it does not have
                 any switch to specify the dhcp hostname
               - added Polish translation
