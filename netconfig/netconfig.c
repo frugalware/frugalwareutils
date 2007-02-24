@@ -245,6 +245,23 @@ void sighup_handler(int sig)
 	fwnet_setdns(sigprof);
 }
 
+void sigterm_handler(int sig)
+{
+	int i;
+	if(sigprof==NULL)
+		exit(0);
+	
+	// unload the profile
+	for (i=0; i<g_list_length(sigprof->interfaces); i++)
+		fwnet_ifdown((fwnet_interface_t*)g_list_nth_data(sigprof->interfaces, i), sigprof);
+	
+	fwnet_lodown();
+	if(!fwutil_dryrun)
+		fwnet_setlastprofile(NULL);
+	
+	exit(0);	
+}
+
 int run(int argc, char **argv)
 {
 	int opt;
@@ -339,6 +356,11 @@ int run(int argc, char **argv)
 		{
 			sigprof = profile;
 			if (signal(SIGHUP, sighup_handler) == SIG_ERR)
+			{
+				perror("signal");
+				return(1);
+			}
+			if (signal(SIGTERM, sigterm_handler) == SIG_ERR)
 			{
 				perror("signal");
 				return(1);
