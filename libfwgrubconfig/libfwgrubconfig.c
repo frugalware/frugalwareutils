@@ -593,6 +593,7 @@ void fwgrub_create_menu(FILE *fp)
 	GList *list;
 	struct stat buf;
 	struct fwgrub_entry_t entry;
+	char path[PATH_MAX];
 
 	entry.fp = fp;
 	entry.title = gen_title();
@@ -621,7 +622,9 @@ void fwgrub_create_menu(FILE *fp)
 	fprintf(fp, "#\n# %s/grub/menu.lst - configuration file for GRUB\n", entry.bootstr);
 	fprintf(fp, "# This file is generated automatically by grubconfig\n#\n\n");
 	fprintf(fp, "default=0\ntimeout=5\n");
-	fprintf(fp, "gfxmenu %s%s/grub/message\n\n", entry.grubbootdev, entry.bootstr);
+	snprintf(path, PATH_MAX, "%s/grub/message", entry.bootstr);
+	if(!stat(path, &buf))
+		fprintf(fp, "gfxmenu %s%s/grub/message\n\n", entry.grubbootdev, entry.bootstr);
 	entry.kernel = strdup("/vmlinuz");
 	entry.opts = strdup("ro quiet vga=791");
 	write_entry(&entry);
