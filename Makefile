@@ -63,3 +63,9 @@ dist:
 release:
 	darcs tag --checkpoint $(VERSION)
 	$(MAKE) dist
+
+update-po:
+	for i in `find . -type d -name po|egrep -v '_darcs|doc'`; \
+	do \
+		$(MAKE) -C $$i update-po; \
+	done
