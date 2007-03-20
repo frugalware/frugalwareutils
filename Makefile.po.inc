@@ -10,7 +10,10 @@ install:
 		$(INSTALL) -m644 $$i.mo $(DESTDIR)$(localedir)/`basename $$i .po`/LC_MESSAGES/$(DOMAIN).mo; \
 	done
 
-pot:
+intltool-extract:
+	cp /usr/bin/intltool-extract ./
+
+pot: intltool-extract
 	intltool-update --pot --gettext-package=$(DOMAIN)
 
 update-po: pot
