@@ -19,6 +19,8 @@
 LANGS=de fr hu pl
 DOMAIN=xconfig
 
+top_srcdir = ..
+
 -include ../../config.mak
 -include ../../Makefile.inc
 -include ../../Makefile.po.inc

@@ -19,6 +19,8 @@
 LANGS=fr hu pl
 DOMAIN=libfwxwmconfig
 
+top_srcdir = ..
+
 -include ../../config.mak
 -include ../../Makefile.inc
 -include ../../Makefile.po.inc

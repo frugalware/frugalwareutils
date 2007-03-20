@@ -19,6 +19,8 @@
 LANGS=fr hu pl
 DOMAIN=mouseconfig
 
+top_srcdir = ..
+
 -include ../../config.mak
 -include ../../Makefile.inc
 -include ../../Makefile.po.inc
