@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-30 23:24+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-04-30 23:45+0200\n"
 "Last-Translator:  <vmiklos@frugalware.org>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -16,14 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../setup.c:115
+#: ../setup.c:122
 msgid "Control center"
 msgstr "Vezérlõközpont"
 
-#: ../setup.c:116
+#: ../setup.c:123
 msgid "Please select one of the following configuration tools to start:"
 msgstr "Kérem válassza ki az elindítani kívánt beállító eszközt:"
 
-#: ../setup.c:130
+#: ../setup.c:137
 msgid "General configuration"
 msgstr "Általános beállítások"

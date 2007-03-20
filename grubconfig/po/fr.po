@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grubconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-31 22:51+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-08-31 23:06+0100\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -17,8 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../grubconfig.c:39
-#: ../grubconfig.c:56
+#: ../grubconfig.c:39 ../grubconfig.c:56
 msgid "MBR"
 msgstr ""
 
@@ -26,8 +25,7 @@ msgstr ""
 msgid "Install to Master Boot Record"
 msgstr "Installer dans le Secteur de Démarrage (MBR)"
 
-#: ../grubconfig.c:40
-#: ../grubconfig.c:58
+#: ../grubconfig.c:40 ../grubconfig.c:58
 msgid "Floppy"
 msgstr "Disquette"
 
@@ -36,8 +34,7 @@ msgid "Install to a formatted floppy in /dev/fd0"
 msgstr "Installer sur une disquette formatée dans /dev/fd0"
 
 #. see see http://lists.gnu.org/archive/html/bug-grub/2003-11/msg00085.html
-#: ../grubconfig.c:42
-#: ../grubconfig.c:60
+#: ../grubconfig.c:42 ../grubconfig.c:60
 msgid "Root"
 msgstr "Root"
 
@@ -45,8 +42,7 @@ msgstr "Root"
 msgid "Install to superblock (do NOT use with XFS)"
 msgstr "Installer sur superblock (ne PAS utiliser avec XFS)"
 
-#: ../grubconfig.c:43
-#: ../grubconfig.c:62
+#: ../grubconfig.c:43 ../grubconfig.c:62
 msgid "Skip"
 msgstr "Ignorer"
 
@@ -77,7 +73,8 @@ msgstr ""
 "\t3. Le superblock de votre partition Racine Linux.\n"
 "\n"
 "L'option 3 nécessite de déclarer la partition bootable avec (c)fdisk\n"
-"Suggestion: Choisissez l'option 3 si vous avez déja un chargeur de démarrage.\n"
+"Suggestion: Choisissez l'option 3 si vous avez déja un chargeur de "
+"démarrage.\n"
 "Quelle option souhaitez vous?"
 
 #: ../grubconfig.c:77
@@ -91,4 +88,3 @@ msgstr "Veuillez patienter"
 #: ../grubconfig.c:82
 msgid "Attemping to install the GRUB bootloader..."
 msgstr "Essai d'installation du chargeur de démarrage GRUB..."
-

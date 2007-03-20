@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libfwxconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-06 20:30+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-06-20 21:16+0200\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -19,7 +19,9 @@ msgstr ""
 
 #: ../xconfig-helper.c:42
 #, c-format
-msgid "xmessage -buttons OK:1 -center -timeout 1 \"If you see this message, click OK within 10 seconds. Elapsed time: %d second(s).\""
-msgstr "xmessage -buttons OK:1 -center -timeout 1 \"Si vous voyez ce message, cliquez sur OK dans les 10 secondes. Temps écoulé: %d seconde(s).\""
-
-
+msgid ""
+"xmessage -buttons OK:1 -center -timeout 1 \"If you see this message, click "
+"OK within 10 seconds. Elapsed time: %d second(s).\""
+msgstr ""
+"xmessage -buttons OK:1 -center -timeout 1 \"Si vous voyez ce message, "
+"cliquez sur OK dans les 10 secondes. Temps écoulé: %d seconde(s).\""

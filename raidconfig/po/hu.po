@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: raidconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-06 23:33+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-05-06 23:33+0200\n"
 "Last-Translator:  <vmiklos@frugalware.org>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -64,14 +64,14 @@ msgid ""
 "ready, press 'Finish'.\n"
 "%s"
 msgstr ""
-"Kérem válassza ki azokat az eszközöket, melyekbõl a tömböt kívánja felépíteni. "
-"Ha elkészült, válassza a Kész gombot.\n"
+"Kérem válassza ki azokat az eszközöket, melyekbõl a tömböt kívánja "
+"felépíteni. Ha elkészült, válassza a Kész gombot.\n"
 "%s"
 
 #: ../raidconfig.c:98
 msgid "Selecting devices"
 msgstr "Eszközök kiválasztása"
 
-#: ../raidconfig.c:120
+#: ../raidconfig.c:121
 msgid "RAID configuration"
 msgstr "RAID beállítás"

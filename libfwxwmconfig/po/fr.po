@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xwmconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-10 03:50+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-09-10 03:58+0100\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -28,4 +28,3 @@ msgstr "Un environnement de bureau léger"
 #: ../libfwxwmconfig.c:132
 msgid "--- No description, please report! ---"
 msgstr "--- Pas de description, merci de le repporter! ---"
-

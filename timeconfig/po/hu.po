@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-29 19:05+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-04-29 19:05+0200\n"
 "Last-Translator:  <vmiklos@frugalware.org>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../timeconfig.c:44
+#: ../timeconfig.c:45
 msgid "no"
 msgstr "nem"
 
-#: ../timeconfig.c:44
+#: ../timeconfig.c:45
 msgid "Hardware clock is set to local time"
 msgstr "A rendszeróra a helyi idõre van állítva"
 
-#: ../timeconfig.c:45
+#: ../timeconfig.c:46
 msgid "yes"
 msgstr "igen"
 
-#: ../timeconfig.c:45
+#: ../timeconfig.c:46
 msgid "Hardware clock is set to UTC"
 msgstr "A rendszeróra a Greenwich-i idõre (UTC/GMT) van állítva"
 
-#: ../timeconfig.c:49
+#: ../timeconfig.c:50
 msgid "Do you want to set hardware clock utc?"
 msgstr "A rendszeróra a Greenwich-i idõre (UTC/GMT) legyen beállítva?"
 
-#: ../timeconfig.c:50
+#: ../timeconfig.c:51
 msgid ""
 "Is the hardware clock set to Coordinated Universal Time (UTC/GMT)?  If it "
 "is, select 'yes' here. If the hardware clock is set to the current local "
@@ -45,17 +45,18 @@ msgid ""
 msgstr ""
 "A rendszeróra a Greenwich-i idõre (UTC/GMT) van beállítva? Ha igen, kérem "
 "válassza az 'igen'-t. Ha a rendszeróra a helyi idõre van állítva (ez a "
-"leggyakoribb), akkor kérem válassza a 'nem'-et. Ha nem biztos benne, "
-"akkor a legjobb, ha a 'nem'-et választja."
+"leggyakoribb), akkor kérem válassza a 'nem'-et. Ha nem biztos benne, akkor a "
+"legjobb, ha a 'nem'-et választja."
 
-#: ../timeconfig.c:98
+#: ../timeconfig.c:99
 msgid "Timezone configuration"
 msgstr "Idõzóna beállítása"
 
-#: ../timeconfig.c:99
+#: ../timeconfig.c:100
 msgid "Please select one of the following timezones for your machine:"
-msgstr "Kérem válassza ki az alábbiak közül azt az idõzónát, ahol Ön tartózkodik:"
+msgstr ""
+"Kérem válassza ki az alábbiak közül azt az idõzónát, ahol Ön tartózkodik:"
 
-#: ../timeconfig.c:115
+#: ../timeconfig.c:118
 msgid "Time configuration"
 msgstr "Idõ beállítása"

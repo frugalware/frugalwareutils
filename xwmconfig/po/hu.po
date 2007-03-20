@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xwmconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-25 23:05+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-06-25 23:11+0200\n"
 "Last-Translator:  <vmiklos@frugalware.org>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -25,8 +25,8 @@ msgid ""
 "Choose one from the window managers listed below. Window managers are "
 "responsible for the desktop layout."
 msgstr ""
-"Válasszon egyet az alább listázott ablakkezelõk közül. Az ablakkezelõk "
-" az asztal elrendezéséért felelõsek."
+"Válasszon egyet az alább listázott ablakkezelõk közül. Az ablakkezelõk  az "
+"asztal elrendezéséért felelõsek."
 
 #: ../xwmconfig.c:56
 #, c-format
@@ -36,7 +36,8 @@ msgstr "használat: %s [opciók]\n"
 #: ../xwmconfig.c:57
 #, c-format
 msgid "--force         Run this tool even GDM or KDM installed.\n"
-msgstr "--force        Az eszköz futtatása még ha a GDM vagy KDM telepítve is van.\n"
+msgstr ""
+"--force        Az eszköz futtatása még ha a GDM vagy KDM telepítve is van.\n"
 
 #: ../xwmconfig.c:58
 #, c-format
@@ -46,7 +47,9 @@ msgstr "--help         Ez a leírás.\n"
 #: ../xwmconfig.c:59
 #, c-format
 msgid "--silent        Do not print any warning if GDM or KDM installed.\n"
-msgstr "--silent       Ne jelenítsen meg semmilyen figyelmeztetést ha a GDM vagy KDM telepítve van.\n"
+msgstr ""
+"--silent       Ne jelenítsen meg semmilyen figyelmeztetést ha a GDM vagy KDM "
+"telepítve van.\n"
 
 #: ../xwmconfig.c:95
 msgid "XDM configuration"
@@ -66,7 +69,8 @@ msgstr "KDM észlelve"
 
 #: ../xwmconfig.c:104
 msgid "KDM is installed, you can choose a window manager from the login menu."
-msgstr "A KDM telepítve van, így az ablakkezelõt a belépési menüben választhatja ki."
+msgstr ""
+"A KDM telepítve van, így az ablakkezelõt a belépési menüben választhatja ki."
 
 #: ../xwmconfig.c:107
 msgid "GDM found"
@@ -74,7 +78,8 @@ msgstr "GDM észlelve"
 
 #: ../xwmconfig.c:107
 msgid "GDM is installed, you can choose a window manager from the login menu."
-msgstr "A GDM telepítve van, így az ablakkezelõt a belépési menüben választhatja ki."
+msgstr ""
+"A GDM telepítve van, így az ablakkezelõt a belépési menüben választhatja ki."
 
 #: ../xwmconfig.c:117
 msgid "No X server found"
@@ -85,5 +90,5 @@ msgid ""
 "The X server is not installed, please issue a 'pacman -S x11' command as "
 "root."
 msgstr ""
-"Az X kiszolgáló nem lett még telepítve, kérem adja ki a 'pacman -S x11' parancsot "
-"rendszergazdaként."
+"Az X kiszolgáló nem lett még telepítve, kérem adja ki a 'pacman -S x11' "
+"parancsot rendszergazdaként."

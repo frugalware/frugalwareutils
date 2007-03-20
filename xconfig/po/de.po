@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-26 02:43+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-05-26 02:46+0200\n"
 "Last-Translator: Marcus Habermehl <bmh1980@frugalware.org>\n"
 "Language-Team: German <translation-team-de@lists.sourceforge.net>\n"
@@ -17,47 +17,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../xconfig.c:42 ../xconfig.c:85
+#: ../xconfig.c:45
+#, c-format
+msgid "usage: %s [--live <resolution> <depth>\n"
+msgstr ""
+
+#: ../xconfig.c:54 ../xconfig.c:106
 msgid "X configuration"
 msgstr ""
 
-#: ../xconfig.c:47
+#: ../xconfig.c:59
 msgid "xinit missing"
 msgstr ""
 
-#: ../xconfig.c:47
+#: ../xconfig.c:59
 msgid "Could not find xinit, please install it with pacman -S xinit."
 msgstr ""
 
-#: ../xconfig.c:54
+#: ../xconfig.c:66
 msgid "xmessage missing"
 msgstr ""
 
-#: ../xconfig.c:54
+#: ../xconfig.c:66
 msgid "Could not find xmessage, please install it with pacman -S xmessage."
 msgstr ""
 
-#: ../xconfig.c:61
+#: ../xconfig.c:73
 msgid "xsetroot missing"
 msgstr ""
 
-#: ../xconfig.c:61
+#: ../xconfig.c:73
 msgid "Could not find xsetroot, please install it with pacman -S xsetroot."
 msgstr ""
 
-#: ../xconfig.c:66
+#: ../xconfig.c:79
 msgid "Configuring the X server"
 msgstr "Konfiguration des X-Servers"
 
-#: ../xconfig.c:66
+#: ../xconfig.c:79
 msgid "Attemping to create an X config file..."
 msgstr "Versuche eine X Konfigurationsdatei zu erstellen ..."
 
-#: ../xconfig.c:74
+#: ../xconfig.c:95
 msgid "Selecting resolution"
 msgstr "Auflösung auswählen"
 
-#: ../xconfig.c:75
+#: ../xconfig.c:96
 msgid ""
 "Please enter the screen resolution you want to use. You can use values such "
 "as 1024x768, 800x600 or 640x480. If unsure, just press ENTER."
@@ -66,14 +71,13 @@ msgstr ""
 "können Werte wie 1024x768, 800x600 oder 640x480 verwenden. Wenn Sie unsicher "
 "sind, drücken Sie einfach ENTER."
 
-
-#: ../xconfig.c:78
+#: ../xconfig.c:99
 msgid "Selecting color depth"
 msgstr "Farbtiefe auswählen"
 
-#: ../xconfig.c:79
+#: ../xconfig.c:100
 msgid ""
 "Please enter the color depth you want to use. If unsure, just press ENTER."
 msgstr ""
-"Bitte geben Sie die Farbtiefe an, die Sie verwenden möchten. Wenn Sie unsicher "
-"sind, drücken Sie einfach ENTER."
+"Bitte geben Sie die Farbtiefe an, die Sie verwenden möchten. Wenn Sie "
+"unsicher sind, drücken Sie einfach ENTER."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: timeconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-06 20:34+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-06-20 21:16+0200\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -23,7 +23,9 @@ msgstr "non"
 
 #: ../timeconfig.c:45
 msgid "Hardware clock is set to local time"
-msgstr "L'horloge matérielle est ajusté sur le temps local (l'horloge de votre bios correspond à votre fuseau horaire)"
+msgstr ""
+"L'horloge matérielle est ajusté sur le temps local (l'horloge de votre bios "
+"correspond à votre fuseau horaire)"
 
 #: ../timeconfig.c:46
 msgid "yes"
@@ -38,8 +40,17 @@ msgid "Do you want to set hardware clock utc?"
 msgstr "Voulez vous ajuster votre horloge matérielle sur l'utc?"
 
 #: ../timeconfig.c:51
-msgid "Is the hardware clock set to Coordinated Universal Time (UTC/GMT)?  If it is, select 'yes' here. If the hardware clock is set to the current local time (this is how most PCs are set up), then say 'no' here.  If you are not sure what this is, you should answer 'no' here."
-msgstr "L'horloge matérielle est elle ajustée sur le Temps Cordonné Universellement (UTC/GMT)? Si oui, sélectionnez 'oui' ici. Si l'horloge matérielle est réglée sur le temps local (votre fuseau horaire - c'est le cas pour la plupart des pc), alors répondez 'non' ici. Si vous n'êtes pas sur, vous devriez répondre 'non'."
+msgid ""
+"Is the hardware clock set to Coordinated Universal Time (UTC/GMT)?  If it "
+"is, select 'yes' here. If the hardware clock is set to the current local "
+"time (this is how most PCs are set up), then say 'no' here.  If you are not "
+"sure what this is, you should answer 'no' here."
+msgstr ""
+"L'horloge matérielle est elle ajustée sur le Temps Cordonné Universellement "
+"(UTC/GMT)? Si oui, sélectionnez 'oui' ici. Si l'horloge matérielle est "
+"réglée sur le temps local (votre fuseau horaire - c'est le cas pour la "
+"plupart des pc), alors répondez 'non' ici. Si vous n'êtes pas sur, vous "
+"devriez répondre 'non'."
 
 #: ../timeconfig.c:99
 msgid "Timezone configuration"
@@ -47,10 +58,9 @@ msgstr "Configuration du fuseau horaire"
 
 #: ../timeconfig.c:100
 msgid "Please select one of the following timezones for your machine:"
-msgstr "Veuillez sélectionner l'un des fuseaux horaires suivants pour votre machine:"
+msgstr ""
+"Veuillez sélectionner l'un des fuseaux horaires suivants pour votre machine:"
 
 #: ../timeconfig.c:118
 msgid "Time configuration"
 msgstr "Configuration de l'horloge"
-
-

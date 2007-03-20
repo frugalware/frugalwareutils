@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: raidconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-06 20:33+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-06-20 21:16+0200\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -61,10 +61,12 @@ msgstr "La liste courante contient: %s."
 #: ../raidconfig.c:90
 #, c-format
 msgid ""
-"Please select the devices you want to build the array from. When you are ready, press 'Finish'.\n"
+"Please select the devices you want to build the array from. When you are "
+"ready, press 'Finish'.\n"
 "%s"
 msgstr ""
-"Veuillez sélectionner les périphériques que vous souhaitez utiliser pour le raid. Quand vous êtes prêts, appuyez sur 'Terminer'.\n"
+"Veuillez sélectionner les périphériques que vous souhaitez utiliser pour le "
+"raid. Quand vous êtes prêts, appuyez sur 'Terminer'.\n"
 "%s"
 
 #: ../raidconfig.c:98
@@ -74,5 +76,3 @@ msgstr "Sélection des périphériques"
 #: ../raidconfig.c:121
 msgid "RAID configuration"
 msgstr "Configuration du RAID"
-
-

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xwmconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-09 00:20+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-04-08 12:19+0900\n"
 "Last-Translator: Piotr Maliñski <admin@rk.edu.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -23,8 +23,7 @@ msgstr "¦rodowiska graficzne"
 msgid ""
 "Choose one from the window managers listed below. Window managers are "
 "responsible for the desktop layout."
-msgstr ""
-"Wybierz jedeno z poni¿szych ¶rodowisk graficznych."
+msgstr "Wybierz jedeno z poni¿szych ¶rodowisk graficznych."
 
 #: ../xwmconfig.c:56
 #, c-format
@@ -44,7 +43,9 @@ msgstr "--help         Pomoc\n"
 #: ../xwmconfig.c:59
 #, c-format
 msgid "--silent        Do not print any warning if GDM or KDM installed.\n"
-msgstr "--silent       Nie wy¶wietlaj ¿adnych ostrze¿eñ je¿eli  GDM lub KDM jest zainstalowany.\n"
+msgstr ""
+"--silent       Nie wy¶wietlaj ¿adnych ostrze¿eñ je¿eli  GDM lub KDM jest "
+"zainstalowany.\n"
 
 #: ../xwmconfig.c:95
 msgid "XDM configuration"
@@ -64,7 +65,9 @@ msgstr "KDM znalezione"
 
 #: ../xwmconfig.c:104
 msgid "KDM is installed, you can choose a window manager from the login menu."
-msgstr "KDM jest znaleziony. Mo¿esz wybraæ ¶rodowisko graficzne z menu KDM przy logowaniu."
+msgstr ""
+"KDM jest znaleziony. Mo¿esz wybraæ ¶rodowisko graficzne z menu KDM przy "
+"logowaniu."
 
 #: ../xwmconfig.c:107
 msgid "GDM found"
@@ -72,7 +75,9 @@ msgstr "GDM znalezione"
 
 #: ../xwmconfig.c:107
 msgid "GDM is installed, you can choose a window manager from the login menu."
-msgstr "GDM jest znaleziony. Mo¿esz wybraæ ¶rodowisko graficzne z menu KDM przy logowaniu."
+msgstr ""
+"GDM jest znaleziony. Mo¿esz wybraæ ¶rodowisko graficzne z menu KDM przy "
+"logowaniu."
 
 #: ../xwmconfig.c:117
 msgid "No X server found"
@@ -83,4 +88,5 @@ msgid ""
 "The X server is not installed, please issue a 'pacman -S x11' command as "
 "root."
 msgstr ""
-"Serwer Xów nie jest zainstalowany. Proszê zainstalowaæ go poleceniem 'pacman -S x11' jako root."
+"Serwer Xów nie jest zainstalowany. Proszê zainstalowaæ go poleceniem 'pacman "
+"-S x11' jako root."

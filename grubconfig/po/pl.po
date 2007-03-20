@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grubconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-09 00:20+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-04-08 12:19+0900\n"
 "Last-Translator: Piotr Maliñski <admin@rk.edu.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -78,10 +78,10 @@ msgstr ""
 msgid "GRUB bootloader"
 msgstr "GRUB bootloader"
 
-#: ../grubconfig.c:83
+#: ../grubconfig.c:82
 msgid "Please wait"
 msgstr "Proszê czekaæ"
 
-#: ../grubconfig.c:83
+#: ../grubconfig.c:82
 msgid "Attemping to install the GRUB bootloader..."
 msgstr "Próbujê zainstalowaæ GRUBa..."

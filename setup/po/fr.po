@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-06 20:34+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-06-20 21:14+0200\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -17,16 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../setup.c:115
+#: ../setup.c:122
 msgid "Control center"
 msgstr "Centre de contrôle"
 
-#: ../setup.c:116
+#: ../setup.c:123
 msgid "Please select one of the following configuration tools to start:"
 msgstr "Veuillez sélectionner l'un des outils de configuration pour terminer:"
 
-#: ../setup.c:130
+#: ../setup.c:137
 msgid "General configuration"
 msgstr "Configuration génerale"
-
-

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libfwnetconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-09 00:20+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-04-08 12:19+0900\n"
 "Last-Translator: Piotr Maliñski <admin@rk.edu.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -15,22 +15,22 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../libfwnetconfig.c:81
+#: ../libfwnetconfig.c:88
 #, c-format
 msgid "%s: No such profile!\n"
 msgstr "%s: Brak takiego profilu!\n"
 
-#: ../libfwnetconfig.c:101
+#: ../libfwnetconfig.c:108
 #, c-format
 msgid "profile: line %d: bad interface name\n"
 msgstr "profil: wiersz %d. z³a nazwa interfejsu\n"
 
-#: ../libfwnetconfig.c:132
+#: ../libfwnetconfig.c:139
 #, c-format
 msgid "profile: line %d: syntax error\n"
 msgstr "profil: wiersz %d. b³±d sk³adniowy\n"
 
-#: ../libfwnetconfig.c:139
+#: ../libfwnetconfig.c:146
 #, c-format
 msgid "profile: line %d: all directives must belong to a section\n"
 msgstr "profil: wiersz %d. wszystkie dyrektywy musz± nale¿eñ do sekcji\n"

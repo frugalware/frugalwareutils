@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-29 21:54+0100\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-10-29 22:32+0100\n"
 "Last-Translator: VMiklos <vmiklos@frugalware.org>\n"
 "Language-Team:  <hu@li.org>\n"
@@ -43,15 +43,15 @@ msgstr "-f | --fast              Gyors mód, a telepítõ használja.\n"
 msgid ""
 "-l | --loop              After bringing up the profile, loop in the "
 "foreground.\n"
-msgstr ""
-"-l | --loop              A profil betöltése után ne lépjen ki.\n"
+msgstr "-l | --loop              A profil betöltése után ne lépjen ki.\n"
 
 #: ../netconfig.c:51
 #, c-format
 msgid ""
 "                         SIGHUP will unload and reload the current profile.\n"
 msgstr ""
-"                         A SIGHUP újra be fogja tölteni a jelenlegi profilt.\n"
+"                         A SIGHUP újra be fogja tölteni a jelenlegi "
+"profilt.\n"
 
 #: ../netconfig.c:52
 #, c-format

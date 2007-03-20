@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libfwnetconfig\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-06 20:12+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-06-20 21:15+0200\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -17,24 +17,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../libfwnetconfig.c:90
+#: ../libfwnetconfig.c:88
 #, c-format
 msgid "%s: No such profile!\n"
 msgstr "%s: Aucun profil correspondant!\n"
 
-#: ../libfwnetconfig.c:110
+#: ../libfwnetconfig.c:108
 #, c-format
 msgid "profile: line %d: bad interface name\n"
 msgstr "profil: ligne %d: mauvais nom d'interface\n"
 
-#: ../libfwnetconfig.c:141
+#: ../libfwnetconfig.c:139
 #, c-format
 msgid "profile: line %d: syntax error\n"
 msgstr "profil: ligne %d: erreur de syntaxe\n"
 
-#: ../libfwnetconfig.c:148
+#: ../libfwnetconfig.c:146
 #, c-format
 msgid "profile: line %d: all directives must belong to a section\n"
-msgstr "profil: ligne %d: toutes les directives doivent être relatives à une section\n"
-
-
+msgstr ""
+"profil: ligne %d: toutes les directives doivent être relatives à une "
+"section\n"

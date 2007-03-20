@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libfwdialog\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-26 00:23+0200\n"
+"POT-Creation-Date: 2007-03-20 15:14+0100\n"
 "PO-Revision-Date: 2006-04-26 00:24+0200\n"
 "Last-Translator:  <vmiklos@frugalware.org>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -16,14 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../libfwdialog.c:48
+#: ../libfwdialog.c:57
 msgid "Setup"
 msgstr "Telepítõ"
 
-#: ../libfwdialog.c:57
+#: ../libfwdialog.c:69
 msgid "Exit"
 msgstr "Kilépés"
 
-#: ../libfwdialog.c:57
+#: ../libfwdialog.c:69
 msgid "Are you sure you want to exit?"
 msgstr "Biztos benne, hogy ki szeretne lépni?"
