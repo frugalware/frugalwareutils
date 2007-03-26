@@ -64,8 +64,15 @@ release:
 	darcs tag --checkpoint $(VERSION)
 	$(MAKE) dist
 
+# FIXME: extend these to handle po4a, too
 update-po:
 	for i in `find . -type d -name po|egrep -v '_darcs|doc'`; \
 	do \
 		$(MAKE) -C $$i update-po; \
+	done
+
+pot:
+	for i in `find . -type d -name po|egrep -v '_darcs|doc'`; \
+	do \
+		$(MAKE) -C $$i pot; \
 	done
