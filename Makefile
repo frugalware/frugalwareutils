@@ -31,7 +31,7 @@ SUBDIRS = doc libfwutil libfwdialog setup \
 compile: config.mak
 	+$(DO_RECURSIVE)
 
-configure: configure.ac
+prepare: configure.ac
 	cp /usr/share/automake/install-sh ./
 	autoconf
 
