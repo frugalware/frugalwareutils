@@ -30,7 +30,7 @@ update-po: pot
 	msginit -l $(basename $@)_$(shell echo $(basename $@)|tr [a-z] [A-Z])
 
 clean:
-	rm -f $(DOMAIN).pot *.mo
+	rm -f $(DOMAIN).pot *.mo *.po
 
 prepare:
 	[ -d $(PO_DIR) ]
