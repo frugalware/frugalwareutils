@@ -35,9 +35,6 @@ configure: configure.ac
 	cp /usr/share/automake/install-sh ./
 	autoconf
 
-config.mak: config.mak.in configure
-	./configure
-
 install:
 	$(INSTALL) -d $(DESTDIR)$(sbindir)
 	$(INSTALL) -d $(DESTDIR)$(fwlibdir)
