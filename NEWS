@@ -1,5 +1,9 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.6.8         - netconfig: handle SIGTERM
+              - grubconfig: handle the case when there is no message file
+              - build fix for newer intltool
+              - moved the po files to the tranlations repo
 0.6.7         - netconfig: new directive in the config file: mode
               - merged documentation updates from the wiki
               - updated Hungarian translation
