@@ -14,4 +14,7 @@ clean:
 	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so -o \
 		$(basename $@).so $(basename $@).o $(LDFLAGS)
 
+prepare:
+	+$(DO_RECURSIVE)
+
 # vim: ft=make

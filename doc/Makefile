@@ -34,3 +34,5 @@ endif
 
 clean:
 	rm -rf man3
+
+prepare:

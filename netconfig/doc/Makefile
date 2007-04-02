@@ -40,3 +40,5 @@ endif
 clean:
 	rm -rf $(LANGS)
 	+$(DO_RECURSIVE)
+
+prepare:

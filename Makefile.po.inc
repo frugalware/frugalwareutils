@@ -32,4 +32,11 @@ update-po: pot
 clean:
 	rm -f $(DOMAIN).pot *.mo
 
+prepare:
+	[ -d $(PO_DIR) ]
+	for i in $(LANGS); \
+	do \
+		cp $(PO_DIR)/frugalwareutils/$$i/$(DOMAIN).po $$i.po; \
+	done
+
 # vim: ft=make

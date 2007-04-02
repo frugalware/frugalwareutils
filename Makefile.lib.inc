@@ -18,4 +18,7 @@ clean:
 	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
 	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so
 
+prepare:
+	+$(DO_RECURSIVE)
+
 # vim: ft=make

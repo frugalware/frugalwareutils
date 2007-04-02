@@ -34,6 +34,7 @@ compile: config.mak
 prepare: configure.ac
 	cp /usr/share/automake/install-sh ./
 	autoconf
+	+$(DO_RECURSIVE)
 
 install:
 	$(INSTALL) -d $(DESTDIR)$(sbindir)

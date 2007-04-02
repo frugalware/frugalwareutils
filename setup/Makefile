@@ -44,5 +44,8 @@ clean:
 	rm -f setup *.o
 	+$(DO_RECURSIVE)
 
+prepare:
+	+$(DO_RECURSIVE)
+
 test:
 	sudo sh -c 'LD_LIBRARY_PATH=../libfwutil:../libfwdialog ./setup'
