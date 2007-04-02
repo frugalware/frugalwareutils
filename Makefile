@@ -47,7 +47,10 @@ install:
 
 clean:
 	+$(DO_RECURSIVE)
-	rm -rf autom4te.cache config.log config.mak config.status configure install-sh
+	rm -rf autom4te.cache config.log config.mak config.status
+
+distclean: clean
+	rm -f configure install-sh
 
 dist:
 	darcs changes >_darcs/current/Changelog
