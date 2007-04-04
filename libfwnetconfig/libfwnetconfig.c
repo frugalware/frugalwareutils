@@ -625,7 +625,7 @@ static char *netaddr(char *ip, char *nm)
 
 /** Dumps a profile to a text file.
  * @param profile the profile to dump
- * @param host the hostname
+ * @param host the hostname (optional)
  * @param nettype the type of the network (lo, dhcp or static)
  * @return 1 on failure, 0 on success
  */
@@ -681,6 +681,8 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 	}
 	fclose(fp);
 
+	if(host)
+	{
 	fp = fopen("/etc/HOSTNAME", "w");
 	if(fp==NULL)
 		return(1);
@@ -727,6 +729,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 	fprintf(fp, "localnet        %s\n", network);
 	fprintf(fp, "\n# End of networks.\n");
 	fclose(fp);
+	}
 	FWUTIL_FREE(network);
 	umask(oldmask);
 	return(0);
