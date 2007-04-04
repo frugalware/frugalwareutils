@@ -683,52 +683,52 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 
 	if(host)
 	{
-	fp = fopen("/etc/HOSTNAME", "w");
-	if(fp==NULL)
-		return(1);
-	fprintf(fp, "%s\n", host);
-	fclose(fp);
+		fp = fopen("/etc/HOSTNAME", "w");
+		if(fp==NULL)
+			return(1);
+		fprintf(fp, "%s\n", host);
+		fclose(fp);
 
-	if(option)
-		sscanf(option, "options = %s netmask %s", ipaddr, netmask);
+		if(option)
+			sscanf(option, "options = %s netmask %s", ipaddr, netmask);
 
-	if(strcmp(nettype, "static"))
-	{
-		sprintf(ipaddr, "127.0.0.1");
-		network = strdup("127.0.0.0");
-	}
-	else
-		network=netaddr(ipaddr, netmask);
+		if(strcmp(nettype, "static"))
+		{
+			sprintf(ipaddr, "127.0.0.1");
+			network = strdup("127.0.0.0");
+		}
+		else
+			network=netaddr(ipaddr, netmask);
 
-	fp = fopen("/etc/hosts", "w");
-	if(fp==NULL)
-		return(1);
-	fprintf(fp, "#\n"
-		"# hosts         This file describes a number of hostname-to-address\n"
-		"#               mappings for the TCP/IP subsystem.  It is mostly\n"
-		"#               used at boot time, when no name servers are running.\n"
-		"#               On small systems, this file can be used instead of a\n"
-		"#               'named' name server.  Just add the names, addresses\n"
-		"#               and any aliases to this file...\n"
-		"#\n\n"
-		"# For loopbacking.\n"
-		"127.0.0.1               localhost\n");
-	fprintf(fp, "%s\t%s %s\n", ipaddr, host, hostname(host));
-	fprintf(fp, "\n# End of hosts.\n");
-	fclose(fp);
+		fp = fopen("/etc/hosts", "w");
+		if(fp==NULL)
+			return(1);
+		fprintf(fp, "#\n"
+				"# hosts         This file describes a number of hostname-to-address\n"
+				"#               mappings for the TCP/IP subsystem.  It is mostly\n"
+				"#               used at boot time, when no name servers are running.\n"
+				"#               On small systems, this file can be used instead of a\n"
+				"#               'named' name server.  Just add the names, addresses\n"
+				"#               and any aliases to this file...\n"
+				"#\n\n"
+				"# For loopbacking.\n"
+				"127.0.0.1               localhost\n");
+		fprintf(fp, "%s\t%s %s\n", ipaddr, host, hostname(host));
+		fprintf(fp, "\n# End of hosts.\n");
+		fclose(fp);
 
-	fp = fopen("/etc/networks", "w");
-	if(fp==NULL)
-		return(1);
-	fprintf(fp, "#\n"
-		"# networks      This file describes a number of netname-to-address\n"
-		"#               mappings for the TCP/IP subsystem.  It is mostly\n"
-		"#               used at boot time, when no name servers are running.\n"
-		"#\n\n"
-		"loopback        127.0.0.0\n");
-	fprintf(fp, "localnet        %s\n", network);
-	fprintf(fp, "\n# End of networks.\n");
-	fclose(fp);
+		fp = fopen("/etc/networks", "w");
+		if(fp==NULL)
+			return(1);
+		fprintf(fp, "#\n"
+				"# networks      This file describes a number of netname-to-address\n"
+				"#               mappings for the TCP/IP subsystem.  It is mostly\n"
+				"#               used at boot time, when no name servers are running.\n"
+				"#\n\n"
+				"loopback        127.0.0.0\n");
+		fprintf(fp, "localnet        %s\n", network);
+		fprintf(fp, "\n# End of networks.\n");
+		fclose(fp);
 	}
 	FWUTIL_FREE(network);
 	umask(oldmask);
