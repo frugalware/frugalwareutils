@@ -73,7 +73,7 @@ char *selnettype()
 		0, 0, 0, typenum, types));
 }
 
-int dsl_hook(fwnet_profile_t *profile)
+int dsl_hook(fwnet_profile_t *profile, int confirm)
 {
 	struct stat buf;
 	char *iface, *uname, *pass1, *pass2;
@@ -81,8 +81,8 @@ int dsl_hook(fwnet_profile_t *profile)
 	// do we have pppoe?
 	if(stat("/usr/sbin/pppoe", &buf))
 		return(0);
-	if(fwdialog_yesno(_("DSL configuration"), _("Do you want to configure a DSL connetion now?")))
-	{
+	if(confirm && !fwdialog_yesno(_("DSL configuration"), _("Do you want to configure a DSL connetion now?")))
+		return(0);
 		uname = fwdialog_ask(_("Enter user name"),
 			_("Enter your PPPoE user name:"), NULL);
 		snprintf(profile->adsl_username, PATH_MAX, uname);
@@ -114,7 +114,6 @@ int dsl_hook(fwnet_profile_t *profile)
 			fwutil_system("pppoe-connect >/dev/tty4 2>/dev/tty4 &");
 			return(0);
 		}
-	}
 	return(0);
 }
 
@@ -205,8 +204,10 @@ int dialog_config(int argc, char **argv)
 			NULL);
 		newprofile->dnses = g_list_append(newprofile->dnses, dns);
 	}
-	if(!strcmp(nettype, "static") || !strcmp(nettype, "dsl"))
-		dsl_hook(newprofile);
+	if(!strcmp(nettype, "static"))
+		dsl_hook(newprofile, 1);
+	if(strcmp(nettype, "dsl"))
+		dsl_hook(newprofile, 0);
 
 	if(fwdialog_yesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
 		&& !fwutil_dryrun)
