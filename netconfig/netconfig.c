@@ -83,37 +83,37 @@ int dsl_hook(fwnet_profile_t *profile, int confirm)
 		return(0);
 	if(confirm && !fwdialog_yesno(_("DSL configuration"), _("Do you want to configure a DSL connetion now?")))
 		return(0);
-		uname = fwdialog_ask(_("Enter user name"),
+	uname = fwdialog_ask(_("Enter user name"),
 			_("Enter your PPPoE user name:"), NULL);
-		snprintf(profile->adsl_username, PATH_MAX, uname);
-		while(1)
-		{
-			pass1 = fwdialog_password(_("Password"),
+	snprintf(profile->adsl_username, PATH_MAX, uname);
+	while(1)
+	{
+		pass1 = fwdialog_password(_("Password"),
 				_("Please enter your PPPoE password"));
-			pass2 = fwdialog_password(_("Password"),
+		pass2 = fwdialog_password(_("Password"),
 				_("Please re-enter your PPPoE password"));
-			if(!strcmp(pass1, pass2))
-			{
-				snprintf(profile->adsl_password, PATH_MAX, pass1);
-				break;
-			}
-			if(!fwdialog_yesno(_("Passwords don't match"),
-				_("Sorry, the passwords do not match. Try again?")))
-				return(1);
-		}
-		iface = fwdialog_ask(_("Enter interface name"),
-			_("Enter the Ethernet interface connected to the DSL modem. It will be ethn, "
-			"where 'n' is a number.\n"
-			"If unsure, just hit enter.\n"
-			"Enter interface name:"), "eth0");
-		snprintf(profile->adsl_interface, IF_NAMESIZE, iface);
-		if(nco_fast)
+		if(!strcmp(pass1, pass2))
 		{
-			fwutil_system("mkdir /var/run");
-			fwutil_system("mount -t devpts none /dev/pts");
-			fwutil_system("pppoe-connect >/dev/tty4 2>/dev/tty4 &");
-			return(0);
+			snprintf(profile->adsl_password, PATH_MAX, pass1);
+			break;
 		}
+		if(!fwdialog_yesno(_("Passwords don't match"),
+					_("Sorry, the passwords do not match. Try again?")))
+			return(1);
+	}
+	iface = fwdialog_ask(_("Enter interface name"),
+			_("Enter the Ethernet interface connected to the DSL modem. It will be ethn, "
+				"where 'n' is a number.\n"
+				"If unsure, just hit enter.\n"
+				"Enter interface name:"), "eth0");
+	snprintf(profile->adsl_interface, IF_NAMESIZE, iface);
+	if(nco_fast)
+	{
+		fwutil_system("mkdir /var/run");
+		fwutil_system("mount -t devpts none /dev/pts");
+		fwutil_system("pppoe-connect >/dev/tty4 2>/dev/tty4 &");
+		return(0);
+	}
 	return(0);
 }
 
