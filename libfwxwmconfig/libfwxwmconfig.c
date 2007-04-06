@@ -29,7 +29,7 @@
 #define FWUTIL_GETTEXT "libfwxwmconfig"
 #include <libfwutil.h>
 #include <libintl.h>
-#include <alpm.h>
+#include <pacman.h>
 #include <glib.h>
 
 #include "libfwxwmconfig.h"
@@ -41,24 +41,24 @@
  * @{
  */
 
-/** Initialize libalpm and the local database
+/** Initialize libpacman and the local database
  * @return the local database object on success, NULL on error
  */
 PM_DB *fwxwm_init()
 {
 	PM_DB *db;
 
-	if(alpm_initialize("/")==-1)
+	if(pacman_initialize("/")==-1)
 		return(NULL);
-	if(!(db = alpm_db_register("local")))
+	if(!(db = pacman_db_register("local")))
 	{
-		alpm_release();
+		pacman_release();
 		return(NULL);
 	}
 	return(db);
 }
 
-/** Release libalpm and the local database
+/** Release libpacman and the local database
  * @param db the local database object
  * @return 0 on success, < 0 on error
  */
@@ -66,8 +66,8 @@ int fwxwm_release(PM_DB *db)
 {
 	int ret=0;
 
-	ret += alpm_db_unregister(db);
-	ret += alpm_release();
+	ret += pacman_db_unregister(db);
+	ret += pacman_release();
 	return(ret);
 }
 
@@ -79,9 +79,9 @@ unsigned int fwxwm_checkdms(PM_DB *db)
 {
 	unsigned int ret=0;
 
-	if(alpm_db_readpkg(db, "kdebase"))
+	if(pacman_db_readpkg(db, "kdebase"))
 		ret |= FWXWM_KDM;
-	if(alpm_db_readpkg(db, "gdm"))
+	if(pacman_db_readpkg(db, "gdm"))
 		ret |= FWXWM_GDM;
 	return(ret);
 }
@@ -113,12 +113,12 @@ GList *fwxwm_list(PM_DB *db)
 		if(strlen(ent->d_name)<=strlen("xinitrc."))
 			continue;
 		ptr = ent->d_name+strlen("xinitrc.");
-		if((pkg = alpm_db_readpkg(db, ptr)))
+		if((pkg = pacman_db_readpkg(db, ptr)))
 		{
 			list = g_list_append(list, strdup(ptr));
-			list = g_list_append(list, strdup(alpm_pkg_getinfo(pkg, PM_PKG_DESC)));
+			list = g_list_append(list, strdup(pacman_pkg_getinfo(pkg, PM_PKG_DESC)));
 			/*printf("pkg: %s\n", ptr);
-			printf("desc: %s\n", (char*)alpm_pkg_getinfo(pkg, PM_PKG_DESC));*/
+			printf("desc: %s\n", (char*)pacman_pkg_getinfo(pkg, PM_PKG_DESC));*/
 		}
 		else
 		{

@@ -21,7 +21,7 @@ CFLAGS = $(LIB_CFLAGS)
 CFLAGS += $(shell pkg-config --cflags glib-2.0)
 LDFLAGS += $(shell pkg-config --libs glib-2.0)
 
-LDFLAGS += -lalpm
+LDFLAGS += -lpacman
 
 # fwutil
 CFLAGS += -I../libfwutil

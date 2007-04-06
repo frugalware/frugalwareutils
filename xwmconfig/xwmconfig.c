@@ -21,7 +21,7 @@
 
 #include <stdio.h>
 #include <glib.h>
-#include <alpm.h>
+#include <pacman.h>
 #include <libfwdialog.h>
 #include <libfwutil.h>
 #include <libfwxwmconfig.h>
