@@ -1,5 +1,10 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.6.9         - netconfig:
+                - don't ask if the user wants a dsl conn in dsl mode
+                - grammar fixes
+                - prevent multiple declaration of libfwnetconfig.h
+              - ported to libpacman
 0.6.8         - netconfig: handle SIGTERM
               - grubconfig: handle the case when there is no message file
               - build fix for newer intltool
