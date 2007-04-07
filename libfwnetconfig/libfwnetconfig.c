@@ -89,6 +89,7 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 		return(NULL);
 	}
 	FWUTIL_FREE(ptr);
+	sprintf (profile->name, "%s", fn);
 
 	while(fgets(line, PATH_MAX, fp))
 	{
