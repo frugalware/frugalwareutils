@@ -86,6 +86,7 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 	if(fp == NULL)
 	{
 		printf(_("%s: No such profile!\n"), fn);
+		FWUTIL_FREE (profile);
 		return(NULL);
 	}
 	FWUTIL_FREE(ptr);
@@ -107,6 +108,7 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 			if(!strlen(interface))
 			{
 				fprintf(stderr, _("profile: line %d: bad interface name\n"), n);
+				FWUTIL_FREE (profile);
 				return(NULL);
 			}
 			if(strcmp(interface, "options"))
@@ -123,7 +125,10 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 					// start a new interface record
 					iface = (fwnet_interface_t*)malloc(sizeof(fwnet_interface_t));
 					if(iface==NULL)
+					{
+						FWUTIL_FREE (profile);
 						return(NULL);
+					}
 					memset(iface, 0, sizeof(fwnet_interface_t));
 					strncpy(iface->name, interface, IF_NAMESIZE);
 					profile->interfaces = g_list_append(profile->interfaces, iface);
@@ -138,6 +143,7 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 			if(var == NULL)
 			{
 				fprintf(stderr, _("profile: line %d: syntax error\n"), n);
+				FWUTIL_FREE (profile);
 				return(NULL);
 			}
 			fwutil_trim(var);
@@ -145,6 +151,7 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 			if(!strlen(interface))
 			{
 				fprintf(stderr, _("profile: line %d: all directives must belong to a section\n"), n);
+				FWUTIL_FREE (profile);
 				return(NULL);
 			}
 			if(ptr != NULL)
