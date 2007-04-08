@@ -47,7 +47,6 @@ int usage(const char *myname)
 	printf(_("       %s [options] [profile]\n"), myname);
 	printf(_("-h | --help              This help.\n"));
 	printf(_("-f | --fast              Fast mode, used by the setup.\n"));
-	printf(_("-l | --loop              After bringing up the profile, loop in the foreground.\n"));
 	printf(_("                         SIGHUP will unload and reload the current profile.\n"));
 	printf(_("     --dry-run           Do not actually perform the operation.\n"));
 	return(0);
@@ -227,52 +226,14 @@ int dialog_config(int argc, char **argv)
 	return(0);
 }
 
-void sighup_handler(int sig)
-{
-	int myret, i;
-	if(sigprof==NULL)
-		return;
-	
-	// unload the profile
-	for (i=0; i<g_list_length(sigprof->interfaces); i++)
-		fwnet_ifdown((fwnet_interface_t*)g_list_nth_data(sigprof->interfaces, i), sigprof);
-	
-	sleep(2);
-	
-	// reload the profile
-	for (i=0; i<g_list_length(sigprof->interfaces); i++)
-		myret += fwnet_ifup((fwnet_interface_t*)g_list_nth_data(sigprof->interfaces, i), sigprof);
-	
-	fwnet_setdns(sigprof);
-}
-
-void sigterm_handler(int sig)
-{
-	int i;
-	if(sigprof==NULL)
-		exit(0);
-	
-	// unload the profile
-	for (i=0; i<g_list_length(sigprof->interfaces); i++)
-		fwnet_ifdown((fwnet_interface_t*)g_list_nth_data(sigprof->interfaces, i), sigprof);
-	
-	fwnet_lodown();
-	if(!fwutil_dryrun)
-		fwnet_setlastprofile(NULL);
-	
-	exit(0);	
-}
-
 int run(int argc, char **argv)
 {
 	int opt;
 	int option_index;
-	int loop=0;
 	static struct option opts[] =
 	{
 		{"help",           no_argument,       0, 'h'},
 		{"fast",           no_argument,       0, 'f'},
-		{"loop",           no_argument,       0, 'l'},
 		{"dry-run",        no_argument,       0, 1000},
 		{0, 0, 0, 0}
 	};
@@ -289,7 +250,6 @@ int run(int argc, char **argv)
 			case 1000: fwutil_dryrun = 1; break;
 			case 'h':  nco_usage  = 1; break;
 			case 'f':  nco_fast   = 1; break;
-			case 'l':  loop       = 1; break;
 		}
 	}
 	fwutil_i18ninit(__FILE__);
@@ -351,24 +311,6 @@ int run(int argc, char **argv)
 		if(!fwutil_dryrun)
 			fwnet_setlastprofile(fn);
 		FWUTIL_FREE(fn);
-		
-		// loop if required (for runit)
-		if (loop)
-		{
-			sigprof = profile;
-			if (signal(SIGHUP, sighup_handler) == SIG_ERR)
-			{
-				perror("signal");
-				return(1);
-			}
-			if (signal(SIGTERM, sigterm_handler) == SIG_ERR)
-			{
-				perror("signal");
-				return(1);
-			}
-			while (1)
-				sleep(400);
-		}
 	}
 	else
 		dialog_config(argc, argv);
