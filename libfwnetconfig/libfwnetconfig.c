@@ -253,12 +253,10 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 			else if (i>0)
 				printf("kill(%d, 15);\n", i);
 			
-			// if we're using dhclient...
-			if (!strcmp("dhclient", iface->dhcpclient)) {
-				ptr = g_strdup_printf("ifconfig %s down", iface->name);
-				fwutil_system(ptr);
-				FWUTIL_FREE(ptr);
-			}
+			// dhclient and the latest dhcpcd do not bring the interface down fully
+			ptr = g_strdup_printf("ifconfig %s down", iface->name);
+			fwutil_system(ptr);
+			FWUTIL_FREE(ptr);
 		}
 	}
 	else
