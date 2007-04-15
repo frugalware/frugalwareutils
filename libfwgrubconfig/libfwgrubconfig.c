@@ -384,20 +384,22 @@ static char *mount_dev(char *path)
 
 	fp = setmntent (table, "r");
 	if(!fp)
-		return(NULL);
-	while ((mnt = getmntent (fp)))
-		if(!strcmp(mnt->mnt_dir, path))
-			break;
-	return(strdup(mnt->mnt_fsname));
+	{
+		while ((mnt = getmntent (fp)))
+			if(!strcmp(mnt->mnt_dir, path))
+				return(strdup(mnt->mnt_fsname));
+	}
+	return(NULL);
 }
 
 static int write_entry(struct fwgrub_entry_t *entry)
 {
 	char *ptr;
 
-	if(!entry->fp)
+	if(!entry || !entry->fp)
 		return(1);
 	fprintf(entry->fp, "title %s\n", entry->title);
+	fflush(entry->fp); // debug help
 	if(!entry->type || !strcmp(entry->type, "linux"))
 	{
 		if(entry->opts)
@@ -424,6 +426,7 @@ static int write_entry(struct fwgrub_entry_t *entry)
 		fprintf(entry->fp, "\tchainloader +1\n\n");
 	}
 	// TODO: else if(!strcmp(entry->type, "hurd"))
+	fflush(entry->fp);
 	return(0);
 }
 
