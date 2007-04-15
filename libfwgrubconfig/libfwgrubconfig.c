@@ -383,7 +383,7 @@ static char *mount_dev(char *path)
 	FILE *fp;
 
 	fp = setmntent (table, "r");
-	if(!fp)
+	if(fp)
 	{
 		while ((mnt = getmntent (fp)))
 			if(!strcmp(mnt->mnt_dir, path))
