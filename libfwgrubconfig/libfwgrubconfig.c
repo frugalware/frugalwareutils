@@ -387,7 +387,10 @@ static char *mount_dev(char *path)
 	{
 		while ((mnt = getmntent (fp)))
 			if(!strcmp(mnt->mnt_dir, path))
-				return(strdup(mnt->mnt_fsname));
+				break;
+		endmntent(fp);
+		if(mnt)
+			return(strdup(mnt->mnt_fsname));
 	}
 	return(NULL);
 }
