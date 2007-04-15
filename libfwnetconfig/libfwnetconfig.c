@@ -231,7 +231,7 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 	if(strlen(profile->adsl_interface) && !strcmp(profile->adsl_interface, iface->name) &&
 		strlen(profile->adsl_username) && strlen(profile->adsl_password))
 	{
-		ret += fwutil_system("service adsl stop");
+		ret += fwutil_system("pppoe-stop");
 	}
 	dhcp = fwnet_is_dhcp(iface);
 	if(dhcp)
@@ -434,7 +434,7 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 		update_adsl_conf(iface->name, profile->adsl_username);
 		update_secrets("/etc/ppp/pap-secrets", profile->adsl_username, profile->adsl_password);
 		update_secrets("/etc/ppp/chap-secrets", profile->adsl_username, profile->adsl_password);
-		ret += fwutil_system("service adsl start");
+		ret += fwutil_system("pppoe-start");
 	}
 	if(g_list_length(iface->post_ups))
 		for (i=0; i<g_list_length(iface->post_ups); i++)
