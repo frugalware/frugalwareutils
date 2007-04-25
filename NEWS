@@ -1,5 +1,9 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.7.0         - new Slovak translation
+              - fixed some memory leak in libfwnetconfig
+              - documentation fixes
+              - fix for netconfig stop when using dhcp
 0.6.9         - netconfig:
                 - don't ask if the user wants a dsl conn in dsl mode
                 - grammar fixes
