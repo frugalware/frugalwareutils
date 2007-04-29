@@ -54,7 +54,7 @@ char* ask_wm(PM_DB *db)
 void usage(char *name)
 {
 	printf(_("usage: %s [options]\n"), name);
-	printf(_("--force         Run this tool even GDM or KDM installed.\n"));
+	printf(_("--force         Run this tool even if GDM or KDM is installed.\n"));
 	printf(_("--help          This help.\n"));
 	printf(_("--silent        Do not print any warning if GDM or KDM installed.\n"));
 }
