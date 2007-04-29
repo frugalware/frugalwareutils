@@ -50,7 +50,7 @@ int ask_mode()
 		"\t1. The Master Boot Record of your first hard drive.\n"
 		"\t2. A formatted floppy disk.\n"
 		"\t3. The superblock of your root Linux partition.\n\n"
-		"Option 3 require setting the partition bootable with (c)fdisk\n"
+		"Option 3 requires setting the partition bootable with (c)fdisk\n"
 		"Hint: Choose option 3 if you already have a boot manager installed.\n"
 		"Which option would you like?"), 0, 0, 0, 4, modes);
 	if(!strcmp(ptr, _("MBR")))
