@@ -47,7 +47,7 @@ char* ask_mode()
 	};
 	char *ptr;
 
-	ptr = fwdialog_menu(_("Do you want to set hardware clock utc?"),
+	ptr = fwdialog_menu(_("Do you want to set hardware clock to UTC?"),
 		_("Is the hardware clock set to Coordinated Universal Time "
 		"(UTC/GMT)?  If it is, select 'yes' here. If the hardware "
 		"clock is set to the current local time (this is how most PCs "
