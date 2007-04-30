@@ -42,27 +42,16 @@ char* ask_mode()
 {
 	char *modes[] = 
 	{
-		_("no"), _("Hardware clock is set to local time"),
-		_("yes"), _("Hardware clock is set to UTC")
+		"localtime", _("Hardware clock is set to local time"),
+		"UTC", _("Hardware clock is set to UTC/GMT")
 	};
 	char *ptr;
 
-	ptr = fwdialog_menu(_("Do you want to set hardware clock to UTC?"),
-		_("Is the hardware clock set to Coordinated Universal Time "
-		"(UTC/GMT)?  If it is, select 'yes' here. If the hardware "
-		"clock is set to the current local time (this is how most PCs "
-		"are set up), then say 'no' here.  If you are not sure what "
-		"this is, you should answer 'no' here."), 0, 0, 0, 2, modes);
-	if(!strcmp(ptr, "yes"))
-	{
-		free(ptr);
-		ptr = strdup("UTC");
-	}
-	else
-	{
-		free(ptr);
-		ptr = strdup("localtime");
-	}
+	ptr = fwdialog_menu(_("What is the setup of the hardware clock?"),
+		_("If the hardware clock is set to the Coordinated Universal "
+		"time select 'UTC'. Else if it is set to the current "
+		"local time (this is how most PCs are set up) or if you are "
+		"unsure, then select 'local' here."), 0, 0, 0, 2, modes);
 	return(ptr);
 }
 
