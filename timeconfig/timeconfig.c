@@ -68,12 +68,12 @@ GList *zone_scan(char *dir)
 	// search the zones
 	fwtime_find(dir);
 
-	// sort them and add a "   " item after each (required by libdialog)
+	// sort them and add a "" item after each (required by libdialog)
 	zones = g_list_sort(zones, sort_zones);
 	for (i=0; i<g_list_length(zones); i++)
 	{
 		buf = g_list_append(buf, g_list_nth_data(zones, i));
-		buf = g_list_append(buf, "   ");
+		buf = g_list_append(buf, "");
 	}
 	g_list_free(zones);
 	zones = buf;
