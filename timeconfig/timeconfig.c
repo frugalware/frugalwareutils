@@ -51,7 +51,7 @@ char* ask_mode()
 		_("If the hardware clock is set to the Coordinated Universal "
 		"time select 'UTC'. Else if it is set to the current "
 		"local time (this is how most PCs are set up) or if you are "
-		"unsure, then select 'local' here."), 0, 0, 0, 2, modes);
+		"unsure, then select 'localtime' here."), 0, 0, 0, 2, modes);
 	return(ptr);
 }
 
