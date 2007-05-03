@@ -642,9 +642,8 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 	char *option = (char*)g_list_nth_data(iface->options, 0);
 	char *dns = (char*)g_list_nth_data(profile->dnses, 0);
 	char *network=NULL;
-	char ipaddr[16], netmask[16];
+	char ipaddr[16] = "", netmask[16] = "";
 	char *ptr;
-	int i;
 	int oldmask;
 
 	oldmask = umask(0077);
@@ -654,41 +653,50 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 	FWUTIL_FREE(ptr);
 	if(fp==NULL)
 		return(1);
-	if((dns && strlen(dns)) || strlen(profile->adsl_username) ||
-		strlen(profile->adsl_password) || strlen(profile->adsl_interface))
+	if(((char*)g_list_nth_data(profile->dnses, 0) && strlen((char*)g_list_nth_data(profile->dnses, 0))) ||
+			strlen(profile->adsl_username) || strlen(profile->adsl_password) ||
+			strlen(profile->adsl_interface))
 		fprintf(fp, "[options]\n");
-	for(i=0;i<=g_list_length(profile->dnses);i++)
-	{
-		dns = g_list_nth_data (profile->dnses, i);
-		if(dns && strlen(dns))
-			fprintf(fp, "dns = %s\n", dns);
-	}
+	if(dns && strlen(dns))
+		fprintf(fp, "dns = %s\n", dns);
 	if(strlen(profile->adsl_username))
 		fprintf(fp, "adsl_username = %s\n", profile->adsl_username);
 	if(strlen(profile->adsl_password))
 		fprintf(fp, "adsl_password = %s\n", profile->adsl_password);
 	if(strlen(profile->adsl_interface))
 		fprintf(fp, "adsl_interface = %s\n", profile->adsl_interface);
-	if(strcmp(nettype, "lo"))
+	for(i=0;i<g_list_length(profile->interfaces);i++)
+	{
+		fwnet_interface_t* iface = (fwnet_interface_t*)g_list_nth_data(profile->interfaces, i);
 		fprintf(fp, "[%s]\n", iface->name);
-	if(iface->essid != NULL && strlen(iface->essid))
-		fprintf(fp, "essid = %s\n", iface->essid);
-	if(iface->mode != NULL && strlen(iface->mode))
-		fprintf(fp, "mode = %s\n", iface->mode);
-	if(iface->key != NULL && strlen(iface->key))
-		fprintf(fp, "key = %s\n", iface->key);
-	if(!strcmp(nettype, "dhcp"))
-	{
-		fprintf(fp, "options = dhcp\n");
-		if(strlen(iface->dhcp_opts))
-			fprintf(fp, "%s", iface->dhcp_opts);
-	}
-	else if (!strcmp(nettype, "static"))
-	{
-		if(option != NULL && strlen(option))
-			fprintf(fp, "%s\n", option);
-		if(strlen(iface->gateway))
-			fprintf(fp, "gateway = default gw %s\n", iface->gateway);
+		if(iface->essid != NULL && strlen(iface->essid))
+			fprintf(fp, "essid = %s\n", iface->essid);
+		if(iface->mode != NULL && strlen(iface->mode))
+			fprintf(fp, "mode = %s\n", iface->mode);
+		if(iface->key != NULL && strlen(iface->key))
+			fprintf(fp, "key = %s\n", iface->key);
+		if(fwnet_is_dhcp(iface))
+		{
+			fprintf(fp, "options = dhcp\n");
+			if(strlen(iface->dhcp_opts))
+				fprintf(fp, "%s", iface->dhcp_opts);
+		}
+		else
+		{
+			for(j=0;j<g_list_length(iface->options);j++)
+			{
+				char *option = (char*)g_list_nth_data(iface->options, j);
+				if(option != NULL && strlen(option))
+				{
+					if(!strlen(ipaddr))
+						sscanf(option, "options = %s netmask %s", ipaddr, netmask);
+					fprintf(fp, "%s\n", option);
+					staticip = 1;
+				}
+			}
+			if(strlen(iface->gateway))
+				fprintf(fp, "gateway = default gw %s\n", iface->gateway);
+		}
 	}
 	fclose(fp);
 
@@ -700,10 +708,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 		fprintf(fp, "%s\n", host);
 		fclose(fp);
 
-		if(option)
-			sscanf(option, "options = %s netmask %s", ipaddr, netmask);
-
-		if(strcmp(nettype, "static"))
+		if(!staticip)
 		{
 			sprintf(ipaddr, "127.0.0.1");
 			network = strdup("127.0.0.0");
