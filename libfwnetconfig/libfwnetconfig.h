@@ -73,6 +73,6 @@ int fwnet_setlastprofile(char* str);
 int fwnet_loup(void);
 int fwnet_lodown(void);
 int fwnet_is_wireless_device(char *dev);
-int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype);
+int fwnet_writeconfig(fwnet_profile_t *profile, char *host);
 
 #endif

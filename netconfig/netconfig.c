@@ -215,7 +215,7 @@ int dialog_config(int argc, char **argv)
 
 	if(fwdialog_yesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
 		&& !fwutil_dryrun)
-		fwnet_writeconfig(newprofile, host, nettype);
+		fwnet_writeconfig(newprofile, host);
 
 	g_list_free(newinterface->options);
 	FWUTIL_FREE(newinterface);

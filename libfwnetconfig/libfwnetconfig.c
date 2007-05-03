@@ -632,10 +632,9 @@ static char *netaddr(char *ip, char *nm)
 /** Dumps a profile to a text file.
  * @param profile the profile to dump
  * @param host the hostname (optional)
- * @param nettype the type of the network (lo, dhcp or static)
  * @return 1 on failure, 0 on success
  */
-int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
+int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 {
 	FILE *fp;
 	fwnet_interface_t* iface = (fwnet_interface_t*)g_list_nth_data(profile->interfaces, 0);
