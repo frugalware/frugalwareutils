@@ -181,6 +181,8 @@ int dialog_config(int argc, char **argv)
 		else
 			newinterface->dhcp_opts[0]='\0';
 		FWUTIL_FREE(ptr);
+		sprintf(option, "dhcp");
+		newinterface->options = g_list_append(newinterface->options, option);
 	}
 	else if(!strcmp(nettype, "static"))
 	{
