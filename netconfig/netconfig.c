@@ -148,7 +148,9 @@ int dialog_config(int argc, char **argv)
 	if((newinterface = (fwnet_interface_t*)malloc(sizeof(fwnet_interface_t))) == NULL)
 		return(1);
 	memset(newinterface, 0, sizeof(fwnet_interface_t));
-	iface = fwdialog_ask(_("Enter interface name"),
+	if(strcmp(nettype, "lo"))
+	{
+		iface = fwdialog_ask(_("Enter interface name"),
 		_("We'll need the name of the interface you'd like to use for your network connection.\n"
 		"If unsure, just hit enter.\n"
 		"Enter interface name:"), "eth0");
