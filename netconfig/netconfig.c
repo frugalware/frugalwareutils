@@ -154,8 +154,9 @@ int dialog_config(int argc, char **argv)
 		_("We'll need the name of the interface you'd like to use for your network connection.\n"
 		"If unsure, just hit enter.\n"
 		"Enter interface name:"), "eth0");
-	snprintf(newinterface->name, IF_NAMESIZE, iface);
-	newprofile->interfaces = g_list_append(newprofile->interfaces, newinterface);
+		snprintf(newinterface->name, IF_NAMESIZE, iface);
+		newprofile->interfaces = g_list_append(newprofile->interfaces, newinterface);
+	}
 
 	if(strcmp(nettype, "lo") && fwnet_is_wireless_device(iface))
 	{
