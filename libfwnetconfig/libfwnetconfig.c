@@ -644,7 +644,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 	char *network=NULL;
 	char ipaddr[16] = "", netmask[16] = "";
 	char *ptr;
-	int oldmask;
+	int oldmask, i, j, staticip = 0;
 
 	oldmask = umask(0077);
 	ptr = g_strdup_printf("%s/%s", FWNET_PATH, profile->name);
@@ -657,8 +657,12 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host, char *nettype)
 			strlen(profile->adsl_username) || strlen(profile->adsl_password) ||
 			strlen(profile->adsl_interface))
 		fprintf(fp, "[options]\n");
-	if(dns && strlen(dns))
-		fprintf(fp, "dns = %s\n", dns);
+	for(i=0;i<g_list_length(profile->dnses);i++)
+	{
+		char *dns = (char*)g_list_nth_data(profile->dnses, i);
+		if(dns && strlen(dns))
+			fprintf(fp, "dns = %s\n", dns);
+	}
 	if(strlen(profile->adsl_username))
 		fprintf(fp, "adsl_username = %s\n", profile->adsl_username);
 	if(strlen(profile->adsl_password))
