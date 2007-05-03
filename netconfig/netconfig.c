@@ -210,7 +210,7 @@ int dialog_config(int argc, char **argv)
 	}
 	if(!strcmp(nettype, "static"))
 		dsl_hook(newprofile, 1);
-	if(strcmp(nettype, "dsl"))
+	if(!strcmp(nettype, "dsl"))
 		dsl_hook(newprofile, 0);
 
 	if(fwdialog_yesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
