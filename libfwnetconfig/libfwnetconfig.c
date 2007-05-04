@@ -637,9 +637,6 @@ static char *netaddr(char *ip, char *nm)
 int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 {
 	FILE *fp;
-	fwnet_interface_t* iface = (fwnet_interface_t*)g_list_nth_data(profile->interfaces, 0);
-	char *option = (char*)g_list_nth_data(iface->options, 0);
-	char *dns = (char*)g_list_nth_data(profile->dnses, 0);
 	char *network=NULL;
 	char ipaddr[16] = "", netmask[16] = "";
 	char *ptr;
