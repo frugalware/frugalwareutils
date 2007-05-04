@@ -177,7 +177,7 @@ int dialog_config(int argc, char **argv)
 			"assigned a DHCP hostname, please enter it below. If you do not have a DHCP hostname, just"
 			"hit enter."), NULL);
 		if(strlen(ptr))
-			snprintf(newinterface->dhcp_opts, PATH_MAX, "dhcp_opts = -t 10 -h %s\n", ptr);
+			snprintf(newinterface->dhcp_opts, PATH_MAX, "-t 10 -h %s\n", ptr);
 		else
 			newinterface->dhcp_opts[0]='\0';
 		FWUTIL_FREE(ptr);
