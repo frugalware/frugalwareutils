@@ -690,7 +690,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 				{
 					if(!strlen(ipaddr))
 						sscanf(option, "options = %s netmask %s", ipaddr, netmask);
-					fprintf(fp, "%s\n", option);
+					fprintf(fp, "options = %s\n", option);
 					staticip = 1;
 				}
 			}

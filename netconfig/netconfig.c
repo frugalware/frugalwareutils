@@ -192,7 +192,7 @@ int dialog_config(int argc, char **argv)
 			_("Enter your netmask. This will generally look something like this: 255.255.255.0\n"
 			"If unsure, just hit enter."), "255.255.255.0");
 		if(strlen(ipaddr))
-			snprintf(option, 49, "options = %s netmask %s", ipaddr, netmask);
+			snprintf(option, 49, "%s netmask %s", ipaddr, netmask);
 		newinterface->options = g_list_append(newinterface->options, option);
 		FWUTIL_FREE(ipaddr);
 		FWUTIL_FREE(netmask);
