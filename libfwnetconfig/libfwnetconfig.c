@@ -695,7 +695,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 				}
 			}
 			if(strlen(iface->gateway))
-				fprintf(fp, "gateway = default gw %s\n", iface->gateway);
+				fprintf(fp, "gateway = %s\n", iface->gateway);
 		}
 	}
 	fclose(fp);
