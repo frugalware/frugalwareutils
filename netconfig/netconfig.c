@@ -200,7 +200,7 @@ int dialog_config(int argc, char **argv)
 			"If you don't have a gateway on your network just hit enter, without entering any ip address."),
 			NULL);
 		if(strlen(ptr))
-			snprintf(newinterface->gateway, FWNET_GW_MAX_SIZE, "default gw %s", ptr);
+			snprintf(newinterface->gateway, FWNET_GW_MAX_SIZE, "%s", ptr);
 		FWUTIL_FREE(ptr);
 		dns = fwdialog_ask(_("Select nameserver"), _("Please give the IP address of the name server to use. You can"
 			"add more Domain Name Servers later by editing /etc/sysconfig/network/default.\n"
