@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.7.1         - minor improvements in timeconfig
+              - tons of bugfixes in libfwnetconfig
+              - netconfig: new --loup and --lodown switches
 0.7.0         - new Slovak translation
               - fixed some memory leak in libfwnetconfig
               - documentation fixes
