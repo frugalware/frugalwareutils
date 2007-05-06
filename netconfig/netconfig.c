@@ -36,8 +36,10 @@
 
 extern int fwutil_dryrun;
 
-int nco_usage   = 0;
+int nco_usage  = 0;
 int nco_fast   = 0;
+int nco_loup   = 0;
+int nco_lodown = 0;
 
 fwnet_profile_t *sigprof;
 
@@ -48,6 +50,8 @@ int usage(const char *myname)
 	printf(_("-h | --help              This help.\n"));
 	printf(_("-f | --fast              Fast mode, used by the setup.\n"));
 	printf(_("     --dry-run           Do not actually perform the operation.\n"));
+	printf(_("     --loup              Bring up the loopback interface.\n"));
+	printf(_("     --lodown            Bring down the loopback interface.\n"));
 	return(0);
 }
 
@@ -239,19 +243,23 @@ int run(int argc, char **argv)
 		{"help",           no_argument,       0, 'h'},
 		{"fast",           no_argument,       0, 'f'},
 		{"dry-run",        no_argument,       0, 1000},
+		{"loup",           no_argument,       0, 1001},
+		{"lodown",         no_argument,       0, 1002},
 		{0, 0, 0, 0}
 	};
 	char *fn=NULL;
 	int ret=0, i;
 	fwnet_profile_t *profile;
 
-	while((opt = getopt_long(argc, argv, "hfl", opts, &option_index)))
+	while((opt = getopt_long(argc, argv, "hf", opts, &option_index)))
 	{
 		if(opt < 0)
 			break;
 		switch(opt)
 		{
 			case 1000: fwutil_dryrun = 1; break;
+			case 1001: nco_loup   = 1; break;
+			case 1002: nco_lodown = 1; break;
 			case 'h':  nco_usage  = 1; break;
 			case 'f':  nco_fast   = 1; break;
 		}
@@ -262,7 +270,19 @@ int run(int argc, char **argv)
 		usage(argv[0]);
 		return(0);
 	}
-
+	
+	if(nco_loup)
+	{
+		fwnet_loup();
+		return(0);
+	}
+	
+	if(nco_lodown)
+	{
+		fwnet_lodown();
+		return(0);
+	}
+	
 	if(optind < argc)
 	{
 		if(!strcmp("list", argv[optind]))
@@ -291,7 +311,6 @@ int run(int argc, char **argv)
 					fwnet_ifdown((fwnet_interface_t*)g_list_nth_data(profile->interfaces, i), profile);
 			if(!strcmp("stop", argv[optind]))
 			{
-				fwnet_lodown();
 				if(!fwutil_dryrun)
 					fwnet_setlastprofile(NULL);
 				return(0);
@@ -307,8 +326,6 @@ int run(int argc, char **argv)
 		profile = fwnet_parseprofile(fn);
 		if(profile==NULL)
 			return(1);
-		if(!fwnet_lastprofile())
-			fwnet_loup();
 		for (i=0; i<g_list_length(profile->interfaces); i++)
 			ret += fwnet_ifup((fwnet_interface_t*)g_list_nth_data(profile->interfaces, i), profile);
 		fwnet_setdns(profile);
