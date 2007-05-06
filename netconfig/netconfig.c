@@ -47,7 +47,6 @@ int usage(const char *myname)
 	printf(_("       %s [options] [profile]\n"), myname);
 	printf(_("-h | --help              This help.\n"));
 	printf(_("-f | --fast              Fast mode, used by the setup.\n"));
-	printf(_("                         SIGHUP will unload and reload the current profile.\n"));
 	printf(_("     --dry-run           Do not actually perform the operation.\n"));
 	return(0);
 }
