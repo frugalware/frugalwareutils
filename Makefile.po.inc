@@ -37,6 +37,9 @@ prepare:
 	for i in $(LANGS); \
 	do \
 		cp $(PO_DIR)/frugalwareutils/$$i/$(DOMAIN).po $$i.po; \
+		if ! msgfmt -c --statistics -o $$i.gmo $$i.po; then \
+			echo "WARNING: $$i.po will break your build!"; \
+		fi; \
 	done
 
 # vim: ft=make
