@@ -26,6 +26,7 @@ LIB_CFLAGS="$CFLAGS"
 case "`$CC -dumpmachine`" in
 	i686-*)
 		CFLAGS="$CFLAGS -march=i686"
+		LIB_CFLAGS="$CFLAGS"
 		;;
 	x86_64-*)
 		CFLAGS="$CFLAGS -march=k8"
