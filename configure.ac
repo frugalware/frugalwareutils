@@ -2,6 +2,22 @@ AC_INIT([Configuration tools for Frugalware.], 1.0, [frugalware-devel@frugalware
 AC_PROG_CC
 AC_PROG_INSTALL
 
+dnl Check for curses
+AC_CHECK_LIB([curses], [wmove], [AC_CHECK_HEADER([curses.h], [LIBCURSES='-lcurses'])])
+if test -n "$LIBCURSES"; then
+	LDFLAGS="$LDFLAGS $LIBCURSES"
+else
+	AC_MSG_ERROR("curses library not found!");
+fi
+
+dnl Check for dialog
+AC_CHECK_LIB([dialog], [init_dialog], [AC_CHECK_HEADER([dialog.h], [LIBDIALOG='-ldialog'])])
+if test -n "$LIBDIALOG"; then
+	LDFLAGS="$LDFLAGS $LIBDIALOG"
+else
+	AC_MSG_ERROR("dialog library not found!");
+fi
+
 AC_ARG_ENABLE([doxygen], AS_HELP_STRING([--disable-doxygen], [Enable doxygen support (default: test)]))
 if test "$enable_doxygen" != "no"; then
 	AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, [])
