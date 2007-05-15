@@ -45,8 +45,8 @@ fwnet_profile_t *sigprof;
 
 int usage(const char *myname)
 {
-	printf(_("usage: %s [options] start|stop|restart|status|list\n"), myname);
-	printf(_("       %s [options] [profile]\n"), myname);
+	printf(_("usage: %s [options] start|stop|restart|status|list [interface]\n"), myname);
+	printf(_("       %s [options] [profile] [interface]\n"), myname);
 	printf(_("-h | --help              This help.\n"));
 	printf(_("-f | --fast              Fast mode, used by the setup.\n"));
 	printf(_("     --dry-run           Do not actually perform the operation.\n"));
