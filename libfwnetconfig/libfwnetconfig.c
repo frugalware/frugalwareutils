@@ -240,7 +240,7 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 		if (!strcmp("dhclient", iface->dhcpclient)) {
 			ptr = g_strdup_printf("/var/run/dhclient-%s.pid", iface->name);
 		} else
-			ptr = g_strdup_printf("/etc/dhcpc/dhcpcd-%s.pid", iface->name);
+			ptr = g_strdup_printf("/var/run/dhcpcd-%s.pid", iface->name);
 		fp = fopen(ptr, "r");
 		FWUTIL_FREE(ptr);
 		if(fp != NULL)
