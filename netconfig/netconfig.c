@@ -247,7 +247,7 @@ int run(int argc, char **argv)
 		{"lodown",         no_argument,       0, 1002},
 		{0, 0, 0, 0}
 	};
-	char *fn=NULL;
+	char *fn=NULL, *iface = NULL;
 	int ret=0, i;
 	fwnet_profile_t *profile;
 
@@ -285,6 +285,10 @@ int run(int argc, char **argv)
 	
 	if(optind < argc)
 	{
+		if(optind + 1 < argc)
+		{
+			iface = argv[optind+1];
+		}
 		if(!strcmp("list", argv[optind]))
 		{
 			fwnet_listprofiles();
@@ -308,7 +312,11 @@ int run(int argc, char **argv)
 			if(profile!=NULL)
 				// unload the old profile
 				for (i=0; i<g_list_length(profile->interfaces); i++)
-					fwnet_ifdown((fwnet_interface_t*)g_list_nth_data(profile->interfaces, i), profile);
+				{
+					fwnet_interface_t* j = g_list_nth_data(profile->interfaces, i);
+					if(!iface || !strcmp(iface, j->name))
+						fwnet_ifdown(j, profile);
+				}
 			if(!strcmp("stop", argv[optind]))
 			{
 				if(!fwutil_dryrun)
@@ -327,7 +335,11 @@ int run(int argc, char **argv)
 		if(profile==NULL)
 			return(1);
 		for (i=0; i<g_list_length(profile->interfaces); i++)
-			ret += fwnet_ifup((fwnet_interface_t*)g_list_nth_data(profile->interfaces, i), profile);
+		{
+			fwnet_interface_t* j = g_list_nth_data(profile->interfaces, i);
+			if(!iface || !strcmp(iface, j->name))
+				ret += fwnet_ifup(j, profile);
+		}
 		fwnet_setdns(profile);
 		if(!fwutil_dryrun)
 			fwnet_setlastprofile(fn);
