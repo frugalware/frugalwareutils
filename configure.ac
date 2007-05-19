@@ -2,6 +2,14 @@ AC_INIT([Configuration tools for Frugalware.], 1.0, [frugalware-devel@frugalware
 AC_PROG_CC
 AC_PROG_INSTALL
 
+dnl Check for libm
+AC_CHECK_LIB([m], [sqrt], [AC_CHECK_HEADER([math.h], [LIBMATH='-lm'])])
+if test -n "$LIBMATH"; then
+	LDFLAGS="$LDFLAGS $LIBMATH"
+else
+	AC_MSG_ERROR("math library not found!");
+fi
+
 dnl Check for curses
 AC_CHECK_LIB([curses], [wmove], [AC_CHECK_HEADER([curses.h], [LIBCURSES='-lcurses'])])
 if test -n "$LIBCURSES"; then
