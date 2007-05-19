@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2007-02-10 18:57+0100\n"
+"POT-Creation-Date: 2007-05-05 13:22+0200\n"
 "PO-Revision-Date: 2006-09-10 04:05+0100\n"
 "Last-Translator: Enda <enda@netou.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -30,7 +30,7 @@ msgstr ""
 # type: TH
 #: netconfig.5:1
 #, no-wrap
-msgid "Frugalware 0.5"
+msgid "Frugalware 0.6"
 msgstr ""
 
 # type: SH
@@ -125,8 +125,9 @@ msgstr ""
 
 # type: Plain text
 #: netconfig.5:31
+#, fuzzy
 msgid ""
-"Explicitely defines dns addresses (ie. when using a static ip). Multiple "
+"Explicitly defines dns addresses (ie. when using a static ip). Multiple "
 "usage is ok."
 msgstr ""
 "Défini explicitement les adresses dns (ie. lors de l'utilisation d'une "
@@ -231,7 +232,7 @@ msgstr ""
 # type: TP
 #: netconfig.5:55
 #, no-wrap
-msgid "B<opions = dhcp>"
+msgid "B<options = dhcp>"
 msgstr ""
 
 # type: Plain text
@@ -269,8 +270,9 @@ msgstr ""
 
 # type: Plain text
 #: netconfig.5:69
+#, fuzzy
 msgid ""
-"The synatax of these directives are the same: you can define there commands "
+"The syntax of these directives are the same: you can define there commands "
 "to be executed before the interface is up, after the interface is up, before "
 "it is down, and after, respectively. Multiple usage is ok, the commands are "
 "executed in the specified order."
@@ -448,8 +450,8 @@ msgstr ""
 # type: Plain text
 #: netconfig.5:132
 msgid ""
-"If you want to use wpa_supplicant instead of the simple encyption (using key "
-"= secret), then use the following pre_up and post_down lines:"
+"If you want to use wpa_supplicant instead of the simple encryption (using "
+"key = secret), then use the following pre_up and post_down lines:"
 msgstr ""
 
 # type: Plain text

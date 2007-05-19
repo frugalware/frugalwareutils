@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"POT-Creation-Date: 2007-02-10 18:57+0100\n"
+"POT-Creation-Date: 2007-05-05 13:22+0200\n"
 "PO-Revision-Date: 2007-02-10 19:14+0100\n"
 "Last-Translator: VMiklos <vmiklos@frugalware.org>\n"
 "Language-Team:  <hu@li.org>\n"
@@ -31,8 +31,8 @@ msgstr "2006 Augusztus 5"
 
 # type: TH
 #: netconfig.5:1
-#, no-wrap
-msgid "Frugalware 0.5"
+#, fuzzy, no-wrap
+msgid "Frugalware 0.6"
 msgstr "Frugalware 0.5"
 
 # type: SH
@@ -127,8 +127,9 @@ msgstr "B<dns = E<lt>ipE<gt>>"
 
 # type: Plain text
 #: netconfig.5:31
+#, fuzzy
 msgid ""
-"Explicitely defines dns addresses (ie. when using a static ip). Multiple "
+"Explicitly defines dns addresses (ie. when using a static ip). Multiple "
 "usage is ok."
 msgstr ""
 "Fixen definiál dns címeket (pl. statikus ip használatakor). A többszörös "
@@ -233,8 +234,8 @@ msgstr ""
 
 # type: TP
 #: netconfig.5:55
-#, no-wrap
-msgid "B<opions = dhcp>"
+#, fuzzy, no-wrap
+msgid "B<options = dhcp>"
 msgstr "B<opions = dhcp>"
 
 # type: Plain text
@@ -272,8 +273,9 @@ msgstr "B<post_down = E<lt>parancsE<gt>>"
 
 # type: Plain text
 #: netconfig.5:69
+#, fuzzy
 msgid ""
-"The synatax of these directives are the same: you can define there commands "
+"The syntax of these directives are the same: you can define there commands "
 "to be executed before the interface is up, after the interface is up, before "
 "it is down, and after, respectively. Multiple usage is ok, the commands are "
 "executed in the specified order."
@@ -333,12 +335,13 @@ msgid ""
 "node is not associ- ated with any cell and passively monitor all packets on "
 "the frequency) or Auto. If defined more than once, the first will be used."
 msgstr ""
-"Beállítja az eszköz mûködési módját a vezetéknéküli hálózati csatolók számára. A "
-"mód lehet Ad-Hoc (a hálózatban nincs Access Point), Managed (a hálózatban több "
-"Access Point van), Master (a csomópont a szinkronizációs master vagy Access Pointként "
-"viselkedik), Repeater (a csomópont csomagokat továbbít más vezetéknélküli csomópontoknak) ,"
-"Secondary (a csomópont egy tartalék master/repeater), Monitor (a csomópont nem kapcsolódik "
-"egy csomóponthoz sem, csak figyeli a frenkvencián az összes csomagot) vagy Auto. "
+"Beállítja az eszköz mûködési módját a vezetéknéküli hálózati csatolók "
+"számára. A mód lehet Ad-Hoc (a hálózatban nincs Access Point), Managed (a "
+"hálózatban több Access Point van), Master (a csomópont a szinkronizációs "
+"master vagy Access Pointként viselkedik), Repeater (a csomópont csomagokat "
+"továbbít más vezetéknélküli csomópontoknak) ,Secondary (a csomópont egy "
+"tartalék master/repeater), Monitor (a csomópont nem kapcsolódik egy "
+"csomóponthoz sem, csak figyeli a frenkvencián az összes csomagot) vagy Auto. "
 "Ha többször van definiálva, akkor az elsõ lesz érvényes."
 
 # type: TP
@@ -459,8 +462,8 @@ msgid ""
 "NOTE: if you use several pre_up and/or post_down lines, this pre_up should "
 "be the first, and this post_down should be the last one."
 msgstr ""
-"MEGJEGYZÉS: ha több pre_up és/vagy post_down sor van, akkor ez a pre_up kell legyen az elsõ, "
-"és ez a post_down kell legyen az utolsó."
+"MEGJEGYZÉS: ha több pre_up és/vagy post_down sor van, akkor ez a pre_up kell "
+"legyen az elsõ, és ez a post_down kell legyen az utolsó."
 
 # type: SH
 #: netconfig.5:128
@@ -470,12 +473,13 @@ msgstr "A WPA_SUPPLICANT HASZNÁLATA"
 
 # type: Plain text
 #: netconfig.5:132
+#, fuzzy
 msgid ""
-"If you want to use wpa_supplicant instead of the simple encyption (using key "
-"= secret), then use the following pre_up and post_down lines:"
+"If you want to use wpa_supplicant instead of the simple encryption (using "
+"key = secret), then use the following pre_up and post_down lines:"
 msgstr ""
-"Ha wpa_sullicantot akar használni sima titkosítás helyett (a key = titkot használva), akkor "
-"használja a következõ pre_up és post_down sorokat: "
+"Ha wpa_sullicantot akar használni sima titkosítás helyett (a key = titkot "
+"használva), akkor használja a következõ pre_up és post_down sorokat: "
 
 # type: Plain text
 #: netconfig.5:136
@@ -523,4 +527,3 @@ msgstr "LÁSD MÉG"
 #: netconfig.5:146
 msgid "B<ifconfig>(8), B<route>(8), B<iwconfig>(8), B<dhcpcd>(8)"
 msgstr "B<ifconfig>(8), B<route>(8), B<iwconfig>(8), B<dhcpcd>(8)"
-

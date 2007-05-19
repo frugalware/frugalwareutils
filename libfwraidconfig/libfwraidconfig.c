@@ -87,6 +87,11 @@ static int partdetails(PedPartition *part)
 	if((ptr = strstr(pname, "p-1"))!=NULL)
 		*ptr='\0';
 
+	if(!fwraid_parts)
+	{
+		fwraid_parts = g_list_append(fwraid_parts, strdup("missing"));
+		fwraid_parts = g_list_append(fwraid_parts, strdup("0GB"));
+	}
 	fwraid_parts = g_list_append(fwraid_parts, pname);
 	fwraid_parts = g_list_append(fwraid_parts, g_strdup_printf("%dGB", (int)part->geom.length/1953125));
 

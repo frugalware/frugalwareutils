@@ -596,7 +596,6 @@ void fwgrub_create_menu(FILE *fp)
 {
 	char *ptr;
 	char *bootdev;
-	GList *list;
 	struct stat buf;
 	struct fwgrub_entry_t entry;
 	char path[PATH_MAX];
@@ -608,13 +607,6 @@ void fwgrub_create_menu(FILE *fp)
 	ptr = find_mount_point("/boot");
 	bootdev = mount_dev(ptr);
 	free(ptr);
-	if(is_raid1_device(bootdev))
-	{
-		list = find_real_devs(bootdev);
-		free(bootdev);
-		bootdev = g_list_nth_data(list, 0);
-		g_list_free(list);
-	}
 	entry.grubbootdev=grub_convert(bootdev, 0);
 
 	ptr = find_mount_point("/");
@@ -629,6 +621,8 @@ void fwgrub_create_menu(FILE *fp)
 	fprintf(fp, "# This file is generated automatically by grubconfig\n#\n\n");
 	fprintf(fp, "default=0\ntimeout=5\n");
 	snprintf(path, PATH_MAX, "%s/grub/message", entry.bootstr);
+	if(is_raid1_device(entry.rootdev))
+		*(entry.grubbootdev) = '\0';
 	if(!stat(path, &buf))
 		fprintf(fp, "gfxmenu %s%s/grub/message\n\n", entry.grubbootdev, entry.bootstr);
 	entry.kernel = strdup("/vmlinuz");
