@@ -83,7 +83,7 @@ int dsl_hook(fwnet_profile_t *profile, int confirm)
 	// do we have pppoe?
 	if(stat("/usr/sbin/pppoe", &buf))
 		return(0);
-	if(confirm && !fwdialog_yesno(_("DSL configuration"), _("Do you want to configure a DSL connetion now?")))
+	if(confirm && !fwdialog_yesno(_("DSL configuration"), _("Do you want to configure a DSL connection now?")))
 		return(0);
 	uname = fwdialog_ask(_("Enter user name"),
 			_("Enter your PPPoE user name:"), NULL);
