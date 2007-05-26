@@ -37,6 +37,14 @@ else
 	AC_MSG_ERROR("parted library not found!");
 fi
 
+dnl Check for pacman
+AC_CHECK_LIB([pacman], [pacman_initialize], [AC_CHECK_HEADER([pacman.h], [LIBPACMAN='-lpacman'])])
+if test -n "$LIBPACMAN"; then
+	LDFLAGS="$LDFLAGS $LIBPACMAN"
+else
+	AC_MSG_ERROR("pacman library not found!");
+fi
+
 AC_ARG_ENABLE([doxygen], AS_HELP_STRING([--disable-doxygen], [Enable doxygen support (default: test)]))
 if test "$enable_doxygen" != "no"; then
 	AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, [])
