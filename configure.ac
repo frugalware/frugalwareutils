@@ -29,6 +29,14 @@ fi
 dnl Check for glib2
 PKG_CHECK_MODULES(GLIB, glib-2.0)
 
+dnl Check for parted
+AC_CHECK_LIB([parted], [ped_device_probe_all], [AC_CHECK_HEADER([parted/parted.h], [LIBPARTED='-lparted'])])
+if test -n "$LIBPARTED"; then
+	LDFLAGS="$LDFLAGS $LIBPARTED"
+else
+	AC_MSG_ERROR("parted library not found!");
+fi
+
 AC_ARG_ENABLE([doxygen], AS_HELP_STRING([--disable-doxygen], [Enable doxygen support (default: test)]))
 if test "$enable_doxygen" != "no"; then
 	AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, [])
