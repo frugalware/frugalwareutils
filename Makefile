@@ -33,6 +33,7 @@ compile: config.mak
 
 prepare: configure.ac
 	cp /usr/share/automake/install-sh ./
+	cp /usr/share/aclocal/pkg.m4 aclocal.m4
 	autoconf
 	+$(DO_RECURSIVE)
 
@@ -51,7 +52,7 @@ clean:
 	rm -rf autom4te.cache config.log config.mak config.status
 
 distclean: clean
-	rm -f configure install-sh
+	rm -f configure install-sh aclocal.m4
 
 dist:
 	darcs changes >_darcs/current/Changelog

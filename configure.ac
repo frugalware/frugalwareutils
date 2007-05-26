@@ -26,6 +26,9 @@ else
 	AC_MSG_ERROR("dialog library not found!");
 fi
 
+dnl Check for glib2
+PKG_CHECK_MODULES(GLIB, glib-2.0)
+
 AC_ARG_ENABLE([doxygen], AS_HELP_STRING([--disable-doxygen], [Enable doxygen support (default: test)]))
 if test "$enable_doxygen" != "no"; then
 	AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, [])
