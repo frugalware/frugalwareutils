@@ -1,5 +1,10 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.7.2         - configure now checks for all dependencies
+	      - netconfig: command line option to specify a specific interface
+	        to start/stop
+              - dhcpcd lockfiles moved from /etc/dhcpc to /var/run
+              - grubconfig: fix menu.lst for raid1 devices
 0.7.1         - minor improvements in timeconfig
               - tons of bugfixes in libfwnetconfig
               - netconfig: new --loup and --lodown switches
