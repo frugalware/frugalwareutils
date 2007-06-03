@@ -568,10 +568,6 @@ static int os_prober(FILE *fp)
 						break;
 				// opts
 				entry->opts = ptr+1;
-				while(*++ptr)
-					if(*ptr==':')
-						break;
-				*ptr='\0';
 				// this is the last one, slice the \n from the end
 				entry->opts[strlen(entry->opts)-1]='\0';
 			}
