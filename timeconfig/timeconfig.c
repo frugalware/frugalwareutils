@@ -80,15 +80,21 @@ GList *zone_scan(char *dir)
 	return(zones);
 }
 
+// feel free to suggest a better default for English, i just took the first
+// item for now
 char *ask_zone(GList *zones)
 {
 	char **zonestrs = fwdialog_glist(zones);
 	char *ptr, *ret;
 
+	/* this string should be the best timezone for the given language from
+	 * /usr/share/zoneinfo */
+	dialog_vars.default_item=strdup(_("Africa/Abidjan"));
 	ret = fwdialog_menu(_("Timezone configuration"),
 		_("Please select one of the following timezones for your "
 		"machine:"), 0, 0, 0, g_list_length(zones)/2, zonestrs);
 	free(zonestrs);
+	free(dialog_vars.default_item);
 	ptr = g_strdup_printf("/usr/share/zoneinfo/%s", ret);
 	free(ret);
 	return(ptr);
