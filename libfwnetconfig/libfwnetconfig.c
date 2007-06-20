@@ -651,8 +651,10 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 		return(1);
 	if(((char*)g_list_nth_data(profile->dnses, 0) && strlen((char*)g_list_nth_data(profile->dnses, 0))) ||
 			strlen(profile->adsl_username) || strlen(profile->adsl_password) ||
-			strlen(profile->adsl_interface))
+			strlen(profile->adsl_interface) || strlen(profile->desc))
 		fprintf(fp, "[options]\n");
+	if (strlen(profile->desc))
+		fprintf(fp, "desc = %s\n", profile->desc);
 	for(i=0;i<g_list_length(profile->dnses);i++)
 	{
 		char *dns = (char*)g_list_nth_data(profile->dnses, i);
