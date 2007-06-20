@@ -701,6 +701,30 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 			if(strlen(iface->gateway))
 				fprintf(fp, "gateway = %s\n", iface->gateway);
 		}
+		for(i=0;i<g_list_length(iface->pre_ups);i++)
+		{
+			char *command = (char*)g_list_nth_data(iface->pre_ups, i);
+			if(command && strlen(command))
+				fprintf(fp, "pre_up = %s\n", command);
+		}
+		for(i=0;i<g_list_length(iface->pre_downs);i++)
+		{
+			char *command = (char*)g_list_nth_data(iface->pre_downs, i);
+			if(command && strlen(command))
+				fprintf(fp, "pre_down = %s\n", command);
+		}
+		for(i=0;i<g_list_length(iface->post_ups);i++)
+		{
+			char *command = (char*)g_list_nth_data(iface->post_ups, i);
+			if(command && strlen(command))
+				fprintf(fp, "post_up = %s\n", command);
+		}
+		for(i=0;i<g_list_length(iface->post_downs);i++)
+		{
+			char *command = (char*)g_list_nth_data(iface->post_downs, i);
+			if(command && strlen(command))
+				fprintf(fp, "post_down = %s\n", command);
+		}
 	}
 	fclose(fp);
 
