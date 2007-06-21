@@ -76,7 +76,7 @@ int run(int argc, char **argv)
 	}
 
 	if(!silent)
-		dialog_msgbox(_("Configuring the X server"), _("Attemping to create "
+		dialog_msgbox(_("Configuring the X server"), _("Attempting to create "
 			"an X config file..."), 0, 0, 0);
 	needrelease = fwutil_init();
 	mdev = fwx_get_mousedev();
