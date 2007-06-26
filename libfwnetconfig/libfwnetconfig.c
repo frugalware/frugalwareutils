@@ -681,9 +681,9 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 		{
 			fprintf(fp, "options = dhcp\n");
 			if(strlen(iface->dhcp_opts))
-				fprintf(fp, "dhcp_opts = %s", iface->dhcp_opts);
+				fprintf(fp, "dhcp_opts = %s\n", iface->dhcp_opts);
 			if(strlen(iface->dhcpclient))
-				fprintf(fp, "dhcpclient = %s", iface->dhcpclient);
+				fprintf(fp, "dhcpclient = %s\n", iface->dhcpclient);
 		}
 		else
 		{
