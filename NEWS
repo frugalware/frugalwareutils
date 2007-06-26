@@ -1,5 +1,10 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.7.3         - netconfig: tons of minos bugfixes and improvements
+	      - grubconfig: support for kernel parameters containing double
+	        dots
+              - timeconfig: allow language-specific default timezones
+              - xconfig: spelling fixes
 0.7.2         - configure now checks for all dependencies
 	      - netconfig: command line option to specify a specific interface
 	        to start/stop
