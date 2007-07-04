@@ -79,7 +79,7 @@ int run(int argc, char **argv)
 	mode = ask_mode();
 	if(mode!=3)
 	{
-		dialog_msgbox(_("Please wait"), _("Attemping to install the GRUB bootloader..."), 0, 0, 0);
+		dialog_msgbox(_("Please wait"), _("Attempting to install the GRUB bootloader..."), 0, 0, 0);
 		needrelease = fwutil_init();
 		fwgrub_install(mode);
 		// backup the old config if there is any
