@@ -95,7 +95,7 @@ char *fwutil_trim(char *str)
 
 /** Converts a char* to uppercase using toupper()
  * @param str string to convert
- * @return pointer to the upper'ed sting
+ * @return pointer to the converted string
  */
 char *fwutil_strtoupper(char *str)
 {
