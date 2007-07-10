@@ -20,7 +20,7 @@ VERSION = 0.7.3
 MAJORVER = 0
 
 DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || exit 1; done
-PO_DIR=~/darcs/translations/po
+PO_DIR=~/git/translations/po
 LANGS = $(shell ls $(PO_DIR)/frugalwareutils)
 
 DESTDIR =
