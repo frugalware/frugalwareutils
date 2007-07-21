@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.7.4         - grubconfig, libfrugalwareutils: spelling fixes
+              - added Italian translation
+              - converted to git
 0.7.3         - netconfig: tons of minos bugfixes and improvements
 	      - grubconfig: support for kernel parameters containing double
 	        dots
