@@ -55,15 +55,21 @@ distclean: clean
 	rm -f configure install-sh aclocal.m4
 
 dist:
-	darcs changes >_darcs/current/Changelog
-	darcs dist -d frugalwareutils-$(VERSION)
+	git-archive --format=tar --prefix=frugalwareutils-$(VERSION)/ HEAD | tar xf -
+	git log --no-merges |git name-rev --tags --stdin > frugalwareutils-$(VERSION)/Changelog
+	make -C frugalwareutils-$(VERSION) prepare
+	tar czf frugalwareutils-$(VERSION).tar.gz frugalwareutils-$(VERSION)
+	rm -rf frugalwareutils-$(VERSION)
+ifneq ($(DRY_RUN),1)
 	gpg --comment "See http://ftp.frugalware.org/pub/README.GPG for info" \
 		-ba -u 20F55619 frugalwareutils-$(VERSION).tar.gz
 	mv frugalwareutils-$(VERSION).tar.gz{,.asc} ../
-	rm _darcs/current/Changelog
+else
+	rm -f frugalwareutils-$(VERSION).tar.gz
+endif
 
 release:
-	darcs tag --checkpoint $(VERSION)
+	git tag $(VERSION)
 	$(MAKE) dist
 
 # FIXME: extend these to handle po4a, too
