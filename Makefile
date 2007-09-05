@@ -60,17 +60,13 @@ dist:
 	make -C frugalwareutils-$(VERSION) prepare
 	tar czf frugalwareutils-$(VERSION).tar.gz frugalwareutils-$(VERSION)
 	rm -rf frugalwareutils-$(VERSION)
-ifneq ($(DRY_RUN),1)
-	gpg --comment "See http://ftp.frugalware.org/pub/README.GPG for info" \
-		-ba -u 20F55619 frugalwareutils-$(VERSION).tar.gz
-	mv frugalwareutils-$(VERSION).tar.gz{,.asc} ../
-else
-	rm -f frugalwareutils-$(VERSION).tar.gz
-endif
 
 release:
 	git tag $(VERSION)
 	$(MAKE) dist
+	gpg --comment "See http://ftp.frugalware.org/pub/README.GPG for info" \
+		-ba -u 20F55619 frugalwareutils-$(VERSION).tar.gz
+	mv frugalwareutils-$(VERSION).tar.gz{,.asc} ../
 
 # FIXME: extend these to handle po4a, too
 update-po:
