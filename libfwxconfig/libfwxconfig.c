@@ -44,7 +44,6 @@ static void print_mouse_options(FILE *fp)
 {
 	fprintf(fp, "Option      \"ZAxisMapping\" \"4 5\"\n"
 		"Option      \"Buttons\" \"3\"\n"
-		"Option      \"AlwaysCore\" \"true\"\n");
 }
 
 static void print_kbd_options(FILE *fp)
