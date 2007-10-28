@@ -13,15 +13,27 @@ This profile is divided into sections or \fIinterfaces\fP.  Each section
 defines an interface that netconfig should initialize. The exception to this is
 the \fIoptions\fP section, which defines global options.
 .TP
-.SH Example:
+.SH Example for static IP:
 .RS
 .nf
 [options]
-dns = 157.181.177.34
+dns = 192.168.1.1
 
 [eth0]
 options = 192.168.1.102 netmask 255.255.255.0
 gateway = default gw 192.168.1.1
+.fi
+.TP
+.SH Example for static ADSL with NAT:
+.RS
+.nf
+[options]
+adsl_username = user@provider.com
+adsl_password = secret
+adsl_interface = eth1
+[eth1]
+options = 192.168.1.102 netmask 255.255.255.0
+post_up = iptables -t nat -A POSTROUTING -j MASQUERADE
 .fi
 .RE
 .SH CONFIG: OPTIONS
