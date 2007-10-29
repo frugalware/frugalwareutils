@@ -143,8 +143,18 @@ If you want to use wpa_supplicant instead of the simple encryption (using key =
 secret), then use the following pre_up and post_down lines:
 
 .nf
-pre_up = wpa_supplicant -Dwext -c /etc/wpa_supplicant.conf -w -B
+pre_up = wpa_supplicant -Dwext -iwlan0 -c /etc/wpa_supplicant.conf -w -B
 post_down = killall wpa_supplicant
+.fi
+
+You also need to edit /etc/wpa_supplicant.conf: comment every network block and
+add one like this:
+
+.nf
+network={
+        ssid="youressid"
+        psk="secret"
+}
 .fi
 
 .SH AUTHORS
