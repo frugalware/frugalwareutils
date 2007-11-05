@@ -1,0 +1,12 @@
+*.po
+*.mo
+*.gmo
+*.so*
+*.1
+configure
+config.status
+aclocal.m4
+autom4te.cache
+config.log
+config.mak
+install-sh
