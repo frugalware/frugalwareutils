@@ -94,6 +94,20 @@ int run(int argc, char **argv)
 
 	char *mouse_type=NULL, *mtype=NULL, *link=NULL;
 
+	if(argc > 1)
+	{
+		if(!strcmp(argv[1], "--help"))
+		{
+			system("man mouseconfig");
+			return(0);
+		}
+		else if(!strcmp(argv[1], "--version"))
+		{
+			printf("%s %s\n", argv[0], VERSION);
+			return(0);
+		}
+	}
+
 	fwutil_i18ninit(__FILE__);
 	if(argv!=NULL)
 		init_dialog(input, dialog_state.output);
