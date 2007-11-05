@@ -1,0 +1,21 @@
+= mouseconfig(1)
+
+== NAME
+
+mouseconfig - configures your mouse settings
+
+== SYNOPSIS
+
+mouseconfig [options]
+
+== DESCRIPTION
+
+mouseconfig sets up the `/etc/sysconfig/gfpm` file to match your hardware.
+
+== OPTIONS
+
+--help::
+	Display this manpage.
+
+--version::
+	Display the package version.
