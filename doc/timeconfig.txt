@@ -1,0 +1,22 @@
+= timeconfig(1)
+
+== NAME
+
+timeconfig - configures your time zone settings
+
+== SYNOPSIS
+
+timeconfig [options]
+
+== DESCRIPTION
+
+`timeconfig` is a menu-driven tool to set up your `/etc/hardwareclock` file and
+a symbolic link, named `/etc/localtime`.
+
+== OPTIONS
+
+--help::
+	Display this manpage.
+
+--version::
+	Display the package version.
