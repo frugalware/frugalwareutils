@@ -72,6 +72,20 @@ int run(int argc, char **argv)
 	int mode, needrelease;
 	struct stat buf;
 
+	if(argc > 1)
+	{
+		if(!strcmp(argv[1], "--help"))
+		{
+			system("man grubconfig");
+			return(0);
+		}
+		else if(!strcmp(argv[1], "--version"))
+		{
+			printf("%s %s\n", argv[0], VERSION);
+			return(0);
+		}
+	}
+
 	fwutil_i18ninit(__FILE__);
 	init_dialog(input, dialog_state.output);
 	fwdialog_backtitle(_("GRUB bootloader"));
