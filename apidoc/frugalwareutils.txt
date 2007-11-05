@@ -1,0 +1,27 @@
+= libfrugalwareutils(3)
+
+== NAME
+
+frugalwareutils - Developer documentation for the Frugalware configuration libraries
+
+== SYNOPSIS
+
+For ease of access, the frugalwareutils manual has been split up into several sections.
+
+libfwutil::	Functions to make writing Frugalware configuration tools easier.
+libfwdialog::	Functions to make libdialog usage easier.
+libfwnetconfig::	Functions to make network configuration easier.
+libfwtimeconfig::	Functions to make time configuration easier.
+libfwraidconfig::	Functions to make RAID configuration easier.
+libfwmouseconfig::	Functions to make mouse configuration easier.
+libfwxconfig::	Functions to make X configuration easier.
+libfwxwmonfig::	Functions to make XDM configuration easier.
+libfwgrubonfig::	Functions to make GRUB configuration easier.
+
+== AUTHOR
+
+Written by Miklos Vajna.
+
+== REPORTING BUGS
+
+If you find any bug, then please file a bugreport at <http://bugs.frugalware.org/>.

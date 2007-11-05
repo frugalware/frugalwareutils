@@ -19,7 +19,11 @@
 -include ../Makefile.inc
 -include ../config.mak
 
+ifneq ($(asciidoc),)
+compile: frugalwareutils.3
+else
 compile:
+endif
 ifneq ($(doxygen),)
 	cd .. && doxygen Doxyfile
 	rm -rf man3/_*
@@ -27,12 +31,24 @@ endif
 
 install:
 ifneq ($(doxygen),)
-	for i in man3/* frugalwareutils.3; do \
+	for i in man3/*; do \
 		$(INSTALL) -m644 $$i $(DESTDIR)$(mandir)/man3/; \
 	done
+endif
+ifneq ($(asciidoc),)
+	$(INSTALL) -m644 frugalwareutils.3 $(DESTDIR)$(mandir)/man3/
 endif
 
 clean:
 	rm -rf man3
+	rm -f frugalwareutils.3
 
 prepare:
+
+frugalwareutils.3:
+	asciidoc -d manpage -b docbook frugalwareutils.txt
+	sed -i '/<!DOCTYPE/s|\("http[^"].*"\)|"file:///usr/share/sgml/docbook/dtd/xml-dtd-4.2/docbookx.dtd"|' \
+		frugalwareutils.xml
+	xsltproc -o frugalwareutils.3 --nonet --path /usr/share/sgml/docbook/dtd/xml-dtd-4.2 \
+		/etc/asciidoc/docbook-xsl/manpage.xsl frugalwareutils.xml
+	sed -i 's/\\(bu/*/' frugalwareutils.3
