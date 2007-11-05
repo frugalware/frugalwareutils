@@ -50,6 +50,11 @@ if test "$enable_doxygen" != "no"; then
 	AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, [])
 fi
 
+AC_ARG_ENABLE([asciidoc], AS_HELP_STRING([--disable-asciidoc], [Disable asciidoc support (default: test)]))
+if test "$enable_asciidoc" != "no"; then
+	AC_CHECK_PROG(DOXYGEN, asciidoc, asciidoc, [])
+fi
+
 AC_ARG_ENABLE([po4a], AS_HELP_STRING([--disable-po4a], [Disable po4a support (default: test)]))
 if test "$enable_po4a" != "no"; then
 	AC_CHECK_PROG(PO4A, po4a, po4a, [])
