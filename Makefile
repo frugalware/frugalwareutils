@@ -1,6 +1,6 @@
 # Makefile for frugalwareutils
 #
-# Copyright (C) 2006 Miklos Vajna <vmiklos@frugalware.org>
+# Copyright (C) 2006, 2007 Miklos Vajna <vmiklos@frugalware.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
 -include config.mak
 -include Makefile.inc
 
-SUBDIRS = doc libfwutil libfwdialog setup \
+SUBDIRS = apidoc libfwutil libfwdialog setup \
 	  libfwnetconfig netconfig \
 	  libfwtimeconfig timeconfig \
 	  libfwraidconfig raidconfig \
