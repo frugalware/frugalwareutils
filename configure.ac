@@ -52,7 +52,7 @@ fi
 
 AC_ARG_ENABLE([asciidoc], AS_HELP_STRING([--disable-asciidoc], [Disable asciidoc support (default: test)]))
 if test "$enable_asciidoc" != "no"; then
-	AC_CHECK_PROG(DOXYGEN, asciidoc, asciidoc, [])
+	AC_CHECK_PROG(ASCIIDOC, asciidoc, asciidoc, [])
 fi
 
 AC_ARG_ENABLE([po4a], AS_HELP_STRING([--disable-po4a], [Disable po4a support (default: test)]))
