@@ -31,7 +31,7 @@ endif
 
 install:
 ifneq ($(asciidoc),)
-	$(INSTALL) -m644 $(MANS) $(DESTDIR)$(man1dir)
+	$(INSTALL) -m644 $(MANS) $(DESTDIR)$(mandir)/man1
 endif
 
 clean:
