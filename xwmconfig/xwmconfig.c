@@ -74,6 +74,7 @@ int run(int argc, char **argv)
 		{"force",        no_argument,       0, 1000},
 		{"help",         no_argument,       0, 1001},
 		{"silent",       no_argument,       0, 1002},
+		{"version",      no_argument,       0, 1003},
 		{0, 0, 0, 0}
 	};
 
@@ -88,6 +89,7 @@ int run(int argc, char **argv)
 			case 1000: xwm_force = 1; break;
 			case 1001: usage(argv[0]); return(0);
 			case 1002: xwm_silent = 1; break;
+			case 1003: printf("%s %s\n", argv[0], VERSION); return(0);
 		}
 	}
 
