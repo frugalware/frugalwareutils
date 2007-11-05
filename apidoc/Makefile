@@ -40,8 +40,7 @@ ifneq ($(asciidoc),)
 endif
 
 clean:
-	rm -rf man3
-	rm -f frugalwareutils.3
+	rm -rf man3 frugalwareutils.3 *.xml
 
 prepare:
 
