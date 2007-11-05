@@ -11,4 +11,5 @@ mandir = @mandir@
 localedir = ${prefix}/share/locale
 includedir = @includedir@
 doxygen = @DOXYGEN@
+asciidoc = @ASCIIDOC@
 po4a = @PO4A@
