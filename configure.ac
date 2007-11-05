@@ -45,12 +45,12 @@ else
 	AC_MSG_ERROR("pacman library not found!");
 fi
 
-AC_ARG_ENABLE([doxygen], AS_HELP_STRING([--disable-doxygen], [Enable doxygen support (default: test)]))
+AC_ARG_ENABLE([doxygen], AS_HELP_STRING([--disable-doxygen], [Disable doxygen support (default: test)]))
 if test "$enable_doxygen" != "no"; then
 	AC_CHECK_PROG(DOXYGEN, doxygen, doxygen, [])
 fi
 
-AC_ARG_ENABLE([po4a], AS_HELP_STRING([--disable-po4a], [Enable po4a support (default: test)]))
+AC_ARG_ENABLE([po4a], AS_HELP_STRING([--disable-po4a], [Disable po4a support (default: test)]))
 if test "$enable_po4a" != "no"; then
 	AC_CHECK_PROG(PO4A, po4a, po4a, [])
 fi
