@@ -43,15 +43,9 @@ int nco_lodown = 0;
 
 fwnet_profile_t *sigprof;
 
-int usage(const char *myname)
+int usage()
 {
-	printf(_("usage: %s [options] start|stop|restart|status|list [interface]\n"), myname);
-	printf(_("       %s [options] [profile] [interface]\n"), myname);
-	printf(_("-h | --help              This help.\n"));
-	printf(_("-f | --fast              Fast mode, used by the setup.\n"));
-	printf(_("     --dry-run           Do not actually perform the operation.\n"));
-	printf(_("     --loup              Bring up the loopback interface.\n"));
-	printf(_("     --lodown            Bring down the loopback interface.\n"));
+	system("man netconfig");
 	return(0);
 }
 
@@ -267,7 +261,7 @@ int run(int argc, char **argv)
 	fwutil_i18ninit(__FILE__);
 	if(nco_usage)
 	{
-		usage(argv[0]);
+		usage();
 		return(0);
 	}
 	
