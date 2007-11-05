@@ -19,7 +19,7 @@
 -include config.mak
 -include Makefile.inc
 
-SUBDIRS = apidoc libfwutil libfwdialog setup \
+SUBDIRS = doc apidoc libfwutil libfwdialog setup \
 	  libfwnetconfig netconfig \
 	  libfwtimeconfig timeconfig \
 	  libfwraidconfig raidconfig \
