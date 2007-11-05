@@ -1,0 +1,26 @@
+= grubconfig(1)
+
+== NAME
+
+grubconfig - configures the GRUB boot loader
+
+== SYNOPSIS
+
+grubconfig [options]
+
+== DESCRIPTION
+
+grubconfig is a front-end to grub-install. It supports installing to RAID
+partitions, and it supports generating a configuration file (`menu.lst`)
+automatically for you. The later will contain the list of auto-detected other
+operating systems.
+
+NOTE: The old `menu.lst` is saved as `menu.lst.old` for you.
+
+== OPTIONS
+
+--help::
+	Display this manpage.
+
+--version::
+	Display the package version.
