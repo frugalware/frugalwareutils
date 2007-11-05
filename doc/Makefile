@@ -23,7 +23,7 @@ XML_PATH = /usr/share/sgml/docbook/dtd/xml-dtd-4.2
 DOCS = $(wildcard *.txt)
 MANS = $(subst .txt,.1,$(DOCS))
 
-ifneq ($(doxygen),)
+ifneq ($(asciidoc),)
 compile: $(MANS)
 else
 compile:
