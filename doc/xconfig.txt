@@ -1,0 +1,25 @@
+= xconfig(1)
+
+== NAME
+
+xconfig - creates your XOrg configuration file
+
+== SYNOPSIS
+
+xconfig [options]
+
+== DESCRIPTION
+
+`xconfig` is a front-end to `X -configure`. It asks for a resolution and a
+colour depth and does the rest of the configuration automatically for you.
+
+== OPTIONS
+
+--help::
+	Display this manpage.
+
+--live <resolution> <depth>::
+	Non-interactive mode, used by ie. FWLive.
+
+--version::
+	Display the package version.
