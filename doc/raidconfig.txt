@@ -1,0 +1,21 @@
+= raidconfig(1)
+
+== NAME
+
+raidconfig - a menu-driven tool to create raid arrays
+
+== SYNOPSIS
+
+raidconfig [options]
+
+== DESCRIPTION
+
+`raidconfig` is a menu-driven curses front-end to `mdadm`.
+
+== OPTIONS
+
+--help::
+	Display this manpage.
+
+--version::
+	Display the package version.
