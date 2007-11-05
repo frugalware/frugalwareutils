@@ -38,16 +38,29 @@ int run(int argc, char **argv)
 	int needrelease, ret, silent=0;
 
 	fwutil_i18ninit(__FILE__);
-	if(argc>1 && !strcmp(argv[1], "--live"))
+	if(argc > 1)
 	{
-		if(argc!=4)
+		if(!strcmp(argv[1], "--live"))
 		{
-			printf(_("usage: %s [--live <resolution> <depth>\n"), argv[0]);
-			return(1);
+			if(argc!=4)
+			{
+				printf(_("usage: %s [--live <resolution> <depth>\n"), argv[0]);
+				return(1);
+			}
+			res = argv[2];
+			depth = argv[3];
+			silent=1;
 		}
-		res = argv[2];
-		depth = argv[3];
-		silent=1;
+		else if(!strcmp(argv[1], "--help"))
+		{
+			system("man xconfig");
+			return(0);
+		}
+		else if(!strcmp(argv[1], "--version"))
+		{
+			printf("%s %s\n", argv[0], VERSION);
+			return(0);
+		}
 	}
 
 	init_dialog(input, dialog_state.output);
