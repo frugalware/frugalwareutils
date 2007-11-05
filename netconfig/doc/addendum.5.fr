@@ -1,3 +1,0 @@
-PO4A-HEADER:mode=after;position=AUTEURS;beginboundary=.SH
-.SH TRADUCTION
-Enda <enda@netou.com>.

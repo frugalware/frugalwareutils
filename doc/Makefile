@@ -1,6 +1,6 @@
 # Makefile for frugalwareutils
 #
-# Copyright (C) 2006 Miklos Vajna <vmiklos@frugalware.org>
+# Copyright (C) 2007 Miklos Vajna <vmiklos@frugalware.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,24 +16,36 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
--include ../../../config.mak
--include ../../../Makefile.inc
+-include ../Makefile.inc
+-include ../config.mak
 
-LANGS=hu
+XML_PATH = /usr/share/sgml/docbook/dtd/xml-dtd-4.2
+DOCS = $(wildcard *.txt)
+MANS = $(subst .txt,.1,$(DOCS))
 
+ifneq ($(doxygen),)
+compile: $(MANS)
+else
 compile:
+endif
 
 install:
-
-update-po: netconfig.5.pot
-	for lang in $(LANGS); do \
-		if msgmerge $$lang.po netconfig.5.pot -o $$lang.new.po; then \
-			mv -f $$lang.new.po $$lang.po; \
-		else \
-			echo "msgmerge for $$cat failed!"; \
-			rm -f $$lang.new.po; \
-		fi; \
-	done
+ifneq ($(asciidoc),)
+	$(INSTALL) -m644 $(MANS) $(DESTDIR)$(man1dir)
+endif
 
 clean:
-	rm -f netconfig.5.pot
+	rm -f *.1
+
+prepare:
+
+%.html: %.txt
+	asciidoc $^
+
+%.xml: %.txt
+	asciidoc -d manpage -b docbook $^
+	sed -i '/<!DOCTYPE/s|\("http[^"].*"\)|"file://$(XML_PATH)/docbookx.dtd"|' $^
+
+%.1: %.xml
+	xsltproc -o $@ --nonet --path $(XML_PATH) /etc/asciidoc/docbook-xsl/manpage.xsl $^ 
+	sed -i 's/\\(bu/*/' $@

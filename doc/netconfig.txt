@@ -1,0 +1,215 @@
+= netconfig(1)
+
+== NAME
+
+netconfig - manages network configuration profiles
+
+== SYNOPSIS
+
+netconfig [options] start|stop|restart|status|list [interface]
+
+netconfig [options] [profile] [interface]
+
+== OPTIONS
+
+-h, --help::
+	Display this manpage.
+
+-f, --fast::
+	Fast mode, used by the installer.
+
+--dry-run::
+	Do not actually perform the operation.
+
+--loup::
+	Bring up the loopback interface.
+
+--lodown::
+	Bring down the loopback interface.
+
+== CONFIGURATION
+
+Every file in the `/etc/sysconfig/network` directory represents a network
+profile. When `netconfig` invoked with the start parameter, then the profile
+named `default` (`/etc/sysconfig/network/default`) will be read.
+
+This behaviour can be overwritten by the `network=<profilename>` kernel
+parameter. In that case the given profile will be loaded instead of `default`
+on system startup.
+
+This profile is divided into sections or interfaces. Each section defines an
+interface that netconfig should initialize. The exception to this is the
+options section, which defines global options.
+
+== CONFIG: OPTIONS
+
+dns = <ip>::
+	Explicitly defines dns addresses (ie. when using a static ip). Multiple
+	usage is ok.
+
+domain = <domain>::
+	Defines the local domain name. If defined more than once, the first
+	will be used.
+
+desc = <description>::
+	A brief description of this network profile. Used by the graphical frontend.
+
+adsl_username = <username>::
+	If you have an adsl (pppoe) connection, your adsl username.
+
+adsl_password = <password>::
+	If you have an adsl connection, your adsl password.
+
+adsl_interface = <interface>::
+	If you have an adsl connection, the Ethernet interface connected to the
+	DSL modem.
+
+== CONFIG: INTERFACES
+
+Each section defines an interface. The interface name is defined by the string
+within square brackets (ie. the two below are `eth0` and `eth1`). The available
+directives:
+
+options = <ip> [netmask <netmask> [broadcast <broadcast>]::
+	Defines the ip address, netmask and broadcast address of the interface.
+	Multiple usage is ok for eth0:1, eth0:2, etc. See the other format of
+	this directive for dhcp.
+
+options = dhcp::
+	Use dhcp for this interface. When this format is used, the other "options" lines are ignored.
+
+pre_up = <command>::
+
+post_up = <command>::
+
+pre_down = <command>::
+
+post_down = <command>::
+	The syntax of these directives are the same: you can define there
+	commands to be executed before the interface is up, after the interface
+	is up, before it is down, and after, respectively. Multiple usage is
+	OK, the commands are executed in the specified order.
+
+mac = <mac address>::
+	Overwrites the mac address of the card. If defined more than once, the
+	first will be used.
+
+essid = <essid>::
+	Set the ESSID (or Network Name - in some products it may also be called
+	Domain ID) for wireless network adapters. If defined more than once,
+	the first will be used.
+
+mode = <mode>::
+	Set the operating mode of the device, for wireless network adapters. The mode
+	can be Ad- Hoc (network composed of only one cell and without Access Point),
+	Managed (node connects to a net- work composed of many Access Points, with
+	roaming), Master (the node is the synchronisation master or acts as an Access
+	Point), Repeater (the node forwards packets between other wireless nodes),
+	Secondary (the node acts as a backup master/repeater), Monitor (the node is not
+	associated with any cell and passively monitor all packets on the frequency) or
+	Auto. If defined more than once, the first will be used.
+
+gateway = [default gw] <ip>::
+	Route packets via a gateway.
+
+NOTE: The specified gateway must be reachable first. If the `default gw` prefix
+is used, then adds a default route. If defined more than once, the first will
+be used. If using DHCP, then this directive is ignored.
+
+key = <key>::
+	Used to manipulate encryption or scrambling keys and security mode for
+	wireless networks.
+
+dhcp_opts = <options>::
+	These options are passed to the dhcp client daemon. The default is `-t
+	10`. You may want to specify here the dhcp hostname, then you'll need `-t 10 -h
+	<hostname>`.
+
+dhcpclient = <dhcp client>::
+	This specifies the dhcp client to use. It can be either dhcpcd
+	(default) or dhclient.
+
+== EXAMPLES
+
+=== Static Address
+
+----
+[options]
+dns = 192.168.1.1
+
+[eth0]
+options = 192.168.1.102 netmask 255.255.255.0
+gateway = default gw 192.168.1.1
+----
+
+=== ADSL with NAT
+
+----
+[options]
+adsl_username = user@provider.com
+adsl_password = secret
+adsl_interface = eth1
+[eth1]
+options = 192.168.1.102 netmask 255.255.255.0
+post_up = iptables -t nat -A POSTROUTING -j MASQUERADE
+----
+
+=== The `key=` directive
+
+----
+key = 0123-4567-89
+key = [3] 0123-4567-89
+key = s:password [2]
+key = [2]
+key = open
+key = off
+key = restricted [3] 0123456789
+key = 01-23 key 45-67 [4] key [4]
+----
+
+=== Initialize before `iwconfig`
+
+If you have to to initialize the card with `ifconfig <interface> up` before
+using iwconfig:
+
+----
+[eth1]
+pre_up = ifconfig eth1 up
+post_down = ifconfig eth1 down
+----
+
+NOTE: If you use several pre_up and/or post_down lines, this pre_up should be
+the first, and this post_down should be the last one.
+
+=== Using wpa_supplicant
+
+If you want to use wpa_supplicant instead of the simple encryption (using
+key = secret), then use the following pre_up and post_down lines:
+
+----
+pre_up = wpa_supplicant -Dwext -iwlan0 -c /etc/wpa_supplicant.conf -w -B
+post_down = killall wpa_supplicant
+----
+
+You also need to edit `/etc/wpa_supplicant.conf`. A possible correct setup is:
+
+----
+ctrl_interface=/var/run/wpa_supplicant
+
+network={
+        ssid="youressid"
+        psk="secret"
+}
+----
+
+== AUTHOR
+
+Written by Miklos Vajna.
+
+== REPORTING BUGS
+
+If you find any bug, then please file a bugreport at <http://bugs.frugalware.org/>.
+
+== SEE ALSO
+
+*ifconfig*(8), *route*(8), *iwconfig*(8), *dhcpcd*(8)

@@ -37,7 +37,7 @@ LDFLAGS += -L../libfwnetconfig -lfwnetconfig
 # setup
 CFLAGS += -I../setup
 
-SUBDIRS = doc po
+SUBDIRS = po
 CONFNAME = netconfig
 
 -include ../Makefile.inc
