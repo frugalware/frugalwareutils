@@ -51,14 +51,6 @@ char* ask_wm(PM_DB *db)
 	return(ptr);
 }
 
-void usage(char *name)
-{
-	printf(_("usage: %s [options]\n"), name);
-	printf(_("--force         Run this tool even if GDM or KDM are installed.\n"));
-	printf(_("--help          This help.\n"));
-	printf(_("--silent        Do not print any warning if GDM or KDM are installed.\n"));
-}
-
 int run(int argc, char **argv)
 {
 	FILE *input = stdin;
@@ -87,7 +79,7 @@ int run(int argc, char **argv)
 		switch(opt)
 		{
 			case 1000: xwm_force = 1; break;
-			case 1001: usage(argv[0]); return(0);
+			case 1001: system("man xwmconfig"); return(0);
 			case 1002: xwm_silent = 1; break;
 			case 1003: printf("%s %s\n", argv[0], VERSION); return(0);
 		}

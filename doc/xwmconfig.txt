@@ -1,0 +1,28 @@
+= xwmconfig(1)
+
+== NAME
+
+xwmconfig - configures your system-wide default window manager
+
+== SYNOPSIS
+
+xwmconfig [options]
+
+== DESCRIPTION
+
+`xwmconfig` configures your default window manager for desktop managers like
+`XDM`, where you can't do so interactively.
+
+== OPTIONS
+
+--force::
+	Run this tool even if GDM or KDM are installed.
+
+--help::
+	Display this manpage.
+
+--silent::
+	Do not print any warning if GDM or KDM are installed.
+
+--version::
+	Display the package version.
