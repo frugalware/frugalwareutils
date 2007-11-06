@@ -52,7 +52,7 @@ clean:
 	rm -rf autom4te.cache config.log config.mak config.status
 
 distclean: clean
-	rm -f configure install-sh aclocal.m4
+	rm -f configure install-sh aclocal.m4 */po/*.gmo
 
 dist:
 	git-archive --format=tar --prefix=frugalwareutils-$(VERSION)/ HEAD | tar xf -
