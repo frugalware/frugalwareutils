@@ -119,7 +119,7 @@ GENERATE_RTF           = NO
 # configuration options related to the man page output
 #---------------------------------------------------------------------------
 GENERATE_MAN           = YES
-MAN_OUTPUT             = doc
+MAN_OUTPUT             = apidoc
 MAN_EXTENSION          = .3
 MAN_LINKS              = YES
 #---------------------------------------------------------------------------
