@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.7.6         - added support for xorg-7.3
+              - converted existing manpages to asciidoc
+              - added 6 new manpages
 0.7.5         - fixed to work with os-prober >= 1.21
               - new Danish translation
 0.7.4         - grubconfig, libfrugalwareutils: spelling fixes
