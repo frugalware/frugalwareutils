@@ -62,7 +62,7 @@ dist:
 	rm -rf frugalwareutils-$(VERSION)
 
 release:
-	git tag $(VERSION)
+	git tag -l |grep -q $(VERSION) || dg tag $(VERSION)
 	$(MAKE) dist
 	gpg --comment "See http://ftp.frugalware.org/pub/README.GPG for info" \
 		-ba -u 20F55619 frugalwareutils-$(VERSION).tar.gz
