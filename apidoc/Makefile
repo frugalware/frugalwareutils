@@ -44,10 +44,5 @@ clean:
 
 prepare:
 
-frugalwareutils.3:
-	asciidoc -d manpage -b docbook frugalwareutils.txt
-	sed -i '/<!DOCTYPE/s|\("http[^"].*"\)|"file:///usr/share/sgml/docbook/dtd/xml-dtd-4.2/docbookx.dtd"|' \
-		frugalwareutils.xml
-	xsltproc -o frugalwareutils.3 --nonet --path /usr/share/sgml/docbook/dtd/xml-dtd-4.2 \
-		/etc/asciidoc/docbook-xsl/manpage.xsl frugalwareutils.xml
-	sed -i 's/\\(bu/*/' frugalwareutils.3
+frugalwareutils.3: frugalwareutils.txt
+	a2x -d manpage -f manpage $^

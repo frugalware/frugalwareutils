@@ -19,7 +19,6 @@
 -include ../Makefile.inc
 -include ../config.mak
 
-XML_PATH = /usr/share/sgml/docbook/dtd/xml-dtd-4.2
 DOCS = $(wildcard *.txt)
 MANS = $(subst .txt,.1,$(DOCS))
 
@@ -42,10 +41,5 @@ prepare:
 %.html: %.txt
 	asciidoc $^
 
-%.xml: %.txt
-	asciidoc -d manpage -b docbook $^
-	sed -i '/<!DOCTYPE/s|\("http[^"].*"\)|"file://$(XML_PATH)/docbookx.dtd"|' $^
-
-%.1: %.xml
-	xsltproc -o $@ --nonet --path $(XML_PATH) /etc/asciidoc/docbook-xsl/manpage.xsl $^ 
-	sed -i 's/\\(bu/*/' $@
+%.1: %.txt
+	a2x -d manpage -f manpage $^
