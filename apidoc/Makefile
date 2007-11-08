@@ -45,4 +45,4 @@ clean:
 prepare:
 
 frugalwareutils.3: frugalwareutils.txt
-	a2x -d manpage -f manpage $^
+	a2x -f manpage $^
