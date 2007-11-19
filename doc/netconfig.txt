@@ -118,7 +118,22 @@ be used. If using DHCP, then this directive is ignored.
 
 key = <key>::
 	Used to manipulate encryption or scrambling keys and security mode for
-	wireless networks.
+	wireless networks. Use this for WEP only, use `wpa_psk` for WPA.
+
+wpa_psk = <passphrase>::
+	If this directive is specified, then wpa_supplicant will be invoked to
+	initialize WPA encryption before setting any other parameter (like ESSID).
+
+wpa_driver = <driver>::
+	The driver to be used by wpa_supplicant. The default is `wext`. Possible drivers
+	are:
+
+	*  wext: Linux wireless extensions (generic)
+	*  hostap: Host AP driver (Intersil Prism2/2.5/3)
+	*  prism54: Prism54.org driver (Intersil Prism GT/Duette/Indigo)
+	*  madwifi: MADWIFI 802.11 support (Atheros, etc.)
+	*  atmel: ATMEL AT76C5XXx (USB, PCMCIA)
+	*  ndiswrapper: Linux ndiswrapper
 
 dhcp_opts = <options>::
 	These options are passed to the dhcp client daemon. The default is `-t

@@ -25,7 +25,7 @@ LDFLAGS += $(shell pkg-config --libs glib-2.0)
 CFLAGS += -I../libfwutil
 LDFLAGS += -L../libfwutil -lfwutil
 
-SUBDIRS = po
+#SUBDIRS = po
 LIBNAME = netconfig
 
 -include ../Makefile.inc

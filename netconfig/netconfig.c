@@ -162,9 +162,20 @@ int dialog_config(int argc, char **argv)
 			NULL);
 		snprintf(newinterface->essid, FWNET_ESSID_MAX_SIZE, ptr);
 		FWUTIL_FREE(ptr);
-		ptr = fwdialog_ask(_("Encryption key"), _("If you have an encryption key, then please enter it below.\n"
+		ptr = fwdialog_ask(_("WEP encryption key"),
+			_("If you have a WEP encryption key, then please enter it below.\n"
 			"Examples: 4567-89AB-CD or  s:password"), NULL);
 		snprintf(newinterface->key, FWNET_ENCODING_TOKEN_MAX, ptr);
+		FWUTIL_FREE(ptr);
+		ptr = fwdialog_ask(_("WPA encryption passphrase"),
+			_("If you have a WPA passphrase, then please enter it below.\n"
+			"Example: secret"), NULL);
+		snprintf(newinterface->wpa_psk, PATH_MAX, ptr);
+		FWUTIL_FREE(ptr);
+		ptr = fwdialog_ask(_("WPA driver"),
+			_("If you want to use a custom driver (not the generic one, called 'wext'), then"
+			"please enter it below. If unsure, just hit enter."), NULL);
+		snprintf(newinterface->wpa_driver, PATH_MAX, ptr);
 		FWUTIL_FREE(ptr);
 	}
 	if(!strcmp(nettype, "dhcp"))

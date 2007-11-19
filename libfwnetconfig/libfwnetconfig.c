@@ -191,6 +191,10 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 					strncpy(iface->mode, ptr, FWNET_MODE_MAX_SIZE);
 				if(!strcmp(var, "KEY") && !strlen(iface->key))
 					strncpy(iface->key, ptr, FWNET_ENCODING_TOKEN_MAX);
+				if(!strcmp(var, "WPA_PSK") && !strlen(iface->wpa_psk))
+					strncpy(iface->wpa_psk, ptr, PATH_MAX);
+				if(!strcmp(var, "WPA_DRIVER") && !strlen(iface->wpa_driver))
+					strncpy(iface->wpa_driver, ptr, PATH_MAX);
 				if(!strcmp(var, "GATEWAY") && !strlen(iface->gateway))
 					strncpy(iface->gateway, ptr, FWNET_GW_MAX_SIZE);
 			}
@@ -272,6 +276,12 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 		fwutil_system(ptr);
 		FWUTIL_FREE(ptr);
 	}
+	if(strlen(iface->wpa_psk))
+	{
+		ptr = g_strdup("killall wpa_supplicant");
+		fwutil_system(ptr);
+		FWUTIL_FREE(ptr);
+	}
 
 	if(g_list_length(iface->post_downs))
 		for (i=0; i<g_list_length(iface->post_downs); i++)
@@ -344,6 +354,19 @@ static int update_secrets(char *path, char *user, char *pass)
 	return(0);
 }
 
+static int update_wpa_conf(char *ssid, char *psk)
+{
+	FILE *fp;
+
+	fp = fopen("/etc/wpa_supplicant.conf", "w");
+	if(!fp)
+		return(1);
+	fprintf(fp, "ctrl_interface=/var/run/wpa_supplicant\n\n");
+	fprintf(fp, "network={\n\tssid=\"%s\"\n\tpsk=\"%s\"\n}\n", ssid, psk);
+	fclose(fp);
+	return(0);
+}
+
 /** Bring up an interface
  * @param iface the interface struct pointer
  * @return 1 on failure, 0 on success
@@ -359,6 +382,16 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 
 	dhcp = fwnet_is_dhcp(iface);
 	// initialize the device
+	if(strlen(iface->wpa_psk))
+	{
+		update_wpa_conf(iface->essid, iface->wpa_psk);
+		if(strlen(iface->wpa_driver))
+			ptr = g_strdup_printf("wpa_supplicant -i%s -D%s -c /etc/wpa_supplicant.conf -w -B", iface->name, iface->wpa_driver);
+		else
+			ptr = g_strdup_printf("wpa_supplicant -i%s -Dwext -c /etc/wpa_supplicant.conf -w -B", iface->name);
+		ret += fwutil_system(ptr);
+		FWUTIL_FREE(ptr);
+	}
 	if(strlen(iface->mac))
 	{
 		ptr = g_strdup_printf("ifconfig %s hw ether %s", iface->name, iface->mac);
@@ -677,6 +710,10 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 			fprintf(fp, "mode = %s\n", iface->mode);
 		if(iface->key != NULL && strlen(iface->key))
 			fprintf(fp, "key = %s\n", iface->key);
+		if(iface->wpa_psk != NULL && strlen(iface->wpa_psk))
+			fprintf(fp, "wpa_psk = %s\n", iface->wpa_psk);
+		if(iface->wpa_driver != NULL && strlen(iface->wpa_driver))
+			fprintf(fp, "wpa_driver = %s\n", iface->wpa_driver);
 		if(fwnet_is_dhcp(iface))
 		{
 			fprintf(fp, "options = dhcp\n");

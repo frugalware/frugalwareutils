@@ -48,6 +48,8 @@ typedef struct __fwnet_interface_t {
 	char essid[FWNET_ESSID_MAX_SIZE+1];
 	char mode[FWNET_MODE_MAX_SIZE+1];
 	char key[FWNET_ENCODING_TOKEN_MAX+1];
+	char wpa_psk[PATH_MAX+1];
+	char wpa_driver[PATH_MAX+1];
 	char gateway[FWNET_GW_MAX_SIZE+1];
 } fwnet_interface_t;
 
