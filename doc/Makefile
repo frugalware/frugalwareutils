@@ -44,7 +44,6 @@ endif
 
 ifneq ($(po4a),)
 localized_mans: $(shell for i in $(LANGS); do for j in $(MANS); do echo $$i/$$j; done; done)
-install-man: install-man1
 else
 localized_mans:
 endif
@@ -63,6 +62,8 @@ clean:
 %.1: %.txt
 	a2x -f manpage $^
 	$(call CONVERT,$@)
+
+install-man: install-man1
 
 install-man1:
 	for i in $(LANGS); do \
