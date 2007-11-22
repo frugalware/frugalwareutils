@@ -65,6 +65,7 @@ clean:
 
 %.1: %.txt
 	a2x -f manpage $^
+	$(call CONVERT,$@)
 
 install-man1:
 	for i in $(LANGS); do \
