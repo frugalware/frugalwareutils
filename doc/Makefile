@@ -18,6 +18,9 @@
 
 -include ../Makefile.inc
 -include ../config.mak
+-include ../Makefile.conf.inc
+
+SUBDIRS = po
 
 DOCS = $(wildcard *.txt)
 MANS = $(subst .txt,.1,$(DOCS))
@@ -54,8 +57,6 @@ endif
 
 clean:
 	rm -f *.1
-
-prepare:
 
 %.html: %.txt
 	asciidoc $^
