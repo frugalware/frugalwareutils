@@ -68,15 +68,14 @@ release:
 		-ba -u 20F55619 frugalwareutils-$(VERSION).tar.gz
 	mv frugalwareutils-$(VERSION).tar.gz{,.asc} ../
 
-# FIXME: extend these to handle po4a, too
 update-po:
-	for i in `find . -type d -name po|egrep -v '_darcs|doc'`; \
+	for i in `find . -type d -name po`; \
 	do \
 		$(MAKE) -C $$i update-po; \
 	done
 
 pot:
-	for i in `find . -type d -name po|egrep -v '_darcs|doc'`; \
+	for i in `find . -type d -name po`; \
 	do \
 		$(MAKE) -C $$i pot; \
 	done
