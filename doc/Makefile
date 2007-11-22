@@ -22,13 +22,32 @@
 DOCS = $(wildcard *.txt)
 MANS = $(subst .txt,.1,$(DOCS))
 
+LANGS = $(shell grep '\[po4a_langs\]' po4a.cfg |sed 's/\[po4a_langs\] //')
+
+CONVERT = \
+	  if echo $(1)|grep -q /; then \
+	  iconv -t $(shell locale -a |grep "$(shell dirname $(1))_.*\."|sed -n 's/.*\.//;1 p') -f UTF8 < $(1) > tmp; mv tmp $(1); \
+	  fi
+
 ifneq ($(asciidoc),)
-compile: $(MANS)
+compile: $(MANS) po4a localized_mans
 else
 compile:
 endif
 
-install:
+po4a:
+ifneq ($(po4a),)
+	po4a -k 0 po4a.cfg
+endif
+
+ifneq ($(po4a),)
+localized_mans: $(shell for i in $(LANGS); do for j in $(MANS); do echo $$i/$$j; done; done)
+install-man: install-man1
+else
+localized_mans:
+endif
+
+install: install-man
 ifneq ($(asciidoc),)
 	$(INSTALL) -m644 $(MANS) $(DESTDIR)$(mandir)/man1
 endif
@@ -43,3 +62,15 @@ prepare:
 
 %.1: %.txt
 	a2x -f manpage $^
+
+install-man1:
+	for i in $(LANGS); do \
+		$(INSTALL) -D -m755 $(DESTDIR)$(mandir)/$$i/man1; \
+		for j in $(MANS); do \
+			$(INSTALL) -m644 $$i/$$j "$(DESTDIR)$(mandir)/$$i/man1/$$j"; \
+		done; \
+	done
+
+pot:
+	po4a -k 0 po4a.cfg
+	rm -rf po/*.po $(LANGS)
