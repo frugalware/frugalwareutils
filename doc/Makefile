@@ -20,6 +20,8 @@
 -include ../config.mak
 -include ../Makefile.conf.inc
 
+compile_needs =
+
 SUBDIRS = po
 
 DOCS = $(wildcard *.txt)
