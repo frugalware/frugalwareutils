@@ -1,5 +1,4 @@
-compile_needs = $(CONFNAME).so
-compile: $(conpile_needs)
+compile: $(CONFNAME).so
 	+$(DO_RECURSIVE)
 
 install:

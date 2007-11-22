@@ -18,9 +18,6 @@
 
 -include ../Makefile.inc
 -include ../config.mak
--include ../Makefile.conf.inc
-
-compile_needs =
 
 SUBDIRS = po
 
@@ -69,7 +66,7 @@ clean:
 
 install-man1:
 	for i in $(LANGS); do \
-		$(INSTALL) -D -m755 $(DESTDIR)$(mandir)/$$i/man1; \
+		$(INSTALL) -d -m755 $(DESTDIR)$(mandir)/$$i/man1; \
 		for j in $(MANS); do \
 			$(INSTALL) -m644 $$i/$$j "$(DESTDIR)$(mandir)/$$i/man1/$$j"; \
 		done; \
@@ -78,3 +75,6 @@ install-man1:
 pot:
 	po4a -k 0 po4a.cfg
 	rm -rf po/*.po $(LANGS)
+
+prepare:
+	+$(DO_RECURSIVE)
