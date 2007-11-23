@@ -10,7 +10,7 @@ mouseconfig [options]
 
 == DESCRIPTION
 
-mouseconfig sets up the `/etc/sysconfig/gfpm` file to match your hardware.
+mouseconfig sets up the `/etc/sysconfig/gpm` file to match your hardware.
 
 == OPTIONS
 
