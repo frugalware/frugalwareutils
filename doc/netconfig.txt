@@ -217,6 +217,9 @@ network={
 }
 ----
 
+NOTE: See also the `wpa_psk` and `wpa_driver` options, most users can avoid the
+manual `pre_up` and `pre_down` directives.
+
 == AUTHOR
 
 Written by Miklos Vajna.
