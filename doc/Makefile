@@ -60,7 +60,7 @@ clean:
 	asciidoc $^
 
 %.1: %.txt
-	a2x -f manpage $^
+	a2x -a lang=$(shell dirname $@|tr -d .) -f manpage $^
 	$(call CONVERT,$@)
 
 install-man: install-man1
