@@ -1,5 +1,7 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.7.7         - added po4a support for manpages
+              - added wpa support to netconfig
 0.7.6         - added support for xorg-7.3
               - converted existing manpages to asciidoc
               - added 6 new manpages
