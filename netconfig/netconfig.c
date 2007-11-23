@@ -173,7 +173,7 @@ int dialog_config(int argc, char **argv)
 		snprintf(newinterface->wpa_psk, PATH_MAX, ptr);
 		FWUTIL_FREE(ptr);
 		ptr = fwdialog_ask(_("WPA driver"),
-			_("If you want to use a custom driver (not the generic one, called 'wext'), then"
+			_("If you want to use a custom driver (not the generic one, called 'wext'), then "
 			"please enter it below. If unsure, just hit enter."), NULL);
 		snprintf(newinterface->wpa_driver, PATH_MAX, ptr);
 		FWUTIL_FREE(ptr);
