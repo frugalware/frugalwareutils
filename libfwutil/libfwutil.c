@@ -152,26 +152,26 @@ int fwutil_init()
 		system("/etc/rc.d/rc.udev");
 		system("mount / -o rw,remount");
 
-		if((fi = fopen("/proc/mounts", "r")))
-		{
-			if((fo = fopen("/etc/mtab", "w")))
-			{
-				char line[256];
-
-				while(!feof(fi))
-				{
-					if(!fgets(line, 255, fi))
-						break;
-					if(!strstr(line, "root"))
-						fprintf(fo, "%s", line);
-				}
-				fclose(fo);
-			}
-			fclose(fi);
-		}
 
 		system("mount /dev/pts");
 		ret++;
+	}
+	if((fi = fopen("/proc/mounts", "r")))
+	{
+		if((fo = fopen("/etc/mtab", "w")))
+		{
+			char line[256];
+
+			while(!feof(fi))
+			{
+				if(!fgets(line, 255, fi))
+					break;
+				if(!strstr(line, "root"))
+					fprintf(fo, "%s", line);
+			}
+			fclose(fo);
+		}
+		fclose(fi);
 	}
 	return(ret);
 }
