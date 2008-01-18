@@ -29,7 +29,7 @@
 #define FWNET_ESSID_MAX_SIZE 32
 #define FWNET_MODE_MAX_SIZE 32
 #define FWNET_ENCODING_TOKEN_MAX   32
-#define FWNET_GW_MAX_SIZE 26
+#define FWNET_GW_MAX_SIZE 27
 
 #define FWNET_VERSIONFILE "/etc/frugalware-release"
 #define FWNET_PATH "/etc/sysconfig/network"
