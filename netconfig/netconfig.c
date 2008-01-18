@@ -210,8 +210,8 @@ int dialog_config(int argc, char **argv)
 		if(strlen(ptr))
 			snprintf(newinterface->gateway, FWNET_GW_MAX_SIZE, "default gw %s", ptr);
 		FWUTIL_FREE(ptr);
-		dns = fwdialog_ask(_("Select nameserver"), _("Please give the IP address of the name server to use. You can"
-			"add more Domain Name Servers later by editing /etc/sysconfig/network/default.\n"
+		dns = fwdialog_ask(_("Select nameserver"), _("Please give the IP address of the name server to use. You "
+			"can add more Domain Name Servers later by editing /etc/sysconfig/network/default.\n"
 			"If you don't have a name server on your network just hit enter, without entering any ip address."),
 			NULL);
 		newprofile->dnses = g_list_append(newprofile->dnses, dns);
