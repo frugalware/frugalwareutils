@@ -164,6 +164,7 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 			// We'll work around this.
 			fprintf(nfp, "HorizSync    %s\n", HORIZSYNC);
 			fprintf(nfp, "VertRefresh  %s\n", REFRESH);
+			fprintf(nfp, "Option \"PreferredMode\" \"%s\"\n", res);
 			fprintf(nfp, "Option       \"DPMS\"\n");
 		}
 		if(reg_match(line, "driver.*kbd"))
