@@ -1,5 +1,10 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.7.8         - netconfig: spelling fixes
+              - xconfig: improved support for xorg-7.3
+              - mouseconfig: spelling fix
+	      - libfwutil: small speed hack avoids multiple udevds running if
+	        possible
 0.7.7         - added po4a support for manpages
               - added wpa support to netconfig
 0.7.6         - added support for xorg-7.3
