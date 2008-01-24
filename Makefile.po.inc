@@ -38,7 +38,8 @@ prepare:
 	do \
 		cp $(PO_DIR)/frugalwareutils/$$i/$(DOMAIN).po $$i.po; \
 		if ! msgfmt -c --statistics -o $$i.gmo $$i.po; then \
-			echo "WARNING: $(DOMAIN)/$$i.po will break your build!"; \
+			echo "ERROR: $(DOMAIN)/$$i.po would break your build!"; \
+			exit 1; \
 		fi; \
 	done
 
