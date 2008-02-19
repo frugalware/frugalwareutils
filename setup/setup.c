@@ -129,7 +129,7 @@ int show_menu()
 	FILE *input = stdin;
 	dialog_state.output = stderr;
 	char *ptr;
-	int i;
+	int i, ret=0;
 	plugin_t *plugin;
 
 	fwutil_i18ninit(__FILE__);
@@ -142,18 +142,18 @@ int show_menu()
 		{
 			plugin = g_list_nth_data(plugin_list, i);
 			if(!strcmp(plugin->name, ptr))
-				plugin->run(1, NULL);
+				ret = plugin->run(1, NULL);
 		}
 		free(ptr);
 	}
 
 	end_dialog();
-	return(0);
+	return(ret);
 }
 
 int main(int argc, char **argv)
 {
-	int i, ret=0;
+	int i, ret=0, found=0;
 	plugin_t *plugin;
 	char *myname, *ptr;
 
@@ -175,12 +175,12 @@ int main(int argc, char **argv)
 			plugin = g_list_nth_data(plugin_list, i);
 			if(!strcmp(plugin->name, myname))
 			{
-				plugin->run(argc, argv);
-				ret = 1;
+				ret = plugin->run(argc, argv);
+				found = 1;
 				break;
 			}
 		}
-		if(!ret)
+		if(!found)
 			fprintf(stderr, "Can't find plugin named '%s'!\n", myname);
 	}
 	else
@@ -190,5 +190,5 @@ int main(int argc, char **argv)
 	}
 	free(ptr);
 	cleanup_plugins();
-	return(0);
+	return(ret);
 }
