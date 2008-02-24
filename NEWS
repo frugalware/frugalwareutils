@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.7.9         - fixed exit codes on error in the curses utils
+              - added Czech translations
+              - removed broken translations
 0.7.8         - netconfig: spelling fixes
               - xconfig: improved support for xorg-7.3
               - mouseconfig: spelling fix
