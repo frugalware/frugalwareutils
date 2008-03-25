@@ -69,6 +69,18 @@ char *selnettype()
 		0, 0, 0, typenum, types));
 }
 
+char* dialog_getiface(char *desc)
+{
+	char *ret;
+	GList *iflist = fwnet_iflist();
+	char **ifarray = fwdialog_glist(iflist);
+	ret = fwdialog_menu(_("Enter interface name"), desc, 0, 0, 0,
+			g_list_length(iflist)/2, ifarray);
+	FWUTIL_FREE(ifarray);
+	g_list_free(iflist);
+	return ret;
+}
+
 int dsl_hook(fwnet_profile_t *profile, int confirm)
 {
 	struct stat buf;
@@ -97,11 +109,10 @@ int dsl_hook(fwnet_profile_t *profile, int confirm)
 					_("Sorry, the passwords do not match. Try again?")))
 			return(1);
 	}
-	iface = fwdialog_ask(_("Enter interface name"),
-			_("Enter the Ethernet interface connected to the DSL modem. It will be ethn, "
+	iface = dialog_getiface(_("Enter the Ethernet interface connected to the DSL modem. It will be ethn, "
 				"where 'n' is a number.\n"
 				"If unsure, just hit enter.\n"
-				"Enter interface name:"), "eth0");
+				"Enter interface name:"));
 	snprintf(profile->adsl_interface, IF_NAMESIZE, iface);
 	if(nco_fast)
 	{
@@ -147,10 +158,9 @@ int dialog_config(int argc, char **argv)
 	memset(newinterface, 0, sizeof(fwnet_interface_t));
 	if(strcmp(nettype, "lo"))
 	{
-		iface = fwdialog_ask(_("Enter interface name"),
-		_("We'll need the name of the interface you'd like to use for your network connection.\n"
+		iface = dialog_getiface(_("We'll need the name of the interface you'd like to use for your network connection.\n"
 		"If unsure, just hit enter.\n"
-		"Enter interface name:"), "eth0");
+		"Enter interface name:"));
 		snprintf(newinterface->name, IF_NAMESIZE, iface);
 		newprofile->interfaces = g_list_append(newprofile->interfaces, newinterface);
 	}
