@@ -12,9 +12,9 @@ clean:
 	rm -f *.so*
 	+$(DO_RECURSIVE)
 
-%.so: %.o
+%.so: %.o $(LIBOBJS)
 	$(CC) $(CFLAGS) -shared -Wl,-soname,$(basename $@).so.$(MAJORVER) -o \
-		$(basename $@).so.$(VERSION) $(basename $@).o $(LDFLAGS)
+		$(basename $@).so.$(VERSION) $(basename $@).o $(LIBOBJS) $(LDFLAGS)
 	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so.$(MAJORVER)
 	ln -sf $(basename $@).so.$(VERSION) $(basename $@).so
 
