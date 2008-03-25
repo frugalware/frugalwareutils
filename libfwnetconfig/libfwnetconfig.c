@@ -218,6 +218,32 @@ int fwnet_is_dhcp(fwnet_interface_t *iface)
 	return(dhcp);
 }
 
+/** Returns a list of interfaces available with descriptions.
+ * @return NULL on failure, GList of fwnet_interface_desc_t on success
+ */
+GList *fwnet_iflist()
+{
+	GList *ret = NULL;
+	char desc[128];
+	DIR *dir;
+	struct dirent *ent;
+
+	// /sys/class/net/
+	dir = opendir(FWNET_IFPATH);
+	if(!dir)
+		return NULL;
+	while((ent = readdir(dir)))
+	{
+		if(!strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") || !strcmp(ent->d_name, "lo"))
+			continue;
+		fwnet_ifdesc(ent->d_name, desc, sizeof(desc));
+		ret = g_list_append(ret, g_strdup(ent->d_name));
+		ret = g_list_append(ret, g_strdup(desc));
+	}
+	closedir(dir);
+	return ret;
+}
+
 /** Shut down an interface
  * @param iface the interface struct pointer
  * @return 1 on failure, 0 on success

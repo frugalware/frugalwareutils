@@ -34,6 +34,7 @@
 #define FWNET_VERSIONFILE "/etc/frugalware-release"
 #define FWNET_PATH "/etc/sysconfig/network"
 #define FWNET_LOCK "/var/run/netconfig"
+#define FWNET_IFPATH "/sys/class/net"
 
 typedef struct __fwnet_interface_t {
 	char name[IF_NAMESIZE+1];
@@ -67,6 +68,7 @@ typedef struct __fwnet_profile_t {
 int fwnet_listprofiles(void);
 fwnet_profile_t *fwnet_parseprofile(char *fn);
 int fwnet_is_dhcp(fwnet_interface_t *iface);
+GList *fwnet_iflist();
 int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile);
 int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile);
 int fwnet_setdns(fwnet_profile_t* profile);

@@ -22,11 +22,12 @@ CFLAGS += $(shell pkg-config --cflags glib-2.0)
 LDFLAGS += $(shell pkg-config --libs glib-2.0)
 
 # fwutil
-CFLAGS += -I../libfwutil
-LDFLAGS += -L../libfwutil -lfwutil
+CFLAGS += -I../libfwutil -I/usr/include/pci
+LDFLAGS += -L../libfwutil -lfwutil -lpci -lz
 
 #SUBDIRS = po
 LIBNAME = netconfig
+LIBOBJS = pci.o
 
 -include ../Makefile.inc
 -include ../Makefile.lib.inc
