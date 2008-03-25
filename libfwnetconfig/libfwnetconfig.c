@@ -223,10 +223,11 @@ int fwnet_is_dhcp(fwnet_interface_t *iface)
  */
 GList *fwnet_iflist()
 {
-	GList *ret = NULL;
+	GList *ret = NULL, *iflist = NULL;
 	char desc[128];
 	DIR *dir;
 	struct dirent *ent;
+	int i;
 
 	// /sys/class/net/
 	dir = opendir(FWNET_IFPATH);
@@ -236,11 +237,17 @@ GList *fwnet_iflist()
 	{
 		if(!strcmp(ent->d_name, ".") || !strcmp(ent->d_name, "..") || !strcmp(ent->d_name, "lo"))
 			continue;
-		fwnet_ifdesc(ent->d_name, desc, sizeof(desc));
-		ret = g_list_append(ret, g_strdup(ent->d_name));
-		ret = g_list_append(ret, g_strdup(desc));
+		iflist = g_list_append(iflist, g_strdup(ent->d_name));
 	}
 	closedir(dir);
+	iflist = g_list_sort(iflist, strcmp);
+	for(i=0; i<g_list_length(iflist); i++)
+	{
+		fwnet_ifdesc(g_list_nth_data(iflist, i), desc, sizeof(desc));
+		ret = g_list_append(ret, g_strdup(g_list_nth_data(iflist, i)));
+		ret = g_list_append(ret, g_strdup(desc));
+	}
+	g_list_free(iflist);
 	return ret;
 }
 
