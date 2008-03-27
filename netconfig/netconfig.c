@@ -160,7 +160,7 @@ int dialog_config(int argc, char **argv)
 	{
 		iface = dialog_getiface(_("We'll need the name of the interface you'd like to use for your network connection.\n"
 		"If unsure, just hit enter.\n"
-		"Enter interface name:"));
+		"Select interface:"));
 		snprintf(newinterface->name, IF_NAMESIZE, iface);
 		newprofile->interfaces = g_list_append(newprofile->interfaces, newinterface);
 	}
