@@ -1,5 +1,9 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.8.0         - netconfig: replaced the interface input dialog with a
+                nice menu (with descriptions of devices)
+              - added Czech manpages
+              - xconfig: fixed Danish keyboard layout
 0.7.9         - fixed exit codes on error in the curses utils
               - added Czech translations
               - removed broken translations
