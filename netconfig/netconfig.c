@@ -74,7 +74,7 @@ char* dialog_getiface(char *desc)
 	char *ret;
 	GList *iflist = fwnet_iflist();
 	char **ifarray = fwdialog_glist(iflist);
-	ret = fwdialog_menu(_("Enter interface name"), desc, 0, 0, 0,
+	ret = fwdialog_menu(_("Select interface"), desc, 0, 0, 0,
 			g_list_length(iflist)/2, ifarray);
 	FWUTIL_FREE(ifarray);
 	g_list_free(iflist);
