@@ -56,6 +56,8 @@ static void print_kbd_options(FILE *fp)
 
 	if(!lang || !strlen(lang) || !strncmp(lang, "en_", 3))
 		fprintf(fp, "Option      \"XkbLayout\" \"us\"\n");
+	else if(!strncmp(lang, "da_", 3))
+		fprintf(fp, "Option      \"XkbLayout\" \"dk\"\n");
 	else
 	{
 		ptr = strstr(lang, "_");
