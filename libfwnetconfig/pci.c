@@ -3,6 +3,7 @@
 #include <sys/ioctl.h>
 #include <net/if.h>
 #include <string.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <errno.h>
 #include <limits.h>

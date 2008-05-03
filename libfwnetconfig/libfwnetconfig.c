@@ -29,6 +29,7 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 #include <signal.h>
 #include <unistd.h>
 #include <libintl.h>
@@ -240,7 +241,7 @@ GList *fwnet_iflist()
 		iflist = g_list_append(iflist, g_strdup(ent->d_name));
 	}
 	closedir(dir);
-	iflist = g_list_sort(iflist, strcmp);
+	iflist = g_list_sort(iflist, (GCompareFunc)strcmp);
 	for(i=0; i<g_list_length(iflist); i++)
 	{
 		fwnet_ifdesc(g_list_nth_data(iflist, i), desc, sizeof(desc));
