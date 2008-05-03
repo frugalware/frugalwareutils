@@ -23,7 +23,7 @@ LDFLAGS += $(shell pkg-config --libs glib-2.0)
 
 # fwutil
 CFLAGS += -I../libfwutil -I/usr/include/pci
-LDFLAGS += -L../libfwutil -lfwutil -lpci -lz
+LDFLAGS += -L../libfwutil -lfwutil -lpci -lz -lresolv
 
 #SUBDIRS = po
 LIBNAME = netconfig
