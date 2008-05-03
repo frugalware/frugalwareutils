@@ -568,6 +568,7 @@ char *fwnet_lastprofile(void)
  */
 int fwnet_setlastprofile(char* str)
 {
+	int fd;
 	FILE *fp;
 
 	if(!str)
@@ -578,7 +579,8 @@ int fwnet_setlastprofile(char* str)
 			return(0);
 	}
 
-	fp = fopen(FWNET_LOCK, "w");
+	fd = creat(FWNET_LOCK, 0644);
+	fp = fdopen(fd, "w");
 	if(fp==NULL)
 		return(1);
 	fprintf(fp, str);
