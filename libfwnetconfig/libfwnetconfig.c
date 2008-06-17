@@ -440,7 +440,7 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 	}
 	if(strlen(iface->essid))
 	{
-		ptr = g_strdup_printf("iwconfig %s essid %s", iface->name, iface->essid);
+		ptr = g_strdup_printf("iwconfig %s essid \"%s\"", iface->name, iface->essid);
 		ret += fwutil_system(ptr);
 		FWUTIL_FREE(ptr);
 	}
