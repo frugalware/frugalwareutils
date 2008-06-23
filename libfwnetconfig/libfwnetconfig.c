@@ -1,9 +1,9 @@
 /*
  *  libfwnetconfig.c for frugalwareutils
  *
- *  usefull functions for a network configurator
+ *  useful functions for network configuration
  * 
- *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
+ *  Copyright (c) 2006, 2008 by Miklos Vajna <vmiklos@frugalware.org>
  * 
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -817,6 +817,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 		else
 			network=netaddr(ipaddr, netmask);
 
+		rename("/etc/hosts", "/etc/hosts.old");
 		fp = fopen("/etc/hosts", "w");
 		if(fp==NULL)
 			return(1);
