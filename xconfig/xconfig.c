@@ -71,6 +71,7 @@ int run(int argc, char **argv)
 	{
 		dialog_msgbox(_("xinit missing"), _("Could not find xinit, please install "
 			"it with pacman -S xinit."), 0, 0, 1);
+		end_dialog();
 		return(1);
 	}
 
@@ -78,6 +79,7 @@ int run(int argc, char **argv)
 	{
 		dialog_msgbox(_("xmessage missing"), _("Could not find xmessage, please install "
 			"it with pacman -S xmessage."), 0, 0, 1);
+		end_dialog();
 		return(1);
 	}
 
@@ -85,6 +87,7 @@ int run(int argc, char **argv)
 	{
 		dialog_msgbox(_("xsetroot missing"), _("Could not find xsetroot, please install "
 			"it with pacman -S xsetroot."), 0, 0, 1);
+		end_dialog();
 		return(1);
 	}
 
