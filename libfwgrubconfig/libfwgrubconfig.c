@@ -330,7 +330,7 @@ int fwgrub_install(int mode)
 		if(mode==2)
 			dev=rootdev;
 		if(mode!=1)
-			ptr = g_strdup_printf("grub-install --no-floppy %s >"
+			ptr = g_strdup_printf("grub-install --no-floppy --recheck %s >"
 				FWGRUB_LOGDEV " 2>&1", dev);
 		else
 			ptr = g_strdup_printf("grub-install %s >"
