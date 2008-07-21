@@ -83,3 +83,5 @@ pot:
 
 prepare:
 	+$(DO_RECURSIVE)
+
+.NOTPARALLEL:
