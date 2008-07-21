@@ -61,10 +61,10 @@ clean:
 %.html: %.txt
 	asciidoc $^
 
-%.1: %.txt
+%.1: %.txt asciidoc.conf
 	a2x --asciidoc-opts="-f asciidoc.conf" -a \
 		frugalwareutils_version=$(VERSION) -a frugalwareutils_date=$(DATE) \
-		-a lang=$(shell dirname $@|tr -d .) -f manpage $^
+		-a lang=$(shell dirname $@|tr -d .) -f manpage $<
 	$(call CONVERT,$@)
 
 install-man: install-man1
