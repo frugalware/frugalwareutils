@@ -19,6 +19,8 @@
 -include ../Makefile.inc
 -include ../config.mak
 
+DATE := $(shell date +%Y-%m-%d)
+
 SUBDIRS = po
 
 DOCS = $(wildcard *.txt)
@@ -60,7 +62,9 @@ clean:
 	asciidoc $^
 
 %.1: %.txt
-	a2x -a lang=$(shell dirname $@|tr -d .) -f manpage $^
+	a2x --asciidoc-opts="-f asciidoc.conf" -a \
+		frugalwareutils_version=$(VERSION) -a frugalwareutils_date=$(DATE) \
+		-a lang=$(shell dirname $@|tr -d .) -f manpage $^
 	$(call CONVERT,$@)
 
 install-man: install-man1
