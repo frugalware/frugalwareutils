@@ -1,5 +1,12 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.8.1         - libfwnetconfig: fix up permissions of lockfiles
+              - old /etc/hosts files are now backed up before
+                overwriting them
+              - essids containing spaces are now supported
+              - xconfig now properly uninitializes the screen if some
+                helper program is missing
+              - grubconfig now calls grub-install with --recheck
 0.8.0         - netconfig: replaced the interface input dialog with a
                 nice menu (with descriptions of devices)
               - added Czech manpages
