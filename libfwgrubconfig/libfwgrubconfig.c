@@ -481,7 +481,7 @@ static int os_prober(FILE *fp)
 	if(stat("/usr/bin/os-prober", &buf))
 		return(1);
 
-	pp = popen("os-prober", "r");
+	pp = popen("os-prober 2>/dev/null", "r");
 	if(!pp)
 		return(1);
 	while(fgets(line, PATH_MAX, pp))
