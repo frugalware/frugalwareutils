@@ -604,6 +604,9 @@ void fwgrub_create_menu(FILE *fp)
 	entry.title = gen_title();
 	entry.type=NULL;
 
+	// hack: update mtab
+	system("mount / -o rw,remount");
+
 	ptr = find_mount_point("/boot");
 	bootdev = mount_dev(ptr);
 	free(ptr);
