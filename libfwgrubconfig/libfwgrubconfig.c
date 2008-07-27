@@ -239,8 +239,12 @@ static char *get_mbr_dev()
 	if(!fp)
 		return(NULL);
 	while(fgets(line, PATH_MAX, fp))
-		if(++i>2)
+	{
+		if(i++ < 2 || strstr(line, "ram"))
+			continue;
+		else
 			break;
+	}
 	fclose(fp);
 	ptr=line;
 	while(*++ptr)
