@@ -1,5 +1,10 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.8.2         - fixed smp build
+              - grubconfig:
+                - ignore ramdisk devices when searching for mbr
+                - handle the case when /etc/mtab is outdated
+                - ignore warnings from os-prober
 0.8.1         - libfwnetconfig: fix up permissions of lockfiles
               - old /etc/hosts files are now backed up before
                 overwriting them
