@@ -70,12 +70,14 @@ clean:
 install-man: install-man1
 
 install-man1:
+ifneq ($(po4a),)
 	for i in $(LANGS); do \
 		$(INSTALL) -d -m755 $(DESTDIR)$(mandir)/$$i/man1; \
 		for j in $(MANS); do \
 			$(INSTALL) -m644 $$i/$$j "$(DESTDIR)$(mandir)/$$i/man1/$$j"; \
 		done; \
 	done
+endif
 
 pot:
 	po4a -k 0 po4a.cfg
