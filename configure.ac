@@ -73,12 +73,16 @@ fi
 LIB_CFLAGS="$CFLAGS"
 case "`$CC -dumpmachine`" in
 	i686-*)
-		CFLAGS="$CFLAGS -march=i686"
+		CFLAGS="$CFLAGS -march=i686 -mtune=generic"
 		LIB_CFLAGS="$CFLAGS"
 		;;
 	x86_64-*)
-		CFLAGS="$CFLAGS -march=k8"
+		CFLAGS="$CFLAGS -march=x86_64 -mtune=generic"
 		LIB_CFLAGS="$CFLAGS -fPIC"
+		;;
+	ppc-* | powerpc-*)
+		CFLAGS="$CFLAGS -mcpu=powerpc -mtune=powerpc"
+		LIB_CFLAGS="$CFLAGS"
 		;;
 esac
 AC_SUBST(LIB_CFLAGS)
