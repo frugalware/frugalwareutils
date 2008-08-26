@@ -808,6 +808,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 			return(1);
 		fprintf(fp, "%s\n", host);
 		fclose(fp);
+		chmod("/etc/HOSTNAME", 0644);
 
 		if(!staticip)
 		{
@@ -834,6 +835,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 		fprintf(fp, "%s\t%s %s\n", ipaddr, host, hostname(host));
 		fprintf(fp, "\n# End of hosts.\n");
 		fclose(fp);
+		chmod("/etc/hosts", 0644);
 
 		fp = fopen("/etc/networks", "w");
 		if(fp==NULL)
@@ -847,6 +849,7 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 		fprintf(fp, "localnet        %s\n", network);
 		fprintf(fp, "\n# End of networks.\n");
 		fclose(fp);
+		chmod("/etc/networks", 0644);
 	}
 	FWUTIL_FREE(network);
 	umask(oldmask);
