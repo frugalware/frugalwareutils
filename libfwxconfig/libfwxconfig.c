@@ -49,6 +49,11 @@ static void print_mouse_options(FILE *fp)
 static void print_kbd_options(FILE *fp)
 {
 	char *ptr, *lang=NULL;
+
+#ifdef __powerpc__
+	// we want capslock and command == altgr
+	fprintf(fp, "Option \"XkbOptions\" \"ctrl:showcaps, lv3:lwin_switch\"\n");
+#endif
 	
 	ptr = getenv("LANG");
 	if(ptr)
