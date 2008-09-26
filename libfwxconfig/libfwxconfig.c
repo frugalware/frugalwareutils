@@ -169,8 +169,10 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 		{
 			// X -configure leaves out the refresh frequency
 			// We'll work around this.
+#ifndef __powerpc__
 			fprintf(nfp, "HorizSync    %s\n", HORIZSYNC);
 			fprintf(nfp, "VertRefresh  %s\n", REFRESH);
+#endif
 			fprintf(nfp, "Option \"PreferredMode\" \"%s\"\n", res);
 			fprintf(nfp, "Option       \"DPMS\"\n");
 		}
