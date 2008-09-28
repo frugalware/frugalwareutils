@@ -16,29 +16,10 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
--include ../config.mak
-CFLAGS = $(LIB_CFLAGS) -DVERSION="\"$(VERSION)\""
-LDFLAGS=-ldialog -lcurses -lm
-CFLAGS += $(shell pkg-config --cflags glib-2.0)
-LDFLAGS += $(shell pkg-config --libs glib-2.0)
+DOMAIN=yabootcfg
 
-# fwutil
-CFLAGS += -I../libfwutil
-LDFLAGS += -L../libfwutil -lfwutil
+top_srcdir = ..
 
-# fwdialog
-CFLAGS += -I../libfwdialog
-LDFLAGS += -L../libfwdialog -lfwdialog
-
-# fwyabootcfg
-CFLAGS += -I../libfwyabootcfg
-LDFLAGS += -L../libfwyabootcfg -lfwyabootcfg
-
-# setup
-CFLAGS += -I../setup
-
-SUBDIRS = po
-CONFNAME = yabootcfg
-
--include ../Makefile.inc
--include ../Makefile.conf.inc
+-include ../../config.mak
+-include ../../Makefile.inc
+-include ../../Makefile.po.inc
