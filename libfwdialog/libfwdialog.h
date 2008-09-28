@@ -28,5 +28,7 @@ char *fwdialog_ask(char *title, char *desc, char *init);
 char *fwdialog_password(char *title, char *desc);
 char *fwdialog_menu(const char *title, const char *cprompt, int height, int width,
 	int menu_height, int item_no, char **items);
+GList *fwdialog_checklist(const char *title, const char *cprompt, int height, int width,
+	int menu_height, int item_no, char **items, int flags);
 int fwdialog_yesno(char *title, char *desc);
 char **fwdialog_glist(GList *list);

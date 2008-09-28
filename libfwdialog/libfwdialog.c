@@ -165,6 +165,67 @@ char *fwdialog_menu(const char *title, const char *cprompt, int height, int widt
 	return(strdup(dialog_vars.input_result));
 }
 
+/** A wrapper to dialog_checklist(): handle the case when the user hits cancel.
+ * @param title the title on the top of the widget
+ * @param cprompt the prompt text shown within the widget
+ * @param height the desired height of the box
+ * @param width the desired width of the box
+ * @param menu_height the minimum height to reserve for displaying the list
+ * @param item_no the number of rows in items
+ * @param items an array of strings - the contents of the menu
+ * @param flags for example FLAG_CHECK
+ * @return the answer - you must glist_free() the allocated memory
+ */
+GList *fwdialog_checklist(const char *title, const char *cprompt, int height, int width,
+	int menu_height, int item_no, char **items, int flags)
+{
+	int ret;
+	char *ptr, *ptrn, *buf;
+	GList *list=NULL;
+
+	buf = dialog_vars.input_result;
+	dialog_vars.quoted = 1;
+	FWUTIL_MALLOC(dialog_vars.input_result, item_no*256);
+	dialog_vars.input_result[0] = '\0';
+
+	while (1) {
+		dlg_put_backtitle();
+		dlg_clear();
+		ret = dialog_checklist(title, cprompt, height, width, menu_height,
+			item_no, items, flags);
+		if (ret != DLG_EXIT_CANCEL)
+			break;
+		if (fwdialog_confirm())
+			fwdialog_exit();
+	}
+
+	ptr = strstr(dialog_vars.input_result, "\"");
+	while (ptr && strstr(ptr, "\" \"")) {
+		ptrn = strstr(ptr, "\" \"");
+		if(ptrn) {
+			*ptrn = '\0';
+			ptrn += 3;
+		}
+		if (ptr[0] == '"')
+			ptr++;
+		list = g_list_append(list, strdup(ptr));
+		ptr=ptrn;
+	}
+	if (ptr) {
+		ptrn = ptr + strlen(ptr) - 1;
+		if (ptrn)
+			*ptrn='\0';
+		if (ptr[0] == '"')
+			ptr++;
+		list = g_list_append(list, strdup(ptr));
+	}
+	FWUTIL_FREE(dialog_vars.input_result);
+	dialog_vars.input_result = buf;
+	dialog_vars.quoted = 0;
+	return list;
+
+}
+
 /** A wrapper to dialog_yesno(): sets the backtitle, clears the display,
  * sets the height and width automatically and turns DLG_EXIT_OK to logical
  * true/false.
