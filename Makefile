@@ -62,7 +62,7 @@ distclean: clean
 	rm -f configure install-sh aclocal.m4 */po/*.gmo
 
 dist:
-	git-archive --format=tar --prefix=frugalwareutils-$(VERSION)/ HEAD | tar xf -
+	git archive --format=tar --prefix=frugalwareutils-$(VERSION)/ HEAD | tar xf -
 	git log --no-merges |git name-rev --tags --stdin > frugalwareutils-$(VERSION)/Changelog
 	make -C frugalwareutils-$(VERSION) prepare
 	tar czf frugalwareutils-$(VERSION).tar.gz frugalwareutils-$(VERSION)
