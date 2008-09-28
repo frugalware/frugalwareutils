@@ -26,8 +26,11 @@ SUBDIRS = doc apidoc libfwutil libfwdialog setup \
 	  libfwmouseconfig mouseconfig \
 	  libfwxconfig xconfig \
 	  libfwgrubconfig grubconfig \
-	  libfwxwmconfig xwmconfig \
-	  libfwyabootcfg
+	  libfwxwmconfig xwmconfig
+
+ifeq ($(CARCH),ppc)
+SUBDIRS += libfwyabootcfg
+endif
 
 compile: config.mak
 	+$(DO_RECURSIVE)
