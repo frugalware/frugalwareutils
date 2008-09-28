@@ -29,7 +29,7 @@ SUBDIRS = doc apidoc libfwutil libfwdialog setup \
 	  libfwxwmconfig xwmconfig
 
 ifeq ($(CARCH),ppc)
-SUBDIRS += libfwyabootcfg
+SUBDIRS += libfwyabootcfg yabootcfg
 endif
 
 compile: config.mak
