@@ -25,8 +25,11 @@ SUBDIRS = doc apidoc libfwutil libfwdialog setup \
 	  libfwraidconfig raidconfig \
 	  libfwmouseconfig mouseconfig \
 	  libfwxconfig xconfig \
-	  libfwgrubconfig grubconfig \
 	  libfwxwmconfig xwmconfig
+
+ifneq ($(CARCH),ppc)
+SUBDIRS += libfwgrubconfig grubconfig
+endif
 
 ifeq ($(CARCH),ppc)
 SUBDIRS += libfwyabootcfg yabootcfg
