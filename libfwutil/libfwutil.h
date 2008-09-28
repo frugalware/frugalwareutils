@@ -30,6 +30,10 @@
 #define _(str) dgettext (FWUTIL_GETTEXT, str)
 #endif
 
+#define FWUTIL_MALLOC(p, b) { if((b) > 0) \
+	{ p = malloc(b); if (!(p)) \
+	{ fprintf(stderr, "malloc failure: could not allocate %d bytes\n", (int)(b)); \
+	exit(1); }} else p = NULL; }
 #define FWUTIL_FREE(p) do { if (p) { free(p); (p) = NULL; }} while(0)
 
 #define fwutil_min(p, q)  ((p) < (q) ? (p) : (q))
