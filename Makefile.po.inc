@@ -36,10 +36,12 @@ prepare:
 	[ -d $(PO_DIR) ]
 	for i in $(LANGS); \
 	do \
-		cp $(PO_DIR)/frugalwareutils/$$i/$(DOMAIN).po $$i.po; \
-		if ! msgfmt -c --statistics -o $$i.gmo $$i.po; then \
-			echo "ERROR: $(DOMAIN)/$$i.po would break your build!"; \
-			exit 1; \
+		if [ -e $(PO_DIR)/frugalwareutils/$$i/$(DOMAIN).po ]; then \
+			cp $(PO_DIR)/frugalwareutils/$$i/$(DOMAIN).po $$i.po; \
+			if ! msgfmt -c --statistics -o $$i.gmo $$i.po; then \
+				echo "ERROR: $(DOMAIN)/$$i.po would break your build!"; \
+				exit 1; \
+			fi; \
 		fi; \
 	done
 
