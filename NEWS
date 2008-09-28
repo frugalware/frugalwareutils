@@ -1,5 +1,10 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.8.3         - implemented a grubconfig-like yabootcfg
+              - ported xconfig to ppc
+              - netconfig now makes sure /etc/hosts and other
+                user-readable files are really world-readable
+              - fix build without po4a
 0.8.2         - fixed smp build
               - grubconfig:
                 - ignore ramdisk devices when searching for mbr
