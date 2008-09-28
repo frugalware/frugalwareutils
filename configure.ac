@@ -77,7 +77,7 @@ case "`$CC -dumpmachine`" in
 		LIB_CFLAGS="$CFLAGS"
 		;;
 	x86_64-*)
-		CFLAGS="$CFLAGS -march=x86_64 -mtune=generic"
+		CFLAGS="$CFLAGS -march=x86-64 -mtune=generic"
 		LIB_CFLAGS="$CFLAGS -fPIC"
 		;;
 	ppc-* | powerpc-*)
