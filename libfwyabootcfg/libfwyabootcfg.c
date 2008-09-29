@@ -249,7 +249,14 @@ void fwyaboot_create_menu(FILE *fp, int flags)
 
 int fwyaboot_install()
 {
-	return system("/usr/sbin/ybin -v &> " FWYABOOT_LOGDEV);
+	int ret;
+	FILE *pp;
+
+	pp = popen("/usr/sbin/mkofboot &> " FWYABOOT_LOGDEV, "w");
+	fprintf(pp, "y\n");
+	ret = pclose(pp);
+	ret += system("/usr/sbin/ybin -v &> " FWYABOOT_LOGDEV);
+	return ret;
 }
 
 #if 0
