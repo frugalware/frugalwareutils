@@ -244,7 +244,8 @@ GList *fwnet_iflist()
 	iflist = g_list_sort(iflist, (GCompareFunc)strcmp);
 	for(i=0; i<g_list_length(iflist); i++)
 	{
-		fwnet_ifdesc(g_list_nth_data(iflist, i), desc, sizeof(desc));
+		if (fwnet_ifdesc(g_list_nth_data(iflist, i), desc, sizeof(desc)))
+			snprintf (desc, sizeof(desc), _("Unknown device"));
 		ret = g_list_append(ret, g_strdup(g_list_nth_data(iflist, i)));
 		ret = g_list_append(ret, g_strdup(desc));
 	}
