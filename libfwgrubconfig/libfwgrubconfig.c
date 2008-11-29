@@ -625,7 +625,15 @@ void fwgrub_create_menu(FILE *fp)
 	fprintf(fp, "default=0\ntimeout=5\n");
 	snprintf(path, PATH_MAX, "%s/grub/message", entry.bootstr);
 	if(is_raid1_device(entry.rootdev))
-		*(entry.grubbootdev) = '\0';
+	{
+		if (entry.grubbootdev)
+			// in case /boot is not on raid1, it is already
+			// allocated.
+			*(entry.grubbootdev) = '\0';
+		else
+			// otherwise just allocate an empty string
+			entry.grubbootdev = strdup("");
+	}
 	if(!stat(path, &buf))
 		fprintf(fp, "gfxmenu %s%s/grub/message\n\n", entry.grubbootdev, entry.bootstr);
 	entry.kernel = strdup("/vmlinuz");
