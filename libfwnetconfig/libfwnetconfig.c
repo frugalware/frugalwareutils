@@ -396,8 +396,17 @@ static int update_wpa_conf(char *ssid, char *psk)
 	fp = fopen("/etc/wpa_supplicant.conf", "w");
 	if(!fp)
 		return(1);
-	fprintf(fp, "ctrl_interface=/var/run/wpa_supplicant\n\n");
-	fprintf(fp, "network={\n\tssid=\"%s\"\n\tpsk=\"%s\"\n}\n", ssid, psk);
+	fprintf(fp,
+	        "# WARNING! Machine generated ephemeral file, do not edit!\n"
+	        "# For a simple setup, edit instead\n"
+	        "#   /etc/sysconfig/network/<your profile>.\n"
+	        "# If you insist on managing this file by yourself, see\n"
+	        "# netconfig(1) / EXAMPLES / Using wpa_supplicant.\n"
+	        "\n"
+	        "ctrl_interface=/var/run/wpa_supplicant\n"
+	        "\n"
+	        "network={\n\tssid=\"%s\"\n\tpsk=\"%s\"\n}\n",
+	        ssid, psk);
 	fclose(fp);
 	return(0);
 }
