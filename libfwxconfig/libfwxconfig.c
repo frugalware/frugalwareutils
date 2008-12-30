@@ -180,7 +180,7 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 		{
 			print_kbd_options(nfp);
 		}
-		if(reg_match(line, "Depth.*(16)|(24)"))
+		if(reg_match(line, "Depth.*(16|24)"))
 		{
 			fprintf(nfp, "Modes \"%s\" \"800x600\" \"640x480\"\n", res);
 		}
