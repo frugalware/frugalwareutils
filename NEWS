@@ -1,5 +1,10 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.8.5         - netconfig now provides better support for hand-written
+                wpa_supplicant.conf
+              - grubconfig now handles the case when /boot is raid1
+              - netconfig now detects the interface name even if ethtool
+                can't find it, but the info is available via sysfs
 0.8.4         - port build system to git-1.6.0
               - fix x86_64 build
               - improve yabootcfg by calling mkofboot as well
