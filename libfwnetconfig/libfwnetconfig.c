@@ -196,6 +196,8 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 					strncpy(iface->wpa_psk, ptr, PATH_MAX);
 				if(!strcmp(var, "WPA_DRIVER") && !strlen(iface->wpa_driver))
 					strncpy(iface->wpa_driver, ptr, PATH_MAX);
+				if(!strcmp(var, "WPA_SUPPLICANT"))
+					iface->wpa_supplicant = (toupper(*ptr) == 'Y');
 				if(!strcmp(var, "GATEWAY") && !strlen(iface->gateway))
 					strncpy(iface->gateway, ptr, FWNET_GW_MAX_SIZE);
 			}
@@ -311,7 +313,7 @@ int fwnet_ifdown(fwnet_interface_t *iface, fwnet_profile_t *profile)
 		fwutil_system(ptr);
 		FWUTIL_FREE(ptr);
 	}
-	if(strlen(iface->wpa_psk))
+	if(strlen(iface->wpa_psk) || iface->wpa_supplicant)
 	{
 		ptr = g_strdup("killall wpa_supplicant");
 		fwutil_system(ptr);
@@ -426,9 +428,10 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 
 	dhcp = fwnet_is_dhcp(iface);
 	// initialize the device
-	if(strlen(iface->wpa_psk))
+	if(strlen(iface->wpa_psk) || iface->wpa_supplicant)
 	{
-		update_wpa_conf(iface->essid, iface->wpa_psk);
+		if(strlen(iface->wpa_psk))
+			update_wpa_conf(iface->essid, iface->wpa_psk);
 		if(strlen(iface->wpa_driver))
 			ptr = g_strdup_printf("wpa_supplicant -i%s -D%s -c /etc/wpa_supplicant.conf -w -B", iface->name, iface->wpa_driver);
 		else

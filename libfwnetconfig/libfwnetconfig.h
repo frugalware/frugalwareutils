@@ -51,6 +51,7 @@ typedef struct __fwnet_interface_t {
 	char key[FWNET_ENCODING_TOKEN_MAX+1];
 	char wpa_psk[PATH_MAX+1];
 	char wpa_driver[PATH_MAX+1];
+	int wpa_supplicant;
 	char gateway[FWNET_GW_MAX_SIZE+1];
 } fwnet_interface_t;
 

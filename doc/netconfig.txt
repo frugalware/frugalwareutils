@@ -118,11 +118,23 @@ be used. If using DHCP, then this directive is ignored.
 
 key = <key>::
 	Used to manipulate encryption or scrambling keys and security mode for
-	wireless networks. Use this for WEP only, use `wpa_psk` for WPA.
+	wireless networks. Use this for WEP only, use `wpa_psk` or
+	`wpa_supplicant` for WPA.
 
 wpa_psk = <passphrase>::
 	If this directive is specified, then wpa_supplicant will be invoked to
 	initialize WPA encryption before setting any other parameter (like ESSID).
+
+wpa_supplicant = yes|no::
+	If this directive is enabled, then wpa_supplicant will be invoked to
+	initialize WPA encryption before setting any other parameter, but will
+	not do anything else. It is intended to use instead of the `essid` and
+	`wpa_psk` directives if you prefer to write a wpa_supplicant.conf
+	manually.
++
+NOTE: In case you use WPA encryption only with your wireless card, then
+this method has the advantage of not having different network profiles
+for each WPA network, as long as each network has a different essid.
 
 wpa_driver = <driver>::
 	The driver to be used by wpa_supplicant. The default is `wext`. Possible drivers
@@ -199,11 +211,10 @@ the first, and this post_down should be the last one.
 === Using wpa_supplicant
 
 If you want to use wpa_supplicant instead of the simple encryption (using
-key = secret), then use the following pre_up and post_down lines:
+key = secret), then enable this by setting:
 
 ----
-pre_up = wpa_supplicant -Dwext -iwlan0 -c /etc/wpa_supplicant.conf -w -B
-post_down = killall wpa_supplicant
+wpa_supplicant = yes
 ----
 
 You also need to edit `/etc/wpa_supplicant.conf`. A possible correct setup is:
