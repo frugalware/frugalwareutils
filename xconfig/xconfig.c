@@ -128,6 +128,7 @@ int run(int argc, char **argv)
 		fwx_doconfig(mdev, res, depth);
 	unlink("/root/xorg.conf.new");
 
+	free (mdev);
 	if(needrelease)
 		fwutil_release();
 	end_dialog();
