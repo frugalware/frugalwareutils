@@ -218,15 +218,22 @@ static void os_prober(FILE *fp)
 void fwyaboot_create_menu(FILE *fp, int flags)
 {
 	char *root = find_root();
+	char *ptr = NULL;
 
 	fprintf(fp, "#\n"
 		"# /etc/yaboot.conf - configuration file for Yaboot\n"
 		"# This file is generated automatically by yabootcfg\n"
 		"#\n\n");
-	fprintf(fp, "init-message=\"%s\"\n", gen_title());
+	ptr = gen_title();
+	fprintf(fp, "init-message=\"%s\"\n", ptr);
+	FWUTIL_FREE (ptr);
 	fprintf(fp, "boot=%s\n", find_boot());
-	fprintf(fp, "device=%s\n", of_path(root, 0));
-	fprintf(fp, "partition=%s\n", of_path(root, 1));
+	ptr = of_path(root, 0);
+	fprintf(fp, "device=%s\n", ptr);
+	FWUTIL_FREE (ptr);
+	ptr = of_path(root, 1);
+	fprintf(fp, "partition=%s\n", ptr);
+	FWUTIL_FREE (ptr);
 	fprintf(fp, "delay=10\n"
 		"timeout=40\n"
 		"install=/usr/lib/yaboot/yaboot\n"
