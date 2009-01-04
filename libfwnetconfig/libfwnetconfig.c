@@ -44,7 +44,7 @@ extern int fwutil_dryrun;
  * @{
  */
 
-/** Prints s list of profiles available.
+/** Prints a list of profiles available.
  * @return 1 on failure, 0 on success
  */
 int fwnet_listprofiles(void)
