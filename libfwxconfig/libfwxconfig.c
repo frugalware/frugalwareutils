@@ -84,6 +84,7 @@ static void print_mouse_identifier(FILE *fp, int num, char *device, char *proto)
 	fprintf(fp, "Option      \"Device\" \"%s\"\n", device);
 	fprintf(fp, "EndSection\n\n"
 			"Section \"InputDevice\"\n");
+	free(proto);
 }
 
 /** Creates a config draft, which will be an input fro fwx_doconfig()
@@ -225,7 +226,7 @@ int fwx_dotest()
 }
 
 /** Get the name of the device used by gpm
- * @return the name of the device
+ * @return the name of the device. Returned string should be freed.
  */
 char *fwx_get_mousedev()
 {
