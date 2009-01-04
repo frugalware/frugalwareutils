@@ -294,6 +294,7 @@ int fwgrub_install(int mode)
 		if(mode==0)
 		{
 			// mbr
+			char *ptr = NULL;
 			GList *devs = find_real_devs(rootdev);
 			for(i=0;i<g_list_length(devs);i++)
 			{
@@ -302,8 +303,12 @@ int fwgrub_install(int mode)
 					" 2>&1", "w");
 				if(!pp)
 					return(1);
-				fprintf(pp, "root %s\n", grub_convert(dev, 0));
-				fprintf(pp, "setup %s\n", grub_convert(dev, 1));
+				ptr = grub_convert(dev, 0);
+				fprintf(pp, "root %s\n", ptr);
+				free (ptr);
+				ptr = grub_convert(dev, 1);
+				fprintf(pp, "setup %s\n", ptr);
+				free (ptr);
 			}
 		}
 		/* else if(mode==1)
@@ -311,6 +316,7 @@ int fwgrub_install(int mode)
 		else if(mode==2)
 		{
 			// root
+			char *ptr = NULL;
 			GList *devs = find_real_devs(rootdev);
 			for(i=0;i<g_list_length(devs);i++)
 			{
@@ -319,8 +325,12 @@ int fwgrub_install(int mode)
 					" 2>&1", "w");
 				if(!pp)
 					return(1);
-				fprintf(pp, "root %s\n", grub_convert(dev, 0));
-				fprintf(pp, "setup %s\n", grub_convert(dev, 0));
+				ptr = grub_convert(dev, 0);
+				fprintf(pp, "root %s\n", ptr);
+				free (ptr);
+				ptr = grub_convert(dev, 0);
+				fprintf(pp, "setup %s\n", ptr);
+				free (ptr);
 			}
 		}
 	}
