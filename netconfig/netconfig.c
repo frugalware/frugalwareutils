@@ -114,6 +114,7 @@ int dsl_hook(fwnet_profile_t *profile, int confirm)
 				"If unsure, just hit enter.\n"
 				"Enter interface name:"));
 	snprintf(profile->adsl_interface, IF_NAMESIZE, iface);
+	FWUTIL_FREE(iface);
 	if(nco_fast)
 	{
 		fwutil_system("mkdir /var/run");
@@ -162,6 +163,7 @@ int dialog_config(int argc, char **argv)
 		"If unsure, just hit enter.\n"
 		"Select interface:"));
 		snprintf(newinterface->name, IF_NAMESIZE, iface);
+		FWUTIL_FREE(iface);
 		newprofile->interfaces = g_list_append(newprofile->interfaces, newinterface);
 	}
 
