@@ -305,10 +305,11 @@ int fwgrub_install(int mode)
 					return(1);
 				ptr = grub_convert(dev, 0);
 				fprintf(pp, "root %s\n", ptr);
-				free (ptr);
+				free(ptr);
 				ptr = grub_convert(dev, 1);
 				fprintf(pp, "setup %s\n", ptr);
-				free (ptr);
+				free(ptr);
+				fclose(pp);
 			}
 		}
 		/* else if(mode==1)
@@ -327,10 +328,11 @@ int fwgrub_install(int mode)
 					return(1);
 				ptr = grub_convert(dev, 0);
 				fprintf(pp, "root %s\n", ptr);
-				free (ptr);
+				free(ptr);
 				ptr = grub_convert(dev, 0);
 				fprintf(pp, "setup %s\n", ptr);
-				free (ptr);
+				free(ptr);
+				fclose(pp);
 			}
 		}
 	}
