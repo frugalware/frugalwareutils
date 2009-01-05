@@ -290,7 +290,7 @@ int fwgrub_install(int mode)
 		if(!pp)
 			return(1);
 		fprintf(pp, "quit\n");
-		fclose(pp);
+		pclose(pp);
 		if(mode==0)
 		{
 			// mbr
