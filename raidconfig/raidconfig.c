@@ -97,6 +97,7 @@ GList *add_devices()
 		dlg_clear();
 		ret = dialog_menu(_("Selecting devices"), dptr, 0, 0, 0,
 			g_list_length(partlist)/2, partarray);
+		free(dptr);
 		if (ret == DLG_EXIT_CANCEL)
 			break;
 		devlist = g_list_append(devlist, strdup(buf));
