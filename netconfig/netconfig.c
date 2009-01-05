@@ -321,9 +321,11 @@ int run(int argc, char **argv)
 			else if ((!strcmp("status", argv[optind])) && fn)
 			{
 				printf(_("Current profile: %s\n"), fn);
+				FWUTIL_FREE(fn);
 				return(0);
 			}
 			profile = fwnet_parseprofile(fn);
+			FWUTIL_FREE(fn);
 			if(profile!=NULL)
 				// unload the old profile
 				for (i=0; i<g_list_length(profile->interfaces); i++)
