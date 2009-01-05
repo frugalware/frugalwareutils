@@ -132,6 +132,7 @@ int run(int argc, char **argv)
 	zones = zone_scan(ZONEDIR);
 	ptr = ask_zone(zones);
 	symlink(ptr, ZONEFILE);
+	free(ptr);
 
 	if(argv!=NULL)
 		end_dialog();
