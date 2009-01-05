@@ -327,6 +327,7 @@ int run(int argc, char **argv)
 			profile = fwnet_parseprofile(fn);
 			FWUTIL_FREE(fn);
 			if(profile!=NULL)
+			{
 				// unload the old profile
 				for (i=0; i<g_list_length(profile->interfaces); i++)
 				{
@@ -334,6 +335,8 @@ int run(int argc, char **argv)
 					if(!iface || !strcmp(iface, j->name))
 						fwnet_ifdown(j, profile);
 				}
+				FWUTIL_FREE(profile);
+			}
 			if(!strcmp("stop", argv[optind]))
 			{
 				if(!fwutil_dryrun)
@@ -361,6 +364,7 @@ int run(int argc, char **argv)
 		if(!fwutil_dryrun)
 			fwnet_setlastprofile(fn);
 		FWUTIL_FREE(fn);
+		FWUTIL_FREE(profile);
 	}
 	else
 		dialog_config(argc, argv);
