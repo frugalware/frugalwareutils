@@ -433,9 +433,9 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 		if(strlen(iface->wpa_psk))
 			update_wpa_conf(iface->essid, iface->wpa_psk);
 		if(strlen(iface->wpa_driver))
-			ptr = g_strdup_printf("wpa_supplicant -i%s -D%s -c /etc/wpa_supplicant.conf -w -B", iface->name, iface->wpa_driver);
+			ptr = g_strdup_printf("wpa_supplicant -i%s -D%s -c /etc/wpa_supplicant.conf -B", iface->name, iface->wpa_driver);
 		else
-			ptr = g_strdup_printf("wpa_supplicant -i%s -Dwext -c /etc/wpa_supplicant.conf -w -B", iface->name);
+			ptr = g_strdup_printf("wpa_supplicant -i%s -Dwext -c /etc/wpa_supplicant.conf -B", iface->name);
 		ret += fwutil_system(ptr);
 		FWUTIL_FREE(ptr);
 	}
