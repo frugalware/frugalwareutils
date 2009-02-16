@@ -1,5 +1,9 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.8.6         - memory leak fixes
+              - file descriptor leak fixes
+              - use pclose() instead of fclose() for popened streams
+              - support for wpa_supplicant-0.6.x
 0.8.5         - netconfig now provides better support for hand-written
                 wpa_supplicant.conf
               - grubconfig now handles the case when /boot is raid1
