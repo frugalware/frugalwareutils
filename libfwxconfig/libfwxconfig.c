@@ -75,8 +75,12 @@ static void print_kbd_options(FILE *fp)
 
 static void print_mouse_identifier(FILE *fp, int num, char *device, char *proto)
 {
-	if(!proto)
+	int auto_proto = 0;
+
+	if(!proto) {
 		proto = strdup("auto");
+		auto_proto = 1;
+	}
 	fprintf(fp, "Identifier  \"Mouse%d\"\n", num);
 	fprintf(fp, "Driver      \"mouse\"\n");
 	print_mouse_options(fp);
@@ -84,7 +88,8 @@ static void print_mouse_identifier(FILE *fp, int num, char *device, char *proto)
 	fprintf(fp, "Option      \"Device\" \"%s\"\n", device);
 	fprintf(fp, "EndSection\n\n"
 			"Section \"InputDevice\"\n");
-	free(proto);
+	if (auto_proto)
+		free(proto);
 }
 
 /** Creates a config draft, which will be an input fro fwx_doconfig()
