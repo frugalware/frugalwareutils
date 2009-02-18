@@ -34,6 +34,7 @@
 #include <unistd.h>
 #include <libintl.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "libfwnetconfig.h"
 

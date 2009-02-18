@@ -11,6 +11,7 @@
 #include <fcntl.h>
 #include <pci.h>
 #include <linux/sockios.h>
+#include <libgen.h>
 
 /* hack, so we may include kernel's ethtool.h */
 typedef unsigned long long __u64;
