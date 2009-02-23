@@ -39,7 +39,12 @@ compile: config.mak
 	+$(DO_RECURSIVE)
 
 prepare: configure.ac
-	cp /usr/share/automake/install-sh ./
+	if [ -e /usr/share/automake/install-sh ]; then \
+		cp /usr/share/automake/install-sh ./; \
+	else \
+		echo 2>&1 "Install automake first."; \
+		exit 1; \
+	fi
 	cp /usr/share/aclocal/pkg.m4 aclocal.m4
 	autoconf
 	+$(DO_RECURSIVE)
