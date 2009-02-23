@@ -92,9 +92,9 @@ update-po:
 	done
 
 pot:
-	for i in `find . -type d -name po`; \
+	@for i in `find . -type d -name po`; \
 	do \
-		$(MAKE) -C $$i pot; \
+		$(MAKE) $(PRINT_DIR) -C $$i pot || exit 1; \
 	done
 
 doc: ../HEADER.html ../Changelog

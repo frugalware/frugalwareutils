@@ -11,7 +11,12 @@ install:
 	done
 
 intltool-extract:
-	cp /usr/bin/intltool-extract ./
+	@if [ -e /usr/bin/intltool-extract ]; then \
+		cp /usr/bin/intltool-extract ./; \
+	else \
+		echo 2>&1 "Install intltool first."; \
+		exit 1; \
+	fi
 
 pot: intltool-extract
 	intltool-update --pot --gettext-package=$(DOMAIN)
