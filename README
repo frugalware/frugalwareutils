@@ -47,6 +47,9 @@ $ make
 # make install
 ----
 
+NOTE: If you got the sources from git, you need to do a `make prepare`
+first.
+
 == What needs to be done (aka. TODO)
 
 - Let `netconfig start/stop` more verbose (maybe some initscript-like
