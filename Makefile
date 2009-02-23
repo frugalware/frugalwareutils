@@ -39,13 +39,13 @@ compile: config.mak
 	+$(DO_RECURSIVE)
 
 prepare: configure.ac
-	if [ -e /usr/share/automake/install-sh ]; then \
+	@if [ -e /usr/share/automake/install-sh ]; then \
 		cp /usr/share/automake/install-sh ./; \
 	else \
 		echo 2>&1 "Install automake first."; \
 		exit 1; \
 	fi
-	if [ -e /usr/share/aclocal/pkg.m4 ]; then \
+	@if [ -e /usr/share/aclocal/pkg.m4 ]; then \
 		cp /usr/share/aclocal/pkg.m4 aclocal.m4; \
 	else \
 		echo 2>&1 "Install pkgconfig first."; \

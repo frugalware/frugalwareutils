@@ -19,12 +19,17 @@
 VERSION = 0.8.6
 MAJORVER = 0
 
-DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || exit 1; done
+DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) $(PRINT_DIR) -C $$i $@ || exit 1; done
 PO_DIR=~/git/translations/po
 LANGS = $(shell [ -d $(PO_DIR) ] && ls $(PO_DIR)/frugalwareutils)
 CARCH ?= $(shell arch)
 
 DESTDIR =
 fwlibdir = $(libdir)/frugalware
+
+# unless "make -w"
+ifneq ($(findstring $(MAKEFLAGS),w),w)
+PRINT_DIR = --no-print-directory
+endif
 
 # vim: ft=make
