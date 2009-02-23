@@ -45,7 +45,7 @@ prepare:
 			fi; \
 		done; \
 	else \
-		echo "WARNING: $(PO_DIR) does not exists, skipping translations for $(DOMAIN)."; \
+		echo "WARNING: $(PO_DIR) does not exist, skipping translations for $(DOMAIN)."; \
 	fi
 
 # vim: ft=make
