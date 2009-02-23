@@ -45,7 +45,12 @@ prepare: configure.ac
 		echo 2>&1 "Install automake first."; \
 		exit 1; \
 	fi
-	cp /usr/share/aclocal/pkg.m4 aclocal.m4
+	if [ -e /usr/share/aclocal/pkg.m4 ]; then \
+		cp /usr/share/aclocal/pkg.m4 aclocal.m4; \
+	else \
+		echo 2>&1 "Install pkgconfig first."; \
+		exit 1; \
+	fi
 	autoconf
 	+$(DO_RECURSIVE)
 
