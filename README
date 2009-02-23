@@ -37,6 +37,22 @@ All of these can be listed and started from the central `setup` command.
 
 == How to set it up
 
+=== If you got the sources from git
+
+First, you need to do a `make prepare` first.
+
+Second, if you want to get the translations from git as well, then you
+need to:
+
+----
+$ git clone git://git.frugalware.org/pub/other/translations
+----
+
+You are expected to do this in `$HOME/git`, but you can overwrite this
+path using the `PO_DIR` make variable.
+
+=== The usual part
+
 You probably want to use these utilities before `/usr` is available, so the
 recommended commandline switches are:
 
@@ -46,9 +62,6 @@ $ ./configure --prefix=/usr --sbindir=/sbin --libdir=/lib \
 $ make
 # make install
 ----
-
-NOTE: If you got the sources from git, you need to do a `make prepare`
-first.
 
 == What needs to be done (aka. TODO)
 
