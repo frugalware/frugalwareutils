@@ -48,7 +48,10 @@ static char* fwnet_ifbusid(const char *iface)
 		}
 		fclose(fp);
 		/* strip the trailing newline */
-		ret[strlen(ret)-1] = 0;
+		if (ret)
+		{
+			ret[strlen(ret)-1] = 0;
+		}
 	}
 
 	return ret;
