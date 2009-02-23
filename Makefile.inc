@@ -21,7 +21,7 @@ MAJORVER = 0
 
 DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) -C $$i $@ || exit 1; done
 PO_DIR=~/git/translations/po
-LANGS = $(shell ls $(PO_DIR)/frugalwareutils)
+LANGS = $(shell [ -d $(PO_DIR) ] && ls $(PO_DIR)/frugalwareutils)
 CARCH ?= $(shell arch)
 
 DESTDIR =
