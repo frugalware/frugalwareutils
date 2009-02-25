@@ -64,7 +64,7 @@ prepare:
 			if [ -e $(PO_DIR)/frugalwareutils/$$i/$(DOMAIN).po ]; then \
 				cp $(PO_DIR)/frugalwareutils/$$i/$(DOMAIN).po $$i.po; \
 				charset=$$(echo $(LANG_CHARSETS)|sed 's/ /\n/g'|grep ^$$i|sed 's/.*,//'); \
-				if [ -n "$$charset" ]; then \
+				if [ -n "$$charset" -a "$(DOMAIN)" != "mans" ]; then \
 					iconv -f UTF-8 -t $$charset < $$i.po > $$i.new.po; \
 					sed "s/UTF-8/$$charset/" $$i.new.po > $$i.po; \
 					rm $$i.new.po; \
