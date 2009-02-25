@@ -167,7 +167,7 @@ int dialog_config(int argc, char **argv)
 		newprofile->interfaces = g_list_append(newprofile->interfaces, newinterface);
 	}
 
-	if(strcmp(nettype, "lo") && fwnet_is_wireless_device(iface))
+	if(strcmp(nettype, "lo") && fwnet_is_wireless_device(newinterface->name))
 	{
 		ptr = fwdialog_ask(_("Extended network name"), _("It seems that this network card has a wireless "
 			"extension. In order to use it, you must set your extended netwok name (ESSID). Enter your ESSID:"),
