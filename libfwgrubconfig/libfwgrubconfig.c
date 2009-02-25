@@ -274,14 +274,14 @@ int fwgrub_install(int mode)
 		struct dirent *ent;
 		char src[PATH_MAX], dest[PATH_MAX];
 
-		dir = opendir("/usr/lib/grub/i386-pc");
+		dir = opendir("/usr/lib/grub/i386-frugalware");
 		if (!dir)
 			return(1);
 		while ((ent = readdir(dir)) != NULL)
 		{
 			if (!strcmp(ent->d_name, ".") || !strcmp(ent->d_name, ".."))
 				continue;
-			snprintf(src, PATH_MAX, "/usr/lib/grub/i386-pc/%s", ent->d_name);
+			snprintf(src, PATH_MAX, "/usr/lib/grub/i386-frugalware/%s", ent->d_name);
 			snprintf(dest, PATH_MAX, "/boot/grub/%s", ent->d_name);
 			fwutil_cp(src, dest);
 		}
