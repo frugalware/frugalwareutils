@@ -196,7 +196,7 @@ key = 01-23 key 45-67 [4] key [4]
 
 === Initialize before `iwconfig`
 
-If you have to to initialize the card with `ifconfig <interface> up` before
+If you have to initialize the card with `ifconfig <interface> up` before
 using iwconfig:
 
 ----
