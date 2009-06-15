@@ -170,7 +170,7 @@ int dialog_config(int argc, char **argv)
 	if(strcmp(nettype, "lo") && fwnet_is_wireless_device(newinterface->name))
 	{
 		ptr = fwdialog_ask(_("Extended network name"), _("It seems that this network card has a wireless "
-			"extension. In order to use it, you must set your extended netwok name (ESSID). Enter your ESSID:"),
+			"extension. In order to use it, you must set your extended network name (ESSID). Enter your ESSID:"),
 			NULL);
 		snprintf(newinterface->essid, FWNET_ESSID_MAX_SIZE, ptr);
 		FWUTIL_FREE(ptr);
