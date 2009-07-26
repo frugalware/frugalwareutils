@@ -158,6 +158,9 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 			fprintf(nfp, "InputDevice    \"Mouse1\" %s\n", cp);
 			line[0]='\0';
 		}
+		if(reg_match(line, "Screen +1"))
+			// To disable multihead setups by default
+			continue;
 		fprintf(nfp, "%s", line);
 		if(reg_match(line, "usebios"))
 		{
