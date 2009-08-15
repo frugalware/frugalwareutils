@@ -649,7 +649,7 @@ void fwgrub_create_menu(FILE *fp)
 	if(!stat(path, &buf))
 		fprintf(fp, "gfxmenu %s%s/grub/message\n\n", entry.grubbootdev, entry.bootstr);
 	entry.kernel = strdup("/vmlinuz");
-	entry.opts = strdup("ro quiet vga=791");
+	entry.opts = strdup("ro quiet vga=791 resume=swap");
 	write_entry(&entry);
 
 	if(!(stat("/boot/memtest.bin", &buf)))
