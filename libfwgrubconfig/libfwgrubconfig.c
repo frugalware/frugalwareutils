@@ -257,6 +257,31 @@ static char *get_mbr_dev()
 	return(g_strdup_printf("/dev/%s", str));
 }
 
+static char *get_swap_dev()
+{
+	char line[PATH_MAX], *ptr;
+	int i = 0;
+	FILE *fp = fopen("/proc/swaps", "r");
+
+	if (!fp)
+		return NULL;
+	while (fgets(line, PATH_MAX, fp))
+	{
+		if (!i++)
+			continue;
+		else
+			break;
+	}
+	if (i == 1)
+		return NULL;
+	fclose(fp);
+	ptr = strchr(line, ' ');
+	if (ptr)
+		*ptr = '\0';
+	return g_strdup(line);
+}
+
+
 /** Installs grub to a given target
  * @param mode 0: mbr, 1: floppy, 2: root
  * @return 0 on succcess, 1 on error
@@ -608,6 +633,7 @@ void fwgrub_create_menu(FILE *fp)
 {
 	char *ptr;
 	char *bootdev;
+	char *swapdev;
 	struct stat buf;
 	struct fwgrub_entry_t entry;
 	char path[PATH_MAX];
@@ -649,7 +675,11 @@ void fwgrub_create_menu(FILE *fp)
 	if(!stat(path, &buf))
 		fprintf(fp, "gfxmenu %s%s/grub/message\n\n", entry.grubbootdev, entry.bootstr);
 	entry.kernel = strdup("/vmlinuz");
-	entry.opts = strdup("ro quiet vga=791 resume=swap");
+	swapdev = get_swap_dev();
+	if (swapdev)
+		entry.opts = g_strdup_printf("ro quiet vga=791 resume=%s", swapdev);
+	else
+		entry.opts = strdup("ro quiet vga=791");
 	write_entry(&entry);
 
 	if(!(stat("/boot/memtest.bin", &buf)))
