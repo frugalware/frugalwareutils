@@ -830,7 +830,12 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 			network = strdup("127.0.0.0");
 		}
 		else
+		{
 			network=netaddr(ipaddr, netmask);
+			if (!network)
+				// probably invalid ip or netmask
+				return(1);
+		}
 
 		rename("/etc/hosts", "/etc/hosts.old");
 		fp = fopen("/etc/hosts", "w");
