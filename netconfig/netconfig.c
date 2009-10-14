@@ -134,6 +134,7 @@ int dialog_config(int argc, char **argv)
 	char *ptr;
 	char *host, *nettype;
 	char *ipaddr=NULL, *netmask=NULL, *dns=NULL, *iface=NULL;
+	int ret = 0;
 
 	dialog_state.output = stderr;
 	if(argv!=NULL)
@@ -235,7 +236,7 @@ int dialog_config(int argc, char **argv)
 
 	if(fwdialog_yesno(_("Adjust configuration files"), _("Accept these settings and adjust configuration files?"))
 		&& !fwutil_dryrun)
-		fwnet_writeconfig(newprofile, host);
+		ret += fwnet_writeconfig(newprofile, host);
 
 	g_list_free(newinterface->options);
 	FWUTIL_FREE(newinterface);
@@ -248,7 +249,7 @@ int dialog_config(int argc, char **argv)
 	FWUTIL_FREE(dns);
 	if(argv!=NULL)
 		end_dialog();
-	return(0);
+	return(ret);
 }
 
 int run(int argc, char **argv)
