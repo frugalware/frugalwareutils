@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.8.9         - grubconfig now supports suspend to disk
+              - grubconfig now disabled vga fb by default
+              - netconfig now handles invalid ip addresses better
 0.8.8         - xconfig: added a fix for xorg74
               - netconfig: spelling fixes in the curses interface and in
                 the manpage
