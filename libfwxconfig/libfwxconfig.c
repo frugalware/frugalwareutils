@@ -118,12 +118,33 @@ static int reg_match(char *str, char *pattern)
  */
 int fwx_doconfig(char *mousedev, char *res, char *depth)
 {
-	char line[PATH_MAX+1];
+	char line[PATH_MAX+1], *drv = NULL;
 	FILE *ofp, *nfp;
 	struct stat buf;
 	int start_looking=0;
+	int vga_seen = 0, drv_wrote = 0;
 
 	unlink(XORGCONFIG);
+
+	/*
+	 * If we see a vga driver and an other video driver later, then we
+	 * should fix the order.
+	 */
+	ofp = fopen(NEWCONFIG, "r");
+	while (fgets(line, PATH_MAX, ofp)) {
+		if (!strcmp(line, "\tDriver      \"vga\"\n")) {
+			vga_seen = 1;
+			continue;
+		}
+		if (vga_seen && !strncmp(line, "\tDriver      \"", 14)) {
+			char *ptr;
+			drv = strdup(line+14);
+			ptr = drv + strlen(drv)-2;
+			*ptr = '\0';
+			printf("'%s'\n", drv);
+		}
+	}
+	fclose(ofp);
 
 	ofp = fopen(NEWCONFIG, "r");
 	if(!ofp)
@@ -161,6 +182,17 @@ int fwx_doconfig(char *mousedev, char *res, char *depth)
 		if(reg_match(line, "Screen +1"))
 			// To disable multihead setups by default
 			continue;
+		if(drv && reg_match(line, "driver.*vga"))
+		{
+			fprintf(nfp, "\tDriver      \"%s\"\n", drv);
+			drv_wrote = 1;
+			continue;
+		}
+		if(drv_wrote && reg_match(line, "driver.*\""))
+		{
+			fprintf(nfp, "\tDriver      \"vga\"\n");
+			continue;
+		}
 		fprintf(nfp, "%s", line);
 		if(reg_match(line, "usebios"))
 		{
