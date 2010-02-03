@@ -79,7 +79,7 @@ unsigned int fwxwm_checkdms(PM_DB *db)
 {
 	unsigned int ret=0;
 
-	if(pacman_db_readpkg(db, "kdebase"))
+	if(pacman_db_readpkg(db, "kdm"))
 		ret |= FWXWM_KDM;
 	if(pacman_db_readpkg(db, "gdm"))
 		ret |= FWXWM_GDM;
