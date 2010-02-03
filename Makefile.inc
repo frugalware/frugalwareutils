@@ -1,6 +1,7 @@
 # Makefile.inc for frugalwareutils
 #
-# Copyright (C) 2006, 2007, 2008, 2009 Miklos Vajna <vmiklos@frugalware.org>
+# Copyright (C) 2006, 2007, 2008, 2009, 2010 Miklos Vajna
+# <vmiklos@frugalware.org>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,7 +17,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
 
-VERSION = 0.8.9
+VERSION = 0.9.0
 MAJORVER = 0
 
 DO_RECURSIVE = @ for i in $(SUBDIRS); do $(MAKE) $(PRINT_DIR) -C $$i $@ || exit 1; done

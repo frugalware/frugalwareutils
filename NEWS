@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.9.0         - fix dualhead setups in xconfig
+              - kde4 support in xwmconfig
+              - buildsystem cleanup
 0.8.9         - grubconfig now supports suspend to disk
               - grubconfig now disabled vga fb by default
               - netconfig now handles invalid ip addresses better
