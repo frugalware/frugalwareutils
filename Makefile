@@ -100,9 +100,7 @@ pot:
 doc: ../HEADER.html ../Changelog
 
 ../HEADER.html: README
-	ln -sf frugalwareutils/README ../HEADER.txt
-	asciidoc -a toc -a numbered -a sectids ../HEADER.txt
-	rm ../HEADER.txt
+	asciidoc -a toc -a numbered -a sectids -o ../HEADER.html README
 
 ../Changelog: .git/refs/heads/master
 	git log --no-merges |git name-rev --tags --stdin >../Changelog
