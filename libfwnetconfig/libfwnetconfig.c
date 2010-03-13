@@ -764,6 +764,8 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 			fprintf(fp, "wpa_psk = %s\n", iface->wpa_psk);
 		if(iface->wpa_driver != NULL && strlen(iface->wpa_driver))
 			fprintf(fp, "wpa_driver = %s\n", iface->wpa_driver);
+		if(iface->wpa_supplicant)
+			fprintf(fp, "wpa_supplicant = yes\n");
 		if(fwnet_is_dhcp(iface))
 		{
 			fprintf(fp, "options = dhcp\n");
