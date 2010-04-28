@@ -157,7 +157,7 @@ int fwraid_create_md(char *devname, int level, GList *devices)
 {
 	char *ptr = fwutil_glist_display(devices, " ");
 	// TODO: this "yes" is an ugly hack to pass various warnings
-	char *cmd = g_strdup_printf("yes |mdadm --create --verbose %s "
+	char *cmd = g_strdup_printf("yes |mdadm --create --metadata 0.90 --verbose %s "
 		"--level=%d --raid-devices=%d %s >%s 2>%s",
 		devname, level, g_list_length(devices), ptr, FWRAID_LOGDEV, FWRAID_LOGDEV);
 	int ret;
