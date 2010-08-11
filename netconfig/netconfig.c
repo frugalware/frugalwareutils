@@ -193,9 +193,9 @@ int dialog_config(int argc, char **argv)
 	}
 	if(!strcmp(nettype, "dhcp"))
 	{
-		ptr = fwdialog_ask(_("Set DHCP hostname"), _("Some network providers require that the DHCP hostname be"
-			"set in order to connect. If so, they'll have assigned a hostname to your machine. If you were"
-			"assigned a DHCP hostname, please enter it below. If you do not have a DHCP hostname, just"
+		ptr = fwdialog_ask(_("Set DHCP hostname"), _("Some network providers require that the DHCP hostname be "
+			"set in order to connect. If so, they'll have assigned a hostname to your machine. If you were "
+			"assigned a DHCP hostname, please enter it below. If you do not have a DHCP hostname, just "
 			"hit enter."), NULL);
 		if(strlen(ptr))
 			snprintf(newinterface->dhcp_opts, PATH_MAX, "-t 10 -h %s\n", ptr);
