@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.9.1         - wpa fixes
+              - netconfig spelling fixes
+              - raidconfig now uses mdadm --metadata 0.90
 0.9.0         - fix dualhead setups in xconfig
               - kde4 support in xwmconfig
               - buildsystem cleanup
