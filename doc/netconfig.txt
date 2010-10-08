@@ -231,6 +231,37 @@ network={
 NOTE: See also the `wpa_psk` and `wpa_driver` options, most users can avoid the
 manual `pre_up` and `pre_down` directives.
 
+=== Using mobile net (wvdial)
+
+----
+[ppp0]
+pre_up = wvdial-up mobilnet
+post_down = wvdial-down
+----
+
+Example `/etc/wvdial.conf` (Vodafone):
+
+----
+[Dialer Defaults]
+ISDN=0
+Modem=/dev/ttyUSB0
+Baud=460800
+Phone =*99#
+Ask Password=0
+Stupid Mode = 1
+Dial Command= ATDT
+Init1=ATZ
+Init3=ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0
+Init4=AT+CGDCONT=1,"IP","internet.vodafone.net"
+Init5=AT+CGQREQ=3,0,0,0,0,0
+Init6=AT+CGQMIN=1,0,0,0,0,0
+Auto DNS=0
+
+[Dialer mobilnet]
+Username =internet
+Password =internet
+----
+
 == AUTHOR
 
 Written by Miklos Vajna.
