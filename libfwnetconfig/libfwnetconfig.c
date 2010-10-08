@@ -488,7 +488,7 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 		ret += fwutil_system(ptr);
 		FWUTIL_FREE(ptr);
 	}
-	else
+	else if(g_list_length(iface->options)>1)
 	{
 		ptr = g_strdup_printf("ifconfig %s 0.0.0.0", iface->name);
 		ret += fwutil_system(ptr);
