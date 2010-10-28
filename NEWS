@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.9.2         - netconfig is now compatible with wvdial to support mobile
+                3g connections
+              - added virtio support to grubconfig
 0.9.1         - wpa fixes
               - netconfig spelling fixes
               - raidconfig now uses mdadm --metadata 0.90
