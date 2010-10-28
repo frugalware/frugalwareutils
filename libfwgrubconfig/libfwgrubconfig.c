@@ -1,7 +1,7 @@
 /*
  *  libfwgrubconfig.c for frugalwareutils
  * 
- *  Copyright (c) 2006, 2007, 2008, 2009 by Miklos Vajna <vmiklos@frugalware.org>
+ *  Copyright (c) 2006, 2007, 2008, 2009, 2010 by Miklos Vajna <vmiklos@frugalware.org>
  * 
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -371,8 +371,21 @@ int fwgrub_install(int mode)
 		if(mode==2)
 			dev=rootdev;
 		if(mode!=1)
-			ptr = g_strdup_printf("grub-install --no-floppy --recheck %s >"
-				FWGRUB_LOGDEV " 2>&1", dev);
+		{
+			if (strncmp(dev, "/dev/vd", 7))
+				ptr = g_strdup_printf("grub-install --no-floppy --recheck %s >"
+					FWGRUB_LOGDEV " 2>&1", dev);
+			else
+			{
+				// we need to generate device.map
+				// manually for virtio
+				FILE *fp = fopen("/boot/grub/device.map", "w");
+				fprintf(fp, "(hd0) %s\n", dev);
+				fclose(fp);
+				ptr = g_strdup_printf("grub-install --no-floppy %s >"
+					FWGRUB_LOGDEV " 2>&1", dev);
+			}
+		}
 		else
 			ptr = g_strdup_printf("grub-install %s >"
 				FWGRUB_LOGDEV " 2>&1", dev);
