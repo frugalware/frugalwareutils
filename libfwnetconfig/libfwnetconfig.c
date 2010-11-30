@@ -408,8 +408,13 @@ static int update_wpa_conf(char *ssid, char *psk)
 	        "\n"
 	        "ctrl_interface=/var/run/wpa_supplicant\n"
 	        "\n"
-	        "network={\n\tssid=\"%s\"\n\tpsk=\"%s\"\n}\n",
-	        ssid, psk);
+	        "network={\n\tssid=\"%s\"\n", ssid);
+	if (strlen(psk) == 64)
+		// that's probably a psk hash, not a real key
+		fprintf(fp, "\tpsk=%s\n", psk);
+	else
+		fprintf(fp, "\tpsk=\"%s\"\n", psk);
+	fprintf(fp, "}\n");
 	fclose(fp);
 	return(0);
 }
