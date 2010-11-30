@@ -193,6 +193,8 @@ fwnet_profile_t *fwnet_parseprofile(char *fn)
 					strncpy(iface->mode, ptr, FWNET_MODE_MAX_SIZE);
 				if(!strcmp(var, "KEY") && !strlen(iface->key))
 					strncpy(iface->key, ptr, FWNET_ENCODING_TOKEN_MAX);
+				if(!strcmp(var, "SCAN_SSID") && !strlen(iface->key))
+					iface->scan_ssid = (toupper(*ptr) == 'Y');
 				if(!strcmp(var, "WPA_PSK") && !strlen(iface->wpa_psk))
 					strncpy(iface->wpa_psk, ptr, PATH_MAX);
 				if(!strcmp(var, "WPA_DRIVER") && !strlen(iface->wpa_driver))
@@ -392,7 +394,7 @@ static int update_secrets(char *path, char *user, char *pass)
 	return(0);
 }
 
-static int update_wpa_conf(char *ssid, char *psk)
+static int update_wpa_conf(char *ssid, int scan_ssid, char *psk)
 {
 	FILE *fp;
 
@@ -409,6 +411,8 @@ static int update_wpa_conf(char *ssid, char *psk)
 	        "ctrl_interface=/var/run/wpa_supplicant\n"
 	        "\n"
 	        "network={\n\tssid=\"%s\"\n", ssid);
+	if (scan_ssid)
+		fprintf(fp, "\tscan_ssid=1\n");
 	if (strlen(psk) == 64)
 		// that's probably a psk hash, not a real key
 		fprintf(fp, "\tpsk=%s\n", psk);
@@ -437,7 +441,7 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 	if(strlen(iface->wpa_psk) || iface->wpa_supplicant)
 	{
 		if(strlen(iface->wpa_psk))
-			update_wpa_conf(iface->essid, iface->wpa_psk);
+			update_wpa_conf(iface->essid, iface->scan_ssid, iface->wpa_psk);
 		if(strlen(iface->wpa_driver))
 			ptr = g_strdup_printf("wpa_supplicant -i%s -D%s -c /etc/wpa_supplicant.conf -B", iface->name, iface->wpa_driver);
 		else

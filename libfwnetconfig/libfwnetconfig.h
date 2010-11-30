@@ -53,6 +53,7 @@ typedef struct __fwnet_interface_t {
 	char wpa_driver[PATH_MAX+1];
 	int wpa_supplicant;
 	char gateway[FWNET_GW_MAX_SIZE+1];
+	int scan_ssid;
 } fwnet_interface_t;
 
 typedef struct __fwnet_profile_t {

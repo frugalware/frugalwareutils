@@ -136,6 +136,10 @@ NOTE: In case you use WPA encryption only with your wireless card, then
 this method has the advantage of not having different network profiles
 for each WPA network, as long as each network has a different essid.
 
+scan_ssid = yes|no::
+	If this directive is enabled, then wpa_supplicant will handle a
+	hidden ESSID as well.
+
 wpa_driver = <driver>::
 	The driver to be used by wpa_supplicant. The default is `wext`. Possible drivers
 	are:
