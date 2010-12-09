@@ -440,7 +440,7 @@ static char *mount_dev(char *path)
 	if(fp)
 	{
 		while ((mnt = getmntent (fp)))
-			if(!strcmp(mnt->mnt_dir, path))
+			if(!strcmp(mnt->mnt_dir, path) && ! (!strcmp(mnt->mnt_fsname, "rootfs") || !strcmp(mnt->mnt_fsname, "/dev/root")))
 				break;
 		endmntent(fp);
 		if(mnt)
