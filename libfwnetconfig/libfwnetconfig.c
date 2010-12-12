@@ -835,6 +835,19 @@ int fwnet_writeconfig(fwnet_profile_t *profile, char *host)
 		fclose(fp);
 		chmod("/etc/HOSTNAME", 0644);
 
+		// for systemd
+		fp = fopen("/etc/hostname", "w");
+		if(fp==NULL)
+			return(1);
+		char *buf = strdup(host);
+		char *ptr = strchr(buf, '.');
+		if (ptr)
+			*ptr = '\0';
+		fprintf(fp, "%s\n", buf);
+		free(buf);
+		fclose(fp);
+		chmod("/etc/hostname", 0644);
+
 		if(!staticip)
 		{
 			sprintf(ipaddr, "127.0.0.1");
