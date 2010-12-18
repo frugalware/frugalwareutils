@@ -59,6 +59,7 @@ install:
 	$(INSTALL) -d $(DESTDIR)$(fwlibdir)
 	$(INSTALL) -d $(DESTDIR)$(libexecdir)
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)/sysconfig/network
+	$(INSTALL) -d $(DESTDIR)$(sysconfdir)/systemd/system/sysinit.target.wants
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man1
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man3
 	$(INSTALL) -d $(DESTDIR)$(includedir)
