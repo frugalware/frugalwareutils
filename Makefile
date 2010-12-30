@@ -60,6 +60,8 @@ install:
 	$(INSTALL) -d $(DESTDIR)$(libexecdir)
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)/sysconfig/network
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)/systemd/system/sysinit.target.wants
+	$(INSTALL) -d $(DESTDIR)$(libdir)/systemd/system
+	$(INSTALL) -m644 netconfig/netconfig.service $(DESTDIR)$(libdir)/systemd/system/netconfig.service
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man1
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man3
 	$(INSTALL) -d $(DESTDIR)$(includedir)
