@@ -1,5 +1,10 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.9.4         - netconfig:
+                - systemd support
+                - subscribe to udev netlink socket to start interfaces
+                  right after they show up
+              - retire xconfig, it's no longer necessary
 0.9.3         - netconfig:
                 - supports for raw wpa psk hashes
                 - learned scanning for essids in wpa config
