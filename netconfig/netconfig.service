@@ -1,7 +1,6 @@
 [Unit]
 Description=Network configurator
-After=syslog.target udev-settle.service
-Wants=udev-settle.service
+After=syslog.target
 
 [Service]
 Type=oneshot

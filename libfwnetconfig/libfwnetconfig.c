@@ -3,7 +3,7 @@
  *
  *  useful functions for network configuration
  * 
- *  Copyright (c) 2006, 2007, 2008, 2009 by Miklos Vajna <vmiklos@frugalware.org>
+ *  Copyright (c) 2006, 2007, 2008, 2009, 2011 by Miklos Vajna <vmiklos@frugalware.org>
  * 
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@
 #include <libintl.h>
 #include <string.h>
 #include <ctype.h>
+#include <libudev.h>
 
 #include "libfwnetconfig.h"
 
@@ -423,6 +424,97 @@ static int update_wpa_conf(char *ssid, int scan_ssid, char *psk)
 	return(0);
 }
 
+static int check_devpath(const char *path, char *iface)
+{
+	int ret = 0;
+	char *devpath = strdup(path);
+	char *ptr = strrchr(devpath, '/');
+
+	if (ptr && strcmp(iface, ++ptr) == 0)
+		ret = 1;
+	free(devpath);
+	return ret;
+}
+
+static int wait_interface(char *iface)
+{
+	struct udev *udev = NULL;
+	struct udev_monitor *udev_monitor = NULL;
+	struct udev_enumerate *udev_enumerate = NULL;
+	struct udev_list_entry *item = NULL, *first = NULL;
+	int rc = -1;
+
+	udev = udev_new();
+	if (!udev) {
+		fprintf(stderr, "unable to create udev context");
+		goto finish;
+	}
+
+	/* subscribe to udev events */
+	udev_monitor = udev_monitor_new_from_netlink(udev, "udev");
+	if (!udev_monitor) {
+		fprintf(stderr, "unable to create netlink socket\n");
+		goto finish;
+	}
+	udev_monitor_set_receive_buffer_size(udev_monitor, 128*1024*1024);
+	if (udev_monitor_filter_add_match_subsystem_devtype(udev_monitor, "net", NULL) < 0) {
+		fprintf(stderr, "unable to add matching subsystem to monitor\n");
+		goto finish;
+	}
+	if (udev_monitor_enable_receiving(udev_monitor) < 0) {
+		fprintf(stderr, "unable to subscribe to udev events\n");
+		goto finish;
+	}
+
+	/* then enumerate over existing ones */
+	udev_enumerate = udev_enumerate_new(udev);
+	if (!udev_enumerate) {
+		fprintf(stderr, "unable to create an an enumeration context\n");
+		goto finish;
+	}
+	if (udev_enumerate_add_match_subsystem(udev_enumerate, "net") < 0) {
+		fprintf(stderr, "unable to add mathing subsystem to enumerate\n");
+		goto finish;
+	}
+	if (udev_enumerate_scan_devices(udev_enumerate) < 0) {
+		fprintf(stderr, "unable to scan devices\n");
+		goto finish;
+	}
+	first = udev_enumerate_get_list_entry(udev_enumerate);
+	udev_list_entry_foreach(item, first) {
+		if (check_devpath(udev_list_entry_get_name(item), iface)) {
+			/* the interface is already up */
+			rc = 0;
+			goto finish;
+		}
+	}
+
+	while (1) {
+		struct udev_device *device;
+
+		device = udev_monitor_receive_device(udev_monitor);
+		if (device == NULL || strcmp("add", udev_device_get_action(device)) != 0)
+			continue;
+		int found = 0;
+		if (check_devpath(udev_device_get_devpath(device), iface))
+			/* the interface is just added */
+			found = 1;
+		udev_device_unref(device);
+		if (found)
+			break;
+	}
+
+	rc = 0;
+finish:
+	if (udev_enumerate)
+		udev_enumerate_unref(udev_enumerate);
+	if (udev_monitor)
+		udev_monitor_unref(udev_monitor);
+	if (udev)
+		udev_unref(udev);
+	return rc;
+}
+
 /** Bring up an interface
  * @param iface the interface struct pointer
  * @return 1 on failure, 0 on success
@@ -437,6 +529,10 @@ int fwnet_ifup(fwnet_interface_t *iface, fwnet_profile_t *profile)
 			ret += fwutil_system((char*)g_list_nth_data(iface->pre_ups, i));
 
 	dhcp = fwnet_is_dhcp(iface);
+
+	// wait for the interface
+	wait_interface(iface->name);
+
 	// initialize the device
 	if(strlen(iface->wpa_psk) || iface->wpa_supplicant)
 	{
