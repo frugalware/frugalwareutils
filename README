@@ -13,7 +13,6 @@ The following components are available at the moment:
 * netconfig
 * raidconfig
 * timeconfig
-* xconfig
 * xwmconfig
 
 All of these can be listed and started from the central `setup` command.
@@ -26,6 +25,7 @@ All of these can be listed and started from the central `setup` command.
   * ncurses
   * libparted
   * libpacman
+  * libudev
 
 - To build them, you need libdialog.
 

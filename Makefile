@@ -24,7 +24,6 @@ SUBDIRS = doc apidoc libfwutil libfwdialog setup \
 	  libfwtimeconfig timeconfig \
 	  libfwraidconfig raidconfig \
 	  libfwmouseconfig mouseconfig \
-	  libfwxconfig xconfig \
 	  libfwxwmconfig xwmconfig
 
 ifneq ($(CARCH),ppc)

@@ -14,7 +14,6 @@ libfwnetconfig::	Functions to make network configuration easier.
 libfwtimeconfig::	Functions to make time configuration easier.
 libfwraidconfig::	Functions to make RAID configuration easier.
 libfwmouseconfig::	Functions to make mouse configuration easier.
-libfwxconfig::	Functions to make X configuration easier.
 libfwxwmonfig::	Functions to make XDM configuration easier.
 libfwgrubonfig::	Functions to make GRUB configuration easier.
 
