@@ -436,13 +436,18 @@ static int check_devpath(const char *path, char *iface)
 	return ret;
 }
 
-static int wait_interface(char *iface)
+static int wait_interface(char *iface_)
 {
 	struct udev *udev = NULL;
 	struct udev_monitor *udev_monitor = NULL;
 	struct udev_enumerate *udev_enumerate = NULL;
 	struct udev_list_entry *item = NULL, *first = NULL;
 	int rc = -1;
+	// our copy, so that we can drop the :<num> suffix if needed
+	char *ptr, *iface = strdup(iface_);
+
+	if (ptr = strchr(iface, ':'))
+		*ptr = '\0';
 
 	udev = udev_new();
 	if (!udev) {
@@ -512,6 +517,8 @@ finish:
 		udev_monitor_unref(udev_monitor);
 	if (udev)
 		udev_unref(udev);
+	if (iface)
+		free(iface);
 	return rc;
 }
 
