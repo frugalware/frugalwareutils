@@ -283,6 +283,7 @@ int run(int argc, char **argv)
 		}
 	}
 	fwutil_i18ninit(__FILE__);
+	fwnet_cginit();
 	if(nco_usage)
 	{
 		usage();

@@ -35,6 +35,8 @@
 #define FWNET_PATH "/etc/sysconfig/network"
 #define FWNET_LOCK "/var/run/netconfig"
 #define FWNET_IFPATH "/sys/class/net"
+#define FWNET_CGPATH "/sys/fs/cgroup/systemd/system/netconfig.service"
+
 
 typedef struct __fwnet_interface_t {
 	char name[IF_NAMESIZE+1];
@@ -79,6 +81,7 @@ int fwnet_setlastprofile(char* str);
 int fwnet_loup(void);
 int fwnet_lodown(void);
 int fwnet_is_wireless_device(char *dev);
+int fwnet_cginit(void);
 int fwnet_writeconfig(fwnet_profile_t *profile, char *host);
 int fwnet_ifdesc(const char *iface, char *desc, int size);
 

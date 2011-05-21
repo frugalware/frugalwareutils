@@ -824,6 +824,22 @@ static char *netaddr(char *ip, char *nm)
 	return(g_strdup_printf("%d.%d.%d.%d", na[0], na[1], na[2], na[3]));
 }
 
+/** Puts the current process to the cgroup of netconfig
+ * @return 1 on failure, 0 on success
+ */
+int fwnet_cginit(void)
+{
+	FILE *fp;
+
+	mkdir(FWNET_CGPATH, 0755);
+	fp = fopen(FWNET_CGPATH "/tasks", "w");
+	if (!fp)
+		return 1;
+	fprintf(fp, "%d\n", getpid());
+	fclose(fp);
+	return 0;
+}
+
 /** Dumps a profile to a text file.
  * @param profile the profile to dump
  * @param host the hostname (optional)
