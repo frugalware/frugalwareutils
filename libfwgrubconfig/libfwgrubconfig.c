@@ -690,9 +690,9 @@ void fwgrub_create_menu(FILE *fp)
 	entry.kernel = strdup("/vmlinuz");
 	swapdev = get_swap_dev();
 	if (swapdev)
-		entry.opts = g_strdup_printf("ro quiet resume=%s", swapdev);
+		entry.opts = g_strdup_printf("ro quiet splash resume=%s", swapdev);
 	else
-		entry.opts = strdup("ro quiet");
+		entry.opts = strdup("ro quiet splash");
 	write_entry(&entry);
 
 	if(!(stat("/boot/memtest.bin", &buf)))
