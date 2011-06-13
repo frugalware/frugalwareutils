@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.9.5         - netconfig: ethx:y is available when ethx is
+              - netconfig: add cgroups support
+              - grubconfig: enable splash by default
 0.9.4         - netconfig:
                 - systemd support
                 - subscribe to udev netlink socket to start interfaces
