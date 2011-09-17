@@ -447,7 +447,17 @@ static char *mount_dev(char *path)
 		if(mnt)
 			return(strdup(mnt->mnt_fsname));
 	}
-	return(NULL);
+	// not found? then it must be a pre-initrd root device, look it up from /proc/cmdline
+	fp = fopen("/proc/cmdline", "r");
+	char line[PATH_MAX];
+	if (fp)
+		fgets(line, 512, fp);
+	// skip everything before root= and after a space
+	char *ptr = strstr(line, "root=") + 5;
+	if (strchr(ptr, ' '))
+		*(strchr(ptr, ' ')) = '\0';
+	fclose(fp);
+	return(strdup(ptr));
 }
 
 static int write_entry(struct fwgrub_entry_t *entry)
