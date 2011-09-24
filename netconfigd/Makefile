@@ -21,7 +21,7 @@
 compile: netconfigd
 
 install:
-	$(INSTALL) netconfigd $(DESTDIR)$(sbindir)/setup
+	$(INSTALL) netconfigd $(DESTDIR)$(sbindir)/netconfigd
 
 clean:
 	rm -f netconfigd *.o
