@@ -72,28 +72,34 @@ int fwnet_listprofiles(void)
  */
 int fwnet_wait(void)
 {
+	int rc = 0;
+	int fd = 0;
+	int wd = 0;
+
+	// Subscribe to inotify events.
+	fd = inotify_init();
+	if (fd < 0) {
+		perror( "inotify_init" );
+		rc = 1;
+		goto finish;
+	}
+	wd = inotify_add_watch(fd, FWNET_LOCKDIR, IN_CREATE);
+
 	struct stat buf;
 	if(!stat(FWNET_LOCK, &buf)) {
 		// Already loaded.
-		return 0;
+		goto finish;
 	}
-
-	char buffer[WAIT_BUF_LEN];
-	int fd = inotify_init();
-
-	if (fd < 0) {
-		perror( "inotify_init" );
-		return 1;
-	}
-	int wd = inotify_add_watch(fd, FWNET_LOCKDIR, IN_CREATE);
 
 	while (1) {
+		char buffer[WAIT_BUF_LEN];
 		int length = read(fd, buffer, WAIT_BUF_LEN);
 		int i = 0;
 
 		if (length < 0) {
 			perror("read");
-			return 1;
+			rc = 1;
+			goto finish;
 		}  
 
 		while (i < length) {
@@ -101,14 +107,16 @@ int fwnet_wait(void)
 			if (event->len && event->mask & IN_CREATE &&
 				!(event->mask & IN_ISDIR) &&
 				!strncmp(event->name, FWNET_LOCKFILE, strlen(FWNET_LOCKFILE)))
-				return 0;
+				goto finish;
 			i += WAIT_EVENT_SIZE + event->len;
 		}
 	}
-
-	inotify_rm_watch(fd, wd);
-	close(fd);
-	return 0;
+finish:
+	if (wd)
+		inotify_rm_watch(fd, wd);
+	if (fd)
+		close(fd);
+	return rc;
 }
 
 /** Parses a profile. Based on pacman's config parser, which is
@@ -494,7 +502,7 @@ static int wait_interface(char *iface_)
 	// our copy, so that we can drop the :<num> suffix if needed
 	char *ptr, *iface = strdup(iface_);
 
-	if (ptr = strchr(iface, ':'))
+	if ((ptr = strchr(iface, ':')))
 		*ptr = '\0';
 
 	udev = udev_new();
