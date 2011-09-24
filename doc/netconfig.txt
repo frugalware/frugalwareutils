@@ -6,7 +6,7 @@ netconfig - manages network configuration profiles
 
 == SYNOPSIS
 
-netconfig [options] start|stop|restart|status|list [interface]
+netconfig [options] start|stop|restart|status|list|wait [interface]
 
 netconfig [options] [profile] [interface]
 

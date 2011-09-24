@@ -313,6 +313,11 @@ int run(int argc, char **argv)
 			fwnet_listprofiles();
 			return(0);
 		}
+		if(!strcmp("wait", argv[optind]))
+		{
+			fwnet_wait();
+			return(0);
+		}
 		if((fn=fwnet_lastprofile()) || !strcmp("stop", argv[optind]) || !strcmp("status", argv[optind]))
 		{
 			if((!strcmp("stop", argv[optind])) && !fn)

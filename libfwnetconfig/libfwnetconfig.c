@@ -29,6 +29,7 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/inotify.h>
 #include <fcntl.h>
 #include <signal.h>
 #include <unistd.h>
@@ -38,6 +39,9 @@
 #include <libudev.h>
 
 #include "libfwnetconfig.h"
+
+#define WAIT_EVENT_SIZE  ( sizeof (struct inotify_event) )
+#define WAIT_BUF_LEN     ( 1024 * ( WAIT_EVENT_SIZE + 16 ) )
 
 extern int fwutil_dryrun;
 
@@ -61,6 +65,50 @@ int fwnet_listprofiles(void)
 			printf("%s\n", ent->d_name);
 	}
 	return(0);
+}
+
+/** Waits till the first profile is loaded.
+ * @return 1 on failure, 0 on success
+ */
+int fwnet_wait(void)
+{
+	struct stat buf;
+	if(!stat(FWNET_LOCK, &buf)) {
+		// Already loaded.
+		return 0;
+	}
+
+	char buffer[WAIT_BUF_LEN];
+	int fd = inotify_init();
+
+	if (fd < 0) {
+		perror( "inotify_init" );
+		return 1;
+	}
+	int wd = inotify_add_watch(fd, FWNET_LOCKDIR, IN_CREATE);
+
+	while (1) {
+		int length = read(fd, buffer, WAIT_BUF_LEN);
+		int i = 0;
+
+		if (length < 0) {
+			perror("read");
+			return 1;
+		}  
+
+		while (i < length) {
+			struct inotify_event *event = (struct inotify_event *)&buffer[i];
+			if (event->len && event->mask & IN_CREATE &&
+				!(event->mask & IN_ISDIR) &&
+				!strncmp(event->name, FWNET_LOCKFILE, strlen(FWNET_LOCKFILE)))
+				return 0;
+			i += WAIT_EVENT_SIZE + event->len;
+		}
+	}
+
+	inotify_rm_watch(fd, wd);
+	close(fd);
+	return 0;
 }
 
 /** Parses a profile. Based on pacman's config parser, which is

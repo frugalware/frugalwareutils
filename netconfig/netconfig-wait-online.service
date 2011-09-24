@@ -1,0 +1,12 @@
+[Unit]
+Description=Waits till netconfig loads the initial profile
+Requires=netconfig.service
+Wants=network.target
+Before=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/netconfig wait
+
+[Install]
+WantedBy=multi-user.target

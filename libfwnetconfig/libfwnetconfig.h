@@ -34,6 +34,8 @@
 #define FWNET_VERSIONFILE "/etc/frugalware-release"
 #define FWNET_PATH "/etc/sysconfig/network"
 #define FWNET_LOCK "/var/run/netconfig"
+#define FWNET_LOCKDIR "/var/run"
+#define FWNET_LOCKFILE "netconfig"
 #define FWNET_IFPATH "/sys/class/net"
 #define FWNET_CGPATH "/sys/fs/cgroup/systemd/system/netconfig.service"
 
@@ -70,6 +72,7 @@ typedef struct __fwnet_profile_t {
 } fwnet_profile_t;
 
 int fwnet_listprofiles(void);
+int fwnet_wait(void);
 fwnet_profile_t *fwnet_parseprofile(char *fn);
 int fwnet_is_dhcp(fwnet_interface_t *iface);
 GList *fwnet_iflist();
