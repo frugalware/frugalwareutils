@@ -1,12 +1,10 @@
 [Unit]
 Description=Network configurator
-After=syslog.target
+Wants=network.target
+Before=network.target
 
 [Service]
-Type=oneshot
-RemainAfterExit=yes
-ExecStart=/sbin/netconfig start
-ExecStop=/sbin/netconfig stop
+ExecStart=/sbin/netconfigd
 
 [Install]
-WantedBy=network.target multi-user.target
+WantedBy=multi-user.target

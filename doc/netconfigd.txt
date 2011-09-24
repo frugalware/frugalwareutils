@@ -1,0 +1,26 @@
+= netconfigd(1)
+
+== NAME
+
+netconfigd - wrapper daemon around netconfig
+
+== SYNOPSIS
+
+netconfigd
+
+== DISCUSSON
+
+This daemon runs `netconfig start` on startup, `netconfig restart` when it
+receives SIGHUP, finally `netconfig stop` when it receives SIGTERM.
+
+== AUTHOR
+
+Written by Miklos Vajna.
+
+== REPORTING BUGS
+
+If you find any bug, then please file a bugreport at <http://bugs.frugalware.org/>.
+
+== SEE ALSO
+
+*netconfig*(1)
