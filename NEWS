@@ -1,5 +1,8 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
+0.9.6         - netconfig: no longer blocks till the end of the first profile
+		startup (use netconfig-wait-online.service for legacy daemons)
+              - grubconfig: initrd support
 0.9.5         - netconfig: ethx:y is available when ethx is
               - netconfig: add cgroups support
               - grubconfig: enable splash by default
