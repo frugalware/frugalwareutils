@@ -35,6 +35,7 @@
 #include <stdlib.h>
 #include <libfwutil.h>
 #include <glib.h>
+#include <blkid.h>
 
 #include "libfwgrubconfig.h"
 
@@ -45,6 +46,7 @@ typedef struct mdu_version_s {
 } mdu_version_t;
 #define MD_MAJOR 9
 #define RAID_VERSION            _IOR (MD_MAJOR, 0x10, mdu_version_t)
+#define BLKGETSIZE64 _IOR(0x12,114,size_t)
 #define FWGRUB_LOGDEV "/dev/tty4"
 
 struct fwgrub_entry_t {
@@ -460,6 +462,36 @@ static char *mount_dev(char *path)
 	return(strdup(ptr));
 }
 
+static char* get_uuid(char *device)
+{
+	char path[PATH_MAX];
+	int fd;
+	blkid_probe pr = NULL;
+	uint64_t size;
+	const char *uuid;
+	char *ret;
+
+	if(!device || !strlen(device))
+		return NULL;
+
+	fd = open(device, O_RDONLY);
+
+	if (fd < 0)
+		return NULL;
+
+	pr = blkid_new_probe();
+	blkid_probe_set_request (pr, BLKID_PROBREQ_UUID);
+	ioctl(fd, BLKGETSIZE64, &size);
+	blkid_probe_set_device(pr, fd, 0, size);
+	blkid_do_safeprobe(pr);
+	blkid_probe_lookup_value(pr, "UUID", &uuid, NULL);
+	snprintf(path, PATH_MAX, "/dev/disk/by-uuid/%s", uuid);
+	ret = strdup(path);
+	blkid_free_probe(pr);
+	close(fd);
+	return ret;
+}
+
 static int write_entry(struct fwgrub_entry_t *entry)
 {
 	char *ptr;
@@ -473,8 +505,12 @@ static int write_entry(struct fwgrub_entry_t *entry)
 		if(entry->opts)
 		{
 			if(entry->rootdev && strlen(entry->rootdev))
+			{
+				char *uuid = get_uuid(entry->rootdev);
 				fprintf(entry->fp, "\tkernel %s%s%s root=%s %s\n",
-					entry->grubbootdev, entry->bootstr, entry->kernel, entry->rootdev, entry->opts);
+					entry->grubbootdev, entry->bootstr, entry->kernel, uuid, entry->opts);
+				free(uuid);
+			}
 			else
 				// probably rootdev is already included in ->opts
 				fprintf(entry->fp, "\tkernel %s%s%s %s\n",
