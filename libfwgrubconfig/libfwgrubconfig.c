@@ -243,7 +243,7 @@ static char *get_mbr_dev()
 		return(NULL);
 	while(fgets(line, PATH_MAX, fp))
 	{
-		if(i++ < 2 || strstr(line, "ram"))
+		if(i++ < 2 || strstr(line, "ram") || strstr(line, "loop"))
 			continue;
 		else
 			break;
@@ -443,7 +443,7 @@ static char *mount_dev(char *path)
 	if(fp)
 	{
 		while ((mnt = getmntent (fp)))
-			if(!strcmp(mnt->mnt_dir, path) && ! (!strcmp(mnt->mnt_fsname, "rootfs") || !strcmp(mnt->mnt_fsname, "/dev/root")))
+			if(!strcmp(mnt->mnt_dir, path) && ! (!strcmp(mnt->mnt_fsname, "rootfs") || !strcmp(mnt->mnt_fsname, "/dev/root") || !strcmp(mnt->mnt_fsname, "/dev/mapper/live-rw")))
 				break;
 		endmntent(fp);
 		if(mnt)
