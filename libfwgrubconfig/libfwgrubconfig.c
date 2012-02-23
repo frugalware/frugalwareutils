@@ -745,7 +745,11 @@ void fwgrub_create_menu(FILE *fp)
 	entry.initrd = strdup("/initrd.img.xz");
 	swapdev = get_swap_dev();
 	if (swapdev)
-		entry.opts = g_strdup_printf("ro quiet splash resume=%s", swapdev);
+	{
+		char *uuid = get_uuid(swapdev);
+		entry.opts = g_strdup_printf("ro quiet splash resume=%s", uuid);
+		free(uuid);
+	}
 	else
 		entry.opts = strdup("ro quiet splash");
 	write_entry(&entry);
