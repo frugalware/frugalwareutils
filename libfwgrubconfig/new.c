@@ -83,10 +83,7 @@ char *guess_mbr_device(void)
 
 	regfree(&re);
 
-	if(!*root)
-		return 0;
-
-	return root;
+	return (*root) ? root : 0;
 }
 
 static
