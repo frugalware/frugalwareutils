@@ -26,4 +26,4 @@ enum fwgrub_install_mode
 };
 
 int fwgrub_install(enum fwgrub_install_mode mode);
-void fwgrub_create_menu(FILE *fp);
+int fwgrub_create_menu(void);
