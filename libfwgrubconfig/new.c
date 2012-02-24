@@ -25,7 +25,9 @@
 #include <regex.h>
 #include <unistd.h>
 #include <limits.h>
-#include "libfwgrubconfig.h"
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include "new.h"
 
 #define SPACE         " \t\r\n\v\f"
 #define DIGIT         "0123456789"
@@ -129,7 +131,7 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 
 		_exit(EXIT_FAILURE);
 	}
-	else if(id == -1)
+	else if(pid == -1)
 		return 1;
 
 	if(waitpid(pid,&status,0) == -1 || !WIFEXITED(status) || WEXITSTATUS(status))
