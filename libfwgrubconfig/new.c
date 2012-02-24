@@ -40,7 +40,7 @@ char *guess_mbr_device(void)
 	char line[LINE_MAX], *p;
 	int i, j;
 	regex_t re;
-	static char root[4096];
+	static char root[PATH_MAX];
 
 	f = fopen("/proc/partitions","rb");
 
