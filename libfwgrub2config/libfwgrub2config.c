@@ -27,6 +27,7 @@
 #include <limits.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <errno.h>
 #include "libfwgrub2config.h"
 
 #define SPACE         " \t\r\n\v\f"
@@ -117,9 +118,10 @@ int execute_command(const char *cmd)
  * @return 0 on succcess, 1 on error
  */
 
-int fwgrub_install(enum fwgrub_install_mode mode)
+int fwgrub_install(enum fwgrub2_install_mode mode)
 {
 	char cmd[_POSIX_ARG_MAX], *mbr;
+	struct stat st;
 
 	/* First, define the common parts of the install command. */
 	strcpy(cmd,"grub-install --recheck --no-floppy --boot-directory=/boot ");
@@ -127,16 +129,18 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 	/* Now, define additional arguments based on installation mode. */
 	switch(mode)
 	{
-		case FWGRUB_INSTALL_MBR:
+		case FWGRUB2_INSTALL_MBR:
 			mbr = guess_mbr_device();
 			if(!mbr)
 				return 1;
 			strcat(cmd,mbr);
 			break;
 
-		case FWGRUB_INSTALL_EFI:
+		case FWGRUB2_INSTALL_EFI:
 			strcat(cmd,"--root-directory=/boot/efi --bootloader-id=frugalware");
-			if(mkdir("/boot/efi",0755))
+			if(!stat("/boot/efi") && !S_ISDIR(st.st_mode))
+				return 1;
+			else if(mkdir("/boot/efi",0755))
 				return 1;
 			break;
 	}
@@ -147,10 +151,10 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 	return execute_command(cmd);
 }
 
-/** Creates a grub.cfg
+/** Make a grub2 configuration file
  * @return 0 on succcess, 1 on error
  */
-int fwgrub_create_menu(void)
+int fwgrub2_make_config(void)
 {
 	return execute_command("grub-mkconfig -o /boot/grub/grub.cfg > " FWGRUB_LOGDEV " 2>&1");
 }
