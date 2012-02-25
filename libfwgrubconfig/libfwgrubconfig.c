@@ -28,7 +28,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <errno.h>
-#include "libfwgrub2config.h"
+#include "libfwgrubconfig.h"
 
 #define SPACE         " \t\r\n\v\f"
 #define DIGIT         "0123456789"
@@ -123,7 +123,7 @@ int execute_command(const char *cmd)
  * @return 0 on succcess, 1 on error
  */
 
-int fwgrub_install(enum fwgrub2_install_mode mode)
+int fwgrub_install(enum fwgrub_install_mode mode)
 {
 	char cmd[_POSIX_ARG_MAX], *mbr;
 	struct stat st;
@@ -134,16 +134,16 @@ int fwgrub_install(enum fwgrub2_install_mode mode)
 	/* Now, define additional arguments based on installation mode. */
 	switch(mode)
 	{
-		case FWGRUB2_INSTALL_MBR:
+		case FWGRUB_INSTALL_MBR:
 			mbr = guess_mbr_device();
 			if(!mbr)
 				return 1;
 			strcat(cmd,mbr);
 			break;
 
-		case FWGRUB2_INSTALL_EFI:
+		case FWGRUB_INSTALL_EFI:
 			strcat(cmd,"--root-directory=/boot/efi --bootloader-id=frugalware");
-			if(!stat("/boot/efi") && !S_ISDIR(st.st_mode))
+			if(!stat("/boot/efi",&st) && !S_ISDIR(st.st_mode))
 				return 1;
 			else if(mkdir("/boot/efi",0755))
 				return 1;

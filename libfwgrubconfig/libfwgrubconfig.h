@@ -19,11 +19,11 @@
  *  USA.
  */
 
-enum fwgrub2_install_mode
+enum fwgrub_install_mode
 {
-	FWGRUB2_INSTALL_MBR,
-	FWGRUB2_INSTALL_EFI
+	FWGRUB_INSTALL_MBR,
+	FWGRUB_INSTALL_EFI
 };
 
-int fwgrub2_install(enum fwgrub2_install_mode mode);
-int fwgrub2_make_config(void);
+int fwgrub_install(enum fwgrub_install_mode mode);
+int fwgrub_make_config(void);
