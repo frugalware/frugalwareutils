@@ -77,7 +77,7 @@ char *guess_mbr_device(void)
 		if(!regexec(&re,p,0,0,0))
 		{
 			strcpy(root,"/dev/");
-			strcpy(root,p);
+			strcat(root,p);
 			p = strchr(root,'\n');
 			if(p)
 				*p = 0;
