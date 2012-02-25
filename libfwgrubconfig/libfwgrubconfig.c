@@ -92,32 +92,6 @@ char *guess_mbr_device(void)
 	return (*root) ? root : 0;
 }
 
-static
-int execute_command(const char *cmd)
-{
-	pid_t pid;
-	int status;
-
-	/* Let's do the splits! :D */
-	pid = fork();
-
-	if(!pid)
-	{
-		/* Execute the command in the child process. */
-		execl("/bin/sh","/bin/sh","-c",cmd,(void *) 0);
-
-		_exit(EXIT_FAILURE);
-	}
-	else if(pid == -1)
-		return 1;
-
-	/* Did the process exit normally and return a zero exit code? */
-	if(waitpid(pid,&status,0) == -1 || !WIFEXITED(status) || WEXITSTATUS(status))
-		return 1;
-
-	return 0;
-}
-
 /** Installs grub to a given target
  * @param mode FWGRUB_INSTALL_MBR, FWGRUB_INSTALL_EFI
  * @return 0 on succcess, 1 on error
@@ -153,7 +127,7 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 	/* Setup logging. */
 	strcat(cmd," > " FWGRUB_LOGDEV " 2>&1");
 
-	return execute_command(cmd);
+	return system(cmd) ? 1 : 0;
 }
 
 /** Make a grub2 configuration file
@@ -161,7 +135,7 @@ int fwgrub_install(enum fwgrub_install_mode mode)
  */
 int fwgrub_make_config(void)
 {
-	return execute_command("grub-mkconfig -o /boot/grub/grub.cfg > " FWGRUB_LOGDEV " 2>&1");
+	return system("grub-mkconfig -o /boot/grub/grub.cfg > " FWGRUB_LOGDEV " 2>&1") ? 1 : 0;
 }
 
 /** @} */
