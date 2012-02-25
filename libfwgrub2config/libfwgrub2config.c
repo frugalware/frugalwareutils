@@ -27,7 +27,7 @@
 #include <limits.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
-#include "new.h"
+#include "libfwgrub2config.h"
 
 #define SPACE         " \t\r\n\v\f"
 #define DIGIT         "0123456789"
