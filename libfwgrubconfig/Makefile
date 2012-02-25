@@ -18,12 +18,6 @@
 
 -include ../config.mak
 CFLAGS = $(LIB_CFLAGS)
-CFLAGS += $(shell pkg-config --cflags glib-2.0)
-LDFLAGS += $(shell pkg-config --libs glib-2.0)
-CFLAGS += $(shell pkg-config --cflags blkid)
-LDFLAGS += $(shell pkg-config --libs blkid)
-
-LDFLAGS += -lparted
 
 # fwutil
 CFLAGS += -I../libfwutil
