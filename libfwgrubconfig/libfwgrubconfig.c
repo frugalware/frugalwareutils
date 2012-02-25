@@ -159,7 +159,7 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 /** Make a grub2 configuration file
  * @return 0 on succcess, 1 on error
  */
-int fwgrub2_make_config(void)
+int fwgrub_make_config(void)
 {
 	return execute_command("grub-mkconfig -o /boot/grub/grub.cfg > " FWGRUB_LOGDEV " 2>&1");
 }
