@@ -48,7 +48,7 @@ int fwtime_hwclockconf(char *mode)
 {
 	char cmd[_POSIX_ARG_MAX];
 
-	strcpy(cmd,"hwclock --adjust");
+	strcpy(cmd,"hwclock --systohc");
 
 	if(!strcmp(mode,"UTC"))
 		strcat(cmd," --utc");
