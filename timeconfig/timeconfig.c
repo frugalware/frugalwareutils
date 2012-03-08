@@ -35,7 +35,7 @@
 #define ZONEDIR "/usr/share/zoneinfo"
 #define ZONEFILE "/etc/localtime"
 
-GList *zones=NULL;
+extern GList *zones;
 
 static
 char* ask_mode()
