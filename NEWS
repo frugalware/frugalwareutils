@@ -2,7 +2,7 @@ VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
 0.9.8         - grubconfig has been modified to work with GRUB2
               - fix handling of localtime in timeconfig
-			  - make UTC the default time setting in timeconfig
+              - make UTC the default time setting in timeconfig
 0.9.7         - netconfig no longer creates /etc/HOSTNAME
               - grubconfig creates UUID's in menu.lst
 0.9.6         - netconfig: no longer blocks till the end of the first profile
