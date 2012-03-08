@@ -98,6 +98,7 @@ int run(int argc, char **argv)
 	return(0);
 }
 
+static
 plugin_t plugin =
 {
 	"grubconfig",
