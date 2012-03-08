@@ -1,8 +1,8 @@
 /*
  *  netconfig.c for frugalwareutils
- * 
+ *
  *  Copyright (c) 2006, 2007, 2008, 2009 by Miklos Vajna <vmiklos@frugalware.org>
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
  *  USA.
  */
 
@@ -36,19 +36,21 @@
 
 extern int fwutil_dryrun;
 
-int nco_usage  = 0;
-int nco_fast   = 0;
-int nco_loup   = 0;
-int nco_lodown = 0;
+static int nco_usage  = 0;
+static int nco_fast   = 0;
+static int nco_loup   = 0;
+static int nco_lodown = 0;
 
-fwnet_profile_t *sigprof;
+static fwnet_profile_t *sigprof;
 
+static
 int usage()
 {
 	system("man netconfig");
 	return(0);
 }
 
+static
 char *selnettype()
 {
 	int typenum=4;
@@ -69,6 +71,7 @@ char *selnettype()
 		0, 0, 0, typenum, types));
 }
 
+static
 char* dialog_getiface(char *desc)
 {
 	char *ret;
@@ -81,6 +84,7 @@ char* dialog_getiface(char *desc)
 	return ret;
 }
 
+static
 int dsl_hook(fwnet_profile_t *profile, int confirm)
 {
 	struct stat buf;
@@ -125,6 +129,7 @@ int dsl_hook(fwnet_profile_t *profile, int confirm)
 	return(0);
 }
 
+static
 int dialog_config(int argc, char **argv)
 {
 	FILE *input = stdin;
@@ -252,6 +257,7 @@ int dialog_config(int argc, char **argv)
 	return(ret);
 }
 
+static
 int run(int argc, char **argv)
 {
 	int opt;
@@ -289,19 +295,19 @@ int run(int argc, char **argv)
 		usage();
 		return(0);
 	}
-	
+
 	if(nco_loup)
 	{
 		fwnet_loup();
 		return(0);
 	}
-	
+
 	if(nco_lodown)
 	{
 		fwnet_lodown();
 		return(0);
 	}
-	
+
 	if(optind < argc)
 	{
 		if(optind + 1 < argc)
@@ -380,6 +386,7 @@ int run(int argc, char **argv)
 	return(ret);
 }
 
+static
 plugin_t plugin =
 {
 	"netconfig",
