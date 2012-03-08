@@ -1,8 +1,8 @@
 /*
  *  xwmconfig.c for frugalwareutils
- * 
+ *
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
  *  USA.
  */
 
@@ -37,6 +37,7 @@
 int xwm_force=0;
 int xwm_silent=0;
 
+static
 char* ask_wm(PM_DB *db)
 {
 	GList *list = fwxwm_list(db);
@@ -51,6 +52,7 @@ char* ask_wm(PM_DB *db)
 	return(ptr);
 }
 
+static
 int run(int argc, char **argv)
 {
 	FILE *input = stdin;
@@ -124,6 +126,7 @@ int run(int argc, char **argv)
 	return(0);
 }
 
+static
 plugin_t plugin =
 {
 	"xwmconfig",
