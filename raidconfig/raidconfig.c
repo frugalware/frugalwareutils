@@ -1,8 +1,8 @@
 /*
  *  raidconfig.c for frugalwareutils
- * 
+ *
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
  *  USA.
  */
 
@@ -32,10 +32,11 @@
 #include <unistd.h>
 #include <libintl.h>
 
+static
 char *ask_devname()
 {
 	char *ptr, *basename = fwraid_suggest_devname();
-	
+
 	ptr = fwdialog_ask(_("Select RAID device"),
 		_("Please specify the raid device you want to create:"),
 		basename);
@@ -43,10 +44,11 @@ char *ask_devname()
 	return(ptr);
 }
 
+static
 int ask_level()
 {
 	int ret;
-	char *fwraid_levels[] = 
+	char *fwraid_levels[] =
 	{
 		"0", _("raid0 (stripe)"),
 		"1", _("raid1 (mirror)"),
@@ -64,6 +66,7 @@ int ask_level()
 	return(ret);
 }
 
+static
 GList *add_devices()
 {
 	GList *partlist = fwraid_lst_parts();
@@ -86,7 +89,7 @@ GList *add_devices()
 			sptr = g_strdup_printf(_("The current list contains: %s."), ptr);
 			free(ptr);
 		}
-	
+
 		dptr = g_strdup_printf(_("Please select the devices you want to build "
 			"the array from. When you are ready, press 'Finish'.\n%s"),
 			sptr);
@@ -108,6 +111,7 @@ GList *add_devices()
 	return(devlist);
 }
 
+static
 int run(int argc, char **argv)
 {
 	FILE *input = stdin;
@@ -148,6 +152,7 @@ int run(int argc, char **argv)
 	return(0);
 }
 
+static
 plugin_t plugin =
 {
 	"raidconfig",
