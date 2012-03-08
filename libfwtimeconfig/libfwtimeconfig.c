@@ -29,6 +29,7 @@
 #include <unistd.h>
 #include <libintl.h>
 
+#define FWTIME_LOGDEV "/dev/tty4"
 #define ZONEDIR "/usr/share/zoneinfo"
 #define ZONEFILE "/etc/localtime"
 
@@ -53,6 +54,8 @@ int fwtime_hwclockconf(char *mode)
 		strcat(cmd," --utc");
 	else if(!strcmp(mode,"localtime"))
 		strcat(cmd," --localtime");
+
+	strcat(cmd," > " FWTIME_LOGDEV " 2>&1");
 
 	return system(cmd) ? 1 : 0;
 }
