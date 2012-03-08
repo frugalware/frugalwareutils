@@ -41,16 +41,18 @@ char* ask_mode()
 {
 	char *modes[] =
 	{
-		"localtime", _("Hardware clock is set to local time"),
-		"UTC", _("Hardware clock is set to UTC/GMT")
+		"UTC", _("Hardware clock is set to UTC/GMT"),
+		"localtime", _("Hardware clock is set to localtime")
 	};
 	char *ptr;
 
 	ptr = fwdialog_menu(_("What is the setup of the hardware clock?"),
 		_("If the hardware clock is set to the Coordinated Universal "
-		"time select 'UTC'. Else if it is set to the current "
-		"local time (this is how most PCs are set up) or if you are "
-		"unsure, then select 'localtime' here."), 0, 0, 0, 2, modes);
+		"Time select 'UTC'. Else if it is set to the current "
+		"localtime, choose 'localtime'. You should only pick 'localtime' if"
+		"you have a version of Windows earlier than Vista SP2 installed, or"
+		"another reason to keep using 'localtime'.")
+		, 0, 0, 0, 2, modes);
 	return(ptr);
 }
 
