@@ -37,6 +37,7 @@
 
 GList *zones=NULL;
 
+static
 char* ask_mode()
 {
 	char *modes[] =
@@ -56,11 +57,13 @@ char* ask_mode()
 	return(ptr);
 }
 
+static
 int sort_zones(gconstpointer a, gconstpointer b)
 {
 	return(strcmp(a, b));
 }
 
+static
 GList *zone_scan(char *dir)
 {
 	GList *buf=NULL;
@@ -83,6 +86,7 @@ GList *zone_scan(char *dir)
 
 // feel free to suggest a better default for English, i just took the first
 // item for now
+static
 char *ask_zone(GList *zones)
 {
 	char **zonestrs = fwdialog_glist(zones);
@@ -101,6 +105,7 @@ char *ask_zone(GList *zones)
 	return(ptr);
 }
 
+static
 int run(int argc, char **argv)
 {
 	FILE *input = stdin;
@@ -140,6 +145,7 @@ int run(int argc, char **argv)
 	return(0);
 }
 
+static
 plugin_t plugin =
 {
 	"timeconfig",
