@@ -1,8 +1,8 @@
 /*
  *  setup.c for frugalwareutils
- * 
+ *
  *  Copyright (c) 2006, 2008 by Miklos Vajna <vmiklos@frugalware.org>
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
  *  USA.
  */
 
@@ -37,6 +37,7 @@
 
 GList *plugin_list;
 
+static
 int sort_plugins(gconstpointer a, gconstpointer b)
 {
 	const plugin_t *pa = a;
@@ -44,6 +45,7 @@ int sort_plugins(gconstpointer a, gconstpointer b)
 	return (strcmp(pa->name, pb->name));
 }
 
+static
 int add_plugin(char *filename)
 {
 	void *handle;
@@ -67,6 +69,7 @@ int add_plugin(char *filename)
 	return(0);
 }
 
+static
 int init_plugins(char *dirname)
 {
 	char *filename, *ext;
@@ -92,6 +95,7 @@ int init_plugins(char *dirname)
 	return(0);
 }
 
+static
 int cleanup_plugins()
 {
 	int i;
@@ -105,6 +109,7 @@ int cleanup_plugins()
 	return(0);
 }
 
+static
 char* ask_what()
 {
 	int i;
@@ -124,6 +129,7 @@ char* ask_what()
 		"to start:"), 0, 0, 0, g_list_length(pluglist)/2, plugstrs));
 }
 
+static
 int show_menu()
 {
 	FILE *input = stdin;
