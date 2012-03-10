@@ -99,6 +99,58 @@ char *get_first_device(char *s,size_t n)
 	return *s ? s : 0;
 }
 
+static
+char *get_root_device(char *s,size_t n)
+{
+	FILE *file;
+	regex_t re;
+	char line[LINE_MAX], *dev, *dir, *p;
+	regmatch_t mat;
+
+	file = fopen("/proc/mounts","rb");
+
+	if(!file)
+		return 0;
+
+	if(regcomp(&re,"^/dev/[hsv]d[a-z]",REG_EXTENDED))
+	{
+		fclose(file);
+
+		return 0;
+	}
+
+	*s = 0;
+
+	while(fgets(line,sizeof line,file))
+	{
+		dev = strtok_r(line," ",&p);
+
+		if(!dev)
+	        continue;
+
+		dir = strtok_r(0," ",&p);
+
+		if(!dir)
+			continue;
+
+		if(strcmp(dir,"/"))
+			continue;
+
+		if(regexec(&re,dev,1,&mat,0))
+			continue;
+
+		snprintf(s,n,"%.*s",mat.rm_eo - mat.rm_so,dev);
+
+		break;
+	}
+
+	fclose(file);
+
+	regfree(&re);
+
+	return *s ? s : 0;
+}
+
 /** Installs grub to a given target
  * @param mode FWGRUB_INSTALL_MBR_FIRST, FWGRUB_INSTALL_MBR_ROOT, FWGRUB_INSTALL_EFI
  * @return 0 on succcess, 1 on error
@@ -122,6 +174,9 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 			break;
 
 		case FWGRUB_INSTALL_MBR_ROOT:
+			if(!get_root_device(device,sizeof device))
+				return 1;
+			strcat(cmd,device);
 			break;
 
 		case FWGRUB_INSTALL_EFI:
