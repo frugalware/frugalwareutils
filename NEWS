@@ -3,6 +3,7 @@ VERSION         DESCRIPTION
 0.9.9         - grubconfig now allows MBR installation to first hard drive or root hard drive
               - fixups in timeconfig text
               - raidconfig now uses the default mdadm metadata when making new arrays
+			  - fix for users who accidently pass invalid raid device name to raidconfig
 0.9.8         - grubconfig has been modified to work with GRUB2
               - fix handling of localtime in timeconfig
               - make UTC the default time setting in timeconfig
