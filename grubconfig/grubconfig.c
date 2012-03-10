@@ -47,6 +47,7 @@ enum fwgrub_install_mode ask_mode()
 	ptr = fwdialog_menu(_("Installing GRUB bootloader"),
 		_("GRUB can be installed to a variety of places:\n\n"
 		"\t1. The Master Boot Record of your first hard drive.\n"
+		"\t2. The Master Boot Record of your root hard drive (DO NOT CHOOSE IF YOU USE RAID).\n"
 		"Which option would you like?"), 0, 0, 0, 2, modes);
 	if(!strcmp(ptr, _("First")))
 		ret=FWGRUB_INSTALL_MBR_FIRST;
