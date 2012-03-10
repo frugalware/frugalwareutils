@@ -139,7 +139,12 @@ int run(int argc, char **argv)
 		init_dialog(input, dialog_state.output);
 	fwdialog_backtitle(_("RAID configuration"));
 
-	devname = ask_devname();
+	while(1)
+	{
+		devname = ask_devname();
+		if(devname && !strncmp(devname,"/dev/",5))
+			break;
+	}
 	level = ask_level();
 	fwraid_mknod_md(devname);
 	devlist = add_devices();
