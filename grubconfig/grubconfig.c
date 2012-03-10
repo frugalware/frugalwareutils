@@ -37,7 +37,8 @@ enum fwgrub_install_mode ask_mode()
 {
 	char *modes[] =
 	{
-		_("MBR"), _("Install to Master Boot Record"),
+		_("First"), _("Install to Master Boot Record of first hard drive"),
+		_("Root"), _("Install to Master Boot Record of root hard drive"),
 		_("Skip"), _("Skip the installation of GRUB.")
 	};
 	char *ptr;
@@ -47,8 +48,10 @@ enum fwgrub_install_mode ask_mode()
 		_("GRUB can be installed to a variety of places:\n\n"
 		"\t1. The Master Boot Record of your first hard drive.\n"
 		"Which option would you like?"), 0, 0, 0, 2, modes);
-	if(!strcmp(ptr, _("MBR")))
-		ret=FWGRUB_INSTALL_MBR;
+	if(!strcmp(ptr, _("First")))
+		ret=FWGRUB_INSTALL_MBR_FIRST;
+	else if(!strcmp(ptr, _("Root")))
+		ret=FWGRUB_INSTALL_MBR_ROOT;
 	else if(!strcmp(ptr, _("Skip")))
 		ret=-1;
 	free(ptr);
