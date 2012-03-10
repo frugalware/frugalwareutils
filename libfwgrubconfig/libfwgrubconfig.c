@@ -40,66 +40,73 @@
  */
 
 static
-char *guess_mbr_device(void)
+char *get_first_device(char *s,size_t n)
 {
-	FILE *f;
-	char line[LINE_MAX], *p;
-	int i, j;
+	FILE *file;
 	regex_t re;
-	static char root[PATH_MAX];
+	int i = 1;
+	char line[LINE_MAX], *p, *dev;
 
-	f = fopen("/proc/partitions","rb");
+	file = fopen("/proc/partitions","rb");
 
-	if(!f)
+	if(!file)
 		return 0;
 
-	if(regcomp(&re,"^[shv]d[a-z]$",REG_EXTENDED | REG_NOSUB | REG_NEWLINE))
+	if(regcomp(&re,"^[hsv]d[a-z]$",REG_EXTENDED | REG_NOSUB))
 	{
-		fclose(f);
+		fclose(file);
 
 		return 0;
 	}
 
-	for( i = 1, *root = 0 ; fgets(line,sizeof line,f) ; ++i )
+	*s = 0;
+
+	while(fgets(line,sizeof line,file))
 	{
 		if(i < 3)
+		{
+			++i;
+
+			continue;
+		}
+
+		if(!strtok_r(line," \n",&p))
 			continue;
 
-		p = line + strspn(line,SPACE);
+		if(!strtok_r(0," \n",&p))
+			continue;
 
-		for( j = 0 ; j < 3 ; ++j )
-		{
-			p += strspn(p,DIGIT);
+		if(!strtok_r(0," \n",&p))
+			continue;
 
-			p += strspn(p,SPACE);
-		}
+		dev = strtok_r(0," \n",&p);
 
-		if(!regexec(&re,p,0,0,0))
-		{
-			strcpy(root,"/dev/");
-			strcat(root,p);
-			p = strchr(root,'\n');
-			if(p)
-				*p = 0;
-			break;
-		}
+		if(!dev)
+			continue;
+
+		if(regexec(&re,dev,0,0,0))
+			continue;
+
+		snprintf(s,n,"/dev/%s",dev);
+
+		break;
 	}
 
-	fclose(f);
+	fclose(file);
 
 	regfree(&re);
 
-	return (*root) ? root : 0;
+	return *s ? s : 0;
 }
 
 /** Installs grub to a given target
- * @param mode FWGRUB_INSTALL_MBR, FWGRUB_INSTALL_EFI
+ * @param mode FWGRUB_INSTALL_MBR_FIRST, FWGRUB_INSTALL_MBR_ROOT, FWGRUB_INSTALL_EFI
  * @return 0 on succcess, 1 on error
  */
 
 int fwgrub_install(enum fwgrub_install_mode mode)
 {
-	char cmd[_POSIX_ARG_MAX], *mbr;
+	char cmd[_POSIX_ARG_MAX], device[PATH_MAX];
 	struct stat st;
 
 	/* First, define the common parts of the install command. */
@@ -108,11 +115,13 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 	/* Now, define additional arguments based on installation mode. */
 	switch(mode)
 	{
-		case FWGRUB_INSTALL_MBR:
-			mbr = guess_mbr_device();
-			if(!mbr)
+		case FWGRUB_INSTALL_MBR_FIRST:
+			if(!get_first_device(device,sizeof device))
 				return 1;
-			strcat(cmd,mbr);
+			strcat(cmd,device);
+			break;
+
+		case FWGRUB_INSTALL_MBR_ROOT:
 			break;
 
 		case FWGRUB_INSTALL_EFI:
