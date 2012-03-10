@@ -30,8 +30,6 @@
 #include <errno.h>
 #include "libfwgrubconfig.h"
 
-#define SPACE         " \t\r\n\v\f"
-#define DIGIT         "0123456789"
 #define FWGRUB_LOGDEV "/dev/tty4"
 
 /** @defgroup libfwgrubconfig Frugalware GRUB configuration and installation library
