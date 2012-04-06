@@ -2,8 +2,8 @@
 
 . "${PM_FUNCTIONS}"
 
-# No point in proceeding if netconfig is not active.
-if ! systemctl is-active netconfig.service &> /dev/null; then
+# No point in proceeding if netconfig is not enabled.
+if ! systemctl is-enabled netconfig.service &> /dev/null; then
   exit $NA
 fi
 
