@@ -1,0 +1,19 @@
+#!/bin/sh
+
+. "${PM_FUNCTIONS}"
+
+# No point in proceeding if netconfig is not active.
+if ! systemctl is-active netconfig.service &> /dev/null; then
+  exit $NA
+fi
+
+case "$1" in
+	hibernate|suspend)
+		systemctl stop netconfig.service
+		;;
+	thaw|resume)
+		systemctl start netconfig.service
+		;;
+	*) exit $NA
+		;;
+esac

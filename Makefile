@@ -60,8 +60,10 @@ install:
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)/sysconfig/network
 	$(INSTALL) -d $(DESTDIR)$(sysconfdir)/systemd/system/sysinit.target.wants
 	$(INSTALL) -d $(DESTDIR)$(libdir)/systemd/system
+	$(INSTALL) -d $(DESTDIR)/usr/lib/pm-utils/sleep.d
 	$(INSTALL) -m644 netconfig/netconfig.service $(DESTDIR)$(libdir)/systemd/system/netconfig.service
 	$(INSTALL) -m644 netconfig/netconfig-wait-online.service $(DESTDIR)$(libdir)/systemd/system/netconfig-wait-online.service
+	$(INSTALL) -m755 netconfig/netconfig.sleep $(DESTDIR)/usr/lib/pm-utils/sleep.d/55netconfig
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man1
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man3
 	$(INSTALL) -d $(DESTDIR)$(includedir)
