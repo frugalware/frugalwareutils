@@ -1,6 +1,7 @@
 VERSION         DESCRIPTION
 -----------------------------------------------------------------------------
-1.0.0         - netconfig now restarts itself properly when suspending
+1.0.0         - netconfig now stops and starts itself when entering and leaving hibernation/suspend
+              - netconfig now stops and starts itself when rfkill (software or hardware wireless shut off) is used
 0.9.9         - grubconfig now allows MBR installation to first hard drive or root hard drive
               - fixups in timeconfig text
               - raidconfig now uses the default mdadm metadata when making new arrays
