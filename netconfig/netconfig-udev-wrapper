@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case $1 in
+stop)
+  /bin/systemctl stop netconfig.service
+  ;;
+start)
+  /usr/bin/sleep 5
+  /bin/systemctl start netconfig.service
+  ;;
+esac
+
+exit 0

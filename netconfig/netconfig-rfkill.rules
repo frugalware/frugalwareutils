@@ -1,0 +1,2 @@
+SUBSYSTEM=="rfkill", ACTION=="change", ATTR{type}=="wlan", ATTR{state}!="1", RUN+="/sbin/netconfig-udev-wrapper stop"
+SUBSYSTEM=="rfkill", ACTION=="change", ATTR{type}=="wlan", ATTR{state}=="1", RUN+="/sbin/netconfig-udev-wrapper start"
