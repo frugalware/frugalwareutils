@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# No point in proceeding if netconfig is not enabled.
+if ! systemctl is-enabled netconfig.service &> /dev/null; then
+  exit 0
+fi
+
 case $1 in
 stop)
   /bin/systemctl stop netconfig.service
