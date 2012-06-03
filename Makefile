@@ -64,7 +64,7 @@ install:
 	$(INSTALL) -d $(DESTDIR)$(libdir)/udev/rules.d
 	$(INSTALL) -m644 netconfig/netconfig.service $(DESTDIR)$(libdir)/systemd/system/netconfig.service
 	$(INSTALL) -m644 netconfig/netconfig-wait-online.service $(DESTDIR)$(libdir)/systemd/system/netconfig-wait-online.service
-	$(INSTALL) -m755 netconfig/netconfig.sleep $(DESTDIR)/usr/lib/pm-utils/sleep.d/55netconfig
+	$(INSTALL) -m755 netconfig/netconfig.sleep $(DESTDIR)/usr/lib/pm-utils/sleep.d/56netconfig
 	$(INSTALL) -m755 netconfig/netconfig-udev-wrapper $(DESTDIR)$(sbindir)/netconfig-udev-wrapper
 	$(INSTALL) -m644 netconfig/netconfig-rfkill.rules $(DESTDIR)$(libdir)/udev/rules.d/97-netconfig-rfkill.rules
 	$(INSTALL) -d $(DESTDIR)$(mandir)/man1
