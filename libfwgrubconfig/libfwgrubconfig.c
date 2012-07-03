@@ -110,7 +110,7 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 				return 1;
 			strcat(cmd,device);
 			break;
-
+#if 0
 		case FWGRUB_INSTALL_EFI:
 			strcat(cmd,"--root-directory=/boot/efi --bootloader-id=frugalware");
 			if(!stat("/boot/efi",&st) && !S_ISDIR(st.st_mode))
@@ -118,6 +118,7 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 			else if(mkdir("/boot/efi",0755))
 				return 1;
 			break;
+#endif
 	}
 
 	/* Setup logging. */
