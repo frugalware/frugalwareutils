@@ -142,7 +142,7 @@ int run(int argc, char **argv)
 	while(1)
 	{
 		devname = ask_devname();
-		if(devname && !strncmp(devname,"/dev/",5))
+		if(devname && !strncmp(devname,"/dev/md",7))
 			break;
 	}
 	level = ask_level();
