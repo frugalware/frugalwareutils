@@ -1,8 +1,8 @@
 /*
  *  libfwutil.c for frugalwareutils
- * 
+ *
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
  *  USA.
  */
 
@@ -40,17 +40,68 @@ int fwutil_dryrun = 0;
  * @{
  */
 
-/** A wrapper to system() and printf(): the action depends on the global
+/** A wrapper to execl() and printf(): the action depends on the global
  * f_util_dryrun variable (0 by default).
  * @param cmd the command to print/execute
  * @return 1 on failure, 0 on success
  */
 int fwutil_system(const char *cmd)
 {
+	pid_t id;
+	int status;
+
 	if(fwutil_dryrun)
-		return(printf("%s\n", cmd));
-	else
-		return(system(cmd) ? 1 : 0);
+		return(printf("%s\n", cmd) < 0 ? 1 : 0);
+
+	id = fork();
+
+	if(!id)
+	{
+		execl("/bin/sh","/bin/sh","-c",cmd,(void *) 0);
+
+		_exit(EXIT_FAILURE);
+	}
+	else if(id == -1)
+		return 1;
+
+	if(waitpid(id,&status,0) == -1 || !WIFEXITED(status) || WEXITSTATUS(status))
+		return 1;
+
+	return 0;
+}
+
+/** A wrapper to execl() and printf(): the action depends on the global
+ * f_util_dryrun variable (0 by default).
+ * @param root the directory to chroot to before execute
+ * @param cmd the command to print/execute
+ * @return 1 on failure, 0 on success
+ */
+int fwutil_system_chroot(const char *root,const char *cmd)
+{
+	pid_t id;
+	int status;
+
+	if(fwutil_dryrun)
+		return(printf("%s: %s\n", root, cmd) < 0 ? 1 : 0);
+
+	id = fork();
+
+	if(!id)
+	{
+		if(chroot(root) || chdir("/"))
+			_exit(EXIT_FAILURE);
+
+		execl("/bin/sh","/bin/sh","-c",cmd,(void *) 0);
+
+		_exit(EXIT_FAILURE);
+	}
+	else if(id == -1)
+		return 1;
+
+	if(waitpid(id,&status,0) == -1 || !WIFEXITED(status) || WEXITSTATUS(status))
+		return 1;
+
+	return 0;
 }
 
 /** Initialize gettext, based on the filename.

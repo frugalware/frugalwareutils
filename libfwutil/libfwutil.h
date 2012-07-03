@@ -1,8 +1,8 @@
 /*
  *  libfwutil.h for frugalwareutils
- * 
+ *
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
  *  USA.
  */
 
@@ -39,6 +39,7 @@
 #define fwutil_min(p, q)  ((p) < (q) ? (p) : (q))
 
 int fwutil_system(const char *cmd);
+int fwutil_system_chroot(const char *root,const char *cmd);
 void fwutil_i18ninit(char *namespace);
 char *fwutil_trim(char *str);
 char *fwutil_strtoupper(char *str);
