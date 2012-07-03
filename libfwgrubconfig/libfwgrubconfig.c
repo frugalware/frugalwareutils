@@ -38,7 +38,7 @@
  */
 
 static
-char *get_root_device(char *s,size_t n)
+char *get_root_device(const char *root,char *s,size_t n)
 {
 	FILE *file;
 	regex_t re;
@@ -50,7 +50,7 @@ char *get_root_device(char *s,size_t n)
 	if(!file)
 		return 0;
 
-	if(regcomp(&re,"^/dev/[hsv]d[a-z]",REG_EXTENDED))
+	if(regcomp(&re,"^/dev/(sd[a-z]|hd[a-z]|vd[a-z]|md[0-9]+)",REG_EXTENDED))
 	{
 		fclose(file);
 
@@ -64,14 +64,14 @@ char *get_root_device(char *s,size_t n)
 		dev = strtok_r(line," ",&p);
 
 		if(!dev)
-	        continue;
+			continue;
 
 		dir = strtok_r(0," ",&p);
 
 		if(!dir)
 			continue;
 
-		if(strcmp(dir,"/"))
+		if(strcmp(dir,root))
 			continue;
 
 		if(regexec(&re,dev,1,&mat,0))
@@ -87,6 +87,109 @@ char *get_root_device(char *s,size_t n)
 	regfree(&re);
 
 	return *s ? s : 0;
+}
+
+static
+char *get_sysfs_contents(const char *path)
+{
+	FILE *file;
+	char line[LINE_MAX], *s;
+
+	file = fopen(path,"rb");
+
+	if(!file)
+		return 0;
+
+	if(!fgets(line,sizeof line,file))
+	{
+		fclose(file);
+
+		return 0;
+	}
+
+	s = strchr(line,'\n');
+
+	if(s)
+		*s = 0;
+
+	s = strdup(line);
+
+	fclose(file);
+
+	return s;
+}
+
+static
+char **get_device_list(const char *root)
+{
+	char **devices = 0;
+
+	if(!strncmp(root,"/dev/md",7))
+	{
+		int disks_count, i;
+		char path[PATH_MAX], *level = 0, *disks = 0;
+
+		snprintf(path,sizeof path,"/sys/block/%s/md/level",root+5);
+
+		level = get_sysfs_contents(path);
+
+		snprintf(path,sizeof path,"/sys/block/%s/md/raid_disks",root+5);
+
+		disks = get_sysfs_contents(path);
+
+		if(!level || !disks || strcmp(level,"raid1") || atoi(disks) < 2)
+		{
+			free(level);
+
+			free(disks);
+
+			return 0;
+		}
+
+		disks_count = atoi(disks);
+
+		devices = malloc(sizeof(char *) * (disks_count + 1));
+
+		for( i = 0 ; i < disks_count ; ++i )
+		{
+			char buf[PATH_MAX], dev[PATH_MAX];
+			ssize_t n;
+
+			snprintf(path,sizeof path,"/sys/block/%s/md/rd%d",root+5,i);
+
+			n = readlink(path,buf,sizeof buf);
+
+			if(n == -1 || n == sizeof buf)
+			{
+				free(level);
+
+				free(disks);
+
+				return 0;
+			}
+
+			buf[n] = 0;
+
+			if(strncmp(buf,"dev-",4))
+				return 0;
+
+			snprintf(dev,sizeof dev,"/dev/%s",buf+4);
+
+			devices[i] = strdup(dev);
+		}
+
+		devices[i] = 0;
+	}
+	else
+	{
+		devices = malloc(sizeof(char *) * 2);
+
+		devices[0] = strdup(root);
+
+		devices[1] = 0;
+	}
+
+	return devices;
 }
 
 /** Installs grub to a given target
@@ -106,7 +209,7 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 	switch(mode)
 	{
 		case FWGRUB_INSTALL_MBR:
-			if(!get_root_device(device,sizeof device))
+			if(!get_root_device("/",device,sizeof device))
 				return 1;
 			strcat(cmd,device);
 			break;
