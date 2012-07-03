@@ -28,7 +28,8 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <errno.h>
-#include "libfwgrubconfig.h"
+#include <libfwutil.h>
+#include <libfwgrubconfig.h>
 
 #define FWGRUB_LOGDEV "/dev/tty4"
 
@@ -215,26 +216,41 @@ char **get_device_list(const char *root)
 }
 
 /** Installs grub to a given target
+ * @param root directory to chroot to before installing grub
  * @param mode FWGRUB_INSTALL_MBR, FWGRUB_INSTALL_EFI
  * @return 0 on succcess, 1 on error
  */
 
-int fwgrub_install(enum fwgrub_install_mode mode)
+int fwgrub_install(const char *root,enum fwgrub_install_mode mode)
 {
-	char cmd[_POSIX_ARG_MAX], device[PATH_MAX];
-	struct stat st;
+	char cmd[_POSIX_ARG_MAX], dev[PATH_MAX], **devices, **p;
 
-	/* First, define the common parts of the install command. */
-	strcpy(cmd,"grub-install --recheck --no-floppy --boot-directory=/boot ");
-
-	/* Now, define additional arguments based on installation mode. */
-	switch(mode)
+	if(mode == FWGRUB_INSTALL_MBR)
 	{
-		case FWGRUB_INSTALL_MBR:
-			if(!get_root_device("/",device,sizeof device))
+		if(!get_root_device(root,dev,sizeof dev))
+			return 1;
+
+		devices = get_device_list(dev);
+
+		if(!devices)
+			return 1;
+
+		for( p = devices ; *p ; ++p )
+		{
+			snprintf(cmd,sizeof cmd,"grub-install --recheck --no-floppy --boot-directory=/boot %s > " FWGRUB_LOGDEV " 2>&1",*p);
+
+			if(fwutil_system_chroot(root,cmd))
+			{
+				free_device_list(devices);
+
 				return 1;
-			strcat(cmd,device);
-			break;
+			}
+		}
+
+		free_device_list(devices);
+
+		return 0;
+	}
 #if 0
 		case FWGRUB_INSTALL_EFI:
 			strcat(cmd,"--root-directory=/boot/efi --bootloader-id=frugalware");
@@ -244,12 +260,8 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 				return 1;
 			break;
 #endif
-	}
 
-	/* Setup logging. */
-	strcat(cmd," > " FWGRUB_LOGDEV " 2>&1");
-
-	return system(cmd) ? 1 : 0;
+	return 1;
 }
 
 /** Make a grub2 configuration file

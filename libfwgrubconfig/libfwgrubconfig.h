@@ -27,5 +27,5 @@ enum fwgrub_install_mode
 #endif
 };
 
-int fwgrub_install(enum fwgrub_install_mode mode);
+int fwgrub_install(const char *root,enum fwgrub_install_mode mode);
 int fwgrub_make_config(void);
