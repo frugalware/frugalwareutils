@@ -24,15 +24,8 @@ SUBDIRS = doc apidoc libfwutil libfwdialog setup netconfigd \
 	  libfwtimeconfig timeconfig \
 	  libfwraidconfig raidconfig \
 	  libfwmouseconfig mouseconfig \
-	  libfwxwmconfig xwmconfig
-
-ifneq ($(CARCH),ppc)
-SUBDIRS += libfwgrubconfig grubconfig
-endif
-
-ifeq ($(CARCH),ppc)
-SUBDIRS += libfwyabootcfg yabootcfg
-endif
+	  libfwxwmconfig xwmconfig \
+	  libfwgrubconfig grubconfig
 
 compile: config.mak
 	+$(DO_RECURSIVE)
