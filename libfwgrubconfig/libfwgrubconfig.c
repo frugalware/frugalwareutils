@@ -120,6 +120,17 @@ char *get_sysfs_contents(const char *path)
 }
 
 static
+void free_device_list(char **devices)
+{
+	char **p = devices;
+
+	while(*p)
+		free(*p++);
+
+	free(devices);
+}
+
+static
 char **get_device_list(const char *root)
 {
 	char **devices = 0;
@@ -128,6 +139,7 @@ char **get_device_list(const char *root)
 	{
 		int disks_count, i;
 		char path[PATH_MAX], *level = 0, *disks = 0;
+		struct stat st;
 
 		snprintf(path,sizeof path,"/sys/block/%s/md/level",root+5);
 
@@ -159,26 +171,36 @@ char **get_device_list(const char *root)
 
 			n = readlink(path,buf,sizeof buf);
 
-			if(n == -1 || n == sizeof buf)
+			if(n >= 0 && n < (ssize_t) sizeof buf)
+				buf[n] = 0;
+
+			if(
+				n == -1                                       ||
+				n == (ssize_t) sizeof buf                     ||
+				strncmp(buf,"dev-",4)                         ||
+				snprintf(dev,sizeof dev,"/dev/%3s",buf+4) < 0 ||
+				stat(dev,&st)
+			)
 			{
 				free(level);
 
 				free(disks);
 
+				devices[i] = 0;
+
+				free_device_list(devices);
+
 				return 0;
 			}
-
-			buf[n] = 0;
-
-			if(strncmp(buf,"dev-",4))
-				return 0;
-
-			snprintf(dev,sizeof dev,"/dev/%s",buf+4);
 
 			devices[i] = strdup(dev);
 		}
 
 		devices[i] = 0;
+
+		free(level);
+
+		free(disks);
 	}
 	else
 	{
