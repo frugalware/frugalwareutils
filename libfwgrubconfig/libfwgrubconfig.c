@@ -38,66 +38,6 @@
  */
 
 static
-char *get_first_device(char *s,size_t n)
-{
-	FILE *file;
-	regex_t re;
-	int i = 1;
-	char line[LINE_MAX], *p, *dev;
-
-	file = fopen("/proc/partitions","rb");
-
-	if(!file)
-		return 0;
-
-	if(regcomp(&re,"^[hsv]d[a-z]$",REG_EXTENDED | REG_NOSUB))
-	{
-		fclose(file);
-
-		return 0;
-	}
-
-	*s = 0;
-
-	while(fgets(line,sizeof line,file))
-	{
-		if(i < 3)
-		{
-			++i;
-
-			continue;
-		}
-
-		if(!strtok_r(line," \n",&p))
-			continue;
-
-		if(!strtok_r(0," \n",&p))
-			continue;
-
-		if(!strtok_r(0," \n",&p))
-			continue;
-
-		dev = strtok_r(0," \n",&p);
-
-		if(!dev)
-			continue;
-
-		if(regexec(&re,dev,0,0,0))
-			continue;
-
-		snprintf(s,n,"/dev/%s",dev);
-
-		break;
-	}
-
-	fclose(file);
-
-	regfree(&re);
-
-	return *s ? s : 0;
-}
-
-static
 char *get_root_device(char *s,size_t n)
 {
 	FILE *file;
@@ -150,7 +90,7 @@ char *get_root_device(char *s,size_t n)
 }
 
 /** Installs grub to a given target
- * @param mode FWGRUB_INSTALL_MBR_FIRST, FWGRUB_INSTALL_MBR_ROOT, FWGRUB_INSTALL_EFI
+ * @param mode FWGRUB_INSTALL_MBR, FWGRUB_INSTALL_EFI
  * @return 0 on succcess, 1 on error
  */
 
@@ -165,13 +105,7 @@ int fwgrub_install(enum fwgrub_install_mode mode)
 	/* Now, define additional arguments based on installation mode. */
 	switch(mode)
 	{
-		case FWGRUB_INSTALL_MBR_FIRST:
-			if(!get_first_device(device,sizeof device))
-				return 1;
-			strcat(cmd,device);
-			break;
-
-		case FWGRUB_INSTALL_MBR_ROOT:
+		case FWGRUB_INSTALL_MBR:
 			if(!get_root_device(device,sizeof device))
 				return 1;
 			strcat(cmd,device);
