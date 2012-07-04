@@ -60,7 +60,6 @@ int run(int argc, char **argv)
 {
 	FILE *input = stdin, *fp;
 	dialog_state.output = stderr;
-	int needrelease;
 	struct stat buf;
 	enum fwgrub_install_mode mode;
 
@@ -86,11 +85,8 @@ int run(int argc, char **argv)
 	if(mode!=-1)
 	{
 		dialog_msgbox(_("Please wait"), _("Attempting to install the GRUB bootloader..."), 0, 0, 0);
-		needrelease = fwutil_init();
-		fwgrub_install(mode);
+		fwgrub_install("/",mode);
 		fwgrub_make_config();
-		if(needrelease)
-			fwutil_release();
 	}
 
 	if(argv!=NULL)
