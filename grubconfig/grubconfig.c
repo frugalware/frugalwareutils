@@ -37,7 +37,7 @@ enum fwgrub_install_mode ask_mode()
 {
 	char *modes[] =
 	{
-		_("MBR"), _("Install to Master Boot Record of root hard drive"),
+		_("MBR"), _("Install to Master Boot Record of the hard drive your root partition is on."),
 		_("Skip"), _("Skip the installation of GRUB.")
 	};
 	char *ptr;
@@ -45,7 +45,7 @@ enum fwgrub_install_mode ask_mode()
 
 	ptr = fwdialog_menu(_("Installing GRUB bootloader"),
 		_("GRUB can be installed to a variety of places:\n\n"
-		"\t1. The Master Boot Record of your root hard drive.\n"
+		"\t1. The Master Boot Record the hard drive your root partition is on.\n"
 		"Which option would you like?"), 0, 0, 0, 2, modes);
 	if(!strcmp(ptr, _("Root")))
 		ret=FWGRUB_INSTALL_MBR;
