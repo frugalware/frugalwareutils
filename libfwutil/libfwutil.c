@@ -184,59 +184,6 @@ char *fwutil_glist_display(GList *list, char *sep)
 	return(ret);
 }
 
-/** Initialize the environment if necessary
- * @return true if fwx_release() call is needed later, false if not
- */
-int fwutil_init()
-{
-	struct stat buf;
-	FILE *fi, *fo;
-	int ret=0;
-
-	if(stat("/proc/1", &buf))
-	{
-		system("mount /proc");
-		ret++;
-	}
-	if(stat("/dev/zero", &buf))
-	{
-		system("/etc/rc.d/rc.udev");
-		system("mount / -o rw,remount");
-
-
-		system("mount /dev/pts");
-		ret++;
-	}
-	if((fi = fopen("/proc/mounts", "r")))
-	{
-		if((fo = fopen("/etc/mtab", "w")))
-		{
-			char line[256];
-
-			while(!feof(fi))
-			{
-				if(!fgets(line, 255, fi))
-					break;
-				if(!strstr(line, "root"))
-					fprintf(fo, "%s", line);
-			}
-			fclose(fo);
-		}
-		fclose(fi);
-	}
-	return(ret);
-}
-
-/** Release the environment
- */
-void fwutil_release()
-{
-	umount("/dev/pts");
-	umount("/dev");
-	umount("/sys");
-	umount("/proc");
-}
-
 /** does the same as cp
  * @param src source
  * @param dest destination

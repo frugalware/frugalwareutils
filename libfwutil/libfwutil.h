@@ -43,8 +43,6 @@ int fwutil_system_chroot(const char *root,const char *cmd);
 void fwutil_i18ninit(char *namespace);
 char *fwutil_trim(char *str);
 char *fwutil_strtoupper(char *str);
-int fwutil_init();
-void fwutil_release();
 int fwutil_cp(char *src, char *dest);
 #ifdef __G_LIB_H__
 char *fwutil_glist_display(GList *list, char *sep);
