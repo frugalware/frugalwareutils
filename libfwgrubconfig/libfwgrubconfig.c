@@ -29,7 +29,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <libfwutil.h>
-#include <libfwgrubconfig.h>
+#include "libfwgrubconfig.h"
 
 #define FWGRUB_LOGDEV "/dev/tty4"
 
