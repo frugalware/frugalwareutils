@@ -86,7 +86,7 @@ int run(int argc, char **argv)
 	{
 		dialog_msgbox(_("Please wait"), _("Attempting to install the GRUB bootloader..."), 0, 0, 0);
 		fwgrub_install("/",mode);
-		fwgrub_make_config();
+		fwgrub_make_config("/");
 	}
 
 	if(argv!=NULL)

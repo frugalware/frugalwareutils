@@ -133,7 +133,7 @@ int run(int argc, char **argv)
 	fwdialog_backtitle(_("Time configuration"));
 
 	ptr = ask_mode();
-	fwtime_hwclockconf(ptr);
+	fwtime_hwclockconf("/",ptr);
 	free(ptr);
 	zones = zone_scan(ZONEDIR);
 	ptr = ask_zone(zones);
