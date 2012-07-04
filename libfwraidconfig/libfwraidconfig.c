@@ -1,8 +1,8 @@
 /*
  *  libfwraidconfig.c for frugalwareutils
- * 
+ *
  *  Copyright (c) 2006 by Miklos Vajna <vmiklos@frugalware.org>
- * 
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
  *  USA.
  */
 
@@ -54,14 +54,14 @@ char* fwraid_suggest_devname()
 			last = line[2];
 	fclose(fp);
 	return(g_strdup_printf("/dev/md%c", ++last));
-	
+
 }
 
 /** Creates a RAID device node manually.
  * @param devname the name of the device
  * @return 1 on failure, 0 on success
  */
-int fwraid_mknod_md(char *devname)
+int fwraid_mknod_md(const char *devname)
 {
 	struct stat buf;
 	int ret;
@@ -71,7 +71,7 @@ int fwraid_mknod_md(char *devname)
 		// device already created
 		return(0);
 	ptr = g_strdup_printf("mknod %s b 9 %s", devname, devname + strlen("/dev/md"));
-	
+
 	ret = system(ptr);
 	free(ptr);
 	return(ret);
@@ -153,7 +153,7 @@ GList *fwraid_lst_parts()
  * @param devices list of the real device names
  * @return 1 on failure, 0 on success
  */
-int fwraid_create_md(char *devname, int level, GList *devices)
+int fwraid_create_md(const char *devname, int level, GList *devices)
 {
 	char *ptr = fwutil_glist_display(devices, " ");
 	// TODO: this "yes" is an ugly hack to pass various warnings
@@ -161,8 +161,8 @@ int fwraid_create_md(char *devname, int level, GList *devices)
 		"--level=%d --raid-devices=%d %s >%s 2>%s",
 		devname, level, g_list_length(devices), ptr, FWRAID_LOGDEV, FWRAID_LOGDEV);
 	int ret;
-	
-	ret = system(cmd);
+
+	ret = fwutil_system(cmd);
 	free(ptr);
 	free(cmd);
 	return(ret);
