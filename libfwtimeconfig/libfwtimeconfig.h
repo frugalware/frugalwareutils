@@ -19,5 +19,5 @@
  *  USA.
  */
 
-int fwtime_hwclockconf(char *mode);
-int fwtime_find(char *dirname);
+int fwtime_hwclockconf(const char *root,const char *mode);
+int fwtime_find(const char *dirname);

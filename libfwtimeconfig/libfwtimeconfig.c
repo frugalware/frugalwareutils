@@ -41,10 +41,11 @@ GList *zones=NULL;
  */
 
 /** Creates the hardware clock configuration file.
+ * @param root directory to chroot to
  * @param mode clock mode
  * @return 1 on failure, 0 on success
  */
-int fwtime_hwclockconf(char *mode)
+int fwtime_hwclockconf(const char *root,const char *mode)
 {
 	char cmd[_POSIX_ARG_MAX];
 
@@ -57,7 +58,7 @@ int fwtime_hwclockconf(char *mode)
 
 	strcat(cmd," > " FWTIME_LOGDEV " 2>&1");
 
-	return system(cmd) ? 1 : 0;
+	return fwutil_system_chroot(root,cmd);
 }
 
 /** Helper function for finding timezones available. The result will be written
@@ -65,7 +66,7 @@ int fwtime_hwclockconf(char *mode)
  * @param dirname path of the dir which contains the timezones
  * @return 1 on failure, 0 on success
  */
-int fwtime_find(char *dirname)
+int fwtime_find(const char *dirname)
 {
 	DIR *dir;
 	struct dirent *ent;
