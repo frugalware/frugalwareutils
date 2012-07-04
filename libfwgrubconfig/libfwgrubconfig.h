@@ -21,11 +21,8 @@
 
 enum fwgrub_install_mode
 {
-	FWGRUB_INSTALL_MBR,
-#if 0
-	FWGRUB_INSTALL_EFI
-#endif
+	FWGRUB_INSTALL_MBR
 };
 
 int fwgrub_install(const char *root,enum fwgrub_install_mode mode);
-int fwgrub_make_config(void);
+int fwgrub_make_config(const char *root);

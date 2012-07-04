@@ -251,25 +251,17 @@ int fwgrub_install(const char *root,enum fwgrub_install_mode mode)
 
 		return 0;
 	}
-#if 0
-		case FWGRUB_INSTALL_EFI:
-			strcat(cmd,"--root-directory=/boot/efi --bootloader-id=frugalware");
-			if(!stat("/boot/efi",&st) && !S_ISDIR(st.st_mode))
-				return 1;
-			else if(mkdir("/boot/efi",0755))
-				return 1;
-			break;
-#endif
 
 	return 1;
 }
 
 /** Make a grub2 configuration file
+ * @param root directory to chroot to before generating grub config
  * @return 0 on succcess, 1 on error
  */
-int fwgrub_make_config(void)
+int fwgrub_make_config(const char *root)
 {
-	return system("grub-mkconfig -o /boot/grub/grub.cfg > " FWGRUB_LOGDEV " 2>&1") ? 1 : 0;
+	return fwutil_system_chroot(root,"grub-mkconfig -o /boot/grub/grub.cfg > " FWGRUB_LOGDEV " 2>&1");
 }
 
 /** @} */
