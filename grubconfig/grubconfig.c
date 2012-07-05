@@ -47,7 +47,7 @@ enum fwgrub_install_mode ask_mode()
 		_("GRUB can be installed to a variety of places:\n\n"
 		"\t1. The Master Boot Record the hard drive your root partition is on.\n"
 		"Which option would you like?"), 0, 0, 0, 2, modes);
-	if(!strcmp(ptr, _("Root")))
+	if(!strcmp(ptr, _("MBR")))
 		ret=FWGRUB_INSTALL_MBR;
 	else if(!strcmp(ptr, _("Skip")))
 		ret=-1;
