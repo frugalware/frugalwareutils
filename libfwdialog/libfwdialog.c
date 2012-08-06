@@ -66,8 +66,10 @@ int fwdialog_confirm(void)
 {
 	int ret;
 	dialog_vars.defaultno=1;
+	dialog_vars.default_button=DLG_EXIT_CANCEL;
 	ret = dialog_yesno(_("Exit"), _("Are you sure you want to exit?"), 0, 0);
 	dialog_vars.defaultno=0;
+	dialog_vars.default_button=DLG_EXIT_OK;
 	if(ret==DLG_EXIT_OK)
 		return(1);
 	else
@@ -99,8 +101,10 @@ char *fwdialog_ask(char *title, char *desc, char *init)
 	dlg_clear();
 	while(1)
 	{
+		dialog_vars.default_button=-1;
 		dialog_vars.input_result = my_buffer;
 		ret = dialog_inputbox(title, desc, 0, 0, init, 0);
+		dialog_vars.default_button=DLG_EXIT_OK;
 		if (ret != DLG_EXIT_CANCEL)
 			break;
 		if(fwdialog_confirm())
